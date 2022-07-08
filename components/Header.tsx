@@ -33,7 +33,7 @@ const Header = () => {
                   <input type="text" placeholder="Site search" />
                 </div>
               </form>
-              {/* <div class="no-results">Not found.</div> */}
+              {/* <div className="no-results">Not found.</div> */}
               <div className="mobile-search-results">
                 <div className="mobile-posts-block">
                   <div className="inner-flex">
@@ -197,7 +197,7 @@ const Header = () => {
                 <input type="text" placeholder="Site search" />
               </div>
             </form>
-            {/* <div class="no-results">Not found.</div> */}
+            {/* <div className="no-results">Not found.</div> */}
             <div className="desctop-search-results">
               <div className="related-posts-block">
                 <a href="" className="image">

@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Intro from "../components/Intro";
 import Pagination from "../components/Pagination";
+import Posts from "../components/Posts";
 import StandWithUkraine from "../components/StandWithUkraine";
 import Tags from "../components/Tags";
 
@@ -20,7 +21,7 @@ const Home: NextPage = () => (
     <section className="simple-section">
       <div className="container">
         <Tags />
-
+        <Posts />
         <Pagination />
       </div>
     </section>
