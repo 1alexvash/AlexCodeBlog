@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Intro from "../components/Intro";
 import StandWithUkraine from "../components/StandWithUkraine";
+import Tags from "../components/Tags";
 
 const Home: NextPage = () => (
   <>
@@ -15,6 +16,11 @@ const Home: NextPage = () => (
     <StandWithUkraine />
     <Header />
     <Intro />
+    <section className="simple-section">
+      <div className="container">
+        <Tags />
+      </div>
+    </section>
     <Footer />
   </>
 );
