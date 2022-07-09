@@ -1,3 +1,28 @@
+@font-face {
+  font-display: swap;
+  font-family: "Ubuntu";
+  src: url(/fonts/Ubuntu-Regular.woff2) format("woff2"),
+    url("/fonts/Ubuntu-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Ubuntu";
+  src: url(/fonts/Ubuntu-Medium.woff2) format("woff2"),
+    url("/fonts/Ubuntu-Medium.woff") format("woff");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-display: swap;
+  font-family: "Ubuntu";
+  src: url(/fonts/Ubuntu-Bold.woff2) format("woff2"),
+    url("/fonts/Ubuntu-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
