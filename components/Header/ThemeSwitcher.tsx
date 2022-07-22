@@ -5,11 +5,22 @@ const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
+    if (localStorage.theme === "dark") {
+      setTheme("dark");
+      const body = document.querySelector("body")!;
+      body.classList.add("dark-theme");
+    }
+  }, []);
+
+  useEffect(() => {
     const body = document.querySelector("body")!;
+    console.log("theme:", theme);
     if (theme === "light") {
       body.classList.remove("dark-theme");
+      localStorage.theme = "light";
     } else {
       body.classList.add("dark-theme");
+      localStorage.theme = "dark";
     }
   }, [theme]);
 
