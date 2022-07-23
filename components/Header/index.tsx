@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => (
@@ -14,10 +16,12 @@ const Header = () => (
       </div>
       <div className="header-content">
         <div className="tob-block">
-          <a href="" className="main-logo">
-            <img className="light" src="images/main-logo.svg" alt="" />
-            <img className="dark" src="images/main-logo-dark.svg" alt="" />
-          </a>
+          <Link href="/">
+            <a className="main-logo">
+              <img className="light" src="images/main-logo.svg" alt="" />
+              <img className="dark" src="images/main-logo-dark.svg" alt="" />
+            </a>
+          </Link>
           <div className="header-close">
             <img src="images/close.svg" alt="" />
           </div>
@@ -143,9 +147,9 @@ const Header = () => (
         <div className="header-menu-outer">
           <ul className="header-menu">
             <li>
-              <a href="" className="active">
-                Home
-              </a>
+              <Link href="/">
+                <a className="active">Home</a>
+              </Link>
             </li>
             <li>
               <a href="">About</a>
