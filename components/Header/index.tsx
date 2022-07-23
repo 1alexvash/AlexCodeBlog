@@ -151,12 +151,6 @@ const Header = () => (
                 <a className="active">Home</a>
               </Link>
             </li>
-            <li>
-              <a href="">About</a>
-            </li>
-            <li>
-              <a href="">Portfolio</a>
-            </li>
           </ul>
           <div className="header-search-desctop">
             <img src="images/search.svg" alt="" />
