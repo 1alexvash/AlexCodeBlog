@@ -7,12 +7,12 @@ const Footer = () => (
         </div>
         <ul className="footer-socials">
           <li>
-            <a href="">
+            <a href="https://t.me/HeWorksSoHard">
               <img src="images/telegram.svg" alt="" />
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="https://github.com/1alexvash">
               <img src="images/github-gray.svg" alt="" />
             </a>
           </li>
@@ -23,8 +23,8 @@ const Footer = () => (
           </li>
         </ul>
         <div className="copyright">
-          ©2021 - Alex-code <span className="divider">|</span> All right
-          reserved
+          ©{new Date().getFullYear()} - Alex-code{" "}
+          <span className="divider">|</span> All right reserved
         </div>
       </div>
     </div>

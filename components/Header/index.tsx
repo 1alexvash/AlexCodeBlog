@@ -164,12 +164,12 @@ const Header = () => (
         </div>
         <ul className="header-socials">
           <li>
-            <a href="">
+            <a href="https://t.me/HeWorksSoHard">
               <img src="images/telegram.svg" alt="" />
             </a>
           </li>
           <li>
-            <a href="" className="git">
+            <a href="https://github.com/1alexvash" className="git">
               <img src="images/github.svg" alt="" />
             </a>
           </li>
