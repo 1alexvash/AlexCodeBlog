@@ -1,33 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const PageProgress = () => {
-  const [width, setWidth] = useState(0);
-
-  const scrollHeight = () => {
-    const element = document.documentElement,
-      ScrollTop = element.scrollTop || document.body.scrollTop,
-      ScrollHeight = element.scrollHeight || document.body.scrollHeight;
-    const percent = (ScrollTop / (ScrollHeight - element.clientHeight)) * 100;
-    setWidth(percent);
-  };
+  const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    window.addEventListener("scroll", scrollHeight);
-    return () => window.removeEventListener("scroll", scrollHeight);
-  });
+    const calculateScrollProgress = () => {
+      let percentage = (
+        ((document.body.scrollTop || document.documentElement.scrollTop) /
+          (document.documentElement.scrollHeight -
+            document.documentElement.clientHeight)) *
+        100
+      ).toPrecision(3);
+
+      progressBarRef.current.style.setProperty("width", percentage + "%");
+    };
+
+    document.addEventListener("scroll", calculateScrollProgress);
+    return () => {
+      document.removeEventListener("scroll", calculateScrollProgress);
+    };
+  }, []);
 
   return (
     <div
       className="page-progress"
       style={{
         position: "sticky",
-        top: -0.5, // Fix for gap pixel on Chrome with slight zoom
-        transition: "300ms",
+        top: -0.25, // Fix for gap pixel on Chrome with slight zoom
       }}
     >
       <div
+        ref={progressBarRef}
         className="progress-bar"
-        style={{ width: width + "%", transition: "0.3s" }}
+        style={{
+          width: 0,
+          transition: "100ms",
+        }}
       />
     </div>
   );
