@@ -14,7 +14,7 @@ const ThemeSwitcher = () => {
 
   useEffect(() => {
     const body = document.querySelector("body")!;
-    console.log("theme:", theme);
+
     if (theme === "light") {
       body.classList.remove("dark-theme");
       localStorage.theme = "light";
