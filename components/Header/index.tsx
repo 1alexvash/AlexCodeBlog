@@ -4,6 +4,7 @@ import { useState } from "react";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
+  const [showSearch, setShowSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -15,7 +16,7 @@ const Header = () => {
             <img className="dark" src="images/main-logo-dark.svg" alt="" />
           </a>
           <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-            <img src="images/buter.svg" alt="" />
+            <img src="images/hamburger.svg" alt="" />
           </div>
         </div>
         <div
@@ -162,7 +163,11 @@ const Header = () => {
               </li>
             </ul>
             <div className="header-search-desctop">
-              <img src="images/search.svg" alt="" />
+              <img
+                src="images/search.svg"
+                alt=""
+                onClick={() => setShowSearch(true)}
+              />
             </div>
           </div>
           <ul className="header-socials">
@@ -185,8 +190,12 @@ const Header = () => {
           <ThemeSwitcher />
         </div>
       </div>
-      {/* desctop-search */}
-      <div className="desctop-search">
+      <div
+        className="desctop-search"
+        style={{
+          display: showSearch ? "block" : "none",
+        }}
+      >
         <div className="container">
           <div className="desctop-search-content">
             <form
@@ -199,7 +208,12 @@ const Header = () => {
               </div>
             </form>
             {/* <div className="no-results">Not found.</div> */}
-            <div className="desctop-search-results">
+            <div
+              className="desctop-search-results"
+              style={{
+                display: showSearch ? "block" : "none",
+              }}
+            >
               <div className="related-posts-block">
                 <a href="" className="image">
                   <img src="images/related-posts-1.jpg" alt="" />
@@ -349,9 +363,18 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="search-overlay">
+      <div
+        className="search-overlay"
+        style={{
+          display: showSearch ? "block" : "none",
+        }}
+      >
         <div className="close-search">
-          <img src="images/close-search.svg" alt="" />
+          <img
+            src="images/close-search.svg"
+            alt=""
+            onClick={() => setShowSearch(false)}
+          />
         </div>
       </div>
     </header>
