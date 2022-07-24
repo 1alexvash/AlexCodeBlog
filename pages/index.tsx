@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Intro from "../components/Intro";
-import Pagination from "../components/Pagination";
-import Posts from "../components/Posts";
-import StandWithUkraine from "../components/StandWithUkraine";
-import Tags from "../components/Tags";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Intro from "@/components/Intro";
+import Pagination from "@/components/Pagination";
+import Posts from "@/components/Posts";
+import StandWithUkraine from "@/components/StandWithUkraine";
+import Tags from "@/components/Tags";
 
 const Home: NextPage = () => (
   <>
