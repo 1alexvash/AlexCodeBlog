@@ -1606,7 +1606,7 @@ h3 {
   color: #fff;
 }
 
-.dark-theme .header-buter img {
+.dark-theme .header-hamburger img {
   filter: brightness(0) invert(1);
 }
 
@@ -2113,7 +2113,7 @@ h3 {
   }
 
   .header-close,
-  .header-buter {
+  .header-hamburger {
     -ms-flex-negative: 0;
     flex-shrink: 0;
     cursor: pointer;
@@ -2121,7 +2121,7 @@ h3 {
   }
 
   .header-close img,
-  .header-buter img {
+  .header-hamburger img {
     display: block;
   }
 
