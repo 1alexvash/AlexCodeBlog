@@ -5,6 +5,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -45,11 +46,21 @@ const Header = () => {
                 className="mobile-search-form simple-form"
               >
                 <div className="input-block">
-                  <input type="text" placeholder="Site search" />
+                  <input
+                    type="text"
+                    placeholder="Site search"
+                    value={searchValue}
+                    onChange={(event) => setSearchValue(event.target.value)}
+                  />
                 </div>
               </form>
               {/* <div className="no-results">Not found.</div> */}
-              <div className="mobile-search-results">
+              <div
+                className="mobile-search-results"
+                style={{
+                  display: searchValue.trim().length > 0 ? "block" : "none",
+                }}
+              >
                 <div className="mobile-posts-block">
                   <div className="inner-flex">
                     <a href="" className="image">
@@ -148,9 +159,18 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="mobile-search-overlay">
+            <div
+              className="mobile-search-overlay"
+              style={{
+                display: searchValue.trim().length > 0 ? "block" : "none",
+              }}
+            >
               <div className="close-search">
-                <img src="images/close-search.svg" alt="" />
+                <img
+                  src="images/close-search.svg"
+                  alt=""
+                  onClick={() => setSearchValue("")}
+                />
               </div>
             </div>
           </div>
@@ -204,7 +224,12 @@ const Header = () => {
               className="desctop-search-form simple-form"
             >
               <div className="input-block">
-                <input type="text" placeholder="Site search" />
+                <input
+                  type="text"
+                  placeholder="Site search"
+                  value={searchValue}
+                  onChange={(event) => setSearchValue(event.target.value)}
+                />
               </div>
             </form>
             {/* <div className="no-results">Not found.</div> */}
