@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { postsJSON } from "../Posts";
+import Logo from "./Logo";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
@@ -12,10 +14,7 @@ const Header = () => {
     <header>
       <div className="container">
         <div className="header-content-mobile">
-          <a href="" className="main-logo">
-            <img className="light" src="images/main-logo.svg" alt="" />
-            <img className="dark" src="images/main-logo-dark.svg" alt="" />
-          </a>
+          <Logo />
           <div className="header-hamburger" onClick={() => setShowMenu(true)}>
             <img src="images/hamburger.svg" alt="" />
           </div>
@@ -26,12 +25,9 @@ const Header = () => {
             display: showMenu ? "flex" : "none",
           }}
         >
-          <div className="tob-block">
+          <div className="top-block">
             <Link href="/">
-              <a className="main-logo">
-                <img className="light" src="images/main-logo.svg" alt="" />
-                <img className="dark" src="images/main-logo-dark.svg" alt="" />
-              </a>
+              <Logo />
             </Link>
             <div className="header-close" onClick={() => setShowMenu(false)}>
               <img src="images/close.svg" alt="" />
@@ -61,102 +57,25 @@ const Header = () => {
                   display: searchValue.trim().length > 0 ? "block" : "none",
                 }}
               >
-                <div className="mobile-posts-block">
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src="images/related-posts-1.jpg" alt="" />
-                    </a>
-                    <a href="" className="name">
-                      Using SWR React Hooks With Next.js’ Incremental Static
-                      Regeneration (ISR)
-                    </a>
+                {postsJSON.map((post, index) => (
+                  <div className="mobile-posts-block" key={index}>
+                    <div className="inner-flex">
+                      <a href="" className="image">
+                        <img src={post.image} alt="" />
+                      </a>
+                      <a href="" className="name">
+                        {post.title}
+                      </a>
+                    </div>
+                    <div className="tags">
+                      {post.tags.map((tag) => (
+                        <a href="" key={tag}>
+                          #{tag}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-                <div className="mobile-posts-block">
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src="images/related-posts-1.jpg" alt="" />
-                    </a>
-                    <a href="" className="name">
-                      Using SWR React Hooks With Next.js’ Incremental Static
-                      Regeneration (ISR)
-                    </a>
-                  </div>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-                <div className="mobile-posts-block">
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src="images/related-posts-1.jpg" alt="" />
-                    </a>
-                    <a href="" className="name">
-                      Using SWR React Hooks With Next.js’ Incremental Static
-                      Regeneration (ISR)
-                    </a>
-                  </div>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-                <div className="mobile-posts-block">
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src="images/related-posts-1.jpg" alt="" />
-                    </a>
-                    <a href="" className="name">
-                      Using SWR React Hooks With Next.js’ Incremental Static
-                      Regeneration (ISR)
-                    </a>
-                  </div>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-                <div className="mobile-posts-block">
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src="images/related-posts-1.jpg" alt="" />
-                    </a>
-                    <a href="" className="name">
-                      Using SWR React Hooks With Next.js’ Incremental Static
-                      Regeneration (ISR)
-                    </a>
-                  </div>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-                <div className="mobile-posts-block">
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src="images/related-posts-1.jpg" alt="" />
-                    </a>
-                    <a href="" className="name">
-                      Using SWR React Hooks With Next.js’ Incremental Static
-                      Regeneration (ISR)
-                    </a>
-                  </div>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
             <div
@@ -165,12 +84,8 @@ const Header = () => {
                 display: searchValue.trim().length > 0 ? "block" : "none",
               }}
             >
-              <div className="close-search">
-                <img
-                  src="images/close-search.svg"
-                  alt=""
-                  onClick={() => setSearchValue("")}
-                />
+              <div className="close-search" onClick={() => setSearchValue("")}>
+                <img src="images/close-search.svg" alt="" />
               </div>
             </div>
           </div>
@@ -182,7 +97,7 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <div className="header-search-desctop">
+            <div className="header-search-desktop">
               <img
                 src="images/search.svg"
                 alt=""
@@ -211,17 +126,17 @@ const Header = () => {
         </div>
       </div>
       <div
-        className="desctop-search"
+        className="desktop-search"
         style={{
           display: showSearch ? "block" : "none",
         }}
       >
         <div className="container">
-          <div className="desctop-search-content">
+          <div className="desktop-search-content">
             <form
               action="#"
               method="post"
-              className="desctop-search-form simple-form"
+              className="desktop-search-form simple-form"
             >
               <div className="input-block">
                 <input
@@ -234,156 +149,30 @@ const Header = () => {
             </form>
             {/* <div className="no-results">Not found.</div> */}
             <div
-              className="desctop-search-results"
+              className="desktop-search-results"
               style={{
                 display: showSearch ? "block" : "none",
               }}
             >
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-1.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental Static
-                    Regeneration (ISR)
+              {postsJSON.map((post, index) => (
+                <div className="related-posts-block" key={index}>
+                  <a href="" className="image">
+                    <img src={post.image} alt="" />
                   </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
+                  <div className="inner">
+                    <a href="" className="name">
+                      {post.title}
+                    </a>
+                    <div className="tags">
+                      {post.tags.map((tag) => (
+                        <a href="" key={tag}>
+                          #{tag}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-2.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Client-Side Routing In Next.js
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-3.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-1.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental Static
-                    Regeneration (ISR)
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-2.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Client-Side Routing In Next.js
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-3.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-1.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental Static
-                    Regeneration (ISR)
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-2.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Client-Side Routing In Next.js
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-3.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                  </div>
-                </div>
-              </div>
-              <div className="related-posts-block">
-                <a href="" className="image">
-                  <img src="images/related-posts-1.jpg" alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    Using SWR React Hooks With Next.js’ Incremental Static
-                    Regeneration (ISR)
-                  </a>
-                  <div className="tags">
-                    <a href="">#Firebase</a>
-                    <a href="">#React</a>
-                    <a href="">#Typescript</a>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -394,12 +183,8 @@ const Header = () => {
           display: showSearch ? "block" : "none",
         }}
       >
-        <div className="close-search">
-          <img
-            src="images/close-search.svg"
-            alt=""
-            onClick={() => setShowSearch(false)}
-          />
+        <div className="close-search" onClick={() => setShowSearch(false)}>
+          <img src="images/close-search.svg" alt="" />
         </div>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import PostCard from "./PostCard";
 
-const posts = [
+export const postsJSON = [
   {
     title:
       "Using SWR React Hooks With Next.js Incremental Static Regeneration (ISR)",
@@ -36,7 +36,7 @@ const posts = [
 
 const Posts = () => (
   <ul className="posts-list">
-    {posts.map((post, index) => (
+    {postsJSON.map((post, index) => (
       <PostCard key={index} post={post} />
     ))}
   </ul>
