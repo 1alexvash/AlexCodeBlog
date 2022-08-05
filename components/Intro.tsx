@@ -4,7 +4,7 @@ const Intro = () => (
       <div className="intro-content">
         <div className="intro-avatar">
           <div className="image">
-            <img src="images/author-avatar.jpg" alt="" />
+            <img src="/images/author-avatar.jpg" alt="" />
           </div>
           <div className="name">Alex</div>
           <div className="job">Full Stack JavaScript Developer</div>

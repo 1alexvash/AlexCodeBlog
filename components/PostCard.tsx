@@ -1,21 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Post } from "pages";
 
 interface Props {
-  post: {
-    title: string;
-    image: string;
-    tags: string[];
-  };
+  post: Post;
 }
 
 const PostCard = ({ post }: Props) => (
   <li>
     <div className="posts-list-block">
       <div className="content">
-        <Link href="/post">
+        <Link href={`/post/${post.slug}`}>
           <a className="post-img">
-            <Image src={post.image} layout="fill" alt="" priority />
+            <Image src={post.coverImage} layout="fill" alt="" priority />
           </a>
         </Link>
         <div className="tags">
@@ -25,7 +22,7 @@ const PostCard = ({ post }: Props) => (
             </a>
           ))}
         </div>
-        <Link href="/post">
+        <Link href={`/post/${post.slug}`}>
           <a className="link">{post.title}</a>
         </Link>
       </div>
