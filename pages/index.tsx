@@ -1,3 +1,4 @@
+import { getAllPosts } from "helpers";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -9,7 +10,26 @@ import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
-const Home: NextPage = () => (
+export type Author = {
+  name: string;
+  picture: string;
+};
+
+export type Post = {
+  slug: string;
+  title: string;
+  coverImage: string;
+  lastmod: Date;
+  publishdate: Date;
+  draft: boolean;
+  tags: string[];
+};
+
+type Props = {
+  posts: Post[];
+};
+
+const Home: NextPage<Props> = ({ posts }: Props) => (
   <>
     <Head>
       <title>AlexCode</title>
@@ -22,12 +42,28 @@ const Home: NextPage = () => (
     <section className="simple-section">
       <div className="container">
         <Tags />
-        <Posts />
+        <Posts posts={posts} />
         <Pagination />
       </div>
     </section>
     <Footer />
   </>
 );
+
+export const getStaticProps = async () => {
+  const posts = getAllPosts([
+    "slug",
+    "title",
+    "coverImage",
+    // "lastmod",
+    // "publishdate",
+    "draft",
+    "tags",
+  ]);
+
+  return {
+    props: { posts },
+  };
+};
 
 export default Home;

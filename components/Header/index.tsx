@@ -14,7 +14,7 @@ const Header = () => {
     <div className="header-content-mobile">
       <Logo />
       <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-        <img src="images/hamburger.svg" alt="" />
+        <img src="/images/hamburger.svg" alt="" />
       </div>
     </div>
   );
@@ -28,10 +28,13 @@ const Header = () => {
     >
       <div className="top-block">
         <Link href="/">
-          <Logo />
+          {/* This wrapper prevents console log error */}
+          <div style={{ cursor: "pointer" }}>
+            <Logo />
+          </div>
         </Link>
         <div className="header-close" onClick={() => setShowMenu(false)}>
-          <img src="images/close.svg" alt="" />
+          <img src="/images/close.svg" alt="" />
         </div>
       </div>
       {/* mobile-search */}
@@ -86,7 +89,7 @@ const Header = () => {
           }}
         >
           <div className="close-search" onClick={() => setSearchValue("")}>
-            <img src="images/close-search.svg" alt="" />
+            <img src="/images/close-search.svg" alt="" />
           </div>
         </div>
       </div>
@@ -100,7 +103,7 @@ const Header = () => {
         </ul>
         <div className="header-search-desktop">
           <img
-            src="images/search.svg"
+            src="/images/search.svg"
             alt=""
             onClick={() => setShowSearch(true)}
           />
@@ -109,17 +112,17 @@ const Header = () => {
       <ul className="header-socials">
         <li>
           <a href="https://t.me/HeWorksSoHard">
-            <img src="images/telegram.svg" alt="" />
+            <img src="/images/telegram.svg" alt="" />
           </a>
         </li>
         <li>
           <a href="https://github.com/1alexvash" className="git">
-            <img src="images/github.svg" alt="" />
+            <img src="/images/github.svg" alt="" />
           </a>
         </li>
         <li>
           <a href="mailto:1alexvash@gmail.com">
-            <img src="images/mail.svg" alt="" />
+            <img src="/images/mail.svg" alt="" />
           </a>
         </li>
       </ul>
@@ -190,7 +193,7 @@ const Header = () => {
       }}
     >
       <div className="close-search" onClick={() => setShowSearch(false)}>
-        <img src="images/close-search.svg" alt="" />
+        <img src="/images/close-search.svg" alt="" />
       </div>
     </div>
   );

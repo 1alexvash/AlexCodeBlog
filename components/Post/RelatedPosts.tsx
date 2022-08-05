@@ -3,7 +3,7 @@ const RelatedPosts = () => (
     <h2>Related posts</h2>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-1.jpg" alt="" />
+        <img src="/images/related-posts-1.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -19,7 +19,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-2.jpg" alt="" />
+        <img src="/images/related-posts-2.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -33,7 +33,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-3.jpg" alt="" />
+        <img src="/images/related-posts-3.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -46,7 +46,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-1.jpg" alt="" />
+        <img src="/images/related-posts-1.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -62,7 +62,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-2.jpg" alt="" />
+        <img src="/images/related-posts-2.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -76,7 +76,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-3.jpg" alt="" />
+        <img src="/images/related-posts-3.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -89,7 +89,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-1.jpg" alt="" />
+        <img src="/images/related-posts-1.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -105,7 +105,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-2.jpg" alt="" />
+        <img src="/images/related-posts-2.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -119,7 +119,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-3.jpg" alt="" />
+        <img src="/images/related-posts-3.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -132,7 +132,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-1.jpg" alt="" />
+        <img src="/images/related-posts-1.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -148,7 +148,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-2.jpg" alt="" />
+        <img src="/images/related-posts-2.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -162,7 +162,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-3.jpg" alt="" />
+        <img src="/images/related-posts-3.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">
@@ -175,7 +175,7 @@ const RelatedPosts = () => (
     </div>
     <div className="related-posts-block">
       <a href="" className="image">
-        <img src="images/related-posts-1.jpg" alt="" />
+        <img src="/images/related-posts-1.jpg" alt="" />
       </a>
       <div className="inner">
         <a href="" className="name">

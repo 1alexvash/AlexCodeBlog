@@ -1,3 +1,5 @@
+import { Post } from "pages";
+
 import PostCard from "./PostCard";
 
 export const postsJSON = [
@@ -34,9 +36,13 @@ export const postsJSON = [
   },
 ];
 
-const Posts = () => (
+interface Props {
+  posts: Post[];
+}
+
+const Posts = ({ posts }: Props) => (
   <ul className="posts-list">
-    {postsJSON.map((post, index) => (
+    {posts.map((post, index) => (
       <PostCard key={index} post={post} />
     ))}
   </ul>
