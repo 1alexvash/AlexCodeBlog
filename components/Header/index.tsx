@@ -1,3 +1,4 @@
+import config from "config";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -110,21 +111,13 @@ const Header = () => {
         </div>
       </div>
       <ul className="header-socials">
-        <li>
-          <a href="https://t.me/HeWorksSoHard">
-            <img src="/images/telegram.svg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/1alexvash" className="git">
-            <img src="/images/github.svg" alt="" />
-          </a>
-        </li>
-        <li>
-          <a href="mailto:1alexvash@gmail.com">
-            <img src="/images/mail.svg" alt="" />
-          </a>
-        </li>
+        {config.social_links.map((link) => (
+          <li key={link.link}>
+            <a href={link.link}>
+              <img src={link.image} alt="" />
+            </a>
+          </li>
+        ))}
       </ul>
       <ThemeSwitcher />
     </div>

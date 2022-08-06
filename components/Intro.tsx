@@ -1,3 +1,5 @@
+import config from "config";
+
 const Intro = () => (
   <section className="intro-section">
     <div className="container">
@@ -6,17 +8,12 @@ const Intro = () => (
           <div className="image">
             <img src="/images/author-avatar.jpg" alt="" />
           </div>
-          <div className="name">Alex</div>
-          <div className="job">Full Stack JavaScript Developer</div>
+          <div className="name">{config.author_name}</div>
+          <div className="job">{config.author_position}</div>
         </div>
         <div className="intro-text">
-          <h1>Hello, my name Alex</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate
-            elementum volutpat a, sit amet sed donec et. Adipiscing egestas
-            molestie commodo sed consectetur egestas. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit.
-          </p>
+          <h1>Hello, my name {config.author_name}</h1>
+          <p>{config.site_description}</p>
         </div>
       </div>
     </div>

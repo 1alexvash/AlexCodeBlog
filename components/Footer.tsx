@@ -1,3 +1,5 @@
+import config from "config";
+
 const currentYear = new Date().getFullYear();
 
 const Footer = () => (
@@ -8,21 +10,13 @@ const Footer = () => (
           <img src="/images/footer-logo.svg" alt="" />
         </div>
         <ul className="footer-socials">
-          <li>
-            <a href="https://t.me/HeWorksSoHard">
-              <img src="/images/telegram.svg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/1alexvash">
-              <img src="/images/github-gray.svg" alt="" />
-            </a>
-          </li>
-          <li>
-            <a href="mailto:1alexvash@gmail.com">
-              <img src="/images/mail.svg" alt="" />
-            </a>
-          </li>
+          {config.social_links.map((link) => (
+            <li key={link.link}>
+              <a href={link.link}>
+                <img src={link.image} alt="" />
+              </a>
+            </li>
+          ))}
         </ul>
         <div className="copyright">
           ©{currentYear} - Alex-code <span className="divider">|</span> All
