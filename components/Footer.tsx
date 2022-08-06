@@ -1,3 +1,5 @@
+const currentYear = new Date().getFullYear();
+
 const Footer = () => (
   <footer>
     <div className="container">
@@ -23,8 +25,8 @@ const Footer = () => (
           </li>
         </ul>
         <div className="copyright">
-          ©{new Date().getFullYear()} - Alex-code{" "}
-          <span className="divider">|</span> All right reserved
+          ©{currentYear} - Alex-code <span className="divider">|</span> All
+          right reserved
         </div>
       </div>
     </div>

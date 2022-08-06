@@ -1,4 +1,4 @@
-import { getAllPosts } from "helpers";
+import { getAllPosts } from "helpers/contentRender";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -19,8 +19,8 @@ export type Post = {
   slug: string;
   title: string;
   coverImage: string;
-  lastmod: Date;
-  publishdate: Date;
+  lastmod: string;
+  publishdate: string;
   draft: boolean;
   tags: string[];
 };

@@ -1,3 +1,4 @@
+import { toHumanReadableDate } from "helpers";
 import { PostInterfaceWithContent } from "pages/post/[slug]";
 
 interface Props {
@@ -10,7 +11,7 @@ const PostContent = ({ post }: Props) => (
       <img src="/images/blogpost-pic.jpg" alt="" />
     </div>
     <div className="blogpost-date">
-      <span>12/12/2021 14:45</span>
+      <span>{toHumanReadableDate(post.lastmod)}</span>
     </div>
     <h1>{post.title}</h1>
 

@@ -1,4 +1,8 @@
-import { getAllPosts, getPostBySlug, markdownToHtml } from "helpers";
+import {
+  getAllPosts,
+  getPostBySlug,
+  markdownToHtml,
+} from "helpers/contentRender";
 import type { NextPage } from "next";
 import Head from "next/head";
 
