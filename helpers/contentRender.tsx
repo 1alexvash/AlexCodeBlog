@@ -7,7 +7,11 @@ import html from "remark-html";
 const postsDirectory = join(process.cwd(), "content/posts");
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+  if (fs.existsSync(postsDirectory)) {
+    return fs.readdirSync(postsDirectory);
+  } else {
+    return [];
+  }
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
