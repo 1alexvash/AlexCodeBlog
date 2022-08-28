@@ -42,6 +42,7 @@ const Post: NextPage<Props> = ({ post }: Props) => (
           <RelatedPosts />
         </div>
       </div>
+      {/* <CommentsSection /> This feature not used, and needed for the time being */}
     </section>
     <Footer />
   </>
