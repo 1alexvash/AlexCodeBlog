@@ -8,7 +8,7 @@ interface Props {
 const PostContent = ({ post }: Props) => (
   <article className="blogpost-content">
     <div className="blogpost-image">
-      <img src="/images/blogpost-pic.jpg" alt="" />
+      <img src={post.featuredImage} alt="" />
     </div>
     <div className="blogpost-date">
       <span>{toHumanReadableDate(post.date)}</span>
