@@ -11,7 +11,7 @@ const PostContent = ({ post }: Props) => (
       <img src="/images/blogpost-pic.jpg" alt="" />
     </div>
     <div className="blogpost-date">
-      <span>{toHumanReadableDate(post.lastmod)}</span>
+      <span>{toHumanReadableDate(post.date)}</span>
     </div>
     <h1>{post.title}</h1>
 

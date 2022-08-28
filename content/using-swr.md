@@ -1,8 +1,7 @@
 ---
 title: Using SWR React Hooks With Next.js Incremental Static Regeneration (ISR)
-coverImage: "/images/post-pic-3.jpg"
-lastmod: "2018-09-04T17:48:24-07:00"
-publishdate: "2018-09-04T17:48:24-07:00"
+featuredImage: "/images/post-pic-3.jpg"
+date: "2018-09-04T17:48:24-07:00"
 draft: false
 tags:
   - React

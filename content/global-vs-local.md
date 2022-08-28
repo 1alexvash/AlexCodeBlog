@@ -1,8 +1,7 @@
 ---
 title: Global vs. Local Styling In Next.js
-coverImage: "/images/post-pic-2.jpg"
-lastmod: "2018-09-04T17:48:24-07:00"
-publishdate: "2018-09-04T17:48:24-07:00"
+featuredImage: "/images/post-pic-2.jpg"
+date: "2018-09-04T17:48:24-07:00"
 draft: false
 tags:
   - javascript

@@ -12,7 +12,7 @@ const PostCard = ({ post }: Props) => (
       <div className="content">
         <Link href={`/post/${post.slug}`}>
           <a className="post-img">
-            <Image src={post.coverImage} layout="fill" alt="" priority />
+            <Image src={post.featuredImage} layout="fill" alt="" priority />
           </a>
         </Link>
         <div className="tags">

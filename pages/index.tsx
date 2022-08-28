@@ -19,9 +19,8 @@ export type Author = {
 export type Post = {
   slug: string;
   title: string;
-  coverImage: string;
-  lastmod: string;
-  publishdate: string;
+  featuredImage: string;
+  date: string;
   draft: boolean;
   tags: string[];
 };
@@ -55,9 +54,8 @@ export const getStaticProps = async () => {
   const posts = getAllPosts([
     "slug",
     "title",
-    "coverImage",
-    "lastmod",
-    "publishdate",
+    "featuredImage",
+    "date",
     "draft",
     "tags",
   ]);
