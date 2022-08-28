@@ -4,7 +4,7 @@ import { join } from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
-const postsDirectory = join(process.cwd(), "content");
+const postsDirectory = join(process.cwd(), "content/posts");
 
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
