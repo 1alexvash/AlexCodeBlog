@@ -694,10 +694,8 @@ header {
 }
 
 .filter-tags-list li {
+  cursor: pointer;
   margin: 0 10px 20px;
-}
-
-.filter-tags-list a {
   display: block;
   padding: 12px 19px;
   text-align: center;
@@ -709,11 +707,11 @@ header {
   transition: all 0.3s ease-out;
 }
 
-.filter-tags-list a:hover {
+.filter-tags-list li:hover {
   border-color: #3a3a3a;
 }
 
-.filter-tags-list a.active {
+.filter-tags-list li.active {
   color: #fff !important;
   background: #fe6c0a !important;
   border-color: #fe6c0a !important;
