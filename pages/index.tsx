@@ -11,16 +11,11 @@ import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
-export type Author = {
-  name: string;
-  picture: string;
-};
-
 export type Post = {
   slug: string;
   title: string;
-  featuredImage: string;
   date: string;
+  featuredImage: string;
   draft: boolean;
   tags: string[];
 };
@@ -58,7 +53,7 @@ export const getStaticProps = async () => {
     "date",
     "draft",
     "tags",
-  ]);
+  ]).filter((post: Post) => post.draft === false);
 
   return {
     props: { posts },
