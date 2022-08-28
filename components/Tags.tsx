@@ -1,37 +1,19 @@
-const Tags = () => (
+interface Props {
+  uniqueTags: string[];
+}
+
+const Tags = ({ uniqueTags }: Props) => (
   <ul className="filter-tags-list">
     <li>
       <a href="" className="active">
         ALL
       </a>
     </li>
-    <li>
-      <a href="">#React</a>
-    </li>
-    <li>
-      <a href="">#Typescript</a>
-    </li>
-    <li>
-      <a href="">#Firebase</a>
-    </li>
-    <li>
-      <a href="">#React</a>
-    </li>
-    <li>
-      <a href="">#Typescript</a>
-    </li>
-    <li>
-      <a href="">#Firebase</a>
-    </li>
-    <li>
-      <a href="">#React</a>
-    </li>
-    <li>
-      <a href="">#Typescript</a>
-    </li>
-    <li>
-      <a href="">#Firebase</a>
-    </li>
+    {uniqueTags.map((uniqueTag) => (
+      <li key={uniqueTag}>
+        <a href="">{uniqueTag}</a>
+      </li>
+    ))}
   </ul>
 );
 
