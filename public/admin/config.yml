@@ -17,4 +17,4 @@ collections:
       - { label: "Featured Image", name: "featuredImage", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Tags", name: "tags", widget: "list", min: 1 }
