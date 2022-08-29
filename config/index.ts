@@ -1,7 +1,6 @@
 const config = {
   site_title: "AlexCode",
-  site_description:
-    "I know technologies can be a little difficult, so I've created this website will a list of cool recipes / tricks to help you out become a better developer.",
+  site_description: "Technologies suck, they won't be if you read my blog 💪",
   author_name: "Alex",
   author_position: "Full Stack JavaScript Developer",
   social_links: [

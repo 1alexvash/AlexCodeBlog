@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { resetTags, updateTags } from "redux/slices/selectedTags";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 interface Props {
   uniqueTags: string[];
 }
 
 const Tags = ({ uniqueTags }: Props) => {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const selectedTags = useAppSelector((state) => state.selectedTags);
+
+  const dispatch = useAppDispatch();
 
   const noneTagSelected = selectedTags.length === 0;
   const allTagsSelected = uniqueTags.length === selectedTags.length;
@@ -14,7 +17,7 @@ const Tags = ({ uniqueTags }: Props) => {
     <ul className="filter-tags-list">
       <li
         className={noneTagSelected || allTagsSelected ? "active" : ""}
-        onClick={() => setSelectedTags([])}
+        onClick={() => dispatch(resetTags())}
       >
         ALL
       </li>
@@ -27,9 +30,10 @@ const Tags = ({ uniqueTags }: Props) => {
               const updatedTags = selectedTags.filter(
                 (tag) => tag !== uniqueTag
               );
-              setSelectedTags(updatedTags);
+
+              dispatch(updateTags(updatedTags));
             } else {
-              setSelectedTags([...selectedTags, uniqueTag]);
+              dispatch(updateTags([...selectedTags, uniqueTag]));
             }
           }}
         >
