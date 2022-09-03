@@ -2,6 +2,7 @@ import config from "config";
 import { getAllPosts } from "helpers/contentRender";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useAppSelector } from "redux/typesHooks";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -29,6 +30,11 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
     new Set([...posts.map((post) => post.tags).flat()])
   );
 
+  const selectedTags = useAppSelector((state) => state.selectedTags);
+  const filteredPosts = posts.filter((post) =>
+    selectedTags.every((tag) => post.tags.includes(tag))
+  );
+
   return (
     <>
       <Head>
@@ -42,7 +48,7 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
       <section className="simple-section">
         <div className="container">
           <Tags uniqueTags={uniqueTags} />
-          <Posts posts={posts} />
+          <Posts posts={filteredPosts} />
           <Pagination />
         </div>
       </section>
