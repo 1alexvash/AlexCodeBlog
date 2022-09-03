@@ -35,6 +35,13 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
     selectedTags.every((tag) => post.tags.includes(tag))
   );
 
+  const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
+  const currentPage = useAppSelector((state) => state.pagination.currentPage);
+  const postsToRender = filteredPosts.slice(
+    currentPage * config.posts_per_page,
+    (currentPage + 1) * config.posts_per_page
+  );
+
   return (
     <>
       <Head>
@@ -48,8 +55,8 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
       <section className="simple-section">
         <div className="container">
           <Tags uniqueTags={uniqueTags} />
-          <Posts posts={filteredPosts} />
-          <Pagination />
+          <Posts posts={postsToRender} />
+          <Pagination pagesCount={pagesCount} />
         </div>
       </section>
       <Footer />

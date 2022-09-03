@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, updateTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
@@ -12,6 +14,10 @@ const Tags = ({ uniqueTags }: Props) => {
 
   const noneTagSelected = selectedTags.length === 0;
   const allTagsSelected = uniqueTags.length === selectedTags.length;
+
+  useEffect(() => {
+    dispatch(resetPaginationPage());
+  }, [dispatch, selectedTags]);
 
   return (
     <ul className="filter-tags-list">

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import selectedTags from "./slices/selectedTags";
+import paginationSlice from "./slices/pagination";
+import selectedTagsSlice from "./slices/selectedTags";
 
 const store = configureStore({
   reducer: {
-    selectedTags,
+    selectedTags: selectedTagsSlice,
+    pagination: paginationSlice,
   },
 });
 

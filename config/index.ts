@@ -8,6 +8,7 @@ const config = {
     { link: "https://github.com/1alexvash", image: "/images/github-gray.svg" },
     { link: "mailto:1alexvash@gmail.com", image: "/images/mail.svg" },
   ],
+  posts_per_page: 12,
 };
 
 export default config;

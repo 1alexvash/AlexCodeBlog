@@ -857,10 +857,8 @@ header {
 }
 
 .pagination li {
+  cursor: pointer;
   margin: 0 5px;
-}
-
-.pagination a {
   display: -ms-flexbox;
   display: flex;
   width: 48px;
@@ -876,11 +874,11 @@ header {
   border: 1px solid transparent;
 }
 
-.pagination a:hover {
+.pagination li:hover {
   border-color: #3a3a3a;
 }
 
-.pagination a.active {
+.pagination li.active {
   color: #fff !important;
   background: #fe6c0a !important;
   border-color: #fe6c0a !important;
