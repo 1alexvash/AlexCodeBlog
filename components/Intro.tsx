@@ -12,8 +12,10 @@ const Intro = () => (
           <div className="job">{config.author_position}</div>
         </div>
         <div className="intro-text">
-          <h1>Hello, my name is {config.author_name}</h1>
-          <p>{config.site_description}</p>
+          <h1>Hello, I am {config.author_name}</h1>
+          <p style={{ whiteSpace: "break-spaces" }}>
+            {config.site_description}
+          </p>
         </div>
       </div>
     </div>
