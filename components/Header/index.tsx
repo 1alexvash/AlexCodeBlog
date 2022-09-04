@@ -30,6 +30,10 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
+  const filteredPosts = postsJSON.filter((post) =>
+    post.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   const HeaderContentMobile = (
     <div className="header-content-mobile">
       <Logo />
@@ -81,7 +85,7 @@ const Header = () => {
               display: searchValue.trim().length > 0 ? "block" : "none",
             }}
           >
-            {postsJSON.map((post, index) => (
+            {filteredPosts.map((post, index) => (
               <div className="mobile-posts-block" key={index}>
                 <div className="inner-flex">
                   <a href="" className="image">
@@ -172,7 +176,7 @@ const Header = () => {
               display: showSearch ? "block" : "none",
             }}
           >
-            {postsJSON.map((post, index) => (
+            {filteredPosts.map((post, index) => (
               <div className="related-posts-block" key={index}>
                 <a href="" className="image">
                   <img src={post.featuredImage} alt="" />
