@@ -2,9 +2,28 @@ import config from "config";
 import Link from "next/link";
 import { useState } from "react";
 
-import { postsJSON } from "../Posts";
 import Logo from "./Logo";
 import ThemeSwitcher from "./ThemeSwitcher";
+
+const postsJSON = [
+  {
+    slug: "2022-08-28-second-post",
+    title: "Second post",
+    featuredImage:
+      "/post-images/reverse-image-search-627b7e49986b0-sej-760x400.png",
+    date: "2022-08-28T17:04:52.321Z",
+    draft: false,
+    tags: ["TypeScript", "React"],
+  },
+  {
+    slug: "2022-08-28-first-post",
+    title: "First post",
+    featuredImage: "/post-images/camera.jpg",
+    date: "2022-08-28T15:40:22.718Z",
+    draft: false,
+    tags: ["TypeScript", "React", "Firebase"],
+  },
+];
 
 const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
@@ -66,7 +85,7 @@ const Header = () => {
               <div className="mobile-posts-block" key={index}>
                 <div className="inner-flex">
                   <a href="" className="image">
-                    <img src={post.image} alt="" />
+                    <img src={post.featuredImage} alt="" />
                   </a>
                   <a href="" className="name">
                     {post.title}
@@ -156,7 +175,7 @@ const Header = () => {
             {postsJSON.map((post, index) => (
               <div className="related-posts-block" key={index}>
                 <a href="" className="image">
-                  <img src={post.image} alt="" />
+                  <img src={post.featuredImage} alt="" />
                 </a>
                 <div className="inner">
                   <a href="" className="name">
