@@ -1,7 +1,7 @@
 ---
 title: How to delete a git folder
 date: 2021-11-14 12:08:54
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2021-11-14-how-to-delete-a-git-folder.webp
 draft: false
 tags:
   - Git

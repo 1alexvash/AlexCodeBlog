@@ -1,7 +1,7 @@
 ---
 title: What is VS Code peek definition?
 date: 2022-07-09 12:08:36
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2022-07-09-what-is-vs-code-peek-definition.webp
 draft: false
 tags:
   - VSCode

@@ -1,7 +1,7 @@
 ---
 title: VSCode undo last git commit
 date: 2022-01-03 03:23:50
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2022-01-03-vs-code-undo-last-git-commit.webp
 draft: false
 tags:
   - Git

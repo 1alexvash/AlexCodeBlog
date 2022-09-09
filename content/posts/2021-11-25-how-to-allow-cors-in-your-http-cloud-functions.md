@@ -1,7 +1,7 @@
 ---
 title: How to allow CORS in your HTTP cloud functions
 date: 2021-11-25 01:00:00
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2021-11-25-how-to-allow-cors-in-your-http-cloud-functions.webp
 draft: false
 tags:
   - Cloud Functions

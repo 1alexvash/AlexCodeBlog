@@ -1,7 +1,7 @@
 ---
 title: Snippet to update every document in Firestore
 date: 2022-01-22 09:38:03
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2022-01-22-snippet-to-update-every-document-in-firestore.webp
 draft: false
 tags:
   - Firebase

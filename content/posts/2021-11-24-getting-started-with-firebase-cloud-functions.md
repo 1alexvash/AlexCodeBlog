@@ -1,7 +1,7 @@
 ---
 title: Getting started with Firebase Cloud Functions
 date: 2021-11-24 02:28:00
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2021-11-24-getting-started-with-firebase-cloud-functions.webp
 draft: false
 tags:
   - Cloud Functions

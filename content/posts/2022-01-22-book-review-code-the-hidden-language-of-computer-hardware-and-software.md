@@ -1,7 +1,7 @@
 ---
 title: "Book review: Code the hidden language of computer hardware and software"
 date: 2022-01-22 09:34:26
-featuredImage: /post-images/camera.jpg
+featuredImage: /post-images/2022-01-22-book-review-code-the-hidden-language-of-computer-hardware-and-software.webp
 draft: false
 tags:
   - BookReview
