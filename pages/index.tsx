@@ -31,9 +31,13 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
   );
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
-  const filteredPosts = posts.filter((post) =>
-    selectedTags.every((tag) => post.tags.includes(tag))
-  );
+  const filteredPosts = posts.filter((post) => {
+    if (selectedTags.length === 0) {
+      return true;
+    }
+
+    return selectedTags.some((tag) => post.tags.includes(tag));
+  });
 
   const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
   const currentPage = useAppSelector((state) => state.pagination.currentPage);

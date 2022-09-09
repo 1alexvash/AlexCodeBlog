@@ -9,9 +9,9 @@ import Head from "next/head";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
+import LatestPosts from "@/components/Post/LatestPosts";
 import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
-import RelatedPosts from "@/components/Post/RelatedPosts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { Post as PostI } from "../index";
@@ -22,9 +22,10 @@ export interface PostInterfaceWithContent extends PostI {
 
 interface Props {
   post: PostInterfaceWithContent;
+  latestPosts: PostI[];
 }
 
-const Post: NextPage<Props> = ({ post }: Props) => (
+const Post: NextPage<Props> = ({ latestPosts, post }: Props) => (
   <>
     <Head>
       <title>{post.title}</title>
@@ -39,7 +40,7 @@ const Post: NextPage<Props> = ({ post }: Props) => (
       <div className="container">
         <div className="blogpost-outer">
           <PostContent post={post} />
-          <RelatedPosts />
+          <LatestPosts latestPosts={latestPosts} />
         </div>
       </div>
       {/* <CommentsSection /> This feature not used, and needed for the time being */}
@@ -55,6 +56,17 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
+  const latestPosts = getAllPosts([
+    "slug",
+    "title",
+    "featuredImage",
+    "date",
+    "draft",
+    "tags",
+  ])
+    .filter((post: PostI) => post.draft === false && post.slug !== params.slug)
+    .slice(0, 10);
+
   const post = getPostBySlug(params.slug, [
     "slug",
     "title",
@@ -68,6 +80,7 @@ export async function getStaticProps({ params }: Params) {
 
   return {
     props: {
+      latestPosts,
       post: {
         ...post,
         content,
