@@ -17,7 +17,6 @@ So, I decided it would be 😂 hilarious to write a blog post about it.
 
 Let's say we have the following object of people:
 
-````
 ```javascript
 const people = [
   {
@@ -33,16 +32,11 @@ const people = [
     age: 30,
   },
 ];
+```
+
+### For in / (Key iterator)
+
 ````
-
-```
-
-For in
-------
-
-(Key iterator)
-
-```
 
 ```javascript
 for (person in people) {
@@ -52,20 +46,13 @@ for (person in people) {
 // 0
 // 1
 // 2
-```
+````
 
-```
+### For of / (Value iterator)
 
-For of
-------
-
-(Value iterator)
-
-```
-
-```java
+```javascript
 for (person of people) {
-    console.log(person);
+  console.log(person);
 }
 
 // {name: "John", age: 20}
@@ -73,9 +60,6 @@ for (person of people) {
 // {name: "Peter", age: 30}
 ```
 
-```
-
 So, basically, that's it.
 
 Pretty simple.
-```

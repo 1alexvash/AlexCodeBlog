@@ -10,18 +10,17 @@ tags:
 
 A quite useful self-explanatory snippet
 
-````
 ```typescript
-firestore.collection("users").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        doc.ref.update({
-            premium: true
-        });
+firestore
+  .collection("users")
+  .get()
+  .then(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      doc.ref.update({
+        premium: true,
+      });
     });
-});
-````
-
+  });
 ```
 
 (This one is for 8th version of SDK)
-```

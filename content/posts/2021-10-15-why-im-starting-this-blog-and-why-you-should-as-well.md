@@ -11,7 +11,7 @@ The idea to start a blog in 2021 doesn't seem legit. Yeah, I get it.
 
 I was thinking, exactly, the same until I read "The Complete Software Developer's Career Guide by John Sonmez".
 
-https://www.amazon.com/Complete-Software-Developers-Career-Guide-ebook/dp/B073X6GNJ1 In the book, he tackles a couple of arguments why it is still a solid idea, and in this article I'm going to list some benefits you can get out of blogging.
+In the [book](https://www.amazon.com/Complete-Software-Developers-Career-Guide-ebook/dp/B073X6GNJ1), he tackles a couple of arguments why it is still a solid idea, and in this article I'm going to list some benefits you can get out of blogging.
 
 But you better grab that book, it's really that good.  
 It's going to change your life, I promise.

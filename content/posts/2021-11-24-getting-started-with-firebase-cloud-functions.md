@@ -24,10 +24,9 @@ Don't worry, firebase has a generous free-tier. You **won't** have to pay for an
 
 Make sure firebase is installed in your CLI by running this command
 
-````
 ```bash
 firebase --version
-````
+```
 
 ```
 
@@ -37,8 +36,6 @@ Then run to initialize / reinitialize your project
 
 ```bash
 firebase init
-```
-
 ```
 
 Press enter to proceed
@@ -63,12 +60,8 @@ So, you're going to see a structure like that.
 
 ![](http://localhost/wordpress/wp-content/uploads/2021/11/image-14-1024x244.png)Now we need to deploy this function to firebase using this command.
 
-```
-
 ```bash
 firebase deploy --only functions
-```
-
 ```
 
 After deploying. You're going to receive the URL by which you'll be able to call the function.
@@ -86,4 +79,3 @@ You can see that we did indeed log something by calling this function. We've got
 A cloud function that returns JSON data.
 
 Stay tuned.
-```

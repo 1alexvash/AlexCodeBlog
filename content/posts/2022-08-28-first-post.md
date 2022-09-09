@@ -31,7 +31,7 @@ _Cursive_ text
 2. Bullet List
 3. Pretty cool
 
-![alt](/post-images/second.jpg "title")
+![image](/post-images/second.jpg)
 
 ```typescript
 export function toHumanReadableDate(ISODate: string) {

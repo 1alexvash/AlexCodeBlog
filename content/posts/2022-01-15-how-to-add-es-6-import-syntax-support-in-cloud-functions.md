@@ -14,16 +14,11 @@ If your project folder was created with TypeScript, you don't have to worry abou
 
 Firstly, we need to tell node.js we're working with the modern ES6 syntax, to do it go to **package.json** file, and add new key pair:
 
-````
 ```json
 "type": "module",
-````
-
 ```
 
 Now we can rewrite our old function:
-
-```
 
 ```javascript
 const functions = require("firebase-functions");
@@ -37,12 +32,8 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 ```
 
-```
-
 Using new ES6 syntax
 (You need to use asterisk symbol to get access to firebase functions, a bit unusual, but it's a modern JavaScript)
-
-```
 
 ```javascript
 import * as functions from "firebase-functions";
@@ -56,9 +47,6 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 });
 ```
 
-```
-
 We can check the function locally, to make sure nothing was broken:
 
 ![](http://localhost/wordpress/wp-content/uploads/2022/01/image-2.png)Indeed, nothing really was broken, but now we can enjoy using modern syntax in our code.
-```

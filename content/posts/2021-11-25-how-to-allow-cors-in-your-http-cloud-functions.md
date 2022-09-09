@@ -20,7 +20,6 @@ Let's rewrite our code in the **functions/index.js** using official way from the
 
 ![](http://localhost/wordpress/wp-content/uploads/2021/11/image-14-1024x244-1.png)To this:
 
-````
 ```javascript
 const functions = require("firebase-functions");
 
@@ -40,33 +39,22 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!");
   }
 });
-
-````
-
 ```
 
 We've configured some HTTP headers, and now we can get the data on the client via fetch.
 
 But first to apply the changes, let's redeploy cloud functions:
 
-```
-
 ```bash
 firebase deploy --only functions
 ```
 
-```
-
 Now let's run some fetch call in the console.log
-
-```
 
 ```javascript
 fetch("https://us-central1-fir-project-3359f.cloudfunctions.net/helloWorld")
   .then((response) => response.text())
   .then((data) => console.log(data));
-```
-
 ```
 
 And it works!
@@ -79,17 +67,11 @@ Actually, there is.
 
 First, we need to install cors package in the functions folder
 
-```
-
-```
+```bash
 npm i cors
 ```
 
-```
-
 And then we need to import this package, and wrap our function with this package, so our code we'll look like this:
-
-```
 
 ```javascript
 const functions = require("firebase-functions");
@@ -105,32 +87,21 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 ```
 
-```
-
 Make sure to import cors package like this, via passing origin parameter.
 
 Otherwise, your code won't work.
 
----
-
-Quick update:
--------------
+## Quick update:
 
 I found a simpler way without importing cors package.
 
 Just add this line:
 
-```
-
-```kotlin
+```bash
 response.set("Access-Control-Allow-Origin", "*");
 ```
 
-```
-
 So, our final code looks like this:
-
-```
 
 ```javascript
 const functions = require("firebase-functions");
@@ -142,8 +113,4 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
   response.set("Access-Control-Allow-Origin", "*");
   response.send("Hello from Firebase!!!");
 });
-```
-
-```
-
 ```

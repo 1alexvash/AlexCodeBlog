@@ -7,11 +7,8 @@ tags:
   - Git
 ---
 
-````
 ```bash
 rm -rf .git
-````
-
 ```
 
 Let's examine the code we wrote to get a little bit better understanding.
@@ -30,12 +27,8 @@ Let's examine the code we wrote to get a little bit better understanding.
 
 Well, use cases can be different, but basically, it is a convenient command for resetting git history, so you can then run
 
-```
-
-```
+```bash
 git init
-```
-
 ```
 
 And reinitialize the repo.
@@ -51,4 +44,3 @@ Step one: find folder options in the windows start menu:
 ![](http://localhost/wordpress/wp-content/uploads/2021/11/image-2.png)Here we are!
 
 ![](http://localhost/wordpress/wp-content/uploads/2021/11/image-4.png)
-```
