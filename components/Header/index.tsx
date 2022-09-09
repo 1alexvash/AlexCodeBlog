@@ -51,12 +51,8 @@ const Header = () => {
       }}
     >
       <div className="top-block">
-        <Link href="/">
-          {/* This wrapper prevents console log error */}
-          <div style={{ cursor: "pointer" }}>
-            <Logo />
-          </div>
-        </Link>
+        <Logo />
+
         <div className="header-close" onClick={() => setShowMenu(false)}>
           <img src="/images/close.svg" alt="" />
         </div>
