@@ -4,6 +4,8 @@ import { Post } from "pages";
 import { useEffect, useState } from "react";
 
 import Logo from "./Logo";
+import SkeletonDesktop from "./SkeletonDesktop";
+import SkeletonMobile from "./SkeletonMobile";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
@@ -30,13 +32,82 @@ const Header = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const posts = await fetch("/api/hello").then((data) => data.json());
+      const posts = await fetch("/api/getAllPosts").then((data) => data.json());
 
       setLoading(false);
       setPosts(posts);
     };
-    fetchData();
-  }, []);
+
+    if (showSearch && posts.length === 0) {
+      fetchData();
+    }
+  }, [showSearch, posts.length]);
+
+  const MobileSearch = (
+    <div className="mobile-search">
+      <div className="mobile-search-content">
+        <form
+          action="#"
+          method="post"
+          className="mobile-search-form simple-form"
+        >
+          <div className="input-block">
+            <input
+              type="text"
+              placeholder="Site search"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+            />
+          </div>
+        </form>
+        {filteredPosts.length === 0 ? (
+          <div className="no-results">Not found.</div>
+        ) : (
+          <div
+            className="mobile-search-results"
+            style={{
+              display: searchValue.trim().length > 0 ? "block" : "none",
+            }}
+          >
+            {loading &&
+              Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonMobile key={index} />
+              ))}
+
+            {filteredPosts.map((post, index) => (
+              <div className="mobile-posts-block" key={index}>
+                <div className="inner-flex">
+                  <a href="" className="image">
+                    <img src={post.featuredImage} alt="" />
+                  </a>
+                  <a href="" className="name">
+                    {post.title}
+                  </a>
+                </div>
+                <div className="tags">
+                  {post.tags.map((tag) => (
+                    <a href="" key={tag}>
+                      #{tag}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <div
+        className="mobile-search-overlay"
+        style={{
+          display: searchValue.trim().length > 0 ? "block" : "none",
+        }}
+      >
+        <div className="close-search" onClick={() => setSearchValue("")}>
+          <img src="/images/close-search.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  );
 
   const HeaderContentDesktop = (
     <div
@@ -53,64 +124,7 @@ const Header = () => {
         </div>
       </div>
       {/* mobile-search */}
-      <div className="mobile-search">
-        <div className="mobile-search-content">
-          <form
-            action="#"
-            method="post"
-            className="mobile-search-form simple-form"
-          >
-            <div className="input-block">
-              <input
-                type="text"
-                placeholder="Site search"
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
-              />
-            </div>
-          </form>
-          {filteredPosts.length === 0 ? (
-            <div className="no-results">Not found.</div>
-          ) : (
-            <div
-              className="mobile-search-results"
-              style={{
-                display: searchValue.trim().length > 0 ? "block" : "none",
-              }}
-            >
-              {filteredPosts.map((post, index) => (
-                <div className="mobile-posts-block" key={index}>
-                  <div className="inner-flex">
-                    <a href="" className="image">
-                      <img src={post.featuredImage} alt="" />
-                    </a>
-                    <a href="" className="name">
-                      {post.title}
-                    </a>
-                  </div>
-                  <div className="tags">
-                    {post.tags.map((tag) => (
-                      <a href="" key={tag}>
-                        #{tag}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div
-          className="mobile-search-overlay"
-          style={{
-            display: searchValue.trim().length > 0 ? "block" : "none",
-          }}
-        >
-          <div className="close-search" onClick={() => setSearchValue("")}>
-            <img src="/images/close-search.svg" alt="" />
-          </div>
-        </div>
-      </div>
+      {MobileSearch}
       <div className="header-menu-outer">
         <ul className="header-menu">
           <li>
@@ -163,6 +177,7 @@ const Header = () => {
               />
             </div>
           </form>
+
           {filteredPosts.length === 0 ? (
             <div className="no-results">Not found.</div>
           ) : (
@@ -172,6 +187,11 @@ const Header = () => {
                 display: showSearch ? "block" : "none",
               }}
             >
+              {loading &&
+                Array.from({ length: 10 }).map((_, index) => (
+                  <SkeletonDesktop key={index} />
+                ))}
+
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
                   <a href="" className="image">
