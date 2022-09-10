@@ -39,8 +39,8 @@ Git folder is by default invisible on Windows, so you can make it visible via th
 
 Step one: find folder options in the windows start menu:
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-1.png)Step two:
+![](/post-images/2021-11-image-1.webp)Step two:
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-2.png)Here we are!
+![](/post-images/2021-11-image-2.webp)Here we are!
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-4.png)
+![](/post-images/2021-11-image-3.webp)

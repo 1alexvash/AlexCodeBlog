@@ -49,4 +49,4 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 
 We can check the function locally, to make sure nothing was broken:
 
-![](http://localhost/wordpress/wp-content/uploads/2022/01/image-2.png)Indeed, nothing really was broken, but now we can enjoy using modern syntax in our code.
+![](/post-images/2022-01-image-response.webp)Indeed, nothing really was broken, but now we can enjoy using modern syntax in our code.

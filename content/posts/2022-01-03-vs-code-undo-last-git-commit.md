@@ -16,7 +16,7 @@ In your Visual Studio Code open control panel.
 
 By clicking **Shift + P**
 
-![](http://localhost/wordpress/wp-content/uploads/2022/01/image.png)And then hit the command, and that's it!
+![](/post-images/2022-01-image.webp)And then hit the command, and that's it!
 
 It so damn simple! I really love this trick.
 

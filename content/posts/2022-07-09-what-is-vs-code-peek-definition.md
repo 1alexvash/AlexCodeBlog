@@ -13,6 +13,6 @@ Oftentimes it's useful to lookup the source of the variable to understand what i
 
 Example usage:
 
-![](http://localhost/wordpress/wp-content/uploads/2022/07/animation-2.gif)Just click on that variable while holding ctrl, or press F12Another useful peek command is alt + F12, which works slightly differently, it shows all of the places where this function or object is being used at. Very useful for refactoring.
+![](/post-images/2022-07-animation-1.gif)Just click on that variable while holding ctrl, or press F12Another useful peek command is alt + F12, which works slightly differently, it shows all of the places where this function or object is being used at. Very useful for refactoring.
 
-![](http://localhost/wordpress/wp-content/uploads/2022/07/animation-3.gif)
+![](/post-images/2022-07-animation-2.gif)

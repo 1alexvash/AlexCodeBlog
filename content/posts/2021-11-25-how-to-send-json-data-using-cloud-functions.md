@@ -42,4 +42,4 @@ To:
 
 And that's it!
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-21.png)
+![](/post-images/2021-11-image.webp)

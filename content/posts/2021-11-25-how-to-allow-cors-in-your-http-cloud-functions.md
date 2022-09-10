@@ -14,11 +14,11 @@ You probably have noticed something interesting.
 
 We can call our function via CURL, but not via fetch on the client.
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-19.png)It is due to CORS policy.
+![](/post-images/2021-11-image-5.webp)It is due to CORS policy.
 
 Let's rewrite our code in the **functions/index.js** using official way from the firebase documentation.
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-14-1024x244-1.png)To this:
+![](/post-images/2021-11-image-6.webp)To this:
 
 ```javascript
 const functions = require("firebase-functions");
@@ -59,7 +59,7 @@ fetch("https://us-central1-fir-project-3359f.cloudfunctions.net/helloWorld")
 
 And it works!
 
-![](http://localhost/wordpress/wp-content/uploads/2021/11/image-20.png)But don't you find it is a little bit redundant to write so much code?
+![](/post-images/2021-11-image-7.webp)But don't you find it is a little bit redundant to write so much code?
 
 Is there an easier way?
 

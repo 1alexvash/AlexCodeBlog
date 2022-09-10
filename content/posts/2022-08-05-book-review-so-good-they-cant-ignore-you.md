@@ -33,7 +33,7 @@ Cool, so how does it relate to programming? Programming is kind of funny, becaus
 
 When you are starting out your career journey, it can be tough, the competition to land that first job can be fierce, and it can be very easy to get disappointed, as there's none of the positive reinforcement.
 
-![](http://localhost/wordpress/wp-content/uploads/2022/08/image.png) But, it's a totally different story, once you do get that experience, now companies are the ones looking for you, and you're in the position of being picky, while you check and rejects those offers.
+![](/post-images/2022-08-uno-card.png) But, it's a totally different story, once you do get that experience, now companies are the ones looking for you, and you're in the position of being picky, while you check and rejects those offers.
 
 Though getting there takes ⌚ time, and persistence.
 
