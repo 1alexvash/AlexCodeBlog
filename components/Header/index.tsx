@@ -74,33 +74,36 @@ const Header = () => {
               />
             </div>
           </form>
-          {/* <div className="no-results">Not found.</div> */}
-          <div
-            className="mobile-search-results"
-            style={{
-              display: searchValue.trim().length > 0 ? "block" : "none",
-            }}
-          >
-            {filteredPosts.map((post, index) => (
-              <div className="mobile-posts-block" key={index}>
-                <div className="inner-flex">
-                  <a href="" className="image">
-                    <img src={post.featuredImage} alt="" />
-                  </a>
-                  <a href="" className="name">
-                    {post.title}
-                  </a>
-                </div>
-                <div className="tags">
-                  {post.tags.map((tag) => (
-                    <a href="" key={tag}>
-                      #{tag}
+          {filteredPosts.length === 0 ? (
+            <div className="no-results">Not found.</div>
+          ) : (
+            <div
+              className="mobile-search-results"
+              style={{
+                display: searchValue.trim().length > 0 ? "block" : "none",
+              }}
+            >
+              {filteredPosts.map((post, index) => (
+                <div className="mobile-posts-block" key={index}>
+                  <div className="inner-flex">
+                    <a href="" className="image">
+                      <img src={post.featuredImage} alt="" />
                     </a>
-                  ))}
+                    <a href="" className="name">
+                      {post.title}
+                    </a>
+                  </div>
+                  <div className="tags">
+                    {post.tags.map((tag) => (
+                      <a href="" key={tag}>
+                        #{tag}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
         <div
           className="mobile-search-overlay"
@@ -165,33 +168,36 @@ const Header = () => {
               />
             </div>
           </form>
-          {/* <div className="no-results">Not found.</div> */}
-          <div
-            className="desktop-search-results"
-            style={{
-              display: showSearch ? "block" : "none",
-            }}
-          >
-            {filteredPosts.map((post, index) => (
-              <div className="related-posts-block" key={index}>
-                <a href="" className="image">
-                  <img src={post.featuredImage} alt="" />
-                </a>
-                <div className="inner">
-                  <a href="" className="name">
-                    {post.title}
+          {filteredPosts.length === 0 ? (
+            <div className="no-results">Not found.</div>
+          ) : (
+            <div
+              className="desktop-search-results"
+              style={{
+                display: showSearch ? "block" : "none",
+              }}
+            >
+              {filteredPosts.map((post, index) => (
+                <div className="related-posts-block" key={index}>
+                  <a href="" className="image">
+                    <img src={post.featuredImage} alt="" />
                   </a>
-                  <div className="tags">
-                    {post.tags.map((tag) => (
-                      <a href="" key={tag}>
-                        #{tag}
-                      </a>
-                    ))}
+                  <div className="inner">
+                    <a href="" className="name">
+                      {post.title}
+                    </a>
+                    <div className="tags">
+                      {post.tags.map((tag) => (
+                        <a href="" key={tag}>
+                          #{tag}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
