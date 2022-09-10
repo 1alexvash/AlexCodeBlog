@@ -1,36 +1,20 @@
 import config from "config";
 import Link from "next/link";
-import { useState } from "react";
+import { Post } from "pages";
+import { useEffect, useState } from "react";
 
 import Logo from "./Logo";
 import ThemeSwitcher from "./ThemeSwitcher";
-
-const postsJSON = [
-  {
-    slug: "2022-08-28-second-post",
-    title: "Second post",
-    featuredImage:
-      "/post-images/reverse-image-search-627b7e49986b0-sej-760x400.png",
-    date: "2022-08-28T17:04:52.321Z",
-    draft: false,
-    tags: ["TypeScript", "React"],
-  },
-  {
-    slug: "2022-08-28-first-post",
-    title: "First post",
-    featuredImage: "/post-images/camera.jpg",
-    date: "2022-08-28T15:40:22.718Z",
-    draft: false,
-    tags: ["TypeScript", "React", "Firebase"],
-  },
-];
 
 const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
-  const filteredPosts = postsJSON.filter((post) =>
+  const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -42,6 +26,17 @@ const Header = () => {
       </div>
     </div>
   );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const posts = await fetch("/api/hello").then((data) => data.json());
+
+      setLoading(false);
+      setPosts(posts);
+    };
+    fetchData();
+  }, []);
 
   const HeaderContentDesktop = (
     <div
