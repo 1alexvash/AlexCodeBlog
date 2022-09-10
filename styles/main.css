@@ -221,6 +221,11 @@ a:hover {
   outline: none !important;
 }
 
+hr {
+  border-top: 1px solid;
+  background: #616161;
+}
+
 .page {
   display: -ms-flexbox;
   display: flex;
