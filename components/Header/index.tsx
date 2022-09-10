@@ -38,10 +38,10 @@ const Header = () => {
       setPosts(posts);
     };
 
-    if (showSearch && posts.length === 0) {
+    if ((showSearch || showMenu) && posts.length === 0) {
       fetchData();
     }
-  }, [showSearch, posts.length]);
+  }, [showSearch, posts.length, showMenu]);
 
   const MobileSearch = (
     <div className="mobile-search">
@@ -77,10 +77,10 @@ const Header = () => {
             {filteredPosts.map((post, index) => (
               <div className="mobile-posts-block" key={index}>
                 <div className="inner-flex">
-                  <a href="" className="image">
+                  <a href={`/post/${post.slug}`} className="image">
                     <img src={post.featuredImage} alt="" />
                   </a>
-                  <a href="" className="name">
+                  <a href={`/post/${post.slug}`} className="name">
                     {post.title}
                   </a>
                 </div>
@@ -194,11 +194,11 @@ const Header = () => {
 
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
-                  <a href="" className="image">
+                  <a href={`/post/${post.slug}`} className="image">
                     <img src={post.featuredImage} alt="" />
                   </a>
                   <div className="inner">
-                    <a href="" className="name">
+                    <a href={`/post/${post.slug}`} className="name">
                       {post.title}
                     </a>
                     <div className="tags">
