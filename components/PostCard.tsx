@@ -10,9 +10,14 @@ const PostCard = ({ post }: Props) => (
   <li>
     <div className="posts-list-block">
       <div className="content">
-        <Link href={`/post/${post.slug}`}>
+        <Link href={`/post/${post.slug}`} as={undefined}>
           <a className="post-img">
-            <Image src={post.featuredImage} layout="fill" alt="" priority />
+            <Image
+              src={post.featuredImage}
+              layout="fill"
+              alt=""
+              loading="lazy"
+            />
           </a>
         </Link>
         <div className="tags">
