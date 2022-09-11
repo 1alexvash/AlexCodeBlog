@@ -9,11 +9,29 @@ tags:
   - Firebase
 ---
 
-Hello
+# Markdown Examples
 
-It's my first article
+## h2 Heading
 
-Isn't it excited?
+### h3 Heading
+
+#### h4 Heading
+
+##### h5 Heading
+
+###### h6 Heading
+
+## Emphasis
+
+**This is bold text**
+
+_This is italic text_
+
+~~Strikethrough~~
+
+## Blockquotes
+
+> Develop. Preview. Ship. – Vercel
 
 **Bold** text
 
@@ -23,13 +41,19 @@ _Cursive_ text
 
 > The super smart quote
 
-- Bullet list amazing
-- Two
-- Three
+## Lists
 
-1. Another
-2. Bullet List
-3. Pretty cool
+Unordered:
+
+- Lorem ipsum dolor sit amet
+- Consectetur adipiscing elit
+- Integer molestie lorem at massa
+
+Ordered:
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
 
 ```javascript
 const a = 1;
