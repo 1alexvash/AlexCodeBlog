@@ -18,7 +18,7 @@ It's going to change your life, I promise.
 
 ---
 
-## Why to blog?
+### Why to blog?
 
 The biggest benefit of blogging is that you will be able to ingrain the knowledge you have.
 

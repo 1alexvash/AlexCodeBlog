@@ -19,7 +19,7 @@ My hate to love changed in a matter of a single month. What changed, you might a
 
 But hear me out on this one. You're not going to get good at things you have no actual experience. It's like expecting to learn to play the guitar without touching one. This kind of wishful thinking isn't going to work.
 
-## But TypeScript sucks!
+### But TypeScript sucks!
 
 Nope. It just requires a different kind of thinking.
 
@@ -29,7 +29,7 @@ I promise, after using TS for some time you won't be able to get back to regular
 
 I'm looking back at my old JS code, and it just doesn't feel right. The code hasn't got those cute types, so it is less secure, and I can't wrap my head around to figure what is about.
 
-## It all sounds good
+### It all sounds good
 
 After reading this article, you've probably got the feeling like I'm a huge advocate of TypeScript and probably sponsored by them. (Sadly but no)
 

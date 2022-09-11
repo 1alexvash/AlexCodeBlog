@@ -23,9 +23,7 @@ const PostContent = ({ post }: Props) => (
       ))}
     </div>
 
-    <div className="max-w-2xl mx-auto">
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
-    </div>
+    <div dangerouslySetInnerHTML={{ __html: post.content }} />
 
     {/* <Reactions /> This future might be added later */}
   </article>

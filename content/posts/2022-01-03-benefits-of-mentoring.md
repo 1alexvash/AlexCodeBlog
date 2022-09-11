@@ -13,7 +13,7 @@ Mentoring is primarily **beneficial** to you.
 
 I know this can be a little counterintuitive, when somebody constantly asks you questions, and doesn't let you concentrate on work, so let me explain.
 
-## Benefits:
+### Benefits:
 
 ### Deep knowledge
 
