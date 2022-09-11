@@ -135,7 +135,8 @@ body {
   line-height: 1;
 }
 
-ul {
+ul,
+ol {
   list-style: none;
 }
 
@@ -1082,18 +1083,18 @@ h2 {
   color: #3a3a3a;
 }
 
-.simple-list {
+.blogpost-content ul,
+.blogpost-content ol {
   line-height: 169%;
-  margin-top: -2px;
   margin-bottom: 20px;
 }
 
-.simple-list li {
+.blogpost-content ul li {
   padding-left: 24px;
   position: relative;
 }
 
-.simple-list li:before {
+.blogpost-content ul li:before {
   content: "";
   left: 10px;
   top: 12px;
@@ -1103,6 +1104,19 @@ h2 {
   position: absolute;
   display: block;
   background: #616161;
+}
+
+.blogpost-content ol {
+  counter-reset: numbersCounter;
+}
+
+.blogpost-content ol li {
+  padding-left: 9px;
+  counter-increment: numbersCounter;
+}
+
+.blogpost-content ol li:before {
+  content: counter(numbersCounter) ") ";
 }
 
 .blogpost-image {
@@ -1122,10 +1136,6 @@ h2 {
 
 .blogpost-content em {
   font-style: italic;
-}
-
-.blogpost-content ul {
-  list-style-type: disc;
 }
 
 h1 {
