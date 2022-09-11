@@ -17,7 +17,7 @@ But if you've got the right mindset, you'll be able to uplift and inspire yourse
 
 So enough of pep talk, it's time for discussion of the key ideas of the book.
 
-## Key idea #1: Passion is a BS
+### Key idea #1: Passion is a BS
 
 The author claims that passion is BS because we are not born for doing something, as we age our interest can change, and that's okay. I mean you can be a professional ⚽ football player, you can have a gift and genetics for it, but is it something you are meant to do from the day you were born, until the day you die? Uh, does not sound too exciting for me, I'd rather have a life, where I can pick, and try plenty of occupations.
 
@@ -27,7 +27,7 @@ The general way passion gets formed is when we start doing something, we notice 
 
 You know you would not likely to attend the 💪 gym for the second time if during your first time you could not lift a single thing. It's not like I say you can't improve, but I can speculate if you weren't born with great 🎨 painting skills by default neither, you did really ever take the time to improve them. **Nobody gets motivated and driven by being lame**.
 
-## Key idea #2: Career capital
+### Key idea #2: Career capital
 
 Cool, so how does it relate to programming? Programming is kind of funny, because you don't need some 🧬 genetics or talent for it, you just need a desire for hard work, dedication, and some time to develop your skills.
 
@@ -39,7 +39,7 @@ But, it's a totally different story, once you do get that experience, now compan
 
 Though getting there takes ⌚ time, and persistence.
 
-## Key idea #3: Gain control
+### Key idea #3: Gain control
 
 People like having control in their life, people love when their opinion gets respected, but to get there you need to put some work.
 
@@ -52,7 +52,7 @@ When people text you, and ask you something every 10 minute, it can feel annoyin
 
 Sounds good, yep? You just need to keep in mind, that nobody gets born a shot caller, you need to grow and become one, so take your step, and enjoy your 🛣 journey.
 
-## Summary:
+### Summary:
 
 As you can see, I did enjoy the book from the review, I really liked the core ideas in it. The book itself is short, and straight to the point. I want to conclude with the following quote:
 
