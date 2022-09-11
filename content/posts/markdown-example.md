@@ -31,6 +31,11 @@ _Cursive_ text
 2. Bullet List
 3. Pretty cool
 
+```javascript
+const a = 1;
+console.log("Hello world");
+```
+
 ![image](/post-images/second.jpg)
 
 ```typescript

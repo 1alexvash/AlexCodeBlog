@@ -26,7 +26,6 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ posts }: Props) => {
-  console.log("posts:", posts);
   const uniqueTags = Array.from(
     new Set([...posts.map((post) => post.tags).flat()])
   );

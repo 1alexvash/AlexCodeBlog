@@ -10,13 +10,15 @@ const LatestPosts = ({ latestPosts }: Props) => (
     <h2>Latest posts</h2>
     {latestPosts.map((post) => (
       <div className="related-posts-block" key={post.title}>
-        <a href={post.slug} className="image">
-          <img src={post.featuredImage} alt="" />
-        </a>
-        <div className="inner">
-          <a href={post.slug} className="name">
-            {post.title}
+        <Link href={post.slug}>
+          <a className="image">
+            <img src={post.featuredImage} alt="" />
           </a>
+        </Link>
+        <div className="inner">
+          <Link href={post.slug}>
+            <a className="name">{post.title}</a>
+          </Link>
           <div className="tags">
             {post.tags.map((tag) => (
               <a href="" key={tag}>
