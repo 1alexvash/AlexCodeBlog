@@ -1817,6 +1817,11 @@ h3 {
   }
 }
 
+.remark-highlight {
+  overflow: auto;
+  max-width: calc(100vw - 30px);
+}
+
 @media (min-width: 768px) {
   .container {
     width: 750px;
