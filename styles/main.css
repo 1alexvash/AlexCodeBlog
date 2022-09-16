@@ -1293,6 +1293,18 @@ h3 {
   margin-right: 5px;
 }
 
+blockquote {
+  background: rgba(254, 108, 10, 0.05);
+  border-radius: 0px 4px 4px 0px;
+  margin-bottom: 27px;
+  border-left: 4px solid #fe6c0a;
+  padding: 30px 26px;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
 /*comments-section ==============================================*/
 
 .comments-outer {
@@ -1802,6 +1814,10 @@ h3 {
   opacity: 1;
 }
 
+.dark-theme blockquote {
+  background: rgba(254, 108, 10, 0.22);
+}
+
 .skeleton {
   opacity: 0.7;
   animation: skeleton-loading 1s linear infinite alternate;
@@ -2034,6 +2050,11 @@ h3 {
 
   .blogpost-content p {
     margin-bottom: 18px;
+  }
+
+  blockquote {
+    margin-bottom: 18px;
+    padding: 20px;
   }
 
   .simple-list li::before {
