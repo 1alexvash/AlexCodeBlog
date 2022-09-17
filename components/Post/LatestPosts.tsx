@@ -1,27 +1,27 @@
-import Link from "next/link";
-import { Post } from "pages";
+import Link from 'next/link';
+import { Post } from 'pages';
 
 interface Props {
   latestPosts: Post[];
 }
 
 const LatestPosts = ({ latestPosts }: Props) => (
-  <div className="related-posts">
+  <div className='related-posts'>
     <h2>Latest posts</h2>
     {latestPosts.map((post) => (
-      <div className="related-posts-block" key={post.title}>
+      <div className='related-posts-block' key={post.title}>
         <Link href={post.slug}>
-          <a className="image">
-            <img src={post.featuredImage} alt="" />
+          <a className='image'>
+            <img src={post.featuredImage} alt='post' />
           </a>
         </Link>
-        <div className="inner">
+        <div className='inner'>
           <Link href={post.slug}>
-            <a className="name">{post.title}</a>
+            <a className='name'>{post.title}</a>
           </Link>
-          <div className="tags">
+          <div className='tags'>
             {post.tags.map((tag) => (
-              <a href="" key={tag}>
+              <a href='' key={tag}>
                 #{tag}
               </a>
             ))}
@@ -30,8 +30,8 @@ const LatestPosts = ({ latestPosts }: Props) => (
       </div>
     ))}
 
-    <Link href="/">
-      <a className="btn">See all posts</a>
+    <Link href='/'>
+      <a className='btn'>See all posts</a>
     </Link>
   </div>
 );
