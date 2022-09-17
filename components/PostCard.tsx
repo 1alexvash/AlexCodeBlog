@@ -10,7 +10,7 @@ const PostCard = ({ post }: Props) => (
   <li>
     <div className="posts-list-block">
       <div className="content">
-        <Link href={`/post/${post.slug}`} as={undefined}>
+        <Link href={`/post/${post.slug}`} as={undefined} prefetch={false}>
           <a className="post-img">
             <Image
               src={post.featuredImage}
