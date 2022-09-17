@@ -1,7 +1,9 @@
 import config from "config";
 import Link from "next/link";
 import { Post } from "pages";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
+import { updateTags } from "redux/slices/selectedTags";
+import { useAppDispatch } from "redux/typesHooks";
 
 import Logo from "./Logo";
 import SkeletonDesktop from "./SkeletonDesktop";
@@ -15,6 +17,43 @@ const Header = () => {
 
 	const [loading, setLoading] = useState(false);
 	const [posts, setPosts] = useState<Post[]>([]);
+
+
+	interface TagLinkProps {
+		readonly tag: string;
+	}
+	const dispatch = useAppDispatch();
+	const DispatchTagsMobile: React.FC<TagLinkProps> = ({ tag }) => {
+
+		const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+			event.preventDefault();
+			dispatch(updateTags([tag]));
+			setShowMenu(false);
+			setSearchValue("")
+			scrollTo(0, 500) // scroll to posts by Y
+		}
+		return (
+			<a href="" onClick={onClick}>
+				#{tag}
+			</a>
+		)
+	}
+
+	const DispatchTagsDesktop: React.FC<TagLinkProps> = ({ tag }) => {
+
+		const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+			event.preventDefault();
+			dispatch(updateTags([tag]));
+			setShowSearch(false);
+			setSearchValue("")
+			scrollTo(0, 350) // scroll to posts by Y
+		}
+		return (
+			<a href="" onClick={onClick}>
+				#{tag}
+			</a>
+		)
+	}
 
 	const filteredPosts = posts.filter((post) =>
 		post.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -86,9 +125,7 @@ const Header = () => {
 								</div>
 								<div className="tags">
 									{post.tags.map((tag) => (
-										<a href="" key={tag}>
-											#{tag}
-										</a>
+										<DispatchTagsMobile key={tag} tag={tag} />
 									))}
 								</div>
 							</div>
@@ -203,9 +240,7 @@ const Header = () => {
 										</a>
 										<div className="tags">
 											{post.tags.map((tag) => (
-												<a href="" key={tag}>
-													#{tag}
-												</a>
+												<DispatchTagsDesktop key={tag} tag={tag} />
 											))}
 										</div>
 									</div>
