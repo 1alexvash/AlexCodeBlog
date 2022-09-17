@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type TagsType = string[];
 
 export const selectedTagsSlice = createSlice({
-  name: "selectedTags",
+  name: 'selectedTags',
   initialState: [] as TagsType,
   reducers: {
     resetTags: () => {

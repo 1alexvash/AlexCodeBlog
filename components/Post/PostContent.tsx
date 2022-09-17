@@ -1,12 +1,18 @@
+import config from 'config';
 import { toHumanReadableDate } from 'helpers';
+import Head from 'next/head';
 import { PostInterfaceWithContent } from 'pages/post/[slug]';
-
 interface Props {
   post: PostInterfaceWithContent;
 }
 
 const PostContent = ({ post }: Props) => (
   <article className='blogpost-content'>
+    <Head>
+      <title>{post.title}</title>
+      <meta name='description' content={config.site_description} />
+      <meta property='og:title' content={config.page_content[0]} />
+    </Head>
     <div className='blogpost-image'>
       <img src={post.featuredImage} alt='post' />
     </div>
