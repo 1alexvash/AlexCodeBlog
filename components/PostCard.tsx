@@ -5,24 +5,29 @@ import { MouseEventHandler } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { updateTags } from "../redux/slices/selectedTags";
+
 interface Props {
 	post: Post;
 }
+
 interface TagLinkProps {
 	readonly tag: string;
 }
+
 const TagLink: React.FC<TagLinkProps> = ({ tag }) => {
 	const dispatch = useAppDispatch();
 	const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
 		event.preventDefault();
 		dispatch(updateTags([tag]));
 	}
+    
 	return (
 		<a href="" onClick={onClick}>
 			#{tag}
 		</a>
 	)
 }
+
 const PostCard = ({ post }: Props) => {
 
 	return (
