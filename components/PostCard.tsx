@@ -1,19 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Post } from "pages";
+import { MouseEventHandler } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { updateTags } from "../redux/slices/selectedTags";
 interface Props {
 	post: Post;
 }
-
-const PostCard = ({ post }: Props) => {
+interface TagLinkProps {
+	readonly tag: string;
+}
+const TagLink: React.FC<TagLinkProps> = ({ tag }) => {
 	const dispatch = useAppDispatch();
-	const dispatchTags = (e: any, tag: string) => {
-		e.preventDefault();
-		dispatch(updateTags([tag]))
+	const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+		event.preventDefault();
+		dispatch(updateTags([tag]));
 	}
+	return (
+		<a href="" onClick={onClick}>
+			#{tag}
+		</a>
+	)
+}
+const PostCard = ({ post }: Props) => {
+
 	return (
 		<li>
 			<div className="posts-list-block">
@@ -30,9 +41,7 @@ const PostCard = ({ post }: Props) => {
 					</Link>
 					<div className="tags">
 						{post.tags.map((tag) => (
-							<a href="" key={tag} onClick={(e) => dispatchTags(e, tag)}>
-								#{tag}
-							</a>
+							<TagLink key={tag} tag={tag} />
 						))}
 					</div>
 					<Link href={`/post/${post.slug}`}>
