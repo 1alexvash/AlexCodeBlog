@@ -2,7 +2,9 @@ import config from "config";
 import Link from "next/link";
 import { Post } from "pages";
 import { useEffect, useState } from "react";
+import { useAppDispatch } from "redux/typesHooks";
 
+import { updateTags } from "../../redux/slices/selectedTags";
 import Logo from "./Logo";
 import SkeletonDesktop from "./SkeletonDesktop";
 import SkeletonMobile from "./SkeletonMobile";
@@ -15,6 +17,8 @@ const Header = () => {
 
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
+
+  const dispatch = useAppDispatch();
 
   const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -86,9 +90,18 @@ const Header = () => {
                 </div>
                 <div className="tags">
                   {post.tags.map((tag) => (
-                    <a href="" key={tag}>
-                      #{tag}
-                    </a>
+                    <Link href="/" key={tag}>
+                      <a
+                        href=""
+                        key={tag}
+                        onClick={() => {
+                          setShowMenu(false);
+                          dispatch(updateTags([tag]));
+                        }}
+                      >
+                        #{tag}
+                      </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -203,9 +216,18 @@ const Header = () => {
                     </a>
                     <div className="tags">
                       {post.tags.map((tag) => (
-                        <a href="" key={tag}>
-                          #{tag}
-                        </a>
+                        <Link href="/" key={tag}>
+                          <a
+                            href=""
+                            key={tag}
+                            onClick={() => {
+                              setShowSearch(false);
+                              dispatch(updateTags([tag]));
+                            }}
+                          >
+                            #{tag}
+                          </a>
+                        </Link>
                       ))}
                     </div>
                   </div>

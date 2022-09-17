@@ -26,7 +26,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
             </Link>
             <div className="tags">
               {post.tags.map((tag) => (
-                <Link href={"/"} key={tag}>
+                <Link href="/" key={tag}>
                   <a
                     href=""
                     key={tag}
