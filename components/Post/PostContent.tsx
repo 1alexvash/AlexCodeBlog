@@ -11,9 +11,9 @@ const PostContent = ({ post }: Props) => (
     <Head>
       <title>{post.title}</title>
       <meta name="description" content={config.site_description} />
-      <meta property="og:title" content={config.page_content[0]} />
+      <meta property="og:title" content={config.site_keywords[0]} />
       <meta property="og:description" content={config.site_description} />
-      <meta property="og:url" content={config.site_url} />
+      <meta property="og:url" content={config.host_url} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={config.site_title} />
       <meta property="og:image" content={config.defaultImage} />
