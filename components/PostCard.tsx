@@ -23,8 +23,8 @@ const PostCard = ({ post }: Props) => {
               <Image
                 src={post.featuredImage}
                 layout="fill"
-                alt="feature"
-                loading="lazy"
+                alt="blog post image"
+                priority
               />
             </a>
           </Link>
