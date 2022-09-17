@@ -32,6 +32,7 @@ const Header = () => {
 			setSearchValue("")
 			scrollTo(0, 500) // scroll to posts by Y
 		}
+        
 		return (
 			<a href="" onClick={onClick}>
 				#{tag}
@@ -48,6 +49,7 @@ const Header = () => {
 			setSearchValue("")
 			scrollTo(0, 350) // scroll to posts by Y
 		}
+
 		return (
 			<a href="" onClick={onClick}>
 				#{tag}
