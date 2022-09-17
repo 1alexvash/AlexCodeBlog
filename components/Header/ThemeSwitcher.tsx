@@ -32,10 +32,10 @@ const ThemeSwitcher = () => {
   return (
     <ul className="theme-switcher">
       <li className="light" onClick={() => setTheme("light")}>
-        <img src="/images/sun.svg" alt="" />
+        <img src="/images/sun.svg" alt="sun" />
       </li>
       <li className="dark" onClick={() => setTheme("dark")}>
-        <img src="/images/moon.svg" alt="" />
+        <img src="/images/moon.svg" alt="moon" />
       </li>
     </ul>
   );

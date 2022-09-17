@@ -24,7 +24,7 @@ const Header = () => {
     <div className="header-content-mobile">
       <Logo />
       <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-        <img src="/images/hamburger.svg" alt="" />
+        <img src="/images/hamburger.svg" alt="hamburger" />
       </div>
     </div>
   );
@@ -78,7 +78,7 @@ const Header = () => {
               <div className="mobile-posts-block" key={index}>
                 <div className="inner-flex">
                   <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="" />
+                    <img src={post.featuredImage} alt="feature" />
                   </a>
                   <a href={`/post/${post.slug}`} className="name">
                     {post.title}
@@ -103,7 +103,7 @@ const Header = () => {
         }}
       >
         <div className="close-search" onClick={() => setSearchValue("")}>
-          <img src="/images/close-search.svg" alt="" />
+          <img src="/images/close-search.svg" alt="search" />
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@ const Header = () => {
         <Logo />
 
         <div className="header-close" onClick={() => setShowMenu(false)}>
-          <img src="/images/close.svg" alt="" />
+          <img src="/images/close.svg" alt="close" />
         </div>
       </div>
       {/* mobile-search */}
@@ -136,7 +136,7 @@ const Header = () => {
         <div className="header-search-desktop">
           <img
             src="/images/search.svg"
-            alt=""
+            alt="search"
             onClick={() => setShowSearch(true)}
           />
         </div>
@@ -145,7 +145,7 @@ const Header = () => {
         {config.social_links.map((link) => (
           <li key={link.link}>
             <a href={link.link}>
-              <img src={link.image} alt="" />
+              <img src={link.image} alt="image" />
             </a>
           </li>
         ))}
@@ -195,7 +195,7 @@ const Header = () => {
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
                   <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="" />
+                    <img src={post.featuredImage} alt="feature" />
                   </a>
                   <div className="inner">
                     <a href={`/post/${post.slug}`} className="name">
@@ -226,7 +226,7 @@ const Header = () => {
       }}
     >
       <div className="close-search" onClick={() => setShowSearch(false)}>
-        <img src="/images/close-search.svg" alt="" />
+        <img src="/images/close-search.svg" alt="search" />
       </div>
     </div>
   );

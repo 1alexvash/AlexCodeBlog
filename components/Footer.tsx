@@ -7,13 +7,13 @@ const Footer = () => (
     <div className="container">
       <div className="footer-content">
         <div className="footer-logo">
-          <img src="/images/footer-logo.svg" alt="" />
+          <img src="/images/footer-logo.svg" alt="footer-logo" />
         </div>
         <ul className="footer-socials">
           {config.social_links.map((link) => (
             <li key={link.link}>
               <a href={link.link}>
-                <img src={link.image} alt="" />
+                <img src={link.image} alt="image-link" />
               </a>
             </li>
           ))}
