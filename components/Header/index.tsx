@@ -18,10 +18,10 @@ const Header = () => {
 	const [loading, setLoading] = useState(false);
 	const [posts, setPosts] = useState<Post[]>([]);
 
-
 	interface TagLinkProps {
 		readonly tag: string;
 	}
+
 	const dispatch = useAppDispatch();
 	const DispatchTagsMobile: React.FC<TagLinkProps> = ({ tag }) => {
 
@@ -32,7 +32,7 @@ const Header = () => {
 			setSearchValue("")
 			scrollTo(0, 500) // scroll to posts by Y
 		}
-        
+
 		return (
 			<a href="" onClick={onClick}>
 				#{tag}
