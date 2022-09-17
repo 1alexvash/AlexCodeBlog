@@ -10,6 +10,9 @@ const config = {
     { link: 'https://github.com/1alexvash', image: '/images/github-gray.svg' },
     { link: 'mailto:1alexvash@gmail.com', image: '/images/mail.svg' },
   ],
+  site_url: 'https://alex-code.com/',
+  defaultImage:
+    'https://alex-code.com/post-images/2022-08-05-book-review-so-good-they-cant-ignore-you.webp',
   posts_per_page: 12,
 };
 

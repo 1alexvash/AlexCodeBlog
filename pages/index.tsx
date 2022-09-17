@@ -52,6 +52,11 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
         <title>{config.site_title}</title>
         <meta name='description' content={config.site_description} />
         <meta property='og:title' content={config.page_content[1]} />
+        <meta property='og:description' content={config.site_description} />
+        <meta property='og:url' content={config.site_url} />
+        <meta property='og:type' content='website' />
+        <meta property='og:site_name' content={config.site_title} />
+        <meta property='og:image' content={config.defaultImage} />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <StandWithUkraine />
