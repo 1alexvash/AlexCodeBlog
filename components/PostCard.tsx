@@ -1,11 +1,11 @@
+import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "pages";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { updateTags } from "../redux/slices/selectedTags";
 interface Props {
-  post: Post;
+  post: PostDocumentWithoutContent;
 }
 
 const PostCard = ({ post }: Props) => {

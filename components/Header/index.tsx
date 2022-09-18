@@ -1,6 +1,6 @@
 import config from "config";
+import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
-import { Post } from "pages";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -16,7 +16,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostDocumentWithoutContent[]>([]);
 
   const dispatch = useAppDispatch();
 

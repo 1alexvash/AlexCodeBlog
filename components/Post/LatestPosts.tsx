@@ -1,10 +1,10 @@
+import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
-import { Post } from "pages";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { updateTags } from "../../redux/slices/selectedTags";
 interface Props {
-  latestPosts: Post[];
+  latestPosts: PostDocumentWithoutContent[];
 }
 
 const LatestPosts = ({ latestPosts }: Props) => {

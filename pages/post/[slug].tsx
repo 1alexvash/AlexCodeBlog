@@ -1,9 +1,10 @@
 import config from "config";
 import {
-  getAllPosts,
-  getPostBySlug,
-  markdownToHtml,
-} from "helpers/contentRender";
+  getAllPostDocuments,
+  getPostDocumentBySlug,
+} from "helpers/markdownDocumentsReader";
+import markdownToHtml from "helpers/markdownToHtml";
+import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -15,18 +16,10 @@ import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
-import { Post as PostI } from "../index";
-
-export interface PostInterfaceWithContent extends PostI {
-  content: string;
-}
-
-interface Props {
-  post: PostInterfaceWithContent;
-  latestPosts: PostI[];
-}
-
-const Post: NextPage<Props> = ({ latestPosts, post }: Props) => (
+const Post: NextPage<{
+  post: PostDocument;
+  latestPosts: PostDocumentWithoutContent[];
+}> = ({ post, latestPosts }) => (
   <>
     <Head>
       <title>{post.title}</title>
@@ -62,53 +55,35 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const latestPosts = getAllPosts([
-    "slug",
-    "title",
-    "featuredImage",
-    "date",
-    "draft",
-    "tags",
-  ])
-    .filter((post: PostI) => post.draft === false && post.slug !== params.slug)
-    .slice(0, 10);
+  const postDocument = getPostDocumentBySlug(params.slug);
+  const content = await markdownToHtml(postDocument.content || "");
+  const post = {
+    ...postDocument,
+    content,
+  };
 
-  const post = getPostBySlug(params.slug, [
-    "slug",
-    "title",
-    "featuredImage",
-    "date",
-    "draft",
-    "tags",
-    "content",
-  ]);
-  const content = await markdownToHtml(post.content || "");
+  const tenLatestPosts = getAllPostDocuments().slice(0, 10);
 
   return {
     props: {
-      latestPosts,
-      post: {
-        ...post,
-        content,
-      },
+      post,
+      latestPosts: tenLatestPosts,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const posts: {
-    slug: string;
-  }[] = getAllPosts(["slug"]);
+  const postDocuments = getAllPostDocuments();
 
   return {
-    paths: posts.map((post) => {
+    paths: postDocuments.map(({ slug }) => {
       return {
         params: {
-          slug: post.slug,
+          slug,
         },
       };
     }),
-    fallback: false,
+    fallback: "blocking",
   };
 }
 

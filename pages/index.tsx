@@ -1,5 +1,6 @@
 import config from "config";
-import { getAllPosts } from "helpers/contentRender";
+import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
+import { PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
@@ -12,20 +13,7 @@ import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
-export type Post = {
-  slug: string;
-  title: string;
-  date: string;
-  featuredImage: string;
-  draft: boolean;
-  tags: string[];
-};
-
-type Props = {
-  posts: Post[];
-};
-
-const Home: NextPage<Props> = ({ posts }: Props) => {
+const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
   const uniqueTags = Array.from(
     new Set([...posts.map((post) => post.tags).flat()])
   );
@@ -75,17 +63,12 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = getAllPosts([
-    "slug",
-    "title",
-    "featuredImage",
-    "date",
-    "draft",
-    "tags",
-  ]).filter((post: Post) => post.draft === false);
+  const posts = getAllPostDocuments();
 
   return {
-    props: { posts },
+    props: {
+      posts,
+    },
   };
 };
 
