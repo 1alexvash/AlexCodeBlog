@@ -9,6 +9,14 @@ function JSONSerialize<Type>(data: Type): Type {
   return JSON.parse(JSON.stringify(data));
 }
 
+export function getPostSlugs() {
+  if (fs.existsSync(documentsDirectory)) {
+    return fs.readdirSync(documentsDirectory);
+  } else {
+    return [];
+  }
+}
+
 export function getPostDocumentBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(documentsDirectory, `${realSlug}.md`);
@@ -19,7 +27,7 @@ export function getPostDocumentBySlug(slug: string) {
 }
 
 export function getAllPostDocuments(): PostDocumentWithoutContent[] {
-  const slugs = fs.readdirSync(documentsDirectory);
+  const slugs = getPostSlugs();
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => post.draft === false)
