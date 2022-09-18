@@ -1,9 +1,6 @@
 import config from "config";
-import {
-  getAllPosts,
-  getPostBySlug,
-  markdownToHtml,
-} from "helpers/contentRender";
+import { getAllPosts, getPostBySlug } from "helpers/contentRender";
+import markdownToHtml from "helpers/markdown";
 import type { NextPage } from "next";
 import Head from "next/head";
 

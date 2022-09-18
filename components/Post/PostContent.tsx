@@ -1,5 +1,5 @@
 import config from "config";
-import { toHumanReadableDate } from "helpers";
+import toHumanReadableDate from "helpers/toHumanReadableDate";
 import Head from "next/head";
 import { PostInterfaceWithContent } from "pages/post/[slug]";
 interface Props {
