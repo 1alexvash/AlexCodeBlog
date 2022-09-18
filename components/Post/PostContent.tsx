@@ -19,7 +19,7 @@ const PostContent = ({ post }: Props) => (
       <meta property="og:image" content={config.defaultImage} />
     </Head>
     <div className="blogpost-image">
-      <img src={post.featuredImage} alt="post" />
+      <img src={post.featuredImage} alt="blog post image" />
     </div>
     <div className="blogpost-date">
       <span>{toHumanReadableDate(post.date)}</span>

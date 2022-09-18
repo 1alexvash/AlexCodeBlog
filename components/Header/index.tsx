@@ -82,7 +82,7 @@ const Header = () => {
               <div className="mobile-posts-block" key={index}>
                 <div className="inner-flex">
                   <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="feature" />
+                    <img src={post.featuredImage} alt="blog post image" />
                   </a>
                   <a href={`/post/${post.slug}`} className="name">
                     {post.title}
@@ -208,7 +208,7 @@ const Header = () => {
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
                   <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="feature" />
+                    <img src={post.featuredImage} alt="blog post image" />
                   </a>
                   <div className="inner">
                     <a href={`/post/${post.slug}`} className="name">

@@ -10,10 +10,6 @@ interface Props {
 
 const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
-  const dispatchTags = (event: React.MouseEvent, tag: string) => {
-    event.preventDefault();
-    dispatch(updateTags([tag]));
-  };
 
   return (
     <li>
@@ -31,13 +27,18 @@ const PostCard = ({ post }: Props) => {
           </Link>
           <div className="tags">
             {post.tags.map((tag) => (
-              <a
-                href=""
-                key={tag}
-                onClick={(event) => dispatchTags(event, tag)}
-              >
-                #{tag}
-              </a>
+              <Link href="/" key={tag}>
+                <a
+                  href=""
+                  key={tag}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    dispatch(updateTags([tag]));
+                  }}
+                >
+                  #{tag}
+                </a>
+              </Link>
             ))}
           </div>
           <Link href={`/post/${post.slug}`}>
