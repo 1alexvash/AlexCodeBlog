@@ -1,5 +1,6 @@
 import config from "config";
-import { getAllPosts, getPostBySlug } from "helpers/contentRender";
+import { getPostBySlug } from "helpers/contentRender";
+import { getAllPostDocuments } from "helpers/docs";
 import markdownToHtml from "helpers/markdownToHtml";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
@@ -52,19 +53,21 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const latestPosts = getAllPosts([
-    "slug",
-    "title",
-    "featuredImage",
-    "date",
-    "draft",
-    "tags",
-  ])
-    .filter(
-      (post: PostDocumentWithoutContent) =>
-        post.draft === false && post.slug !== params.slug
-    )
-    .slice(0, 10);
+  // const latestPosts = getAllPosts([
+  //   "slug",
+  //   "title",
+  //   "featuredImage",
+  //   "date",
+  //   "draft",
+  //   "tags",
+  // ])
+  //   .filter(
+  //     (post: PostDocumentWithoutContent) =>
+  //       post.draft === false && post.slug !== params.slug
+  //   )
+  //   .slice(0, 10);
+
+  const latestPosts: PostDocumentWithoutContent[] = [];
 
   const post = getPostBySlug(params.slug, [
     "slug",
@@ -89,19 +92,17 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const posts: {
-    slug: string;
-  }[] = getAllPosts(["slug"]);
+  const postDocuments = getAllPostDocuments();
 
   return {
-    paths: posts.map((post) => {
+    paths: postDocuments.map(({ slug }) => {
       return {
         params: {
-          slug: post.slug,
+          slug,
         },
       };
     }),
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
