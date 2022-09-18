@@ -5,7 +5,12 @@ import { remark } from "remark";
 import html from "remark-html";
 import prism from "remark-prism";
 
-const postsDirectory = join(process.cwd(), "public/content/posts");
+const postsDirectory = join(
+  process.cwd(),
+  process.env.NODE_ENV === "production"
+    ? "content/posts"
+    : "public/content/posts"
+);
 
 export function getPostSlugs() {
   if (fs.existsSync(postsDirectory)) {
