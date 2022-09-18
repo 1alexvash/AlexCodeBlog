@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getAllPosts } from "helpers/contentRender";
+import { PostDocumentWithoutContent } from "interfaces";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Post } from "pages";
 
 type Data = {
   name: string;
@@ -18,6 +18,6 @@ export default function handler(
     "date",
     "draft",
     "tags",
-  ]).filter((post: Post) => post.draft === false);
+  ]).filter((post: PostDocumentWithoutContent) => post.draft === false);
   res.status(200).json(posts);
 }

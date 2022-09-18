@@ -1,9 +1,9 @@
-import { Post } from "pages";
+import { PostDocumentWithoutContent } from "interfaces";
 
 import PostCard from "./PostCard";
 
 interface Props {
-  posts: Post[];
+  posts: PostDocumentWithoutContent[];
 }
 
 const Posts = ({ posts }: Props) => (

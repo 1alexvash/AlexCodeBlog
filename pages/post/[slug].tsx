@@ -1,6 +1,7 @@
 import config from "config";
 import { getAllPosts, getPostBySlug } from "helpers/contentRender";
-import markdownToHtml from "helpers/markdown";
+import markdownToHtml from "helpers/markdownToHtml";
+import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -12,18 +13,10 @@ import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
-import { Post as PostI } from "../index";
-
-export interface PostInterfaceWithContent extends PostI {
-  content: string;
-}
-
-interface Props {
-  post: PostInterfaceWithContent;
-  latestPosts: PostI[];
-}
-
-const Post: NextPage<Props> = ({ latestPosts, post }: Props) => (
+const Post: NextPage<{
+  post: PostDocument;
+  latestPosts: PostDocumentWithoutContent[];
+}> = ({ post, latestPosts }) => (
   <>
     <Head>
       <title>{post.title}</title>
@@ -67,7 +60,10 @@ export async function getStaticProps({ params }: Params) {
     "draft",
     "tags",
   ])
-    .filter((post: PostI) => post.draft === false && post.slug !== params.slug)
+    .filter(
+      (post: PostDocumentWithoutContent) =>
+        post.draft === false && post.slug !== params.slug
+    )
     .slice(0, 10);
 
   const post = getPostBySlug(params.slug, [

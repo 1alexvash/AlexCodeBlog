@@ -1,9 +1,10 @@
 import config from "config";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
+import { PostDocument } from "interfaces";
 import Head from "next/head";
-import { PostInterfaceWithContent } from "pages/post/[slug]";
+
 interface Props {
-  post: PostInterfaceWithContent;
+  post: PostDocument;
 }
 
 const PostContent = ({ post }: Props) => (
