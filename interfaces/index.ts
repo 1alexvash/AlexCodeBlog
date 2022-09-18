@@ -1,7 +1,7 @@
 export type PostDocument = {
   slug: string;
   title: string;
-  date: string;
+  date: Date | string;
   featuredImage: string;
   draft: boolean;
   tags: string[];

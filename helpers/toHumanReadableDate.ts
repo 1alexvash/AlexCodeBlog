@@ -1,4 +1,4 @@
-function toHumanReadableDate(ISODate: string) {
+function toHumanReadableDate(ISODate: Date | string) {
   const date = new Date(ISODate);
 
   const dateTimeFormat = new Intl.DateTimeFormat("en", {
