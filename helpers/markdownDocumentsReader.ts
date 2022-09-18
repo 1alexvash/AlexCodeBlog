@@ -3,7 +3,7 @@ import matter from "gray-matter";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import { join } from "path";
 
-const docsDirectory = join(process.cwd(), "content/posts");
+const documentsDirectory = join(process.cwd(), "content/posts");
 
 function JSONSerialize<Type>(data: Type): Type {
   return JSON.parse(JSON.stringify(data));
@@ -11,7 +11,7 @@ function JSONSerialize<Type>(data: Type): Type {
 
 export function getPostDocumentBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(docsDirectory, `${realSlug}.md`);
+  const fullPath = join(documentsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
@@ -19,7 +19,7 @@ export function getPostDocumentBySlug(slug: string) {
 }
 
 export function getAllPostDocuments(): PostDocumentWithoutContent[] {
-  const slugs = fs.readdirSync(docsDirectory);
+  const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => post.draft === false)
