@@ -253,18 +253,7 @@ const Header = () => {
     </div>
   );
 
-  return "No header for this branch";
-
-  return (
-    <header>
-      <div className="container">
-        {HeaderContentMobile}
-        {HeaderContentDesktop}
-      </div>
-      {DesktopSearch}
-      {SearchOverlay}
-    </header>
-  );
+  return <>No header for this branch</>;
 };
 
 export default Header;
