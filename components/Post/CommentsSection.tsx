@@ -31,7 +31,7 @@ const CommentsSection = () => (
             </div>
             <div className="bottom">
               <a href="" className="reply">
-                <img src="images/reply.svg" alt="" />
+                <img src="images/reply.svg" alt="reply" />
                 Reply
               </a>
             </div>
@@ -51,7 +51,7 @@ const CommentsSection = () => (
             </div>
             <div className="bottom">
               <a href="" className="reply">
-                <img src="images/reply.svg" alt="" />
+                <img src="images/reply.svg" alt="reply" />
                 Reply
               </a>
             </div>
@@ -89,7 +89,7 @@ const CommentsSection = () => (
             </div>
             <div className="bottom">
               <a href="" className="reply">
-                <img src="images/reply.svg" alt="" />
+                <img src="images/reply.svg" alt="reply" />
                 Reply
               </a>
             </div>
