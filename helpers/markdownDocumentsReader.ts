@@ -5,13 +5,17 @@ import { join } from "path";
 
 const docsDirectory = join(process.cwd(), "content/posts");
 
+function JSONSerialize<Type>(data: Type): Type {
+  return JSON.parse(JSON.stringify(data));
+}
+
 export function getPostDocumentBySlug(slug: string) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(docsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return { slug: realSlug, ...data, content } as PostDocument;
+  return JSONSerialize({ slug: realSlug, ...data, content }) as PostDocument;
 }
 
 export function getAllPostDocuments(): PostDocumentWithoutContent[] {
@@ -26,5 +30,5 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
       return postWithoutContent;
     });
 
-  return JSON.parse(JSON.stringify(docs));
+  return JSONSerialize(docs);
 }

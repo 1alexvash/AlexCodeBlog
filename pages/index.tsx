@@ -1,5 +1,5 @@
 import config from "config";
-import { getAllPostDocuments } from "helpers/docs";
+import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import { PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";

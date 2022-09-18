@@ -1,6 +1,8 @@
 import config from "config";
-import { getPostBySlug } from "helpers/contentRender";
-import { getAllPostDocuments } from "helpers/docs";
+import {
+  getAllPostDocuments,
+  getPostDocumentBySlug,
+} from "helpers/markdownDocumentsReader";
 import markdownToHtml from "helpers/markdownToHtml";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
@@ -53,40 +55,17 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  // const latestPosts = getAllPosts([
-  //   "slug",
-  //   "title",
-  //   "featuredImage",
-  //   "date",
-  //   "draft",
-  //   "tags",
-  // ])
-  //   .filter(
-  //     (post: PostDocumentWithoutContent) =>
-  //       post.draft === false && post.slug !== params.slug
-  //   )
-  //   .slice(0, 10);
-
-  const latestPosts: PostDocumentWithoutContent[] = [];
-
-  const post = getPostBySlug(params.slug, [
-    "slug",
-    "title",
-    "featuredImage",
-    "date",
-    "draft",
-    "tags",
-    "content",
-  ]);
-  const content = await markdownToHtml(post.content || "");
+  const postDocument = getPostDocumentBySlug(params.slug);
+  const content = await markdownToHtml(postDocument.content || "");
+  const post = {
+    ...postDocument,
+    content,
+  };
 
   return {
     props: {
-      latestPosts,
-      post: {
-        ...post,
-        content,
-      },
+      post,
+      latestPosts: [],
     },
   };
 }
