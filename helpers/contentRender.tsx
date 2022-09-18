@@ -8,7 +8,7 @@ import prism from "remark-prism";
 const postsDirectory = join(
   process.cwd(),
   process.env.NODE_ENV === "production"
-    ? "content/posts"
+    ? "public/content/posts"
     : "public/content/posts"
 );
 
