@@ -27,7 +27,7 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={config.defaultImage} />
+        <meta property="og:image" content={post.featuredImage} />
       </Head>
 
       <div className="blogpost-image">
