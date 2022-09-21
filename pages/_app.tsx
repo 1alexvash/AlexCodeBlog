@@ -1,6 +1,7 @@
 import "../styles/reset.css";
 import "../styles/main.css";
 import "../styles/prism-okaidia.css";
+import "../styles/prism-vscode-dark.css";
 
 import type { AppProps } from "next/app";
 import Script from "next/script";

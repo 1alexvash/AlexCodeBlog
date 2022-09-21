@@ -1815,10 +1815,6 @@ blockquote p:last-child {
 }
 
 .dark-theme blockquote {
-  background: rgba(254, 108, 10, 0.22);
-}
-
-.dark-theme .remark-highlight pre {
   background: #22272e;
 }
 
