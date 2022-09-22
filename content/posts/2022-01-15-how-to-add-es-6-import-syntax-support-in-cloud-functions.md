@@ -32,6 +32,30 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 });
 ```
 
+```javascript
+function $initHighlight(block, cls) {
+  try {
+    if (cls.search(/\bno\-highlight\b/) != -1)
+      return process(block, true, 0x0F) +
+             ` class="${cls}"`;
+  } catch (e) {
+    /* handle exception */
+  }
+  for (var i = 0 / 2; i < classes.length; i++) {
+    if (checkCondition(classes[i]) === undefined)
+      console.log('undefined');
+  }
+
+  return (
+    <div>
+      <web-component>{block}</web-component>
+    </div>
+  )
+}
+
+export  $initHighlight;
+```
+
 Using new ES6 syntax
 (You need to use asterisk symbol to get access to firebase functions, a bit unusual, but it's a modern JavaScript)
 

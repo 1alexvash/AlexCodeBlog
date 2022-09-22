@@ -1,0 +1,143 @@
+/*!
+  Theme: GitHub Dark Dimmed
+  Description: Dark dimmed theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Colors taken from GitHub's CSS
+*/
+
+code[class*="language-"],
+pre[class*="language-"] {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  font-family: Consolas, Monaco, monospace;
+  color: #dcbdfb;
+}
+
+pre[class*="language-"] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+  color: #adbac7;
+  background: #22272e;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #22272e;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+}
+
+.token.comment,
+.token.keyword,
+.token.meta .token.keyword,
+.hljs-template-tag,
+.token.console.class-name,
+.hljs-type,
+.hljs-variable.language_ {
+  color: #f47067;
+}
+
+.token.title,
+.token.title.class_,
+.token.title.class_.inherited__,
+.token.title.function_ {
+  /* Here naming function */
+  color: #dcbdfb;
+}
+
+.token #text {
+  color: #dcbdfb;
+}
+
+.token.literal-property,
+.token.property-access,
+.token.attribute,
+.token.boolean,
+.token.meta,
+.token.number,
+.token.operator,
+.token.selector-attr,
+.token.selector-class,
+.token.selector-id,
+.token.variable {
+  color: #6cb6ff;
+}
+
+.token.property-access {
+  color: #dcbdfb;
+}
+
+.token.meta .token.string,
+.token.regex-delimiter,
+.token.regex-source,
+.token.string {
+  color: #96d0ff;
+}
+
+.token.built_in,
+.token.symbol {
+  color: #f69d50;
+}
+
+.token.code,
+.token.comment,
+.token.formula {
+  color: #768390;
+}
+.token.name,
+.token.quote,
+.token.selector-pseudo,
+.token.selector-tag {
+  color: #8ddb8c;
+}
+
+.token.ubst,
+.token.punctuation {
+  color: #adbac7;
+}
+
+.token.section {
+  color: #316dca;
+  font-weight: 700;
+}
+
+.token.bullet {
+  color: #eac55f;
+}
+
+.token.emphasis {
+  color: #adbac7;
+  font-style: italic;
+}
+
+.token.strong {
+  color: #adbac7;
+  font-weight: 700;
+}
+
+.token.addition {
+  color: #b4f1b4;
+  background-color: #1b4721;
+}
+
+.token.deletion {
+  color: #ffd8d3;
+  background-color: #78191b;
+}
