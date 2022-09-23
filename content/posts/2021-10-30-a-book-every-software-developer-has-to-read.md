@@ -11,7 +11,7 @@ There are some Java books that are good for Java developers, there are some C++ 
 
 But there's one single book.
 
-A really special one - real deal. By reading which, you'll benefit, no matter what language you use for writing code.
+A really special one – real deal. By reading which, you'll benefit, no matter what language you use for writing code.
 
 [Clean code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship-ebook-dp-B001GSTOAM/dp/B001GSTOAM/ref=mt_other?_encoding=UTF8&me=&qid=) by Robert Martin.
 

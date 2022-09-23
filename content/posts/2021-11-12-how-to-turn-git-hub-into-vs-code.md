@@ -10,7 +10,7 @@ tags:
 
 There's this new feature by GitHub that lets you use Visual Studio Code editor inside your repository.
 
-To turn it on, just click **.** on your keyboard
+To turn it on, just click dot <span style="color: red">.</span> symbol on your keyboard
 
 Or you can just change a domain name from
 

@@ -13,12 +13,22 @@ We can use VS Code shortcut **F2** to do it.
 
 ❌ The bad way to rename:
 
-![](/post-images/2022-06-bad-way.gif)(Here we are editing in the local file instead of the source one, so we end up with two names for the same function with the same functionality)✅ Good way
+![](/post-images/2022-06-bad-way.gif)
 
-![](/post-images/2022-06-good-way.gif)(In this clip, we are editing the function name in the source file, and VS Code is smart enough to update the name in every singe file and place this function is being used, and it can be a dozen of times, so it is a pretty nice time saver)**Tip:**
+(Here we are editing in the local file instead of the source one, so we end up with two names for the same function with the same functionality)
+
+✅ Good way
+
+![](/post-images/2022-06-good-way.gif)
+
+(In this clip, we are editing the function name in the source file, and VS Code is smart enough to update the name in every singe file and place this function is being used, and it can be a dozen of times, so it is a pretty nice time saver)
+
+### Tip:
 
 To get to the very source of function definition, use the VS Code peek command
 
-**Ctrl + Click** or **F12**
+To get to the very source of function definition, use the VS Code [peek](/post/2022-07-09-what-is-vs-code-peek-definition) command
+
+### Ctrl + Click or F12
 
 ![](/post-images/2022-06-tip.gif)

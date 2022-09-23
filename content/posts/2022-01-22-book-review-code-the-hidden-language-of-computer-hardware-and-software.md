@@ -25,7 +25,9 @@ The fun and easy part was over.
 
 The rest 90% of the book was dedicated to electrical circuit.
 
-![](/post-images/2022-01-electrical-circuit.webp)The book had over a hundred of these schemes, and it just wasn't that exciting to keep reading, so finished the book a bit of disappointed.
+![](/post-images/2022-01-electrical-circuit.webp)
+
+The book had over a hundred of these schemes, and it just wasn't that exciting to keep reading, so finished the book a bit of disappointed.
 
 My score:
 

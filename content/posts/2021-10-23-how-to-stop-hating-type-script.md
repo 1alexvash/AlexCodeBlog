@@ -35,7 +35,9 @@ After reading this article, you've probably got the feeling like I'm a huge advo
 
 But I'm a real proponent of this technology because it makes my life as a software developer easier.
 
-You won't find a better piece of advice on the internet about learning TypeScript. Here it is: **Just start using it**.
+You won't find a better piece of advice on the internet about learning TypeScript.
+
+Here it is: **Just start using it**.
 
 I know it all can sound inspiring, but there are some real intricacies, and it can be cumbersome just starting out working with types, especially when your code editor overflows with those annoying errors.
 

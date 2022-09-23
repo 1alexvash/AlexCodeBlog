@@ -34,9 +34,9 @@ const people = [
 ];
 ```
 
-### For in / (Key iterator)
+### For in
 
-````
+(Key iterator)
 
 ```javascript
 for (person in people) {
@@ -46,9 +46,11 @@ for (person in people) {
 // 0
 // 1
 // 2
-````
+```
 
-### For of / (Value iterator)
+### For of
+
+(Value iterator)
 
 ```javascript
 for (person of people) {

@@ -15,14 +15,6 @@ tags:
 
 ### h3 Heading
 
-#### h4 Heading
-
-##### h5 Heading
-
-###### h6 Heading
-
-## Emphasis
-
 **This is bold text**
 
 _This is italic text_

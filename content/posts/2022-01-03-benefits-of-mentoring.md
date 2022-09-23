@@ -11,9 +11,9 @@ First thing you need to realize if you were given an opportunity to mentor is th
 
 Mentoring is primarily **beneficial** to you.
 
-I know this can be a little counterintuitive, when somebody constantly asks you questions, and doesn't let you concentrate on work, so let me explain.
+I know this can be a little <ins>counterintuitive</ins>, when somebody constantly asks you questions, and doesn't let you concentrate on work, so let me explain.
 
-### Benefits:
+## Benefits:
 
 ### Deep knowledge
 
@@ -39,7 +39,7 @@ Critical skill for the next point.
 
 This skill grows out of the previous one.
 
-Only by being a good communicator, you'll be able to get a \***\*team-lead\*\*** position.
+Only by being a good communicator, you'll be able to get a **team-lead** position.
 
 I mean, nobody wants to deal with a jerk, so this one critical.
 
