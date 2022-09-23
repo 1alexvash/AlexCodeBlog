@@ -9,12 +9,12 @@ export const selectedTagsSlice = createSlice({
     resetTags: () => {
       return [];
     },
-    updateTags: (state, action: PayloadAction<TagsType>) => {
+    setTags: (state, action: PayloadAction<TagsType>) => {
       return (state = action.payload);
     },
   },
 });
 
-export const { resetTags, updateTags } = selectedTagsSlice.actions;
+export const { resetTags, setTags } = selectedTagsSlice.actions;
 
 export default selectedTagsSlice.reducer;

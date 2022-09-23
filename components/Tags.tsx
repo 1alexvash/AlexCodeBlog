@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { resetPaginationPage } from "redux/slices/pagination";
-import { resetTags, updateTags } from "redux/slices/selectedTags";
+import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 interface Props {
@@ -37,9 +37,9 @@ const Tags = ({ uniqueTags }: Props) => {
                 (tag) => tag !== uniqueTag
               );
 
-              dispatch(updateTags(updatedTags));
+              dispatch(setTags(updatedTags));
             } else {
-              dispatch(updateTags([...selectedTags, uniqueTag]));
+              dispatch(setTags([...selectedTags, uniqueTag]));
             }
           }}
         >

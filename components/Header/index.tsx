@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
-import { updateTags } from "../../redux/slices/selectedTags";
+import { setTags } from "../../redux/slices/selectedTags";
 import Logo from "./Logo";
 import SkeletonDesktop from "./SkeletonDesktop";
 import SkeletonMobile from "./SkeletonMobile";
@@ -96,7 +96,7 @@ const Header = () => {
                         key={tag}
                         onClick={() => {
                           setShowMenu(false);
-                          dispatch(updateTags([tag]));
+                          dispatch(setTags([tag]));
                         }}
                       >
                         #{tag}
@@ -222,7 +222,7 @@ const Header = () => {
                             key={tag}
                             onClick={() => {
                               setShowSearch(false);
-                              dispatch(updateTags([tag]));
+                              dispatch(setTags([tag]));
                             }}
                           >
                             #{tag}

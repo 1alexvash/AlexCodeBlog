@@ -2,7 +2,7 @@ import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
-import { updateTags } from "../redux/slices/selectedTags";
+import { setTags } from "../redux/slices/selectedTags";
 interface Props {
   post: PostDocumentWithoutContent;
 }
@@ -27,7 +27,7 @@ const PostCard = ({ post }: Props) => {
                   key={tag}
                   onClick={(event) => {
                     event.preventDefault();
-                    dispatch(updateTags([tag]));
+                    dispatch(setTags([tag]));
                   }}
                 >
                   #{tag}

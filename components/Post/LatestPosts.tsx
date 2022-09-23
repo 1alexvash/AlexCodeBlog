@@ -2,7 +2,7 @@ import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
-import { updateTags } from "../../redux/slices/selectedTags";
+import { setTags } from "../../redux/slices/selectedTags";
 interface Props {
   latestPosts: PostDocumentWithoutContent[];
 }
@@ -27,11 +27,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
             <div className="tags">
               {post.tags.map((tag) => (
                 <Link href="/" key={tag}>
-                  <a
-                    href=""
-                    key={tag}
-                    onClick={() => dispatch(updateTags([tag]))}
-                  >
+                  <a href="" key={tag} onClick={() => dispatch(setTags([tag]))}>
                     #{tag}
                   </a>
                 </Link>
