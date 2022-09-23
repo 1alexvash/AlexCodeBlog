@@ -1,9 +1,16 @@
 {
-  "plugins": ["react", "simple-import-sort"],
   "extends": "next/core-web-vitals",
+  "plugins": ["react", "simple-import-sort", "@typescript-eslint"],
   "rules": {
-    "no-unused-vars": "warn",
-    // increase the severity of rules so they are auto-fixable
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "ignoreRestSiblings": true
+      }
+    ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "@next/next/no-img-element": "off"
