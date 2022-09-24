@@ -1,7 +1,7 @@
 import config from "config";
 import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../../redux/slices/selectedTags";
@@ -24,14 +24,8 @@ const Header = () => {
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const HeaderContentMobile = (
-    <div className="header-content-mobile">
-      <Logo />
-      <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-        <img src="/images/hamburger.svg" alt="hamburger" />
-      </div>
-    </div>
-  );
+  const mobileInputRef = useRef<HTMLInputElement>(null);
+  const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +39,24 @@ const Header = () => {
     if ((showSearch || showMenu) && posts.length === 0) {
       fetchData();
     }
+
+    if (showSearch) {
+      desktopInputRef.current?.focus();
+    }
+
+    if (showMenu) {
+      mobileInputRef.current?.focus();
+    }
   }, [showSearch, posts.length, showMenu]);
+
+  const HeaderContentMobile = (
+    <div className="header-content-mobile">
+      <Logo />
+      <div className="header-hamburger" onClick={() => setShowMenu(true)}>
+        <img src="/images/hamburger.svg" alt="hamburger" />
+      </div>
+    </div>
+  );
 
   const MobileSearch = (
     <div className="mobile-search">
@@ -61,6 +72,7 @@ const Header = () => {
               placeholder="Site search"
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
+              ref={mobileInputRef}
             />
           </div>
         </form>
@@ -187,6 +199,7 @@ const Header = () => {
                 placeholder="Site search"
                 value={searchValue}
                 onChange={(event) => setSearchValue(event.target.value)}
+                ref={desktopInputRef}
               />
             </div>
           </form>
