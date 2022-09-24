@@ -3,7 +3,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const fakieContent = ["Fakie content", "version: ", 1];
+  const fakieContent = ["Fakie content", "version: ", 2];
 
   res.status(200).json(fakieContent);
 }

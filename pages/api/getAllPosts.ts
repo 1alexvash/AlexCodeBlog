@@ -18,6 +18,6 @@ export default function handler(
     "date",
     "draft",
     "tags",
-  ]).filter((post: Post) => post.draft === false);
+  ]);
   res.status(200).json(posts);
 }
