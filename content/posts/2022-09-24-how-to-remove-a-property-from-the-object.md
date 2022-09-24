@@ -20,7 +20,7 @@ A﻿nd we want an exact copy of this object, but without **password** field for 
 
 W﻿e can do the following, use the JS **delete** keyword
 
-```
+```javascript
 const person = {
   name: "John",
   age: 30,
@@ -36,7 +36,7 @@ console.log(personWithoutPassowrd);
 
 I﻿t gives as a desired result, but t﻿he problem with this approach is that personWithoutPassowrd is a reference of person, so if we console.log it, the original person isn't going to have this key as well
 
-```
+```javascript
 const person = {
   name: "John",
   age: 30,
@@ -55,7 +55,7 @@ console.log(person);
 
 T﻿he better way to go about is to use new ES6 operator
 
-```
+```javascript
 const person = {
   name: "John",
   age: 30,
