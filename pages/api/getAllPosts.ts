@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getAllPosts } from "helpers/contentRender";
+import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,8 +12,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     "draft",
     "tags",
   ]);
+  const allPostsDocs = getAllPostDocuments();
+
   res.status(200).json({
     posts,
-    version: 18,
+    allPostsDocs,
+    version: 19,
   });
 }
