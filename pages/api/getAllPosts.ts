@@ -3,6 +3,8 @@ import { getAllPosts } from "helpers/contentRender";
 import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+export const VERSION = 20;
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const posts = getAllPosts([
     "slug",
@@ -12,11 +14,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     "draft",
     "tags",
   ]);
-  const allPostsDocs = getAllPostDocuments();
 
   res.status(200).json({
     posts,
-    allPostsDocs,
-    version: 19,
+    VERSION,
   });
 }
