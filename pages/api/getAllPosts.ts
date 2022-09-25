@@ -1,5 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getAllPosts, getPostSlugs } from "helpers/contentRender";
+import {
+  getAllPosts,
+  getPostBySlug,
+  getPostSlugs,
+} from "helpers/contentRender";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -13,10 +17,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   ]);
 
   const postSlugs = getPostSlugs();
+  const aSinglePostExample = getPostBySlug("markdown-example.md", [
+    "slug",
+    "title",
+  ]);
 
   res.status(200).json({
     posts,
     postSlugs,
-    version: 9,
+    version: 10,
+    aSinglePostExample,
   });
 }
