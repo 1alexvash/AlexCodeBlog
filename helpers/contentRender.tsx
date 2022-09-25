@@ -19,7 +19,7 @@ function JSONSerialize<Type>(data: Type): Type {
   return JSON.parse(JSON.stringify(data));
 }
 
-export function getPostBySlug(slug: string) {
+export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(documentsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
