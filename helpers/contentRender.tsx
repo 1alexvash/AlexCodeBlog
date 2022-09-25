@@ -27,6 +27,8 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 
   return JSONSerialize({
     slug: "realSlug",
+    data: "data",
+    content: "content",
   });
 
   // const realSlug = slug.replace(/\.md$/, "");
