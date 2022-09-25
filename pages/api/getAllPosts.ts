@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getAllPosts } from "helpers/contentRender";
+import { getAllPosts, getPostSlugs } from "helpers/contentRender";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,8 +11,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     "draft",
     "tags",
   ]);
+
+  const postSlugs = getPostSlugs();
+
   res.status(200).json({
     posts,
-    version: 3,
+    postSlugs,
+    version: 4,
   });
 }
