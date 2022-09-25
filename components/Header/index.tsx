@@ -20,9 +20,9 @@ const Header = () => {
 
   const dispatch = useAppDispatch();
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filteredPosts = posts.filter((post) =>
+  //   post.title.toLowerCase().includes(searchValue.toLowerCase())
+  // );
 
   const HeaderContentMobile = (
     <div className="header-content-mobile">
@@ -36,10 +36,13 @@ const Header = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const posts = await fetch("/api/getAllPosts").then((data) => data.json());
+      const postsAPIResponse = await fetch("/api/getAllPosts").then((data) =>
+        data.json()
+      );
+      console.log("postsAPIResponse:", postsAPIResponse);
 
       setLoading(false);
-      setPosts(posts);
+      // setPosts(postsAPIResponse);
     };
 
     if ((showSearch || showMenu) && posts.length === 0) {
@@ -64,50 +67,6 @@ const Header = () => {
             />
           </div>
         </form>
-        {filteredPosts.length === 0 ? (
-          <div className="no-results">Not found.</div>
-        ) : (
-          <div
-            className="mobile-search-results"
-            style={{
-              display: searchValue.trim().length > 0 ? "block" : "none",
-            }}
-          >
-            {loading &&
-              Array.from({ length: 10 }).map((_, index) => (
-                <SkeletonMobile key={index} />
-              ))}
-
-            {filteredPosts.map((post, index) => (
-              <div className="mobile-posts-block" key={index}>
-                <div className="inner-flex">
-                  <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="blog post image" />
-                  </a>
-                  <a href={`/post/${post.slug}`} className="name">
-                    {post.title}
-                  </a>
-                </div>
-                <div className="tags">
-                  {post.tags.map((tag) => (
-                    <Link href="/" key={tag}>
-                      <a
-                        href=""
-                        key={tag}
-                        onClick={() => {
-                          setShowMenu(false);
-                          dispatch(updateTags([tag]));
-                        }}
-                      >
-                        #{tag}
-                      </a>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
       <div
         className="mobile-search-overlay"
@@ -190,51 +149,6 @@ const Header = () => {
               />
             </div>
           </form>
-
-          {filteredPosts.length === 0 ? (
-            <div className="no-results">Not found.</div>
-          ) : (
-            <div
-              className="desktop-search-results"
-              style={{
-                display: showSearch ? "block" : "none",
-              }}
-            >
-              {loading &&
-                Array.from({ length: 10 }).map((_, index) => (
-                  <SkeletonDesktop key={index} />
-                ))}
-
-              {filteredPosts.map((post, index) => (
-                <div className="related-posts-block" key={index}>
-                  <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="blog post image" />
-                  </a>
-                  <div className="inner">
-                    <a href={`/post/${post.slug}`} className="name">
-                      {post.title}
-                    </a>
-                    <div className="tags">
-                      {post.tags.map((tag) => (
-                        <Link href="/" key={tag}>
-                          <a
-                            href=""
-                            key={tag}
-                            onClick={() => {
-                              setShowSearch(false);
-                              dispatch(updateTags([tag]));
-                            }}
-                          >
-                            #{tag}
-                          </a>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>
