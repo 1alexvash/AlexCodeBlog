@@ -3,14 +3,7 @@ import { getAllPosts } from "helpers/contentRender";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { VERSION } from "./getAllPostsNewWay";
 
-type Data = {
-  name: string;
-};
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const posts = getAllPosts([
     "slug",
     "title",

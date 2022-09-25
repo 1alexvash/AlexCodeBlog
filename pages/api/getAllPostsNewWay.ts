@@ -1,7 +1,7 @@
 import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export const VERSION = "v2";
+export const VERSION = "v3";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const posts = getAllPostDocuments();
