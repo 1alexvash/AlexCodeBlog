@@ -8,8 +8,14 @@ import prism from "remark-prism";
 const documentsDirectory = join(process.cwd(), "content/posts");
 const postsDirectory = join(process.cwd(), "content/posts");
 
+export const equalDirectories = documentsDirectory === postsDirectory;
+
 export function getPostSlugs() {
-  return fs.readdirSync(documentsDirectory);
+  if (fs.existsSync(postsDirectory)) {
+    return fs.readdirSync(postsDirectory);
+  } else {
+    return [];
+  }
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
@@ -42,7 +48,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
-  const slugs = fs.readdirSync(documentsDirectory);
+  const slugs = getPostSlugs();
 
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
