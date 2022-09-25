@@ -5,14 +5,11 @@ import { remark } from "remark";
 import html from "remark-html";
 import prism from "remark-prism";
 
+const documentsDirectory = join(process.cwd(), "content/posts");
 const postsDirectory = join(process.cwd(), "content/posts");
 
 export function getPostSlugs() {
-  if (fs.existsSync(postsDirectory)) {
-    return fs.readdirSync(postsDirectory);
-  } else {
-    return [];
-  }
+  return fs.readdirSync(documentsDirectory);
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
@@ -45,7 +42,8 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
-  const slugs = getPostSlugs();
+  const slugs = fs.readdirSync(documentsDirectory);
+
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
