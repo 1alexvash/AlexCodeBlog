@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json({
     posts,
     postSlugs,
-    version: 12,
+    version: 13,
     // aSinglePostExample,
     // documentsDirectory,
   });
