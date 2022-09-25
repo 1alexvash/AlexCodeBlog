@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {
-  documentsDirectory,
   getAllPosts,
   getPostBySlug,
   getPostSlugs,
@@ -18,10 +17,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   ]);
 
   const postSlugs = getPostSlugs();
-  const aSinglePostExample = getPostBySlug("markdown-example.md", [
-    "slug",
-    "title",
-  ]);
+  // const aSinglePostExample = getPostBySlug("markdown-example.md", [
+  //   "slug",
+  //   "title",
+  // ]);
 
   res.status(200).json({
     posts,
