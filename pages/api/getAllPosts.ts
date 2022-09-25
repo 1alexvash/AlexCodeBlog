@@ -17,16 +17,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   ]);
 
   const postSlugs = getPostSlugs();
-  // const aSinglePostExample = getPostBySlug("markdown-example.md", [
-  //   "slug",
-  //   "title",
-  // ]);
+  const aSinglePostExample = getPostBySlug("markdown-example.md", [
+    "slug",
+    "title",
+  ]);
 
   res.status(200).json({
     posts,
     postSlugs,
-    version: 14,
-    // aSinglePostExample,
+    version: 15,
+    aSinglePostExample,
     // documentsDirectory,
   });
 }
