@@ -25,7 +25,9 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  return JSONSerialize({ slug: realSlug, ...data, content });
+  return JSONSerialize({
+    slug: "realSlug",
+  });
 
   // const realSlug = slug.replace(/\.md$/, "");
   // const fullPath = join(documentsDirectory, `${realSlug}.md`);
