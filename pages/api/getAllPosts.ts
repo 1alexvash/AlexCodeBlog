@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {
+  documentsDirectory,
   getAllPosts,
   getPostBySlug,
   getPostSlugs,
@@ -25,7 +26,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json({
     posts,
     postSlugs,
-    version: 10,
-    aSinglePostExample,
+    version: 11,
+    // aSinglePostExample,
+    documentsDirectory,
   });
 }

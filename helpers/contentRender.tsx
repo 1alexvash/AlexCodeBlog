@@ -5,9 +5,7 @@ import { remark } from "remark";
 import html from "remark-html";
 import prism from "remark-prism";
 
-const documentsDirectory = join(process.cwd(), "content/posts");
-
-documentsDirectory;
+export const documentsDirectory = join(process.cwd(), "content/posts");
 
 export function getPostSlugs() {
   if (fs.existsSync(documentsDirectory)) {
