@@ -6,13 +6,12 @@ import html from "remark-html";
 import prism from "remark-prism";
 
 const documentsDirectory = join(process.cwd(), "content/posts");
-const postsDirectory = join(process.cwd(), "content/posts");
 
-export const equalDirectories = documentsDirectory === postsDirectory;
+documentsDirectory;
 
 export function getPostSlugs() {
-  if (fs.existsSync(postsDirectory)) {
-    return fs.readdirSync(postsDirectory);
+  if (fs.existsSync(documentsDirectory)) {
+    return fs.readdirSync(documentsDirectory);
   } else {
     return [];
   }
@@ -20,7 +19,7 @@ export function getPostSlugs() {
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
+  const fullPath = join(documentsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
