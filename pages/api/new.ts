@@ -1,7 +1,7 @@
 import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export const VERSION = "v4";
+export const VERSION = "v5";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log("Hello cloud function how are you doing? 🤔🤔🤔");

@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getAllPosts } from "helpers/contentRender";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { VERSION } from "./getAllPostsNewWay";
+import { VERSION } from "./new";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const posts = getAllPosts([
