@@ -1,12 +1,22 @@
 import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export const VERSION = "v3";
+export const VERSION = "v4";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const posts = getAllPostDocuments();
-
   console.log("Hello cloud function how are you doing? 🤔🤔🤔");
 
-  res.status(200).json({ posts, VERSION });
+  try {
+    const posts = getAllPostDocuments();
+    res.status(200).json({
+      posts,
+      VERSION,
+    });
+  } catch (error) {
+    res.status(404).json({
+      error,
+      message: "Some Error occured",
+      VERSION,
+    });
+  }
 }
