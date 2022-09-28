@@ -13,7 +13,7 @@ const Footer = () => (
           {config.social_links.map((link) => (
             <li key={link.link}>
               <a href={link.link}>
-                <img src={link.image} alt="image-link" />
+                <img src={link.image} alt="image-link" width={link.width} height={link.height} />
               </a>
             </li>
           ))}
