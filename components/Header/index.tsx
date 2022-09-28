@@ -53,7 +53,7 @@ const Header = () => {
     <div className="header-content-mobile">
       <Logo />
       <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-        <img src="/images/hamburger.svg" alt="hamburger" />
+        <img src="/images/hamburger.svg" alt="hamburger" width={34} height={22}/>
       </div>
     </div>
   );
@@ -163,6 +163,8 @@ const Header = () => {
             src="/images/search.svg"
             alt="search"
             onClick={() => setShowSearch(true)}
+			width={19} 
+			height={19}
           />
         </div>
       </div>
@@ -221,7 +223,7 @@ const Header = () => {
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
                   <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="blog post image" />
+                    <img src={post.featuredImage} alt="blog post image" width={101.99} height={101.99}/>
                   </a>
                   <div className="inner">
                     <a href={`/post/${post.slug}`} className="name">

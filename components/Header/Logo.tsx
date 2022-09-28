@@ -5,8 +5,8 @@ import React from "react";
 const Logo = () => {
   const logo = (
     <a className="main-logo">
-      <img className="light" src="/images/main-logo.svg" alt="light-theme" />
-      <img className="dark" src="/images/main-logo-dark.svg" alt="dark-theme" />
+      <img className="light" src="/images/main-logo.svg" alt="light-theme" width={180} height={50.99}/>
+      <img className="dark" src="/images/main-logo-dark.svg" alt="dark-theme" width={180} height={50.99} />
     </a>
   );
 

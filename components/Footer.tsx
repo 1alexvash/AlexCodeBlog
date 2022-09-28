@@ -7,7 +7,7 @@ const Footer = () => (
     <div className="container">
       <div className="footer-content">
         <div className="footer-logo">
-          <img src="/images/footer-logo.svg" alt="footer-logo" />
+          <img src="/images/footer-logo.svg" alt="footer-logo" width={180} height={50.99} />
         </div>
         <ul className="footer-socials">
           {config.social_links.map((link) => (
