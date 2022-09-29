@@ -21,13 +21,13 @@ const PostContent = ({ post }: Props) => {
     <article className="blogpost-content">
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={config.site_description} />
-        <meta property="og:title" content={"privet"} />
+        <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.site_title} />
         <meta property="og:image" content={post.featuredImage} />
+        <meta name="description" content={config.site_description} />
       </Head>
 
       <div className="blogpost-image">
