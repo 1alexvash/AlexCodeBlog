@@ -1,4 +1,5 @@
 import { PostDocumentWithoutContent } from "interfaces";
+// import Image from "next/future/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -16,7 +17,7 @@ const PostCard = ({ post }: Props) => {
         <div className="content">
           <Link href={`/post/${post.slug}`} as={undefined}>
             <a className="post-img">
-              <img src={post.featuredImage} alt="blog post image"  width={379.99} height={379.99}/>
+              <img src={post.featuredImage} alt="blog post image" />
             </a>
           </Link>
           <div className="tags">
