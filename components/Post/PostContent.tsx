@@ -16,7 +16,7 @@ const getFirstParagraph = (str: string) => {
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
-
+//привет
   return (
     <article className="blogpost-content">
       <Head>
