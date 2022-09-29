@@ -23,13 +23,12 @@ const Post: NextPage<{
   <>
     <Head>
       <title>{post.title}</title>
-	  <meta property="og:title" content={post.title} />
+      <meta name="description" content={config.site_description} />
       <meta property="og:description" content={config.site_description} />
       <meta property="og:url" content={config.host_url} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={config.site_title} />
       <meta property="og:image" content={config.defaultImage} />
-      <meta name="description" content={config.site_description} />
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <StandWithUkraine />
