@@ -1,5 +1,5 @@
 ---
-title: Markdown example
+title: 
 date: 2022-08-28T15:40:22.718Z
 featuredImage: /post-images/camera.jpg
 draft: false
