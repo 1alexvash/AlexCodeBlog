@@ -30,11 +30,9 @@ const ThemeSwitcher = () => {
             if (theme === "light") {
                 body.classList.remove("dark-theme");
                 localStorage.theme = "light";
-                console.log(localStorage.theme + " Поменял на светлую")
               } else {
                 body.classList.add("dark-theme");
                 localStorage.theme = "dark";
-                console.log(localStorage.theme + " Поменял на темную")
               }
         }
     }
