@@ -17,7 +17,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
         <div className="related-posts-block" key={post.title}>
           <Link href={post.slug}>
             <a className="image">
-              <img src={post.featuredImage} alt="blog post image" />
+              <img src={post.featuredImage} alt="blog post image" width={101.99} height={101.99}/>
             </a>
           </Link>
           <div className="inner">
