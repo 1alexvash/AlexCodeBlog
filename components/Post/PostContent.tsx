@@ -22,7 +22,7 @@ const PostContent = ({ post }: Props) => {
       <Head>
         <title>{post.title}</title>
         <meta name="description" content={config.site_description} />
-        <meta property="og:title" content={post.title} />
+        <meta name="og:title" content={post.title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
