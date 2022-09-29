@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
 const ThemeSwitcher = () => {
-  type Theme = "light" | "dark";
-  const [theme, setTheme] = useState<Theme>("light");
+  type Theme = "light" | "dark" | null;
+  const [theme, setTheme] = useState<Theme>(null);
+
+  const checkBrowserTheme = (theme: string) => {
+    return (window.matchMedia && window.matchMedia(`(prefers-color-scheme: ${theme})`).matches)
+  }
 
   useEffect(() => {
     const body = document.querySelector("body")!;
-
     if (localStorage.theme === undefined) {
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
+      if (checkBrowserTheme("dark")) {
         setTheme("dark");
         body.classList.add("dark-theme");
         localStorage.theme = "dark";
@@ -19,13 +19,24 @@ const ThemeSwitcher = () => {
         localStorage.theme = "light";
       }
     } else {
-      if (theme === "light") {
-        body.classList.remove("dark-theme");
-        localStorage.theme = "light";
-      } else {
-        body.classList.add("dark-theme");
-        localStorage.theme = "dark";
-      }
+      if (checkBrowserTheme("dark") && theme===null) {
+            body.classList.add("dark-theme");
+            localStorage.theme = "dark"; 
+            setTheme("dark")
+        } else if (checkBrowserTheme("light") && theme===null) {
+            localStorage.theme = "light"; 
+            setTheme("light")
+        } else {
+            if (theme === "light") {
+                body.classList.remove("dark-theme");
+                localStorage.theme = "light";
+                console.log(localStorage.theme + " Поменял на светлую")
+              } else {
+                body.classList.add("dark-theme");
+                localStorage.theme = "dark";
+                console.log(localStorage.theme + " Поменял на темную")
+              }
+        }
     }
   }, [theme]);
 
