@@ -38,7 +38,7 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
     <>
       <Head>
         <title>{config.site_title}</title>
-        <meta name="description" content={"Hello"} />
+        <meta name="description" content={config.site_description} />
         <meta property="og:title" content={config.site_keywords[1]} />
         <meta property="og:description" content={config.site_description} />
         <meta property="og:url" content={config.host_url} />
