@@ -5,8 +5,11 @@ const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<Theme>(null);
 
   const checkBrowserTheme = (theme: string) => {
-    return (window.matchMedia && window.matchMedia(`(prefers-color-scheme: ${theme})`).matches)
-  }
+    return (
+      window.matchMedia &&
+      window.matchMedia(`(prefers-color-scheme: ${theme})`).matches
+    );
+  };
 
   useEffect(() => {
     const body = document.querySelector("body")!;
@@ -19,22 +22,22 @@ const ThemeSwitcher = () => {
         localStorage.theme = "light";
       }
     } else {
-      if (checkBrowserTheme("dark") && theme===null) {
-            body.classList.add("dark-theme");
-            localStorage.theme = "dark"; 
-            setTheme("dark")
-        } else if (checkBrowserTheme("light") && theme===null) {
-            localStorage.theme = "light"; 
-            setTheme("light")
+      if (checkBrowserTheme("dark") && theme === null) {
+        body.classList.add("dark-theme");
+        localStorage.theme = "dark";
+        setTheme("dark");
+      } else if (checkBrowserTheme("light") && theme === null) {
+        localStorage.theme = "light";
+        setTheme("light");
+      } else {
+        if (theme === "light") {
+          body.classList.remove("dark-theme");
+          localStorage.theme = "light";
         } else {
-            if (theme === "light") {
-                body.classList.remove("dark-theme");
-                localStorage.theme = "light";
-              } else {
-                body.classList.add("dark-theme");
-                localStorage.theme = "dark";
-              }
+          body.classList.add("dark-theme");
+          localStorage.theme = "dark";
         }
+      }
     }
   }, [theme]);
 
