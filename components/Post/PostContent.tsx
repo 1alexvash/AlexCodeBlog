@@ -31,7 +31,12 @@ const PostContent = ({ post }: Props) => {
       </Head>
 
       <div className="blogpost-image">
-        <img src={post.featuredImage} alt="blog post image" width={790} height={300} />
+        <img
+          src={post.featuredImage}
+          alt="blog post image"
+          width={790}
+          height={300}
+        />
       </div>
       <div className="blogpost-date">
         <span>{toHumanReadableDate(post.date)}</span>
