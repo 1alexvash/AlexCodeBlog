@@ -6,6 +6,7 @@
   font-style: normal;
   font-weight: 400;
 }
+
 @font-face {
   font-display: swap;
   font-family: "Ubuntu";
@@ -14,6 +15,7 @@
   font-style: normal;
   font-weight: 500;
 }
+
 @font-face {
   font-display: swap;
   font-family: "Ubuntu";
@@ -315,7 +317,7 @@ header {
   display: none;
 }
 
-.header-content {
+.header-content-desktop {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -797,11 +799,9 @@ header {
   transition: all 0.3s ease-out;
   border-radius: 3px;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.9) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.9) 100%);
 }
 
 .posts-list-block .post-img img {
@@ -1641,11 +1641,11 @@ blockquote p:last-child {
   filter: brightness(0) invert(1);
 }
 
-.dark-theme .header-content {
+.dark-theme .header-content-desktop {
   background: #18191d;
 }
 
-.dark-theme .header-content .top-block {
+.dark-theme .header-content-desktop .top-block {
   border-color: #33393f;
 }
 
@@ -1839,8 +1839,7 @@ blockquote p:last-child {
     width: 750px;
   }
 
-  .header-content {
-    display: -ms-flexbox !important;
+  .header-content-desktop {
     display: flex !important;
   }
 
@@ -1891,7 +1890,7 @@ blockquote p:last-child {
     margin-left: 70px;
   }
 
-  .header-content {
+  .header-content-desktop {
     padding: 0;
   }
 
@@ -2127,7 +2126,7 @@ blockquote p:last-child {
     margin: 20px -12px 25px;
   }
 
-  .header-content {
+  .header-content-desktop {
     display: none;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2146,7 +2145,7 @@ blockquote p:last-child {
     padding: 0;
   }
 
-  .header-content .top-block {
+  .header-content-desktop .top-block {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;

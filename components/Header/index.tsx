@@ -67,7 +67,7 @@ const Header = () => {
 
   const HeaderContentDesktop = (
     <div
-      className="header-content"
+      className="header-content-desktop"
       style={{
         display: showMenu ? "flex" : "none",
       }}
