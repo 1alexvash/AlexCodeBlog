@@ -38,4 +38,19 @@ const SkeletonMobile = () => {
   );
 };
 
-export default SkeletonMobile;
+const MobileSkeletons = () => (
+  <div
+    className="mobile-search-results"
+    style={
+      {
+        // display: search.value.trim().length > 0 ? "block" : "none",
+      }
+    }
+  >
+    {Array.from({ length: 10 }).map((_, index) => (
+      <SkeletonMobile key={index} />
+    ))}
+  </div>
+);
+
+export default MobileSkeletons;

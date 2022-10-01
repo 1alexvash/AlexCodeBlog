@@ -2,15 +2,14 @@ import config from "config";
 import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useAppDispatch } from "redux/typesHooks";
 
-import { setTags } from "../../redux/slices/selectedTags";
 import DesktopSearch from "./DesktopSearch";
 
 import Logo from "./Logo";
-import NotFound from "./NotFound";
-import SkeletonMobile from "./SkeletonMobile";
+
 import ThemeSwitcher from "./ThemeSwitcher";
+
+import MobileSearch from "./MobileSearch";
 
 export type Search = {
   value: string;
@@ -29,8 +28,6 @@ const Header = () => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const dispatch = useAppDispatch();
-
   const filteredPosts = search.posts.filter((post) => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
   });
@@ -40,11 +37,7 @@ const Header = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // benchmark time
-      const start = performance.now();
       const posts = await fetch("/api/getAllPosts").then((data) => data.json());
-      const end = performance.now();
-      console.log("fetching posts took: ", end - start);
 
       setSearch((search) => ({
         ...search,
@@ -75,104 +68,6 @@ const Header = () => {
     </div>
   );
 
-  const MobileSearch = (
-    <div className="mobile-search">
-      <div className="mobile-search-content">
-        <form
-          action="#"
-          method="post"
-          className="mobile-search-form simple-form"
-        >
-          <div className="input-block">
-            <input
-              type="text"
-              placeholder="Site search"
-              value={search.value}
-              onChange={(event) => {
-                setSearch((search) => ({
-                  ...search,
-                  value: event.target.value,
-                }));
-              }}
-              ref={mobileInputRef}
-            />
-          </div>
-        </form>
-
-        {search.isLoaded ? (
-          filteredPosts.length > 0 ? (
-            <div
-              className="mobile-search-results"
-              style={{
-                display: search.value.trim().length > 0 ? "block" : "none",
-              }}
-            >
-              {filteredPosts.map((post, index) => (
-                <div className="mobile-posts-block" key={index}>
-                  <div className="inner-flex">
-                    <a href={`/post/${post.slug}`} className="image">
-                      <img src={post.featuredImage} alt="blog post image" />
-                    </a>
-                    <a href={`/post/${post.slug}`} className="name">
-                      {post.title}
-                    </a>
-                  </div>
-                  <div className="tags">
-                    {post.tags.map((tag) => (
-                      <Link href="/" key={tag}>
-                        <a
-                          href=""
-                          key={tag}
-                          onClick={() => {
-                            setShowMenu(false);
-                            dispatch(setTags([tag]));
-                          }}
-                        >
-                          #{tag}
-                        </a>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <NotFound />
-          )
-        ) : (
-          <div
-            className="mobile-search-results"
-            style={{
-              display: search.value.trim().length > 0 ? "block" : "none",
-            }}
-          >
-            {Array.from({ length: 10 }).map((_, index) => (
-              <SkeletonMobile key={index} />
-            ))}
-          </div>
-        )}
-      </div>
-      <div
-        className="mobile-search-overlay"
-        style={{
-          display: search.value.trim().length > 0 ? "block" : "none",
-        }}
-      >
-        <div
-          className="close-search"
-          onClick={() => {
-            setSearch((search) => ({
-              ...search,
-              value: "",
-            }));
-          }}
-        >
-          <img src="/images/close-search.svg" alt="search" />
-        </div>
-      </div>
-    </div>
-  );
-
   const HeaderContentDesktop = (
     <div
       className="header-content"
@@ -187,8 +82,13 @@ const Header = () => {
           <img src="/images/close.svg" alt="close" />
         </div>
       </div>
-      {/* mobile-search */}
-      {MobileSearch}
+      <MobileSearch
+        search={search}
+        setSearch={setSearch}
+        mobileInputRef={mobileInputRef}
+        filteredPosts={filteredPosts}
+        setShowMenu={setShowMenu}
+      />
       <div className="header-menu-outer">
         <ul className="header-menu">
           <li>
