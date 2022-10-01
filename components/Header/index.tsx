@@ -10,44 +10,55 @@ import SkeletonDesktop from "./SkeletonDesktop";
 import SkeletonMobile from "./SkeletonMobile";
 import ThemeSwitcher from "./ThemeSwitcher";
 
-const Header = () => {
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [showMenu, setShowMenu] = useState(false);
+type Search = {
+  value: string;
+  showSearch: boolean;
+  isLoaded: boolean;
+  posts: PostDocumentWithoutContent[];
+};
 
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState<PostDocumentWithoutContent[]>([]);
+const Header = () => {
+  const [search, setSearch] = useState<Search>({
+    value: "",
+    showSearch: false,
+    isLoaded: false,
+    posts: [] as PostDocumentWithoutContent[],
+  });
+
+  const [showMenu, setShowMenu] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const filteredPosts = search.posts.filter((post) => {
+    return post.title.toLowerCase().includes(search.value.toLowerCase());
+  });
 
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       const posts = await fetch("/api/getAllPosts").then((data) => data.json());
 
-      setLoading(false);
-      setPosts(posts);
+      setSearch((search) => ({
+        ...search,
+        isLoaded: true,
+        posts,
+      }));
     };
 
-    if ((showSearch || showMenu) && posts.length === 0) {
+    if ((search.showSearch || showMenu) && search.posts.length === 0) {
       fetchData();
     }
 
-    if (showSearch) {
+    if (search.showSearch) {
       desktopInputRef.current?.focus();
     }
 
     if (showMenu) {
       mobileInputRef.current?.focus();
     }
-  }, [showSearch, posts.length, showMenu]);
+  }, [search.showSearch, search.posts.length, showMenu]);
 
   const HeaderContentMobile = (
     <div className="header-content-mobile">
@@ -70,8 +81,13 @@ const Header = () => {
             <input
               type="text"
               placeholder="Site search"
-              value={searchValue}
-              onChange={(event) => setSearchValue(event.target.value)}
+              value={search.value}
+              onChange={(event) => {
+                setSearch((search) => ({
+                  ...search,
+                  value: event.target.value,
+                }));
+              }}
               ref={mobileInputRef}
             />
           </div>
@@ -82,10 +98,10 @@ const Header = () => {
           <div
             className="mobile-search-results"
             style={{
-              display: searchValue.trim().length > 0 ? "block" : "none",
+              display: search.value.trim().length > 0 ? "block" : "none",
             }}
           >
-            {loading &&
+            {search.isLoaded &&
               Array.from({ length: 10 }).map((_, index) => (
                 <SkeletonMobile key={index} />
               ))}
@@ -124,10 +140,18 @@ const Header = () => {
       <div
         className="mobile-search-overlay"
         style={{
-          display: searchValue.trim().length > 0 ? "block" : "none",
+          display: search.value.trim().length > 0 ? "block" : "none",
         }}
       >
-        <div className="close-search" onClick={() => setSearchValue("")}>
+        <div
+          className="close-search"
+          onClick={() => {
+            setSearch((search) => ({
+              ...search,
+              value: "",
+            }));
+          }}
+        >
           <img src="/images/close-search.svg" alt="search" />
         </div>
       </div>
@@ -162,7 +186,12 @@ const Header = () => {
           <img
             src="/images/search.svg"
             alt="search"
-            onClick={() => setShowSearch(true)}
+            onClick={() => {
+              setSearch((search) => ({
+                ...search,
+                showSearch: true,
+              }));
+            }}
           />
         </div>
       </div>
@@ -183,7 +212,7 @@ const Header = () => {
     <div
       className="desktop-search"
       style={{
-        display: showSearch ? "block" : "none",
+        display: search.showSearch ? "block" : "none",
       }}
     >
       <div className="container">
@@ -197,8 +226,13 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Site search"
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
+                value={search.value}
+                onChange={(event) => {
+                  setSearch((search) => ({
+                    ...search,
+                    value: event.target.value,
+                  }));
+                }}
                 ref={desktopInputRef}
               />
             </div>
@@ -210,10 +244,10 @@ const Header = () => {
             <div
               className="desktop-search-results"
               style={{
-                display: showSearch ? "block" : "none",
+                display: search.showSearch ? "block" : "none",
               }}
             >
-              {loading &&
+              {search.isLoaded &&
                 Array.from({ length: 10 }).map((_, index) => (
                   <SkeletonDesktop key={index} />
                 ))}
@@ -234,7 +268,11 @@ const Header = () => {
                             href=""
                             key={tag}
                             onClick={() => {
-                              setShowSearch(false);
+                              setSearch((search) => ({
+                                ...search,
+                                showSearch: false,
+                              }));
+
                               dispatch(setTags([tag]));
                             }}
                           >
@@ -257,10 +295,18 @@ const Header = () => {
     <div
       className="search-overlay"
       style={{
-        display: showSearch ? "block" : "none",
+        display: search.showSearch ? "block" : "none",
       }}
     >
-      <div className="close-search" onClick={() => setShowSearch(false)}>
+      <div
+        className="close-search"
+        onClick={() => {
+          setSearch((search) => ({
+            ...search,
+            showSearch: false,
+          }));
+        }}
+      >
         <img src="/images/close-search.svg" alt="search" />
       </div>
     </div>
