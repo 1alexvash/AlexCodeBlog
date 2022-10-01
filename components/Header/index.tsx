@@ -38,7 +38,11 @@ const Header = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // benchmark time
+      const start = performance.now();
       const posts = await fetch("/api/getAllPosts").then((data) => data.json());
+      const end = performance.now();
+      console.log("fetching posts took: ", end - start);
 
       setSearch((search) => ({
         ...search,
