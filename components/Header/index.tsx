@@ -4,12 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import DesktopSearch from "./DesktopSearch";
-
 import Logo from "./Logo";
-
-import ThemeSwitcher from "./ThemeSwitcher";
-
 import MobileSearch from "./MobileSearch";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export type Search = {
   value: string;
