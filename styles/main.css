@@ -799,9 +799,11 @@ header {
   transition: all 0.3s ease-out;
   border-radius: 3px;
   pointer-events: none;
-  background: linear-gradient(180deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.9) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
 }
 
 .posts-list-block .post-img img {
