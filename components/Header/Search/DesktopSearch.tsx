@@ -4,7 +4,7 @@ import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 
-import { Search } from ".";
+import { Search } from "..";
 import DesktopSkeletons from "./DesktopSkeletons";
 import NotFound from "./NotFound";
 

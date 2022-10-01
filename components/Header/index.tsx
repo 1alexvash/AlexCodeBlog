@@ -3,9 +3,9 @@ import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import DesktopSearch from "./DesktopSearch";
 import Logo from "./Logo";
-import MobileSearch from "./MobileSearch";
+import DesktopSearch from "./Search/DesktopSearch";
+import MobileSearch from "./Search/MobileSearch";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 export type Search = {
