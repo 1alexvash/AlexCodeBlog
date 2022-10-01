@@ -534,12 +534,11 @@ header {
 }
 
 .desktop-search {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 100%;
+  top: 110px;
   left: 0;
   width: 100%;
-  margin-top: -10px;
 }
 
 .desktop-search-content {
@@ -594,7 +593,6 @@ header {
   overflow: auto;
   background: #fff;
   padding: 30px 30px 10px;
-  display: none;
 }
 
 .desktop-search-results::-webkit-scrollbar {

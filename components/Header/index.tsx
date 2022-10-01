@@ -248,12 +248,7 @@ const Header = () => {
 
           {search.isLoaded ? (
             filteredPosts.length > 0 ? (
-              <div
-                className="desktop-search-results"
-                style={{
-                  display: search.showSearch ? "block" : "none",
-                }}
-              >
+              <div className="desktop-search-results">
                 {filteredPosts.map((post, index) => (
                   <div className="related-posts-block" key={index}>
                     <a href={`/post/${post.slug}`} className="image">
@@ -291,12 +286,7 @@ const Header = () => {
               <div className="no-results">Not found.</div>
             )
           ) : (
-            <div
-              className="desktop-search-results"
-              style={{
-                display: search.showSearch ? "block" : "none",
-              }}
-            >
+            <div className="desktop-search-results">
               {Array.from({ length: 10 }).map((_, index) => (
                 <SkeletonDesktop key={index} />
               ))}
@@ -309,6 +299,7 @@ const Header = () => {
 
   const DesktopSearchOverlay = (
     <div className="search-overlay-desktop">
+      {DesktopSearch}
       <div
         className="close-search"
         onClick={() => {
@@ -329,7 +320,7 @@ const Header = () => {
         {HeaderContentMobile}
         {HeaderContentDesktop}
       </div>
-      {search.showSearch && DesktopSearch}
+
       {search.showSearch && DesktopSearchOverlay}
     </header>
   );
