@@ -506,15 +506,14 @@ header {
   filter: brightness(0);
 }
 
-.search-overlay {
+.search-overlay-desktop {
   position: fixed;
-  z-index: 40;
+  z-index: 1;
   height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.74);
   top: 0;
   left: 0;
-  display: none;
 }
 
 .close-search {
@@ -536,12 +535,11 @@ header {
 
 .desktop-search {
   position: absolute;
-  z-index: 41;
+  z-index: 2;
   top: 100%;
   left: 0;
   width: 100%;
   margin-top: -10px;
-  display: none;
 }
 
 .desktop-search-content {
@@ -2260,9 +2258,9 @@ blockquote p:last-child {
     margin: 0 7px;
   }
 
-  .search-overlay,
+  .search-overlay-desktop,
   .desktop-search {
-    display: none !important;
+    display: none;
   }
 
   .header-search-desktop {

@@ -222,12 +222,7 @@ const Header = () => {
   );
 
   const DesktopSearch = (
-    <div
-      className="desktop-search"
-      style={{
-        display: search.showSearch ? "block" : "none",
-      }}
-    >
+    <div className="desktop-search">
       <div className="container">
         <div className="desktop-search-content">
           <form
@@ -312,13 +307,8 @@ const Header = () => {
     </div>
   );
 
-  const SearchOverlay = (
-    <div
-      className="search-overlay"
-      style={{
-        display: search.showSearch ? "block" : "none",
-      }}
-    >
+  const DesktopSearchOverlay = (
+    <div className="search-overlay-desktop">
       <div
         className="close-search"
         onClick={() => {
@@ -339,8 +329,8 @@ const Header = () => {
         {HeaderContentMobile}
         {HeaderContentDesktop}
       </div>
-      {DesktopSearch}
-      {SearchOverlay}
+      {search.showSearch && DesktopSearch}
+      {search.showSearch && DesktopSearchOverlay}
     </header>
   );
 };
