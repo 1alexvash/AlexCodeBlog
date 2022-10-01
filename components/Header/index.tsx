@@ -5,12 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../../redux/slices/selectedTags";
+import DesktopSearch from "./DesktopSearch";
+
 import Logo from "./Logo";
-import SkeletonDesktop from "./SkeletonDesktop";
 import SkeletonMobile from "./SkeletonMobile";
 import ThemeSwitcher from "./ThemeSwitcher";
 
-type Search = {
+export type Search = {
   value: string;
   showSearch: boolean;
   isLoaded: boolean;
@@ -221,99 +222,6 @@ const Header = () => {
     </div>
   );
 
-  const DesktopSearch = (
-    <div className="desktop-search">
-      <div className="container">
-        <div className="desktop-search-content">
-          <form
-            action="#"
-            method="post"
-            className="desktop-search-form simple-form"
-          >
-            <div className="input-block">
-              <input
-                type="text"
-                placeholder="Site search"
-                value={search.value}
-                onChange={(event) => {
-                  setSearch((search) => ({
-                    ...search,
-                    value: event.target.value,
-                  }));
-                }}
-                ref={desktopInputRef}
-              />
-            </div>
-          </form>
-
-          {search.isLoaded ? (
-            filteredPosts.length > 0 ? (
-              <div className="desktop-search-results">
-                {filteredPosts.map((post, index) => (
-                  <div className="related-posts-block" key={index}>
-                    <a href={`/post/${post.slug}`} className="image">
-                      <img src={post.featuredImage} alt="blog post image" />
-                    </a>
-                    <div className="inner">
-                      <a href={`/post/${post.slug}`} className="name">
-                        {post.title}
-                      </a>
-                      <div className="tags">
-                        {post.tags.map((tag) => (
-                          <Link href="/" key={tag}>
-                            <a
-                              href=""
-                              key={tag}
-                              onClick={() => {
-                                setSearch((search) => ({
-                                  ...search,
-                                  showSearch: false,
-                                }));
-
-                                dispatch(setTags([tag]));
-                              }}
-                            >
-                              #{tag}
-                            </a>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="no-results">Not found.</div>
-            )
-          ) : (
-            <div className="desktop-search-results">
-              {Array.from({ length: 10 }).map((_, index) => (
-                <SkeletonDesktop key={index} />
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  const DesktopSearchOverlay = (
-    <div className="search-overlay-desktop">
-      {DesktopSearch}
-      <div
-        className="close-search"
-        onClick={() => {
-          setSearch((search) => ({
-            ...search,
-            showSearch: false,
-          }));
-        }}
-      >
-        <img src="/images/close-search.svg" alt="search" />
-      </div>
-    </div>
-  );
-
   return (
     <header>
       <div className="container">
@@ -321,7 +229,14 @@ const Header = () => {
         {HeaderContentDesktop}
       </div>
 
-      {search.showSearch && DesktopSearchOverlay}
+      {search.showSearch && (
+        <DesktopSearch
+          search={search}
+          setSearch={setSearch}
+          desktopInputRef={desktopInputRef}
+          filteredPosts={filteredPosts}
+        />
+      )}
     </header>
   );
 };
