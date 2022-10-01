@@ -8,6 +8,7 @@ import { setTags } from "../../redux/slices/selectedTags";
 import DesktopSearch from "./DesktopSearch";
 
 import Logo from "./Logo";
+import NotFound from "./NotFound";
 import SkeletonMobile from "./SkeletonMobile";
 import ThemeSwitcher from "./ThemeSwitcher";
 
@@ -136,7 +137,7 @@ const Header = () => {
               ))}
             </div>
           ) : (
-            <div className="no-results">Not found.</div>
+            <NotFound />
           )
         ) : (
           <div

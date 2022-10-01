@@ -5,6 +5,7 @@ import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 import { Search } from ".";
 import DesktopSkeletons from "./DesktopSkeletons";
+import NotFound from "./NotFound";
 
 interface Props {
   search: Search;
@@ -84,7 +85,7 @@ const DesktopSearch = ({
                   ))}
                 </div>
               ) : (
-                <div className="no-results">Not found.</div>
+                <NotFound />
               )
             ) : (
               <DesktopSkeletons />
