@@ -92,8 +92,47 @@ const Header = () => {
             />
           </div>
         </form>
-        {filteredPosts.length === 0 ? (
-          <div className="no-results">Not found.</div>
+
+        {search.isLoaded ? (
+          filteredPosts.length > 0 ? (
+            <div
+              className="mobile-search-results"
+              style={{
+                display: search.value.trim().length > 0 ? "block" : "none",
+              }}
+            >
+              {filteredPosts.map((post, index) => (
+                <div className="mobile-posts-block" key={index}>
+                  <div className="inner-flex">
+                    <a href={`/post/${post.slug}`} className="image">
+                      <img src={post.featuredImage} alt="blog post image" />
+                    </a>
+                    <a href={`/post/${post.slug}`} className="name">
+                      {post.title}
+                    </a>
+                  </div>
+                  <div className="tags">
+                    {post.tags.map((tag) => (
+                      <Link href="/" key={tag}>
+                        <a
+                          href=""
+                          key={tag}
+                          onClick={() => {
+                            setShowMenu(false);
+                            dispatch(setTags([tag]));
+                          }}
+                        >
+                          #{tag}
+                        </a>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="no-results">Not found.</div>
+          )
         ) : (
           <div
             className="mobile-search-results"
@@ -101,38 +140,8 @@ const Header = () => {
               display: search.value.trim().length > 0 ? "block" : "none",
             }}
           >
-            {search.isLoaded &&
-              Array.from({ length: 10 }).map((_, index) => (
-                <SkeletonMobile key={index} />
-              ))}
-
-            {filteredPosts.map((post, index) => (
-              <div className="mobile-posts-block" key={index}>
-                <div className="inner-flex">
-                  <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="blog post image" />
-                  </a>
-                  <a href={`/post/${post.slug}`} className="name">
-                    {post.title}
-                  </a>
-                </div>
-                <div className="tags">
-                  {post.tags.map((tag) => (
-                    <Link href="/" key={tag}>
-                      <a
-                        href=""
-                        key={tag}
-                        onClick={() => {
-                          setShowMenu(false);
-                          dispatch(setTags([tag]));
-                        }}
-                      >
-                        #{tag}
-                      </a>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <SkeletonMobile key={index} />
             ))}
           </div>
         )}
@@ -238,8 +247,50 @@ const Header = () => {
             </div>
           </form>
 
-          {filteredPosts.length === 0 ? (
-            <div className="no-results">Not found.</div>
+          {search.isLoaded ? (
+            filteredPosts.length > 0 ? (
+              <div
+                className="desktop-search-results"
+                style={{
+                  display: search.showSearch ? "block" : "none",
+                }}
+              >
+                {filteredPosts.map((post, index) => (
+                  <div className="related-posts-block" key={index}>
+                    <a href={`/post/${post.slug}`} className="image">
+                      <img src={post.featuredImage} alt="blog post image" />
+                    </a>
+                    <div className="inner">
+                      <a href={`/post/${post.slug}`} className="name">
+                        {post.title}
+                      </a>
+                      <div className="tags">
+                        {post.tags.map((tag) => (
+                          <Link href="/" key={tag}>
+                            <a
+                              href=""
+                              key={tag}
+                              onClick={() => {
+                                setSearch((search) => ({
+                                  ...search,
+                                  showSearch: false,
+                                }));
+
+                                dispatch(setTags([tag]));
+                              }}
+                            >
+                              #{tag}
+                            </a>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="no-results">Not found.</div>
+            )
           ) : (
             <div
               className="desktop-search-results"
@@ -247,42 +298,8 @@ const Header = () => {
                 display: search.showSearch ? "block" : "none",
               }}
             >
-              {search.isLoaded &&
-                Array.from({ length: 10 }).map((_, index) => (
-                  <SkeletonDesktop key={index} />
-                ))}
-
-              {filteredPosts.map((post, index) => (
-                <div className="related-posts-block" key={index}>
-                  <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="blog post image" />
-                  </a>
-                  <div className="inner">
-                    <a href={`/post/${post.slug}`} className="name">
-                      {post.title}
-                    </a>
-                    <div className="tags">
-                      {post.tags.map((tag) => (
-                        <Link href="/" key={tag}>
-                          <a
-                            href=""
-                            key={tag}
-                            onClick={() => {
-                              setSearch((search) => ({
-                                ...search,
-                                showSearch: false,
-                              }));
-
-                              dispatch(setTags([tag]));
-                            }}
-                          >
-                            #{tag}
-                          </a>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <SkeletonDesktop key={index} />
               ))}
             </div>
           )}
