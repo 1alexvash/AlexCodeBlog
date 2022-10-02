@@ -1,165 +1,3 @@
-@font-face {
-	font-display: swap;
-	font-family: "Ubuntu";
-	src: url(/fonts/Ubuntu-Regular.woff2) format("woff2"),
-		url("/fonts/Ubuntu-Regular.woff") format("woff");
-	font-style: normal;
-	font-weight: 400;
-}
-
-@font-face {
-	font-display: swap;
-	font-family: "Ubuntu";
-	src: url(/fonts/Ubuntu-Medium.woff2) format("woff2"),
-		url("/fonts/Ubuntu-Medium.woff") format("woff");
-	font-style: normal;
-	font-weight: 500;
-}
-
-@font-face {
-	font-display: swap;
-	font-family: "Ubuntu";
-	src: url(/fonts/Ubuntu-Bold.woff2) format("woff2"),
-		url("/fonts/Ubuntu-Bold.woff") format("woff");
-	font-style: normal;
-	font-weight: 700;
-}
-
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-	display: block;
-}
-
-body {
-	line-height: 1;
-}
-
-ul,
-ol {
-	list-style: none;
-}
-
-blockquote,
-q {
-	quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-	content: "";
-	content: none;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
 *,
 *:before,
 *:after {
@@ -508,15 +346,14 @@ header {
 	filter: brightness(0);
 }
 
-.search-overlay {
+.search-overlay-desktop {
 	position: fixed;
-	z-index: 40;
+	z-index: 1;
 	height: 100vh;
 	width: 100%;
 	background: rgba(0, 0, 0, 0.74);
 	top: 0;
 	left: 0;
-	display: none;
 }
 
 .close-search {
@@ -537,13 +374,11 @@ header {
 }
 
 .desktop-search {
-	position: absolute;
-	z-index: 41;
-	top: 100%;
+	position: relative;
+	z-index: 2;
+	top: 110px;
 	left: 0;
 	width: 100%;
-	margin-top: -10px;
-	display: none;
 }
 
 .desktop-search-content {
@@ -598,7 +433,6 @@ header {
 	overflow: auto;
 	background: #fff;
 	padding: 30px 30px 10px;
-	display: none;
 }
 
 .desktop-search-results::-webkit-scrollbar {
@@ -2280,9 +2114,9 @@ blockquote p:last-child {
 		margin: 0 7px;
 	}
 
-	.search-overlay,
+	.search-overlay-desktop,
 	.desktop-search {
-		display: none !important;
+		display: none;
 	}
 
 	.header-search-desktop {
@@ -2362,7 +2196,6 @@ blockquote p:last-child {
 		background: rgba(0, 0, 0, 0.74);
 		top: 0;
 		left: 0;
-		display: none;
 	}
 
 	.mobile-search-overlay .close-search {
@@ -2379,7 +2212,6 @@ blockquote p:last-child {
 		left: 0;
 		width: calc(100% - 40px);
 		margin: 0 20px;
-		display: none;
 	}
 
 	.mobile-search-results::-webkit-scrollbar {
