@@ -93,24 +93,22 @@ const MobileSearch = ({
           <MobileSkeletons />
         )}
       </div>
-      <div
-        className="mobile-search-overlay"
-        style={{
-          display: search.value.trim().length > 0 ? "block" : "none",
-        }}
-      >
-        <div
-          className="close-search"
-          onClick={() => {
-            setSearch((search) => ({
-              ...search,
-              value: "",
-            }));
-          }}
-        >
-          <img src="/images/close-search.svg" alt="search" />
+
+      {search.value.trim().length > 0 && (
+        <div className="mobile-search-overlay">
+          <div
+            className="close-search"
+            onClick={() => {
+              setSearch((search) => ({
+                ...search,
+                value: "",
+              }));
+            }}
+          >
+            <img src="/images/close-search.svg" alt="search" />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
