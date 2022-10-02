@@ -38,4 +38,12 @@ const SkeletonMobile = () => {
   );
 };
 
-export default SkeletonMobile;
+const MobileSkeletons = () => (
+  <div className="mobile-search-results">
+    {Array.from({ length: 10 }).map((_, index) => (
+      <SkeletonMobile key={index} />
+    ))}
+  </div>
+);
+
+export default MobileSkeletons;
