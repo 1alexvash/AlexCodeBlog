@@ -6,7 +6,6 @@
   font-style: normal;
   font-weight: 400;
 }
-
 @font-face {
   font-display: swap;
   font-family: "Ubuntu";
@@ -15,7 +14,6 @@
   font-style: normal;
   font-weight: 500;
 }
-
 @font-face {
   font-display: swap;
   font-family: "Ubuntu";
@@ -317,7 +315,7 @@ header {
   display: none;
 }
 
-.header-content-desktop {
+.header-content {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -1643,11 +1641,11 @@ blockquote p:last-child {
   filter: brightness(0) invert(1);
 }
 
-.dark-theme .header-content-desktop {
+.dark-theme .header-content {
   background: #18191d;
 }
 
-.dark-theme .header-content-desktop .top-block {
+.dark-theme .header-content .top-block {
   border-color: #33393f;
 }
 
@@ -1841,7 +1839,8 @@ blockquote p:last-child {
     width: 750px;
   }
 
-  .header-content-desktop {
+  .header-content {
+    display: -ms-flexbox !important;
     display: flex !important;
   }
 
@@ -1892,7 +1891,7 @@ blockquote p:last-child {
     margin-left: 70px;
   }
 
-  .header-content-desktop {
+  .header-content {
     padding: 0;
   }
 
@@ -2128,7 +2127,7 @@ blockquote p:last-child {
     margin: 20px -12px 25px;
   }
 
-  .header-content-desktop {
+  .header-content {
     display: none;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -2147,7 +2146,7 @@ blockquote p:last-child {
     padding: 0;
   }
 
-  .header-content-desktop .top-block {
+  .header-content .top-block {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
