@@ -43,8 +43,16 @@ const Header = () => {
       }));
     };
 
-    if ((search.showSearch || showMenu) && search.posts.length === 0) {
-      fetchData();
+    if (search.isLoaded === false) {
+      // Prefetch on Desktop
+      if (search.showSearch) {
+        fetchData();
+      }
+
+      // Prefetch on Mobile
+      if (showMenu && search.value.trim().length > 0) {
+        fetchData();
+      }
     }
 
     if (search.showSearch) {
@@ -54,7 +62,7 @@ const Header = () => {
     if (showMenu) {
       mobileInputRef.current?.focus();
     }
-  }, [search.showSearch, search.posts.length, showMenu]);
+  }, [search.showSearch, search.posts.length, search.value, showMenu]);
 
   const HeaderContentMobile = (
     <div className="header-content-mobile">
