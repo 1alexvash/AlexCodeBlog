@@ -35,7 +35,7 @@ const ThemeSwitcher = () => {
         <img src="/images/sun.svg" alt="sun" width={20} height={20} />
       </li>
       <li className="dark" onClick={() => setTheme("dark")}>
-        <img src="/images/moon.svg" alt="moon" width={19} height={17.99} />
+        <img src="/images/moon.svg" alt="moon" width={19} height={18} />
       </li>
     </ul>
   );

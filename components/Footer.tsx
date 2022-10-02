@@ -11,7 +11,7 @@ const Footer = () => (
             src="/images/footer-logo.svg"
             alt="footer-logo"
             width={180}
-            height={50.99}
+            height={51}
           />
         </div>
         <ul className="footer-socials">

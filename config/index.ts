@@ -9,8 +9,8 @@ const config = {
     {
       link: "https://t.me/HeWorksSoHard",
       image: "/images/telegram.svg",
-      width: 20.99,
-      height: 16.99,
+      width: 21,
+      height: 17,
     },
     {
       link: "https://github.com/1alexvash",
@@ -22,7 +22,7 @@ const config = {
       link: "mailto:1alexvash@gmail.com",
       image: "/images/mail.svg",
       width: 24,
-      height: 15.99,
+      height: 16,
     },
   ],
   host_url: "https://alex-code.com/",

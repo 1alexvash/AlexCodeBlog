@@ -20,8 +20,8 @@ const LatestPosts = ({ latestPosts }: Props) => {
               <img
                 src={post.featuredImage}
                 alt="blog post image"
-                width={101.99}
-                height={101.99}
+                width={102}
+                height={102}
               />
             </a>
           </Link>

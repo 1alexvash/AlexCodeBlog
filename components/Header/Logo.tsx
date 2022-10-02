@@ -10,14 +10,14 @@ const Logo = () => {
         src="/images/main-logo.svg"
         alt="light-theme"
         width={180}
-        height={50.99}
+        height={60}
       />
       <img
         className="dark"
         src="/images/main-logo-dark.svg"
         alt="dark-theme"
         width={180}
-        height={50.99}
+        height={60}
       />
     </a>
   );
