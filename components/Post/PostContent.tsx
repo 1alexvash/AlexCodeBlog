@@ -20,6 +20,7 @@ const PostContent = ({ post }: Props) => {
     <article className="blogpost-content">
       <Head>
         <title>{post.title}</title>
+
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={config.host_url} />
@@ -27,10 +28,16 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:site_name" content={config.site_title} />
         <meta property="og:image" content={post.featuredImage} />
         <meta name="description" content={config.site_description} />
+		
       </Head>
 
       <div className="blogpost-image">
-        <img src={post.featuredImage} alt="blog post image" width={790} height={300} />
+        <img
+          src={post.featuredImage}
+          alt="blog post image"
+          width={790}
+          height={300}
+        />
       </div>
       <div className="blogpost-date">
         <span>{toHumanReadableDate(post.date)}</span>
