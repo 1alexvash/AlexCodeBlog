@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 
 const ThemeSwitcher = () => {
-  type Theme = "light" | "dark" | null;
-  const [theme, setTheme] = useState<Theme>(null);
+  type Theme = "light" | "dark";
+  const checkStorage = () => {
+    if (typeof window !== "undefined") {
+      return localStorage.theme;
+    }
+  };
+  const [theme, setTheme] = useState<Theme>(checkStorage() || "light");
 
   const checkBrowserTheme = (theme: string) => {
     return (
@@ -22,21 +27,12 @@ const ThemeSwitcher = () => {
         localStorage.theme = "light";
       }
     } else {
-      if (checkBrowserTheme("dark") && theme === null) {
+      if (theme === "light") {
+        body.classList.remove("dark-theme");
+        localStorage.theme = "light";
+      } else {
         body.classList.add("dark-theme");
         localStorage.theme = "dark";
-        setTheme("dark");
-      } else if (checkBrowserTheme("light") && theme === null) {
-        localStorage.theme = "light";
-        setTheme("light");
-      } else {
-        if (theme === "light") {
-          body.classList.remove("dark-theme");
-          localStorage.theme = "light";
-        } else {
-          body.classList.add("dark-theme");
-          localStorage.theme = "dark";
-        }
       }
     }
   }, [theme]);
