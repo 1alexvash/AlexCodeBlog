@@ -49,49 +49,46 @@ const MobileSearch = ({
           </div>
         </form>
 
-        {search.isLoaded ? (
-          filteredPosts.length > 0 ? (
-            <div
-              className="mobile-search-results"
-              style={{
-                display: search.value.trim().length > 0 ? "block" : "none",
-              }}
-            >
-              {filteredPosts.map((post, index) => (
-                <div className="mobile-posts-block" key={index}>
-                  <div className="inner-flex">
-                    <a href={`/post/${post.slug}`} className="image">
-                      <img src={post.featuredImage} alt="blog post image" />
-                    </a>
-                    <a href={`/post/${post.slug}`} className="name">
-                      {post.title}
-                    </a>
+        {search.value.trim().length > 0 ? (
+          search.isLoaded ? (
+            filteredPosts.length > 0 ? (
+              <div className="mobile-search-results">
+                {filteredPosts.map((post, index) => (
+                  <div className="mobile-posts-block" key={index}>
+                    <div className="inner-flex">
+                      <a href={`/post/${post.slug}`} className="image">
+                        <img src={post.featuredImage} alt="blog post image" />
+                      </a>
+                      <a href={`/post/${post.slug}`} className="name">
+                        {post.title}
+                      </a>
+                    </div>
+                    <div className="tags">
+                      {post.tags.map((tag) => (
+                        <Link href="/" key={tag}>
+                          <a
+                            href=""
+                            key={tag}
+                            onClick={() => {
+                              setShowMenu(false);
+                              dispatch(setTags([tag]));
+                            }}
+                          >
+                            #{tag}
+                          </a>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                  <div className="tags">
-                    {post.tags.map((tag) => (
-                      <Link href="/" key={tag}>
-                        <a
-                          href=""
-                          key={tag}
-                          onClick={() => {
-                            setShowMenu(false);
-                            dispatch(setTags([tag]));
-                          }}
-                        >
-                          #{tag}
-                        </a>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <NotFound />
+            )
           ) : (
-            <NotFound />
+            <MobileSkeletons />
           )
-        ) : (
-          <MobileSkeletons />
-        )}
+        ) : null}
       </div>
 
       {search.value.trim().length > 0 && (

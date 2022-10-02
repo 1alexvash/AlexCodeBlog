@@ -2194,7 +2194,6 @@ blockquote p:last-child {
     left: 0;
     width: calc(100% - 40px);
     margin: 0 20px;
-    display: none;
   }
 
   .mobile-search-results::-webkit-scrollbar {

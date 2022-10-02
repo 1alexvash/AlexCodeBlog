@@ -39,14 +39,7 @@ const SkeletonMobile = () => {
 };
 
 const MobileSkeletons = () => (
-  <div
-    className="mobile-search-results"
-    style={
-      {
-        // display: search.value.trim().length > 0 ? "block" : "none",
-      }
-    }
-  >
+  <div className="mobile-search-results">
     {Array.from({ length: 10 }).map((_, index) => (
       <SkeletonMobile key={index} />
     ))}
