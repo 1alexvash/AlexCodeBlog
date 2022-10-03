@@ -6,6 +6,7 @@ draft: false
 tags:
   - JavaScript
 ---
+
 L﻿et's say we have the following object
 
 ```javascript
