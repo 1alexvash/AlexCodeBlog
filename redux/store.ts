@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import paginationSlice from "./slices/pagination";
 import selectedTagsSlice from "./slices/selectedTags";
+import themeSlice from "./slices/theme";
 
 const store = configureStore({
   reducer: {
     selectedTags: selectedTagsSlice,
     pagination: paginationSlice,
+    theme: themeSlice
   },
 });
 
