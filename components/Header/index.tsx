@@ -2,52 +2,67 @@ import config from "config";
 import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useAppDispatch } from "redux/typesHooks";
 
-import { setTags } from "../../redux/slices/selectedTags";
 import Logo from "./Logo";
-import SkeletonDesktop from "./SkeletonDesktop";
-import SkeletonMobile from "./SkeletonMobile";
+import DesktopSearch from "./Search/DesktopSearch";
+import MobileSearch from "./Search/MobileSearch";
 import ThemeSwitcher from "./ThemeSwitcher";
 
+export type Search = {
+  value: string;
+  showSearch: boolean;
+  isLoaded: boolean;
+  posts: PostDocumentWithoutContent[];
+};
+
 const Header = () => {
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [search, setSearch] = useState<Search>({
+    value: "",
+    showSearch: false,
+    isLoaded: false,
+    posts: [] as PostDocumentWithoutContent[],
+  });
+
   const [showMenu, setShowMenu] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState<PostDocumentWithoutContent[]>([]);
-
-  const dispatch = useAppDispatch();
-
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const filteredPosts = search.posts.filter((post) => {
+    return post.title.toLowerCase().includes(search.value.toLowerCase());
+  });
 
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       const posts = await fetch("/api/getAllPosts").then((data) => data.json());
 
-      setLoading(false);
-      setPosts(posts);
+      setSearch((search) => ({
+        ...search,
+        isLoaded: true,
+        posts,
+      }));
     };
 
-    if ((showSearch || showMenu) && posts.length === 0) {
-      fetchData();
+    if (search.isLoaded === false) {
+      // Prefetch on Desktop
+      if (search.showSearch) {
+        fetchData();
+      }
+
+      // Prefetch on Mobile
+      if (showMenu && search.value.trim().length > 0) {
+        fetchData();
+      }
     }
 
-    if (showSearch) {
+    if (search.showSearch) {
       desktopInputRef.current?.focus();
     }
 
     if (showMenu) {
       mobileInputRef.current?.focus();
     }
-  }, [showSearch, posts.length, showMenu]);
+  }, [search.showSearch, search.posts.length, search.value, showMenu]);
 
   const HeaderContentMobile = (
     <div className="header-content-mobile">
@@ -59,82 +74,6 @@ const Header = () => {
           width={34}
           height={22}
         />
-      </div>
-    </div>
-  );
-
-  const MobileSearch = (
-    <div className="mobile-search">
-      <div className="mobile-search-content">
-        <form
-          action="#"
-          method="post"
-          className="mobile-search-form simple-form"
-        >
-          <div className="input-block">
-            <input
-              type="text"
-              placeholder="Site search"
-              value={searchValue}
-              onChange={(event) => setSearchValue(event.target.value)}
-              ref={mobileInputRef}
-            />
-          </div>
-        </form>
-        {filteredPosts.length === 0 ? (
-          <div className="no-results">Not found.</div>
-        ) : (
-          <div
-            className="mobile-search-results"
-            style={{
-              display: searchValue.trim().length > 0 ? "block" : "none",
-            }}
-          >
-            {loading &&
-              Array.from({ length: 10 }).map((_, index) => (
-                <SkeletonMobile key={index} />
-              ))}
-
-            {filteredPosts.map((post, index) => (
-              <div className="mobile-posts-block" key={index}>
-                <div className="inner-flex">
-                  <a href={`/post/${post.slug}`} className="image">
-                    <img src={post.featuredImage} alt="blog post image" />
-                  </a>
-                  <a href={`/post/${post.slug}`} className="name">
-                    {post.title}
-                  </a>
-                </div>
-                <div className="tags">
-                  {post.tags.map((tag) => (
-                    <Link href="/" key={tag}>
-                      <a
-                        href=""
-                        key={tag}
-                        onClick={() => {
-                          setShowMenu(false);
-                          dispatch(setTags([tag]));
-                        }}
-                      >
-                        #{tag}
-                      </a>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <div
-        className="mobile-search-overlay"
-        style={{
-          display: searchValue.trim().length > 0 ? "block" : "none",
-        }}
-      >
-        <div className="close-search" onClick={() => setSearchValue("")}>
-          <img src="/images/close-search.svg" alt="search" />
-        </div>
       </div>
     </div>
   );
@@ -153,8 +92,13 @@ const Header = () => {
           <img src="/images/close.svg" alt="close" />
         </div>
       </div>
-      {/* mobile-search */}
-      {MobileSearch}
+      <MobileSearch
+        search={search}
+        setSearch={setSearch}
+        mobileInputRef={mobileInputRef}
+        filteredPosts={filteredPosts}
+        setShowMenu={setShowMenu}
+      />
       <div className="header-menu-outer">
         <ul className="header-menu">
           <li>
@@ -167,9 +111,11 @@ const Header = () => {
           <img
             src="/images/search.svg"
             alt="search"
+
             onClick={() => setShowSearch(true)}
             width={19}
             height={19}
+
           />
         </div>
       </div>
@@ -190,6 +136,7 @@ const Header = () => {
       <ThemeSwitcher />
     </div>
   );
+
 
   const DesktopSearch = (
     <div
@@ -283,14 +230,22 @@ const Header = () => {
     </div>
   );
 
+
   return (
     <header>
       <div className="container">
         {HeaderContentMobile}
         {HeaderContentDesktop}
       </div>
-      {DesktopSearch}
-      {SearchOverlay}
+
+      {search.showSearch && (
+        <DesktopSearch
+          search={search}
+          setSearch={setSearch}
+          desktopInputRef={desktopInputRef}
+          filteredPosts={filteredPosts}
+        />
+      )}
     </header>
   );
 };
