@@ -7,7 +7,9 @@ tags:
   - JavaScript
 ---
 
+
 L﻿et's say we have the following object
+
 
 ```javascript
 const person = {
@@ -17,9 +19,9 @@ const person = {
 };
 ```
 
-A﻿nd we want an exact copy of this object, but without **password** field for example.
+And we want an exact copy of this object, but without **password** field for example.
 
-W﻿e can do the following, use the JS **delete** keyword
+We can do the following, use the JS **delete** keyword
 
 ```javascript
 const person = {
@@ -35,7 +37,7 @@ console.log(personWithoutPassowrd);
 // { name: 'John', age: 30 }
 ```
 
-I﻿t gives as a desired result, but t﻿he problem with this approach is that personWithoutPassowrd is a reference of person, so if we console.log it, the original person isn't going to have this key as well
+It gives as a desired result, but the problem with this approach is that personWithoutPassowrd is a reference of person, so if we console.log it, the original person isn't going to have this key as well
 
 ```javascript
 const person = {
@@ -54,7 +56,7 @@ console.log(person);
 // { name: 'John', age: 30 } Oh it lost original property 😲
 ```
 
-T﻿he better way to go about is to use new ES6 operator
+The better way to go about is to use new ES6 operator
 
 ```javascript
 const person = {
@@ -74,4 +76,6 @@ console.log(personWithoutPassword);
 
 The original object was not damaged, awesome 👍
 
+
 A﻿nd the syntax is pretty easy, on the left side you list out the properties you want to extract, and starting from three dots you just define a new variable with its leftovers
+
