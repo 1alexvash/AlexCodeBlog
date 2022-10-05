@@ -40,7 +40,6 @@ const ThemeSwitcher = () => {
       console.error("Can't find element body");
       return;
     }
-    console.log("change theme", theme);
     switch (theme) {
       case "light": {
         dispatch(setThemeState("light"));
