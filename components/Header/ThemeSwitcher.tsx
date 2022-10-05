@@ -2,54 +2,79 @@ import { useEffect, useState } from "react";
 import { setThemeState } from "redux/slices/theme";
 import { useAppDispatch } from "redux/typesHooks";
 
-const ThemeSwitcher = () => {
-  type Theme = "light" | "dark";
-  const dispatch = useAppDispatch();
-  const checkStorage = () => {
-    if (typeof window !== "undefined") {
-      return localStorage.theme;
-    }
-  };
-  const [theme, setTheme] = useState<Theme>(checkStorage() || "light");
+type Theme = "light" | "dark";
 
-  const checkBrowserTheme = (theme: string) => {
-    return (
-      window.matchMedia &&
-      window.matchMedia(`(prefers-color-scheme: ${theme})`).matches
-    );
-  };
+const tryGetStorageTheme = (): Theme | undefined => {
+  if (typeof window !== "undefined") {
+    return localStorage.theme;
+  }
+};
+
+const getBrowserTheme = (): Theme | undefined => {
+  if (typeof window !== "undefined") {
+    return window.matchMedia &&
+      window.matchMedia(`(prefers-color-scheme: dark)`).matches
+      ? "dark"
+      : "light";
+  }
+};
+
+const absurd = (value: never) => {
+  throw new Error(`Unexpected value: ${value}`);
+};
+
+const getInitialTheme = (): Theme =>
+  tryGetStorageTheme() || getBrowserTheme() || "light";
+
+const ThemeSwitcher = () => {
+  const dispatch = useAppDispatch();
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    const body = document.querySelector("body")!;
-    if (localStorage.theme === undefined) {
-      if (checkBrowserTheme("dark")) {
-        setTheme("dark");
-        body.classList.add("dark-theme");
-        localStorage.theme = "dark";
-        dispatch(setThemeState("dark"));
-      } else {
-        localStorage.theme = "light";
+    localStorage.theme = theme;
+  }, [theme]);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (body === null) {
+      console.error("Can't find element body");
+      return;
+    }
+    console.log("change theme", theme);
+    switch (theme) {
+      case "light": {
         dispatch(setThemeState("light"));
-      }
-    } else {
-      if (theme === "light") {
         body.classList.remove("dark-theme");
-        localStorage.theme = "light";
-        dispatch(setThemeState("light"));
-      } else {
-        body.classList.add("dark-theme");
-        localStorage.theme = "dark";
-        dispatch(setThemeState("dark"));
+        return;
       }
+      case "dark": {
+        dispatch(setThemeState("dark"));
+        body.classList.add("dark-theme");
+        return;
+      }
+      default:
+        absurd(theme);
     }
   }, [theme]);
 
   return (
     <ul className="theme-switcher">
-      <li className="light" onClick={() => setTheme("light")}>
+      <li
+        className="light"
+        onClick={() => {
+          console.log("switch to light");
+          return setTheme("light");
+        }}
+      >
         <img src="/images/sun.svg" alt="sun" />
       </li>
-      <li className="dark" onClick={() => setTheme("dark")}>
+      <li
+        className="dark"
+        onClick={() => {
+          console.log("switch to dark");
+          return setTheme("dark");
+        }}
+      >
         <img src="/images/moon.svg" alt="moon" />
       </li>
     </ul>
