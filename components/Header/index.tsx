@@ -62,7 +62,13 @@ const Header = () => {
     if (showMenu) {
       mobileInputRef.current?.focus();
     }
-  }, [search.showSearch, search.posts.length, search.value, showMenu]);
+  }, [
+    search.showSearch,
+    search.posts.length,
+    search.value,
+    showMenu,
+    search.isLoaded,
+  ]);
 
   const HeaderContentMobile = (
     <div className="header-content-mobile">
