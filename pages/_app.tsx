@@ -1,5 +1,4 @@
 import "../styles/reset.css";
-import "../styles/fonts.css";
 import "../styles/main.css";
 import "../styles/prism-okaidia.css";
 

@@ -37,12 +37,4 @@ const SkeletonDesktop = () => {
   );
 };
 
-const DesktopSkeletons = () => (
-  <div className="desktop-search-results">
-    {Array.from({ length: 10 }).map((_, index) => (
-      <SkeletonDesktop key={index} />
-    ))}
-  </div>
-);
-
-export default DesktopSkeletons;
+export default SkeletonDesktop;
