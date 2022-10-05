@@ -764,12 +764,6 @@ header {
 
 .posts-list-block .content {
 	position: absolute;
-	z-index: 5;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 2;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-align: center;
@@ -780,7 +774,18 @@ header {
 	justify-content: flex-end;
 	padding: 30px;
 	text-align: center;
+
+}
+
+.posts-list-block .content,
+.content::after {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
 	border: 1px solid transparent;
+	z-index: 5;
 }
 
 .posts-list-block:hover .content:after {
@@ -789,14 +794,8 @@ header {
 
 .posts-list-block .content:after {
 	content: "";
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
 	z-index: 5;
-	border: 1px solid transparent;
 	border-radius: 3px;
-	position: absolute;
 	display: block;
 	transition: all 0.3s ease-out;
 	pointer-events: none;
