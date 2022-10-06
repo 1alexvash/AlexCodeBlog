@@ -1510,35 +1510,35 @@ blockquote p:last-child {
 }
 
 .content-404 {
-    padding: 50px 15px;
-    display: -ms-flexbox;
-    display: flex;
-    min-height: 100vh;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    text-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  
-  .content-404 .image {
-    margin-bottom: 55px;
-  }
-  
-  .content-404 .image img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .content-404 .title {
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 1.14;
-    color: #000000;
-    margin-bottom: 57px;
-  }
+  padding: 50px 15px;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  text-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.content-404 .image {
+  margin-bottom: 55px;
+}
+
+.content-404 .image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.content-404 .title {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.14;
+  color: #000000;
+  margin-bottom: 57px;
+}
 
 /*========================== MEDIA =============================*/
 
@@ -1850,8 +1850,8 @@ blockquote p:last-child {
 }
 
 .dark-theme .content-404 .title {
-    color: #fff;
-  }
+  color: #fff;
+}
 
 .skeleton {
   opacity: 0.7;

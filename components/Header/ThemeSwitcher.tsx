@@ -19,10 +19,6 @@ const getBrowserTheme = (): Theme | undefined => {
   }
 };
 
-const absurd = (value: never) => {
-  throw new Error(`Unexpected value: ${value}`);
-};
-
 const getInitialTheme = (): Theme =>
   tryGetStorageTheme() || getBrowserTheme() || "light";
 
@@ -36,44 +32,27 @@ const ThemeSwitcher = () => {
 
   useEffect(() => {
     const body = document.querySelector("body");
+
     if (body === null) {
       console.error("Can't find element body");
       return;
     }
-    switch (theme) {
-      case "light": {
-        dispatch(setThemeState("light"));
-        body.classList.remove("dark-theme");
-        return;
-      }
-      case "dark": {
-        dispatch(setThemeState("dark"));
-        body.classList.add("dark-theme");
-        return;
-      }
-      default:
-        absurd(theme);
+
+    if (theme === "light") {
+      dispatch(setThemeState("light"));
+      body.classList.remove("dark-theme");
+    } else {
+      dispatch(setThemeState("dark"));
+      body.classList.add("dark-theme");
     }
   }, [theme]);
 
   return (
     <ul className="theme-switcher">
-      <li
-        className="light"
-        onClick={() => {
-          console.log("switch to light");
-          return setTheme("light");
-        }}
-      >
+      <li className="light" onClick={() => setTheme("light")}>
         <img src="/images/sun.svg" alt="sun" />
       </li>
-      <li
-        className="dark"
-        onClick={() => {
-          console.log("switch to dark");
-          return setTheme("dark");
-        }}
-      >
+      <li className="dark" onClick={() => setTheme("dark")}>
         <img src="/images/moon.svg" alt="moon" />
       </li>
     </ul>

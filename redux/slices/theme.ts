@@ -2,13 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type Theme = "light" | "dark";
 
-const initialState = {
-  themeState: "light",
+const checkStorage = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.theme;
+  }
 };
 
-if (typeof window !== "undefined") {
-  initialState.themeState = localStorage.theme;
-}
+const initialState = {
+  themeState: localStorage.theme, // can not set localstorage bcs error "localstorage is not defined" bcs server start at first
+};
 
 export const themeSlice = createSlice({
   name: "theme",
