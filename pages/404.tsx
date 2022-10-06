@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { useAppSelector } from "redux/typesHooks";
 
-const UndefinedPage = () => {
+const NotFoundPage = () => {
   const theme = useAppSelector((state) => state.theme);
 
   return (
@@ -36,4 +36,4 @@ const UndefinedPage = () => {
   );
 };
 
-export default UndefinedPage;
+export default NotFoundPage;
