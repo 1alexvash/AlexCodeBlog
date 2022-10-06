@@ -8,6 +8,8 @@ import Script from "next/script";
 import { Provider } from "react-redux";
 import store from "redux/store";
 
+import ThemeProvider from "@/components/ThemeProvider";
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
@@ -26,7 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       </Script>
 
-      <Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </Provider>
   );
 }

@@ -1345,6 +1345,37 @@ blockquote p:last-child {
   height: 100%;
 }
 
+.content-404 {
+  padding: 50px 15px;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  text-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.content-404 .image {
+  margin-bottom: 55px;
+}
+
+.content-404 .image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.content-404 .title {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 1.14;
+  color: #000000;
+  margin-bottom: 57px;
+}
+
 /*========================== MEDIA =============================*/
 
 .dark-theme {
@@ -1652,6 +1683,10 @@ blockquote p:last-child {
 
 .dark-theme blockquote {
   background: rgba(254, 108, 10, 0.22);
+}
+
+.dark-theme .content-404 .title {
+  color: #fff;
 }
 
 .skeleton {
@@ -2280,6 +2315,16 @@ blockquote p:last-child {
   }
 }
 
+.content-404 .image {
+  margin-bottom: 40px;
+}
+
+.content-404 .title {
+  margin-bottom: 32px;
+  font-size: 30px;
+  line-height: 1.17;
+}
+
 @media (max-width: 480px) {
   .intro-text h1 {
     font-size: 30px;
@@ -2393,5 +2438,9 @@ blockquote p:last-child {
 
   .ukraine-flex strong {
     display: block;
+  }
+
+  .content-404 .title {
+    font-size: 24px;
   }
 }
