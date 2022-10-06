@@ -9,7 +9,7 @@ const checkStorage = () => {
 };
 
 const initialState = {
-  themeState: localStorage.theme, // can not set localstorage bcs error "localstorage is not defined" bcs server start at first
+  themeState: "dark", // can not set localstorage bcs error "localstorage is not defined" bcs server start at first
 };
 
 export const themeSlice = createSlice({
