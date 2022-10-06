@@ -16,15 +16,12 @@ export const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    resetTheme: () => {
-      return initialState;
-    },
     setThemeState: (state, action: PayloadAction<Theme>) => {
       state.themeState = action.payload;
     },
   },
 });
 
-export const { resetTheme, setThemeState } = themeSlice.actions;
+export const { setThemeState } = themeSlice.actions;
 
 export default themeSlice.reducer;
