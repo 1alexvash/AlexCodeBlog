@@ -35,7 +35,7 @@ const PostContent = ({ post }: Props) => {
           src={post.featuredImage}
           alt="blog post image"
           width={790}
-          height={300}
+          height={394}
         />
       </div>
       <div className="blogpost-date">
