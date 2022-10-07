@@ -11,7 +11,6 @@ const config = {
       image: "/images/telegram.svg",
       width: 21,
       height: 17,
-      //   className: "telegram",
     },
     {
       link: "https://github.com/1alexvash",
@@ -25,7 +24,6 @@ const config = {
       image: "/images/mail.svg",
       width: 24,
       height: 16,
-      //   className: "mail",
     },
   ],
   host_url: "https://alex-code.com/",
