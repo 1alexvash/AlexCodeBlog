@@ -32,6 +32,21 @@ const Header = () => {
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
+  const setSearchAndOverflow = (state: boolean): void => {
+    setSearch((search) => ({
+      ...search,
+      showSearch: state,
+    }));
+  };
+
+  useEffect(() => {
+    if (search.showSearch === true) {
+      document.body.classList.add("overflowHidden");
+    } else {
+      document.body.classList.remove("overflowHidden");
+    }
+  }, [search.showSearch]);
+
   useEffect(() => {
     const fetchData = async () => {
       const posts = await fetch("/api/getAllPosts").then((data) => data.json());
@@ -117,12 +132,7 @@ const Header = () => {
           <img
             src="/images/search.svg"
             alt="search"
-            onClick={() => {
-              setSearch((search) => ({
-                ...search,
-                showSearch: true,
-              }));
-            }}
+            onClick={() => setSearchAndOverflow(true)}
             width={19}
             height={19}
           />
@@ -159,6 +169,7 @@ const Header = () => {
           setSearch={setSearch}
           desktopInputRef={desktopInputRef}
           filteredPosts={filteredPosts}
+          setSearchAndOverflow={setSearchAndOverflow}
         />
       )}
     </header>

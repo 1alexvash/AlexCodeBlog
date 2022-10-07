@@ -2445,3 +2445,6 @@ blockquote p:last-child {
     font-size: 24px;
   }
 }
+.overflowHidden {
+  overflow: hidden !important;
+}

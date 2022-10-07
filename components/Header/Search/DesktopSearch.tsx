@@ -13,6 +13,7 @@ interface Props {
   setSearch: Dispatch<SetStateAction<Search>>;
   desktopInputRef: RefObject<HTMLInputElement>;
   filteredPosts: PostDocumentWithoutContent[];
+  setSearchAndOverflow: (val: boolean) => void;
 }
 
 const DesktopSearch = ({
@@ -20,6 +21,7 @@ const DesktopSearch = ({
   setSearch,
   desktopInputRef,
   filteredPosts,
+  setSearchAndOverflow,
 }: Props) => {
   const dispatch = useAppDispatch();
 
@@ -94,15 +96,7 @@ const DesktopSearch = ({
           </div>
         </div>
       </div>
-      <div
-        className="close-search"
-        onClick={() => {
-          setSearch((search) => ({
-            ...search,
-            showSearch: false,
-          }));
-        }}
-      >
+      <div className="close-search" onClick={() => setSearchAndOverflow(false)}>
         <img src="/images/close-search.svg" alt="search" />
       </div>
     </div>
