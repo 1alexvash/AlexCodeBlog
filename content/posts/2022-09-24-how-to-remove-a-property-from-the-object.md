@@ -1,7 +1,7 @@
 ---
 title: How to remove a property from the object
 date: 2022-09-24T08:49:31.545Z
-featuredImage: https://via.placeholder.com/800x400
+featuredImage: /post-images/how-to-remove-a-property-from-the-object.png
 draft: false
 tags:
   - JavaScript
