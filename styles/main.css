@@ -614,6 +614,26 @@ header {
   justify-content: flex-end;
   padding: 30px;
   text-align: center;
+  border: 1px solid transparent;
+}
+
+.posts-list-block:hover .content:after {
+  border-color: #fe6c0a;
+}
+
+.posts-list-block .content:after {
+  content: "";
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  position: absolute;
+  display: block;
+  transition: all 0.3s ease-out;
+  pointer-events: none;
 }
 
 .posts-list-block .post-img {
@@ -1441,25 +1461,6 @@ blockquote p:last-child {
 
 .dark-theme .filter-tags-list a:hover {
   border-color: #f2f5f7;
-}
-
-.dark-theme .posts-list-block:hover .content:after {
-  border-color: #fe6c0a;
-}
-
-.dark-theme .posts-list-block .content:after {
-  content: "";
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 5;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  position: absolute;
-  display: block;
-  transition: all 0.3s ease-out;
-  pointer-events: none;
 }
 
 .dark-theme .posts-list-block .link {

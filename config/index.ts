@@ -6,9 +6,24 @@ const config = {
   author_name: "Alex",
   author_position: "Full Stack JavaScript Developer",
   social_links: [
-    { link: "https://t.me/HeWorksSoHard", image: "/images/telegram.svg" },
-    { link: "https://github.com/1alexvash", image: "/images/github-gray.svg" },
-    { link: "mailto:1alexvash@gmail.com", image: "/images/mail.svg" },
+    {
+      link: "https://t.me/HeWorksSoHard",
+      image: "/images/telegram.svg",
+      width: 21,
+      height: 17,
+    },
+    {
+      link: "https://github.com/1alexvash",
+      image: "/images/github-gray.svg",
+      width: 19,
+      height: 19,
+    },
+    {
+      link: "mailto:1alexvash@gmail.com",
+      image: "/images/mail.svg",
+      width: 24,
+      height: 16,
+    },
   ],
   host_url: "https://alex-code.com/",
   defaultImage:

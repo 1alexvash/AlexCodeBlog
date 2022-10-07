@@ -62,13 +62,24 @@ const Header = () => {
     if (showMenu) {
       mobileInputRef.current?.focus();
     }
-  }, [search.showSearch, search.posts.length, search.value, showMenu]);
+  }, [
+    search.showSearch,
+    search.posts.length,
+    search.value,
+    showMenu,
+    search.isLoaded,
+  ]);
 
   const HeaderContentMobile = (
     <div className="header-content-mobile">
       <Logo />
       <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-        <img src="/images/hamburger.svg" alt="hamburger" />
+        <img
+          src="/images/hamburger.svg"
+          alt="hamburger"
+          width={34}
+          height={22}
+        />
       </div>
     </div>
   );
@@ -112,6 +123,8 @@ const Header = () => {
                 showSearch: true,
               }));
             }}
+            width={19}
+            height={19}
           />
         </div>
       </div>
@@ -119,7 +132,12 @@ const Header = () => {
         {config.social_links.map((link) => (
           <li key={link.link}>
             <a href={link.link}>
-              <img src={link.image} alt="image" />
+              <img
+                src={link.image}
+                alt="image"
+                width={link.width}
+                height={link.height}
+              />
             </a>
           </li>
         ))}
