@@ -1,40 +1,15 @@
-import { useEffect, useState } from "react";
+import { setTheme } from "redux/slices/theme";
+import { useAppDispatch } from "redux/typesHooks";
 
 const ThemeSwitcher = () => {
-  type Theme = "light" | "dark";
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const body = document.querySelector("body")!;
-
-    if (localStorage.theme === undefined) {
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        setTheme("dark");
-        body.classList.add("dark-theme");
-        localStorage.theme = "dark";
-      } else {
-        localStorage.theme = "light";
-      }
-    } else {
-      if (theme === "light") {
-        body.classList.remove("dark-theme");
-        localStorage.theme = "light";
-      } else {
-        body.classList.add("dark-theme");
-        localStorage.theme = "dark";
-      }
-    }
-  }, [theme]);
+  const dispatch = useAppDispatch();
 
   return (
     <ul className="theme-switcher">
-      <li className="light" onClick={() => setTheme("light")}>
+      <li className="light" onClick={() => dispatch(setTheme("light"))}>
         <img src="/images/sun.svg" alt="sun" width={20} height={20} />
       </li>
-      <li className="dark" onClick={() => setTheme("dark")}>
+      <li className="dark" onClick={() => dispatch(setTheme("dark"))}>
         <img src="/images/moon.svg" alt="moon" width={19} height={18} />
       </li>
     </ul>
