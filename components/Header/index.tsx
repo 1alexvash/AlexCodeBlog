@@ -32,10 +32,10 @@ const Header = () => {
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
-  const setSearchAndOverflow = (state: boolean): void => {
+  const setShowSearch = (showSearch: boolean): void => {
     setSearch((search) => ({
       ...search,
-      showSearch: state,
+      showSearch,
     }));
   };
 
@@ -132,7 +132,7 @@ const Header = () => {
           <img
             src="/images/search.svg"
             alt="search"
-            onClick={() => setSearchAndOverflow(true)}
+            onClick={() => setShowSearch(true)}
             width={19}
             height={19}
           />
@@ -169,7 +169,7 @@ const Header = () => {
           setSearch={setSearch}
           desktopInputRef={desktopInputRef}
           filteredPosts={filteredPosts}
-          setSearchAndOverflow={setSearchAndOverflow}
+          setShowSearch={setShowSearch}
         />
       )}
     </header>
