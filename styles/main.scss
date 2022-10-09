@@ -11,19 +11,6 @@
   padding-right: 15px;
 }
 
-.clearfix:before,
-.clearfix:after,
-.container:before,
-.container:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after,
-.container:after {
-  clear: both;
-}
-
 html {
   font-size: 16px;
   font-weight: 400;
