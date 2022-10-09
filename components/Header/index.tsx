@@ -33,6 +33,14 @@ const Header = () => {
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (search.showSearch) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [search.showSearch]);
+
+  useEffect(() => {
     const fetchData = async () => {
       const posts = await fetch("/api/getAllPosts").then((data) => data.json());
 

@@ -24,9 +24,17 @@ const DesktopSearch = ({
   const dispatch = useAppDispatch();
 
   return (
-    <div className="search-overlay-desktop">
+    <div
+      className="search-overlay-desktop"
+      onClick={() => {
+        setSearch((search) => ({
+          ...search,
+          showSearch: false,
+        }));
+      }}
+    >
       <div className="desktop-search">
-        <div className="container">
+        <div className="container" onClick={(event) => event.stopPropagation()}>
           <div className="desktop-search-content">
             <form
               action="#"
