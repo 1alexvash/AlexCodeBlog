@@ -34,7 +34,7 @@ const DesktopSearch = ({
       }}
     >
       <div className="desktop-search">
-        <div className="container">
+        <div className="container" onClick={(event) => event.stopPropagation()}>
           <div className="desktop-search-content">
             <form
               action="#"
