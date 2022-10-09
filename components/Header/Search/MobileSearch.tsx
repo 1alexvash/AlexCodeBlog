@@ -94,12 +94,12 @@ const MobileSearch = ({
       {search.value.trim().length > 0 && (
         <div
           className="mobile-search-overlay"
-          onClick={() =>
+          onClick={() => {
             setSearch({
               ...search,
               value: "",
-            })
-          }
+            });
+          }}
         >
           <div
             className="close-search"
