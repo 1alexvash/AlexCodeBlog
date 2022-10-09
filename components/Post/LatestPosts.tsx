@@ -7,13 +7,32 @@ interface Props {
   latestPosts: PostDocumentWithoutContent[];
 }
 
+const date = new Date();
+
 const LatestPosts = ({ latestPosts }: Props) => {
   const dispatch = useAppDispatch();
+
+  const sortLatestPostsByDate = (
+    post: PostDocumentWithoutContent[]
+  ): PostDocumentWithoutContent[] => {
+    const sortedPosts = post.reduce(
+      (previousValue = [], item: PostDocumentWithoutContent) => {
+        if (date.toISOString() >= item.date) {
+          previousValue.push(item);
+        }
+        return previousValue;
+      },
+      []
+    );
+    return sortedPosts;
+  };
+
+  const sortedLatestPosts = sortLatestPostsByDate(latestPosts);
 
   return (
     <div className="related-posts">
       <h2>Latest posts</h2>
-      {latestPosts.map((post) => (
+      {sortedLatestPosts.map((post) => (
         <div className="related-posts-block" key={post.title}>
           <Link href={post.slug}>
             <a className="image">

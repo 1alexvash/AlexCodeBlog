@@ -6,12 +6,33 @@ interface Props {
   posts: PostDocumentWithoutContent[];
 }
 
-const Posts = ({ posts }: Props) => (
-  <ul className="posts-list">
-    {posts.map((post, index) => (
-      <PostCard key={index} post={post} />
-    ))}
-  </ul>
-);
+const date = new Date();
+
+const Posts = ({ posts }: Props) => {
+  const sortedPostsByDate = (
+    posts: PostDocumentWithoutContent[]
+  ): PostDocumentWithoutContent[] => {
+    const sortedPosts = posts.reduce(
+      (previousValue = [], item: PostDocumentWithoutContent) => {
+        if (date.toISOString() >= item.date) {
+          previousValue.push(item);
+        }
+        return previousValue;
+      },
+      []
+    );
+    return sortedPosts;
+  };
+
+  const sortedPosts = sortedPostsByDate(posts);
+
+  return (
+    <ul className="posts-list">
+      {sortedPosts.map((post, index) => (
+        <PostCard key={index} post={post} />
+      ))}
+    </ul>
+  );
+};
 
 export default Posts;
