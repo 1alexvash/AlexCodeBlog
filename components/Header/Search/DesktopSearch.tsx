@@ -13,7 +13,7 @@ interface Props {
   setSearch: Dispatch<SetStateAction<Search>>;
   desktopInputRef: RefObject<HTMLInputElement>;
   filteredPosts: PostDocumentWithoutContent[];
-  setShowSearch: (ShowSearch: boolean) => void;
+  setShowSearch: (showSearch: boolean) => void;
 }
 
 const DesktopSearch = ({
