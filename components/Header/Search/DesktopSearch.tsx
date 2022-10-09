@@ -13,7 +13,6 @@ interface Props {
   setSearch: Dispatch<SetStateAction<Search>>;
   desktopInputRef: RefObject<HTMLInputElement>;
   filteredPosts: PostDocumentWithoutContent[];
-  setShowSearch: (showSearch: boolean) => void;
 }
 
 const DesktopSearch = ({
@@ -21,14 +20,15 @@ const DesktopSearch = ({
   setSearch,
   desktopInputRef,
   filteredPosts,
-  setShowSearch,
 }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
     <div
       className="search-overlay-desktop"
-      onClick={() => setShowSearch(false)}
+      onClick={() => {
+        setSearch((search) => ({ ...search, showSearch: false }));
+      }}
     >
       <div className="desktop-search">
         <div className="container" onClick={(event) => event.stopPropagation()}>
@@ -99,7 +99,15 @@ const DesktopSearch = ({
           </div>
         </div>
       </div>
-      <div className="close-search" onClick={() => setShowSearch(false)}>
+      <div
+        className="close-search"
+        onClick={() =>
+          setSearch((search) => ({
+            ...search,
+            showSearch: false,
+          }))
+        }
+      >
         <img src="/images/close-search.svg" alt="search" />
       </div>
     </div>

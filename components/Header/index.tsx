@@ -32,13 +32,6 @@ const Header = () => {
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
-  const setShowSearch = (showSearch: boolean) => {
-    setSearch((search) => ({
-      ...search,
-      showSearch,
-    }));
-  };
-
   useEffect(() => {
     if (search.showSearch === true) {
       document.body.classList.add("overflow-hidden");
@@ -132,7 +125,9 @@ const Header = () => {
           <img
             src="/images/search.svg"
             alt="search"
-            onClick={() => setShowSearch(true)}
+            onClick={() => {
+              setSearch((search) => ({ ...search, showSearch: true }));
+            }}
             width={19}
             height={19}
           />
@@ -169,7 +164,6 @@ const Header = () => {
           setSearch={setSearch}
           desktopInputRef={desktopInputRef}
           filteredPosts={filteredPosts}
-          setShowSearch={setShowSearch}
         />
       )}
     </header>
