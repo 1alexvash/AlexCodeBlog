@@ -27,7 +27,10 @@ const DesktopSearch = ({
     <div
       className="search-overlay-desktop"
       onClick={() => {
-        setSearch((search) => ({ ...search, showSearch: false }));
+        setSearch((search) => ({
+          ...search,
+          showSearch: false,
+        }));
       }}
     >
       <div className="desktop-search">
