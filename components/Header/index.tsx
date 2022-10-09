@@ -126,7 +126,10 @@ const Header = () => {
             src="/images/search.svg"
             alt="search"
             onClick={() => {
-              setSearch((search) => ({ ...search, showSearch: true }));
+              setSearch((search) => ({
+                ...search,
+                showSearch: true,
+              }));
             }}
             width={19}
             height={19}

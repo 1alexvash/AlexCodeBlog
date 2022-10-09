@@ -101,12 +101,12 @@ const DesktopSearch = ({
       </div>
       <div
         className="close-search"
-        onClick={() =>
+        onClick={() => {
           setSearch((search) => ({
             ...search,
             showSearch: false,
-          }))
-        }
+          }));
+        }}
       >
         <img src="/images/close-search.svg" alt="search" />
       </div>
