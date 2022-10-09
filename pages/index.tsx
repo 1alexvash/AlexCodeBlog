@@ -66,7 +66,7 @@ const today = new Date();
 
 export const getStaticProps = async () => {
   const posts = getAllPostDocuments().filter(
-    (item) => today.toISOString() > item.date
+    (item) => today.toISOString() >= item.date
   );
 
   return {

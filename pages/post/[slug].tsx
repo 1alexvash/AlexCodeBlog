@@ -65,7 +65,7 @@ export async function getStaticProps({ params }: Params) {
   };
   const tenLatestPosts = getAllPostDocuments()
     .slice(0, 10)
-    .filter((item) => today.toISOString() > item.date);
+    .filter((item) => today.toISOString() >= item.date);
 
   return {
     props: {
