@@ -14,9 +14,10 @@ const config = {
     },
     {
       link: "https://github.com/1alexvash",
-      image: "/images/github-gray.svg",
+      image: "/images/github.svg",
       width: 19,
       height: 19,
+      className: "git",
     },
     {
       link: "mailto:1alexvash@gmail.com",
