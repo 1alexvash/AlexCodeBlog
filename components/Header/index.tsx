@@ -131,7 +131,7 @@ const Header = () => {
       <ul className="header-socials">
         {config.social_links.map((link) => (
           <li key={link.link}>
-<a href={link.link} className={link.className ?? ""}>
+            <a href={link.link} className={link.className ?? ""}>
               <img
                 src={link.image}
                 alt="image"
