@@ -62,8 +62,12 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
   );
 };
 
+const today = new Date();
+
 export const getStaticProps = async () => {
-  const posts = getAllPostDocuments();
+  const posts = getAllPostDocuments().filter(
+    (item) => today.toISOString() > item.date
+  );
 
   return {
     props: {
