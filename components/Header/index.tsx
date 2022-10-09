@@ -33,7 +33,7 @@ const Header = () => {
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (search.showSearch === true) {
+    if (search.showSearch) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
