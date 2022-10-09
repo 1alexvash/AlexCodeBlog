@@ -16,7 +16,10 @@ const LatestPosts = ({ latestPosts }: Props) => {
     post: PostDocumentWithoutContent[]
   ): PostDocumentWithoutContent[] => {
     const sortedPosts = post.reduce(
-      (previousValue = [], item: PostDocumentWithoutContent) => {
+      (
+        previousValue: PostDocumentWithoutContent[] = [],
+        item: PostDocumentWithoutContent
+      ) => {
         if (date.toISOString() >= item.date) {
           previousValue.push(item);
         }
