@@ -41,9 +41,9 @@ const Header = () => {
 
   useEffect(() => {
     if (search.showSearch === true) {
-      document.body.classList.add("overflowHidden");
+      document.body.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove("overflowHidden");
+      document.body.classList.remove("overflow-hidden");
     }
   }, [search.showSearch]);
 
