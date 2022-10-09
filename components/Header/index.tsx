@@ -32,7 +32,7 @@ const Header = () => {
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
-  const setShowSearch = (showSearch: boolean): void => {
+  const setShowSearch = (showSearch: boolean) => {
     setSearch((search) => ({
       ...search,
       showSearch,
