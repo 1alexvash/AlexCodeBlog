@@ -21,8 +21,8 @@ const LatestPosts = ({ latestPosts }: Props) => {
               <Image
                 src={post.featuredImage}
                 alt="blog post image"
-                objectFit="cover"
                 layout="fill"
+                objectFit="cover"
                 width={800}
                 height={400}
                 quality={100}
