@@ -18,16 +18,22 @@ export function getPostDocumentBySlug(slug: string) {
   return JSONSerialize({ slug: realSlug, ...data, content }) as PostDocument;
 }
 
+const today = new Date();
+
+const isPostInTheFuture = (posts: PostDocument[]) =>
+  posts.filter((item) => today.toISOString() > item.date);
+
 export function getAllPostDocuments(): PostDocumentWithoutContent[] {
   const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => post.draft === false)
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
-    .map((post) => {
-      const { content, ...postWithoutContent } = post;
-      return postWithoutContent;
-    });
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
-  return JSONSerialize(docs);
+  const filteredPostsByDate = isPostInTheFuture(docs).map((post) => {
+    const { content, ...postWithoutContent } = post;
+    return postWithoutContent;
+  });
+
+  return JSONSerialize(filteredPostsByDate);
 }

@@ -54,8 +54,6 @@ type Params = {
   };
 };
 
-const today = new Date();
-
 export async function getStaticProps({ params }: Params) {
   const postDocument = getPostDocumentBySlug(params.slug);
   const content = await markdownToHtml(postDocument.content || "");
@@ -63,9 +61,7 @@ export async function getStaticProps({ params }: Params) {
     ...postDocument,
     content,
   };
-  const tenLatestPosts = getAllPostDocuments()
-    .slice(0, 10)
-    .filter((item) => today.toISOString() >= item.date);
+  const tenLatestPosts = getAllPostDocuments().slice(0, 10);
 
   return {
     props: {
