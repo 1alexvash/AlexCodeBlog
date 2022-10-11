@@ -21,6 +21,7 @@ const PostCard = ({ post }: Props) => {
               <Image
                 src={post.featuredImage}
                 alt="blog post image"
+                layout="fill"
                 width={378}
                 height={378}
                 objectFit="cover"
