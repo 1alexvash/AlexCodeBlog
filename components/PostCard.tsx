@@ -24,6 +24,8 @@ const PostCard = ({ post }: Props) => {
                 quality={100}
                 layout="fill"
                 objectFit="cover"
+                width={800}
+                height={400}
               />
             </a>
           </Link>
