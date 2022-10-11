@@ -23,8 +23,8 @@ const LatestPosts = ({ latestPosts }: Props) => {
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
-                width={378}
-                height={378}
+                width={102}
+                height={102}
               />
             </a>
           </Link>
