@@ -1406,3 +1406,45 @@ blockquote p:last-child {
   overflow: auto;
   max-width: calc(100vw - 30px);
 }
+
+.btn {
+  width: 93px;
+  height: 42px;
+  background: #45463f;
+  border: #33393f 1px solid;
+  border-radius: 4px;
+  color: #f2f5f7;
+  padding: 5px 19px 6px 20px;
+  position: relative;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  &:hover {
+    background: #6c6c6c;
+    .btn_square2 {
+      background: #6c6c6c;
+    }
+  }
+}
+.btn_squares {
+  border: #f2f5f7 1.2px solid;
+  width: 12.32px;
+  height: 12.32px;
+  border-radius: 2.5px;
+}
+.btn_square1 {
+  position: relative;
+  top: 5px;
+  left: 3px;
+}
+.btn_square2 {
+  position: relative;
+  top: -5px;
+  background: #45463f;
+  transition: all 0.3s ease-out;
+}
+.btn_text {
+  position: absolute;
+  bottom: 11px;
+  right: 20px;
+  font-size: 14px;
+}
