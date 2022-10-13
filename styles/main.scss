@@ -1497,7 +1497,7 @@ blockquote p:last-child {
   border: none;
   background: linear-gradient(
     180deg,
-    rgb(255, 255, 255, 0.8) 0%,
-    rgb(38, 39, 40, 0) 100%
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(38, 39, 40, 0) 100%
   );
 }
