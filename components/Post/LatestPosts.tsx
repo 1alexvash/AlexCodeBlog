@@ -24,8 +24,6 @@ const LatestPosts = ({ latestPosts }: Props) => {
                 layout="fill"
                 objectFit="cover"
                 quality={100}
-                // width={800}
-                // height={400}
               />
             </a>
           </Link>
