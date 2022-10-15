@@ -43,7 +43,9 @@ const LatestPosts = ({ latestPosts }: Props) => {
       ))}
 
       <Link href="/">
-        <a className="btn">See all posts</a>
+        <a className="btn" onClick={() => dispatch(setTags([]))}>
+          See all posts
+        </a>
       </Link>
     </div>
   );
