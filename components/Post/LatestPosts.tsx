@@ -23,7 +23,6 @@ const LatestPosts = ({ latestPosts }: Props) => {
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
-                quality={100}
               />
             </a>
           </Link>
