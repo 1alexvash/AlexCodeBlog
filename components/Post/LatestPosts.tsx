@@ -10,6 +10,10 @@ interface Props {
 const LatestPosts = ({ latestPosts }: Props) => {
   const dispatch = useAppDispatch();
 
+  const resetTags = () => {
+    dispatch(setTags([]));
+  };
+
   return (
     <div className="related-posts">
       <h2>Latest posts</h2>
@@ -43,7 +47,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
       ))}
 
       <Link href="/">
-        <a className="btn" onClick={() => dispatch(setTags([]))}>
+        <a className="btn" onClick={resetTags}>
           See all posts
         </a>
       </Link>
