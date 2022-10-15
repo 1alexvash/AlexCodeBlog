@@ -1,4 +1,5 @@
 import { PostDocumentWithoutContent } from "interfaces";
+import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -17,11 +18,12 @@ const LatestPosts = ({ latestPosts }: Props) => {
         <div className="related-posts-block" key={post.title}>
           <Link href={post.slug}>
             <a className="image">
-              <img
+              <Image
                 src={post.featuredImage}
                 alt="blog post image"
-                width={102}
-                height={102}
+                layout="fill"
+                objectFit="cover"
+                quality={100}
               />
             </a>
           </Link>
