@@ -2,7 +2,7 @@ export type PostDocument = {
   slug: string;
   title: string;
   date: Date | string;
-  featuredImage: string;
+  featuredImage: string | undefined;
   draft: boolean;
   tags: string[];
   content: string;

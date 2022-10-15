@@ -57,7 +57,12 @@ const MobileSearch = ({
                   <div className="mobile-posts-block" key={index}>
                     <div className="inner-flex">
                       <a href={`/post/${post.slug}`} className="image">
-                        <img src={post.featuredImage} alt="blog post image" />
+                        <img
+                          src={
+                            post.featuredImage ?? "/post-images/placeholder.png"
+                          }
+                          alt="blog post image"
+                        />
                       </a>
                       <a href={`/post/${post.slug}`} className="name">
                         {post.title}
