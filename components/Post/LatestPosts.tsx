@@ -2,17 +2,13 @@ import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
-import { setTags } from "../../redux/slices/selectedTags";
+import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
   latestPosts: PostDocumentWithoutContent[];
 }
 
 const LatestPosts = ({ latestPosts }: Props) => {
   const dispatch = useAppDispatch();
-
-  const resetTags = () => {
-    dispatch(setTags([]));
-  };
 
   return (
     <div className="related-posts">
@@ -47,7 +43,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
       ))}
 
       <Link href="/">
-        <a className="btn" onClick={resetTags}>
+        <a className="btn" onClick={() => dispatch(resetTags())}>
           See all posts
         </a>
       </Link>
