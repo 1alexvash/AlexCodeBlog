@@ -48,7 +48,9 @@ a:hover {
 *:focus {
   outline: none !important;
 }
-
+// * {
+//   outline: 1px solid red;
+// }
 hr {
   height: 2px;
   background: #616161;
@@ -889,7 +891,7 @@ h2 {
 }
 
 .blogpost-content .tags {
-  margin: 0 -10px 21px;
+  margin: 0 0 21px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
