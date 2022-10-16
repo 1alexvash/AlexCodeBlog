@@ -22,6 +22,7 @@ const PostCard = ({ post }: Props) => {
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
+                loading="lazy"
               />
             </a>
           </Link>
