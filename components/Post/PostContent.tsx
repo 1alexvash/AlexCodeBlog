@@ -34,8 +34,8 @@ const PostContent = ({ post }: Props) => {
         <img
           src={post.featuredImage ?? "/post-images/placeholder.png"}
           alt="blog post image"
-          width="100%"
-          height="100%"
+          width={790}
+          height={394}
         />
       </div>
       <div className="blogpost-date">
