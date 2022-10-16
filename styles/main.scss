@@ -43,14 +43,14 @@ a:hover {
   text-decoration: none;
 }
 
-*,
-*:active,
-*:focus {
-  outline: none !important;
-}
-// * {
-//   outline: 1px solid red;
+// *,
+// *:active,
+// *:focus {
+//   outline: none !important;
 // }
+* {
+  outline: 1px solid red;
+}
 hr {
   height: 2px;
   background: #616161;
@@ -863,7 +863,7 @@ h2 {
 }
 
 .related-posts-block .tags {
-  margin: 10px -9px -5px;
+  margin: 10px 0px -5px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -891,7 +891,7 @@ h2 {
 }
 
 .blogpost-content .tags {
-  margin: 0 0 21px;
+  margin: 0 -10px 21px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -1407,5 +1407,5 @@ blockquote p:last-child {
 
 .remark-highlight {
   overflow: auto;
-  max-width: calc(100vw - 30px);
+  max-width: 469px;
 }
