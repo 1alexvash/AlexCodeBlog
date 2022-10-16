@@ -2,7 +2,7 @@ import config from "config";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
-
+import Image from "next/image";
 interface Props {
   post: PostDocument;
 }
@@ -34,8 +34,8 @@ const PostContent = ({ post }: Props) => {
         <img
           src={post.featuredImage ?? "/post-images/placeholder.png"}
           alt="blog post image"
-          width={790}
-          height={394}
+          width="100%"
+          height="100%"
         />
       </div>
       <div className="blogpost-date">
