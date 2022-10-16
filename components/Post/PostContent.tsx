@@ -2,6 +2,7 @@ import config from "config";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
+
 interface Props {
   post: PostDocument;
 }
