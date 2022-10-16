@@ -22,7 +22,8 @@ const PostCard = ({ post }: Props) => {
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
-                priority={true}
+                placeholder="blur"
+                quality={100}
               />
             </a>
           </Link>
