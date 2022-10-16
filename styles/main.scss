@@ -43,14 +43,12 @@ a:hover {
   text-decoration: none;
 }
 
-// *,
-// *:active,
-// *:focus {
-//   outline: none !important;
-// }
-* {
-  outline: 1px solid red;
+*,
+*:active,
+*:focus {
+  outline: none !important;
 }
+
 hr {
   height: 2px;
   background: #616161;
@@ -1407,5 +1405,5 @@ blockquote p:last-child {
 
 .remark-highlight {
   overflow: auto;
-  max-width: 469px;
+  max-width: calc(100vw - 30px);
 }
