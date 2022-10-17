@@ -65,7 +65,7 @@ const PostContent = ({ post }: Props) => {
 
       item.prepend(createCopyButton());
     });
-  }, []);
+  }, [post.content]);
 
   return (
     <article className="blogpost-content">
