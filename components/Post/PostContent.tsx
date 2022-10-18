@@ -128,8 +128,6 @@ const PostContent = ({ post }: Props) => {
             squares: HTMLElement,
             spanText: ChildNode | HTMLElement
           ): void => {
-            console.log("Works!");
-
             squares.style.display = "none";
 
             spanText.textContent = "Copied!";
