@@ -1408,7 +1408,7 @@ blockquote p:last-child {
   position: relative;
 }
 
-.btn_copy {
+.btn-copy {
   position: absolute;
   top: 18px;
   right: 17px;
@@ -1423,29 +1423,29 @@ blockquote p:last-child {
   cursor: pointer;
   &:hover {
     background: #6c6c6c;
-    .btn_square2 {
+    .btn-copy-square2 {
       background: #6c6c6c;
     }
   }
 }
-.btn_copy_squares {
+.btn-copy-squares {
   border: #f2f5f7 1.2px solid;
   width: 12.32px;
   height: 12.32px;
   border-radius: 2.5px;
 }
-.btn_copy_square1 {
+.btn-copy-square1 {
   position: relative;
   top: 5px;
   left: 3px;
 }
-.btn_copy_square2 {
+.btn-copy-square2 {
   position: relative;
   top: -5px;
   background: #45463f;
   transition: all 0.3s ease-out;
 }
-.btn_copy_text {
+.btn-copy-text {
   position: absolute;
   bottom: 11px;
   right: 20px;
