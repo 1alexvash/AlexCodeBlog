@@ -33,6 +33,7 @@ const createCopyButton = (): HTMLButtonElement => {
   const buttonText = document.createElement("span");
 
   button.classList.add("btn_copy");
+  button.style.display = "none";
   button.setAttribute("type", "button");
   buttonSquaresDiv.classList.add("btn_copy_squares_div");
   buttonSquare1.classList.add("btn_copy_square1", "btn_copy_squares");
@@ -62,8 +63,22 @@ const PostContent = ({ post }: Props) => {
       if (item.childNodes.length === 2) {
         return;
       }
-
       item.prepend(createCopyButton());
+
+      const button = item.childNodes[0];
+
+      if (!(button instanceof HTMLElement)) {
+        return;
+      }
+      const buttonStyle = button.style;
+
+      item.addEventListener("mouseenter", () => {
+        buttonStyle.display = "block";
+      });
+
+      item.addEventListener("mouseleave", () => {
+        buttonStyle.display = "none";
+      });
     });
   }, [post.content]);
 
