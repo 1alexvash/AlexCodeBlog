@@ -15,16 +15,6 @@ const getFirstParagraph = (str: string) => {
   return str.slice(openedElement, closedElement);
 };
 
-{
-  /* <button class="btn" type="button">
-<div class="btn_squares_div">
-  <div class="btn_square1 btn_squares"></div>
-  <div class="btn_square2 btn_squares"></div>
-</div>
-<span class="btn_text">Copy</span>
-</button>; */
-}
-
 const createCopyButton = (): HTMLButtonElement => {
   const button = document.createElement("button");
   const buttonSquaresDiv = document.createElement("div");
