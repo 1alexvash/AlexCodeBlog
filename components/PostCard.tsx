@@ -23,6 +23,8 @@ const PostCard = ({ post }: Props) => {
                 layout="fill"
                 objectFit="cover"
                 priority={true}
+                placeholder="blur"
+                blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8l8P1HwAGWQJ1HYnHcQAAAABJRU5ErkJggg=="
               />
             </a>
           </Link>
