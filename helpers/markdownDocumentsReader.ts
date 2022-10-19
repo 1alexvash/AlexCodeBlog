@@ -25,7 +25,7 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => {
       {
-        if (process.env.NODE_ENV === "production") {
+        if (process.env.NODE_ENV === "development") {
           return post;
         } else {
           return (
