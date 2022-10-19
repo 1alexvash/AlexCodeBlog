@@ -41,7 +41,7 @@ const PostCard = ({ post }: Props) => {
                 layout="fill"
                 objectFit="cover"
                 priority={true}
-                placeholder="blur"
+                // placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(
                   shimmer(378, 378)
                 )}`}
