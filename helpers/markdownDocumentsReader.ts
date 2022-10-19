@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import { join } from "path";
 
+import { isPostADraft, isPostInTheFuture } from "./checkOfDraftOrFuturePost";
+
 const documentsDirectory = join(process.cwd(), "content/posts");
 
 function JSONSerialize<Type>(data: Type): Type {
@@ -17,23 +19,26 @@ export function getPostDocumentBySlug(slug: string) {
 
   return JSONSerialize({ slug: realSlug, ...data, content }) as PostDocument;
 }
-
-const today = new Date();
-
-const isPostInTheFuture = (posts: PostDocument[]) =>
-  posts.filter((item) => today.toISOString() > item.date);
-
 export function getAllPostDocuments(): PostDocumentWithoutContent[] {
   const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
-    .filter((post: PostDocument) => post.draft === false)
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .filter((post: PostDocument) => {
+      {
+        if (process.env.NODE_ENV === "production") {
+          return post;
+        } else {
+          return (
+            isPostADraft(post) === false && isPostInTheFuture(post) === true
+          );
+        }
+      }
+    })
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
+    .map((post) => {
+      const { content, ...postWithoutContent } = post;
+      return postWithoutContent;
+    });
 
-  const filteredPostsByDate = isPostInTheFuture(docs).map((post) => {
-    const { content, ...postWithoutContent } = post;
-    return postWithoutContent;
-  });
-
-  return JSONSerialize(filteredPostsByDate);
+  return JSONSerialize(docs);
 }

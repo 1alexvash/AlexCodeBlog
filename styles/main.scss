@@ -557,7 +557,6 @@ header {
 .posts-list li {
   margin: 0 15px 30px;
   width: calc(33.333% - 30px);
-  overflow: hidden;
   position: relative;
 }
 
@@ -577,10 +576,6 @@ header {
   z-index: 2;
   border-radius: 3px;
   overflow: hidden;
-}
-
-.posts-list-block:hover .post-img:after {
-  height: 100%;
 }
 
 .posts-list-block .content {
@@ -1405,4 +1400,100 @@ blockquote p:last-child {
 .remark-highlight {
   overflow: auto;
   max-width: calc(100vw - 30px);
+}
+
+.triangle {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  z-index: 3;
+}
+
+.triangle-item {
+  border-top: 62px solid transparent;
+  border-bottom: 62px solid transparent;
+}
+
+.triangle-text {
+  display: block;
+  position: relative;
+  transform: rotate(88deg);
+  font-weight: 500;
+  color: white;
+}
+
+.small-triagles-item {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.triangle-draft {
+  top: -45px;
+  transform: rotate(225deg);
+  left: -13px;
+  border-left: 62px solid #3a3a3a;
+  z-index: 3;
+}
+
+.triangle-text-draft {
+  right: 42px;
+  font-size: 16px;
+  top: -35px;
+}
+
+.small-triagles-item-draft {
+  border-left: 5px solid rgb(0, 0, 0);
+  transform: rotate(45deg);
+}
+
+.small-triagles-item-draft1 {
+  top: -5px;
+  left: 80px;
+}
+
+.small-triagles-item-draft2 {
+  top: 76px;
+  left: -1px;
+}
+
+.triangle-future {
+  top: -45px;
+  transform: rotate(315deg);
+  right: -13px;
+  border-left: 62px solid #fe6c0a;
+}
+
+.triangle-text-future {
+  right: 37px;
+  font-size: 14px;
+  top: -34px;
+}
+
+.small-triagles-item-future {
+  border-left: 5px solid #a24100;
+  transform: rotate(-225deg);
+}
+
+.small-triagles-item-future1 {
+  top: -5px;
+  right: 79px;
+}
+
+.small-triagles-item-future2 {
+  top: 76px;
+  right: -2px;
+}
+
+.triangle-text-future-post {
+  right: 50px;
+  top: -43px;
+}
+
+.posts-list-block-draft-or-future .content::after {
+  border: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(38, 39, 40, 0) 100%
+  );
 }
