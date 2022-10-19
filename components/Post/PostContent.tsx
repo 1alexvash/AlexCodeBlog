@@ -32,13 +32,13 @@ const createCopyButton = (): HTMLButtonElement => {
   const buttonSquare2 = document.createElement("div");
   const buttonText = document.createElement("span");
 
-  button.classList.add("btn_copy");
+  button.classList.add("btn-copy");
   button.style.display = "none";
   button.setAttribute("type", "button");
-  buttonSquaresDiv.classList.add("btn_copy_squares_div");
-  buttonSquare1.classList.add("btn_copy_square1", "btn_copy_squares");
-  buttonSquare2.classList.add("btn_copy_square2", "btn_copy_squares");
-  buttonText.classList.add("btn_copy_text");
+  buttonSquaresDiv.classList.add("btn-copy-squares-div");
+  buttonSquare1.classList.add("btn-copy-square1", "btn-copy-squares");
+  buttonSquare2.classList.add("btn-copy-square2", "btn-copy-squares");
+  buttonText.classList.add("btn-copy-text");
   buttonText.innerHTML = "Copy";
 
   button.appendChild(buttonSquaresDiv);
@@ -165,7 +165,7 @@ const PostContent = ({ post }: Props) => {
 
             copyText(textToCopy);
           } else if (target instanceof HTMLDivElement) {
-            if (target.className === "btn_copy_squares_div") {
+            if (target.className === "btn-copy-squares-div") {
               const spanText = target.parentElement?.childNodes[1];
               const textToCopy =
                 target.parentElement?.parentElement?.childNodes[1]
