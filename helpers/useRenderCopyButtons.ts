@@ -1,5 +1,4 @@
 import { MouseEventHandler, RefObject, useEffect, useRef } from "react";
-
 const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
   const target = event.target;
   const copyText = (text: string): void => {
@@ -45,64 +44,43 @@ const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
     setCopied(squares, target);
 
     copyText(textToCopy);
-  } else if (target instanceof HTMLDivElement) {
-    if (target.className === "btn-copy-squares-div") {
-      const spanText = target.parentElement?.childNodes[1];
-      const textToCopy =
-        target.parentElement?.parentElement?.childNodes[1].textContent ?? " ";
+  } else if (target instanceof HTMLImageElement) {
+    const spanText = target.parentElement?.childNodes[1];
+    const textToCopy =
+      target.parentElement?.parentElement?.childNodes[1].textContent ?? " ";
 
-      if (!(target instanceof HTMLElement) || !spanText) {
-        return;
-      }
-
-      setCopied(target, spanText);
-
-      copyText(textToCopy);
-    } else {
-      const spanText = target.parentElement?.parentElement?.childNodes[1];
-      const squares = target.parentElement;
-      const textToCopy =
-        target.parentElement?.parentElement?.parentElement?.childNodes[1]
-          .textContent ?? " ";
-
-      if (!(squares instanceof HTMLElement) || !spanText) {
-        return;
-      }
-
-      setCopied(squares, spanText);
-
-      copyText(textToCopy);
+    if (!(target instanceof HTMLElement) || !spanText) {
+      return;
     }
+
+    setCopied(target, spanText);
+
+    copyText(textToCopy);
   }
 };
 
 const createCopyButton = (): HTMLButtonElement => {
   const button = document.createElement("button");
-  const buttonSquaresDiv = document.createElement("div");
-  const buttonSquare1 = document.createElement("div");
-  const buttonSquare2 = document.createElement("div");
+  const buttonIcon = document.createElement("img");
   const buttonText = document.createElement("span");
 
   button.classList.add("btn-copy");
   button.style.display = "none";
   button.setAttribute("type", "button");
-  buttonSquaresDiv.classList.add("btn-copy-squares-div");
-  buttonSquare1.classList.add("btn-copy-square-back", "btn-copy-squares");
-  buttonSquare2.classList.add("btn-copy-square-front", "btn-copy-squares");
+  buttonIcon.setAttribute("src", "/images/copy-button-icon.svg");
+
   buttonText.classList.add("btn-copy-text");
   buttonText.innerHTML = "Copy";
 
-  button.appendChild(buttonSquaresDiv);
-  buttonSquaresDiv.append(buttonSquare1, buttonSquare2);
+  button.appendChild(buttonIcon);
   button.append(buttonText);
 
   return button;
 };
 
-const useRenderCopyButtons = (): readonly [
-  RefObject<HTMLDivElement>,
-  MouseEventHandler<HTMLDivElement>
-] => {
+const useRenderCopyButtons = (
+  content: string
+): readonly [RefObject<HTMLDivElement>, MouseEventHandler<HTMLDivElement>] => {
   const doc = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const codeBlocks = doc.current?.querySelectorAll("pre");
@@ -134,7 +112,7 @@ const useRenderCopyButtons = (): readonly [
         buttonStyle.display = "none";
       });
     });
-  }, []);
+  }, [content]);
 
   return [doc, onClickCheck];
 };

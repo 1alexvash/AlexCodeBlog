@@ -19,7 +19,7 @@ const getFirstParagraph = (str: string) => {
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
 
-  const [doc, onClick] = useRenderCopyButtons();
+  const [doc, onClick] = useRenderCopyButtons(post.content);
 
   return (
     <article className="blogpost-content">
