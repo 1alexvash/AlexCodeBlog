@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type Theme = "light" | "dark";
+export type Theme = "light" | "dark" | null;
 
-export const defaultTheme = "light";
+export const defaultTheme = null as Theme | null;
 
 const initialState = defaultTheme;
 
@@ -16,10 +16,12 @@ export const themeSlice = createSlice({
 
       const body = document.querySelector("body");
 
-      if (theme === "dark") {
-        body?.classList.add("dark-theme");
-      } else {
-        body?.classList.remove("dark-theme");
+      if (theme && body) {
+        if (theme === "dark") {
+          body.classList.add("dark-theme");
+        } else {
+          body.classList.remove("dark-theme");
+        }
       }
 
       return (state = theme);

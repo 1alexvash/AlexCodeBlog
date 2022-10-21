@@ -1,5 +1,5 @@
 import { defaultTheme, setTheme, Theme } from "redux/slices/theme";
-import { useAppDispatch } from "redux/typesHooks";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 
@@ -18,17 +18,23 @@ const getBrowserTheme = (): Theme | undefined => {
     : "light";
 };
 
-const getInitialTheme = (): Theme =>
+export const getInitialTheme = (): Theme =>
   getStorageTheme() || getBrowserTheme() || defaultTheme;
 
 const ThemeProvider = ({ children }: Props) => {
+  const theme = useAppSelector((state) => state.theme);
+
   const dispatch = useAppDispatch();
 
   useIsomorphicLayoutEffect(() => {
-    const theme = getInitialTheme();
+    const defaultTheme = getInitialTheme();
 
-    dispatch(setTheme(theme));
+    dispatch(setTheme(defaultTheme));
   }, [dispatch]);
+
+  if (theme === null) {
+    return <>Loading spinner</>;
+  }
 
   return children;
 };
