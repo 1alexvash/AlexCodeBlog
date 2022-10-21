@@ -83,7 +83,7 @@ const useRenderCopyButtons = (
 ): readonly [RefObject<HTMLDivElement>, MouseEventHandler<HTMLDivElement>] => {
   const doc = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const codeBlocks = doc.current?.querySelectorAll("pre");
+    const codeBlocks = doc.current?.querySelectorAll("div.remark-highlight");
 
     if (codeBlocks === undefined) {
       return;
@@ -103,12 +103,10 @@ const useRenderCopyButtons = (
       const buttonStyle = button.style;
 
       item.addEventListener("mouseenter", () => {
-        item.classList.add("pre-display-flex");
         buttonStyle.display = "flex";
       });
 
       item.addEventListener("mouseleave", () => {
-        item.classList.remove("pre-display-flex");
         buttonStyle.display = "none";
       });
     });
