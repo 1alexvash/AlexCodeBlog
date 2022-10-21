@@ -8,12 +8,10 @@
   .container {
     width: 750px;
   }
-
   .header-content {
     display: -ms-flexbox !important;
     display: flex !important;
   }
-
   .mobile-search {
     display: none !important;
   }
@@ -23,11 +21,23 @@
   .container {
     width: 1000px;
   }
+  .remark-highlight {
+    max-width: 59vw;
+  }
+}
+
+@media screen and (max-width: 1260px) and (min-width: 1259px) {
+  .remark-highlight {
+    max-width: 48vw;
+  }
 }
 
 @media (min-width: 1260px) {
   .container {
     width: 1230px;
+  }
+  .remark-highlight {
+    max-width: 64vw;
   }
 }
 
@@ -244,7 +254,7 @@
     padding: 24px;
   }
   .remark-highlight {
-    max-width: 48vw;
+    max-width: 58vw;
   }
 }
 
