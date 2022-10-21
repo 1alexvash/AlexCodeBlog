@@ -26,8 +26,8 @@ const createCopyButton = (): HTMLButtonElement => {
   button.style.display = "none";
   button.setAttribute("type", "button");
   buttonSquaresDiv.classList.add("btn-copy-squares-div");
-  buttonSquare1.classList.add("btn-copy-square1", "btn-copy-squares");
-  buttonSquare2.classList.add("btn-copy-square2", "btn-copy-squares");
+  buttonSquare1.classList.add("btn-copy-square-back", "btn-copy-squares");
+  buttonSquare2.classList.add("btn-copy-square-front", "btn-copy-squares");
   buttonText.classList.add("btn-copy-text");
   buttonText.innerHTML = "Copy";
 
@@ -43,7 +43,7 @@ const PostContent = ({ post }: Props) => {
   const doc = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const codeBlocks = doc.current?.querySelectorAll("div.remark-highlight");
+    const codeBlocks = doc.current?.querySelectorAll("pre");
 
     if (codeBlocks === undefined) {
       return;
@@ -63,10 +63,12 @@ const PostContent = ({ post }: Props) => {
       const buttonStyle = button.style;
 
       item.addEventListener("mouseenter", () => {
-        buttonStyle.display = "block";
+        item.classList.add("pre-display-flex");
+        buttonStyle.display = "flex";
       });
 
       item.addEventListener("mouseleave", () => {
+        item.classList.remove("pre-display-flex");
         buttonStyle.display = "none";
       });
     });
