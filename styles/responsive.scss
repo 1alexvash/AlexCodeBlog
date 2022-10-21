@@ -22,7 +22,7 @@
     width: 1000px;
   }
   .remark-highlight {
-    max-width: 59vw;
+    max-width: calc(54vw + 63px);
   }
 }
 
@@ -254,7 +254,7 @@
     padding: 24px;
   }
   .remark-highlight {
-    max-width: 58vw;
+    max-width: calc(55vw + 31px);
   }
 }
 
@@ -622,7 +622,7 @@
     text-decoration: underline;
   }
   .remark-highlight {
-    max-width: 90vw;
+    max-width: calc(92vw + 9px);
   }
 }
 
