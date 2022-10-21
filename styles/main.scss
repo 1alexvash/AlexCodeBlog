@@ -824,6 +824,7 @@ h2 {
   width: 102px;
   height: 102px;
   transition: all 0.3s ease-out;
+  position: relative;
 }
 
 .related-posts-block .image:hover {
@@ -966,6 +967,7 @@ h2 {
 .blogpost-image img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
 .blogpost-content img {

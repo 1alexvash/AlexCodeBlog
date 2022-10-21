@@ -1,8 +1,9 @@
 import { PostDocumentWithoutContent } from "interfaces";
+import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
-import { setTags } from "../../redux/slices/selectedTags";
+import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
   latestPosts: PostDocumentWithoutContent[];
 }
@@ -17,11 +18,11 @@ const LatestPosts = ({ latestPosts }: Props) => {
         <div className="related-posts-block" key={post.title}>
           <Link href={post.slug}>
             <a className="image">
-              <img
-                src={post.featuredImage}
+              <Image
+                src={post.featuredImage ?? "/post-images/placeholder.png"}
                 alt="blog post image"
-                width={102}
-                height={102}
+                layout="fill"
+                objectFit="cover"
               />
             </a>
           </Link>
@@ -43,7 +44,9 @@ const LatestPosts = ({ latestPosts }: Props) => {
       ))}
 
       <Link href="/">
-        <a className="btn">See all posts</a>
+        <a className="btn" onClick={() => dispatch(resetTags())}>
+          See all posts
+        </a>
       </Link>
     </div>
   );

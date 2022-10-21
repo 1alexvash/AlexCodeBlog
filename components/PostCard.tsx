@@ -1,4 +1,5 @@
 import { PostDocumentWithoutContent } from "interfaces";
+import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -37,6 +38,22 @@ const FuturePost = () => {
 };
 
 const today = new Date();
+const shimmer = (width: number, height: number) => `
+  <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+      <linearGradient id="g">
+        <stop stop-color="#444" offset="20%" />
+        <stop stop-color="#333" offset="50%" />
+        <stop stop-color="#444" offset="70%" />
+      </linearGradient>
+    </defs>
+    <rect width="${width}" height="${height}" fill="#444" />
+    <rect id="r" width="${width}" height="${height}" fill="url(#g)" />
+    <animate xlink:href="#r" attributeName="x" from="-${width}" to="${width}" dur="3s" repeatCount="indefinite"  />
+  </svg>
+`;
+
+const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
 const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
@@ -52,9 +69,18 @@ const PostCard = ({ post }: Props) => {
       {isFuturePost ? <FuturePost /> : null}
       <div className={classNameOfPost}>
         <div className="content">
-          <Link href={`/post/${post.slug}`} as={undefined}>
+          <Link href={`/post/${post.slug}`}>
             <a className="post-img">
-              <img src={post.featuredImage} alt="blog post image" />
+              <Image
+                src={post.featuredImage ?? "/post-images/placeholder.png"}
+                alt="blog post image"
+                layout="fill"
+                objectFit="cover"
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                  shimmer(378, 378)
+                )}`}
+              />
             </a>
           </Link>
           <div className="tags">
