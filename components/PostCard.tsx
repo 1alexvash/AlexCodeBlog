@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
+import DraftImg from "./DraftImg";
 interface Props {
   post: PostDocumentWithoutContent;
 }
 
-const DraftPostMark = () => {
+export const DraftPostMark = () => {
   return (
     <div className="draft-post">
       <div className="triangle-draft triangle triangle-item">
@@ -22,16 +23,7 @@ const DraftPostMark = () => {
   //   draft post flag
 };
 
-const DraftImg = () => {
-  return (
-    <div className="draft-img">
-      <span className="draft-img-text">draft</span>
-    </div>
-  );
-  //if I haven't got img for draft-post - I'll use this Component
-};
-
-const FuturePostMark = () => {
+export const FuturePostMark = () => {
   return (
     <div className="future-post">
       <div className="triangle-future triangle triangle-item">
@@ -67,7 +59,7 @@ const PostCard = ({ post }: Props) => {
                   className="gray-filter-for-img"
                 />
               ) : (
-                <DraftImg />
+                <DraftImg height="100%" />
               )}
               {/* Check have I got an image */}
             </a>

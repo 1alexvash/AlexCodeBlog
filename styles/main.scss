@@ -964,7 +964,7 @@ h2 {
 .blogpost-image {
   margin-bottom: 26px;
   border-radius: 3px;
-  overflow: hidden;
+  position: relative;
 }
 
 .blogpost-image img {
@@ -1513,10 +1513,11 @@ blockquote p:last-child {
 .draft-img-text {
   position: relative;
   top: 50%;
-  color: black;
+  color: black !important;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 25px;
+  text-align: center;
 }
 
 .gray-filter-for-img {
