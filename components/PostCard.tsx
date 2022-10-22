@@ -7,32 +7,40 @@ interface Props {
   post: PostDocumentWithoutContent;
 }
 
-const DraftPost = () => {
+const DraftPostMark = () => {
   return (
     <div className="draft-post">
       <div className="triangle-draft triangle triangle-item">
-        <span className="triangle-text-draft triangle-text">DRAFT</span>
+        <span className="triangle-text-draft triangle-text">draft</span>
       </div>
       <div className="small-triagles-draft">
-        <div className="small-triagles-item-draft1 triangle small-triagles-item-draft small-triagles-item"></div>
-        <div className="small-triagles-item-draft2 triangle small-triagles-item-draft small-triagles-item"></div>
+        <div className="small-triagles-item-draft-first triangle small-triagles-item-draft small-triagles-item"></div>
+        <div className="small-triagles-item-draft-second triangle small-triagles-item-draft small-triagles-item"></div>
       </div>
     </div>
   );
-
   //   draft post flag
 };
 
-const FuturePost = () => {
+const DraftImg = () => {
+  return (
+    <div className="draft-img">
+      <span className="draft-img-text">draft</span>
+    </div>
+  );
+  //if I haven't got img for draft-post - I'll use this Component
+};
+
+const FuturePostMark = () => {
   return (
     <div className="future-post">
       <div className="triangle-future triangle triangle-item">
-        <span className="triangle-text-future triangle-text">FUTURE</span>
-        <span className="triangle-text-future-post triangle-text"> POST</span>
+        <span className="triangle-text-future triangle-text">future</span>
+        <span className="triangle-text-future-post triangle-text"> post</span>
       </div>
       <div className="small-triagles-future">
-        <div className="small-triagles-item-future1 triangle small-triagles-item-future small-triagles-item"></div>
-        <div className="small-triagles-item-future2 triangle small-triagles-item-future small-triagles-item"></div>
+        <div className="small-triagles-item-future-first triangle small-triagles-item-future small-triagles-item"></div>
+        <div className="small-triagles-item-future-second triangle small-triagles-item-future small-triagles-item"></div>
       </div>
     </div>
   );
@@ -45,14 +53,23 @@ const PostCard = ({ post }: Props) => {
 
   return (
     <li>
-      <DraftPost />
-      <FuturePost />
+      <DraftPostMark />
+      <FuturePostMark />
       <div className="posts-list-block posts-list-block-draft-or-future">
         {/* posts-list-block-draft-or-future - Class, that gives a PostCard specific styles(turns off hover effect and adds linear gradient) */}
         <div className="content">
           <Link href={`/post/${post.slug}`} as={undefined}>
             <a className="post-img">
-              <img src={post.featuredImage} alt="blog post image" />
+              {post.featuredImage ? (
+                <img
+                  src={post.featuredImage}
+                  alt="blog post image"
+                  className="gray-filter-for-img"
+                />
+              ) : (
+                <DraftImg />
+              )}
+              {/* Check have I got an image */}
             </a>
           </Link>
           <div className="tags">

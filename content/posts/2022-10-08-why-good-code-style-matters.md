@@ -1,7 +1,7 @@
 ---
 title: Why good code style matters
 date: 2022-10-24T10:10:19.885Z
-featuredImage: https://via.placeholder.com/400/O%20https://placeholder.com/
+featuredImage:
 draft: false
 tags:
   - CleanCode
