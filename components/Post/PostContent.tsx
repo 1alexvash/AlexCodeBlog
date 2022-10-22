@@ -33,6 +33,7 @@ const PostContent = ({ post }: Props) => {
       </Head>
 
       <div className="blogpost-image">
+
         <DraftPostMark />
         <FuturePostMark />
         {post.featuredImage ? (
@@ -46,6 +47,7 @@ const PostContent = ({ post }: Props) => {
         ) : (
           <DraftImg height="394px" />
         )}
+
       </div>
       <div className="blogpost-date">
         <span>{toHumanReadableDate(post.date)}</span>
