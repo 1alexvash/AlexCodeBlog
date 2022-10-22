@@ -31,6 +31,6 @@ The book had over a hundred of these schemes, and it just wasn't that exciting t
 
 My score:
 
-🔥 **12 / 10** For the sample
+🔥 **10 / 10** For the sample
 
-👎 **6 / 10** For the rest of the book
+👎 **5 / 10** For the rest of the book
