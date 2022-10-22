@@ -1,3 +1,7 @@
+import {
+  isPostADraft,
+  isPostInTheFuture,
+} from "helpers/checkOfDraftOrFuturePost";
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,36 +12,30 @@ interface Props {
   post: PostDocumentWithoutContent;
 }
 
-const DraftPost = () => {
-  return (
-    <div className="draft-post">
-      <div className="triangle-draft triangle triangle-item">
-        <span className="triangle-text-draft triangle-text">DRAFT</span>
-      </div>
-      <div className="small-triagles-draft">
-        <div className="small-triagles-item-draft1 triangle small-triagles-item-draft small-triagles-item"></div>
-        <div className="small-triagles-item-draft2 triangle small-triagles-item-draft small-triagles-item"></div>
-      </div>
+const DraftPost = () => (
+  <div className="draft-post">
+    <div className="triangle-draft triangle triangle-item">
+      <span className="triangle-text-draft triangle-text">DRAFT</span>
     </div>
-  );
-};
-
-const FuturePost = () => {
-  return (
-    <div className="future-post">
-      <div className="triangle-future triangle triangle-item">
-        <span className="triangle-text-future triangle-text">FUTURE</span>
-        <span className="triangle-text-future-post triangle-text"> POST</span>
-      </div>
-      <div className="small-triagles-future">
-        <div className="small-triagles-item-future1 triangle small-triagles-item-future small-triagles-item"></div>
-        <div className="small-triagles-item-future2 triangle small-triagles-item-future small-triagles-item"></div>
-      </div>
+    <div className="small-triangles-draft">
+      <div className="small-triangles-item-draft1 triangle small-triangles-item-draft small-triangles-item"></div>
+      <div className="small-triangles-item-draft2 triangle small-triangles-item-draft small-triangles-item"></div>
     </div>
-  );
-};
+  </div>
+);
 
-const today = new Date();
+const FuturePost = () => (
+  <div className="future-post">
+    <div className="triangle-future triangle triangle-item">
+      <span className="triangle-text-future triangle-text">FUTURE</span>
+      <span className="triangle-text-future-post triangle-text"> POST</span>
+    </div>
+    <div className="small-triangles-future">
+      <div className="small-triangles-item-future1 triangle small-triangles-item-future small-triangles-item"></div>
+      <div className="small-triangles-item-future2 triangle small-triangles-item-future small-triangles-item"></div>
+    </div>
+  </div>
+);
 
 const shimmer = (width: number, height: number) => `
   <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -59,15 +57,15 @@ const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
 
-  const isFuturePost = today.toISOString() > post.date ? false : true;
   const classNameOfPost =
-    post.draft === true || isFuturePost === true
+    isPostADraft(post) === true || isPostInTheFuture(post) === false
       ? "posts-list-block posts-list-block-draft-or-future"
       : "posts-list-block";
+
   return (
     <li>
-      {post.draft ? <DraftPost /> : null}
-      {isFuturePost ? <FuturePost /> : null}
+      {isPostADraft(post) ? <DraftPost /> : null}
+      {isPostInTheFuture(post) === false ? <FuturePost /> : null}
       <div className={classNameOfPost}>
         <div className="content">
           <Link href={`/post/${post.slug}`}>

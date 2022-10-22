@@ -1,8 +1,8 @@
-import { PostDocument } from "interfaces";
+import { PostDocumentWithoutContent } from "interfaces";
 
 const today = new Date();
 
-export function isPostADraft(post: PostDocument) {
+export function isPostADraft(post: PostDocumentWithoutContent) {
   if (post.draft === false) {
     return false;
   } else {
@@ -10,7 +10,7 @@ export function isPostADraft(post: PostDocument) {
   }
 }
 
-export function isPostInTheFuture(post: PostDocument) {
+export function isPostInTheFuture(post: PostDocumentWithoutContent) {
   if (today.toISOString() > post.date) {
     return true;
   } else {

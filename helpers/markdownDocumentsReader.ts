@@ -26,7 +26,7 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
     .filter((post: PostDocument) => {
       {
         if (process.env.NODE_ENV === "development") {
-          return post;
+          return true;
         } else {
           return (
             isPostADraft(post) === false && isPostInTheFuture(post) === true
