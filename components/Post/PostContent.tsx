@@ -40,6 +40,8 @@ const PostContent = ({ post }: Props) => {
             src={post.featuredImage}
             alt="blog post image"
             className="gray-filter-for-img"
+            width={790}
+            height={394}
           />
         ) : (
           <DraftImg height="394px" />
