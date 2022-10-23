@@ -3,6 +3,8 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 
+import { DraftPostMark, FuturePostMark } from "../PostCard";
+
 interface Props {
   post: PostDocument;
 }
@@ -31,12 +33,21 @@ const PostContent = ({ post }: Props) => {
       </Head>
 
       <div className="blogpost-image">
-        <img
-          src={post.featuredImage ?? "/post-images/placeholder.png"}
-          alt="blog post image"
-          width={790}
-          height={394}
-        />
+        <DraftPostMark />
+        <FuturePostMark />
+        {post.featuredImage ? (
+          <img
+            src={post.featuredImage}
+            alt="blog post image"
+            className="gray-filter-for-img"
+            width={790}
+            height={394}
+          />
+        ) : (
+          <div className="draft-img" style={{ height: "394px" }}>
+            <h1 className="draft-img-text">draft</h1>
+          </div>
+        )}
       </div>
       <div className="blogpost-date">
         <span>{toHumanReadableDate(post.date)}</span>

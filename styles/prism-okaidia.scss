@@ -39,6 +39,13 @@ pre[class*="language-"] {
   background: #272822;
 }
 
+body.dark-theme {
+  :not(pre) > code[class*="language-"],
+  pre[class*="language-"] {
+    background: #33393f;
+  }
+}
+
 /* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;

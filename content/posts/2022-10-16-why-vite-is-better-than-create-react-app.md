@@ -1,12 +1,13 @@
 ---
 title: Why Vite is better than Create React App
-date: 2022-10-17T08:45:00.000Z
-featuredImage: /post-images/2021-10-23-how-to-stop-hating-type-script.webp
-draft: true
+date: 2022-10-23T08:45:00.000Z
+featuredImage: /post-images/2022-10-23-vite.jpg
+draft: false
 tags:
   - Vite
   - React
 ---
+
 First thing first if you don't know.
 
 **Create React App** – is a technology for running react applications, it does automatic project bundling, so you don't have to set up your own Webpack server by configuring JSX plugins, and other stuff, so your browser can understand "react language".
@@ -49,4 +50,4 @@ It's because Vite is smart enough to understand to only compile the files, that 
 
 ## The bottom line:
 
-Just try it, and you may as well fall in  love with it just like me.
+Just try it, and you may as well fall in love with it just like me.

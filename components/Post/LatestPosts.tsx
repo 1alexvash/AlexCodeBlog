@@ -18,12 +18,20 @@ const LatestPosts = ({ latestPosts }: Props) => {
         <div className="related-posts-block" key={post.title}>
           <Link href={post.slug}>
             <a className="image">
-              <Image
-                src={post.featuredImage ?? "/post-images/placeholder.png"}
-                alt="blog post image"
-                layout="fill"
-                objectFit="cover"
-              />
+              {post.featuredImage ? (
+                <Image
+                  src={post.featuredImage}
+                  alt="blog post image"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              ) : (
+                <div className="draft-img" style={{ height: "102px" }}>
+                  <h1 className="draft-img-text" style={{ top: "35%" }}>
+                    draft
+                  </h1>
+                </div>
+              )}
             </a>
           </Link>
           <div className="inner">

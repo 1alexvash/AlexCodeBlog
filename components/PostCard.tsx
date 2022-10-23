@@ -8,31 +8,32 @@ import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
+
 interface Props {
   post: PostDocumentWithoutContent;
 }
 
-const DraftPost = () => (
+export const DraftPostMark = () => (
   <div className="draft-post">
     <div className="triangle-draft triangle triangle-item">
-      <span className="triangle-text-draft triangle-text">DRAFT</span>
+      <span className="triangle-text-draft triangle-text">draft</span>
     </div>
     <div className="small-triangles-draft">
-      <div className="small-triangles-item-draft1 triangle small-triangles-item-draft small-triangles-item"></div>
-      <div className="small-triangles-item-draft2 triangle small-triangles-item-draft small-triangles-item"></div>
+      <div className="small-triangles-item-draft-first triangle small-triangles-item-draft small-triangles-item"></div>
+      <div className="small-triangles-item-draft-second triangle small-triangles-item-draft small-triangles-item"></div>
     </div>
   </div>
 );
 
-const FuturePost = () => (
+export const FuturePostMark = () => (
   <div className="future-post">
     <div className="triangle-future triangle triangle-item">
-      <span className="triangle-text-future triangle-text">FUTURE</span>
-      <span className="triangle-text-future-post triangle-text"> POST</span>
+      <span className="triangle-text-future triangle-text">future</span>
+      <span className="triangle-text-future-post triangle-text"> post</span>
     </div>
     <div className="small-triangles-future">
-      <div className="small-triangles-item-future1 triangle small-triangles-item-future small-triangles-item"></div>
-      <div className="small-triangles-item-future2 triangle small-triangles-item-future small-triangles-item"></div>
+      <div className="small-triangles-item-future-first triangle small-triangles-item-future small-triangles-item"></div>
+      <div className="small-triangles-item-future-second triangle small-triangles-item-future small-triangles-item"></div>
     </div>
   </div>
 );
@@ -70,16 +71,23 @@ const PostCard = ({ post }: Props) => {
         <div className="content">
           <Link href={`/post/${post.slug}`}>
             <a className="post-img">
-              <Image
-                src={post.featuredImage ?? "/post-images/placeholder.png"}
-                alt="blog post image"
-                layout="fill"
-                objectFit="cover"
-                placeholder="blur"
-                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                  shimmer(378, 378)
-                )}`}
-              />
+              {post.featuredImage ? (
+                <Image
+                  src={post.featuredImage}
+                  alt="blog post image"
+                  layout="fill"
+                  objectFit="cover"
+                  placeholder="blur"
+                  blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                    shimmer(378, 378)
+                  )}`}
+                  style={{ filter: "grayscale(50%)" }}
+                />
+              ) : (
+                <div className="draft-img" style={{ height: "100%" }}>
+                  <h1 className="draft-img-text">draft</h1>
+                </div>
+              )}
             </a>
           </Link>
           <div className="tags">

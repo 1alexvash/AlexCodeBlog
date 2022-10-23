@@ -1,7 +1,7 @@
 ---
 title: My favorite extension for debugging code
 date: 2022-06-18 12:13:31
-featuredImage: /post-images/2022-06-18-my-favorite-extension-for-debugging-code.webp
+featuredImage: /post-images/2022-06-18-my-favorite-extension-for-debugging-code.png
 draft: false
 tags:
   - VSCode
