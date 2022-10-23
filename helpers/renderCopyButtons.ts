@@ -1,6 +1,19 @@
 import { MouseEventHandler, RefObject } from "react";
+type Target = HTMLButtonElement | HTMLSpanElement | HTMLImageElement;
+
 const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
   const target = event.target;
+
+  const targetClasslistCheck = (target: Target) => {
+    if (
+      target.className === "btn-copy" ||
+      target.className === "btn-copy-img" ||
+      target.className === "btn-copy-text"
+    ) {
+      return true;
+    }
+  };
+
   const copyText = (text: string): void => {
     navigator.clipboard.writeText(text);
   };
@@ -23,9 +36,13 @@ const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
     const targetChildren = target.childNodes;
     const spanText = targetChildren[1];
     const squares = targetChildren[0];
-    const textToCopy = target.parentElement?.childNodes[1].textContent ?? " ";
+    const textToCopy = target.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    if (!(squares instanceof HTMLElement) || !spanText) {
+    if (
+      !(squares instanceof HTMLElement) ||
+      !spanText ||
+      !targetClasslistCheck(target)
+    ) {
       return;
     }
 
@@ -35,9 +52,9 @@ const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
   } else if (target instanceof HTMLSpanElement) {
     const squares = target?.parentElement?.childNodes[0];
     const textToCopy =
-      target.parentElement?.parentElement?.childNodes[1].textContent ?? " ";
+      target.parentElement?.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    if (!(squares instanceof HTMLElement)) {
+    if (!(squares instanceof HTMLElement) || !targetClasslistCheck(target)) {
       return;
     }
 
@@ -47,9 +64,13 @@ const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
   } else if (target instanceof HTMLImageElement) {
     const spanText = target.parentElement?.childNodes[1];
     const textToCopy =
-      target.parentElement?.parentElement?.childNodes[1].textContent ?? " ";
+      target.parentElement?.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    if (!(target instanceof HTMLElement) || !spanText) {
+    if (
+      !(target instanceof HTMLElement) ||
+      !spanText ||
+      !targetClasslistCheck(target)
+    ) {
       return;
     }
 
@@ -68,7 +89,7 @@ const createCopyButton = (): HTMLButtonElement => {
   button.style.display = "none";
   button.setAttribute("type", "button");
   buttonIcon.setAttribute("src", "/images/copy-button-icon.svg");
-
+  buttonIcon.classList.add("btn-copy-img");
   buttonText.classList.add("btn-copy-text");
   buttonText.innerHTML = "Copy";
 

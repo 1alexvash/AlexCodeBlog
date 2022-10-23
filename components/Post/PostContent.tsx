@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import {
   onClickCheck,
   renderCopyButtons,
-} from "../../helpers/useRenderCopyButtons";
+} from "../../helpers/renderCopyButtons";
 
 interface Props {
   post: PostDocument;
