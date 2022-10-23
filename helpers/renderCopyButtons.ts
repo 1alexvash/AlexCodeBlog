@@ -99,11 +99,11 @@ const createCopyButton = (): HTMLButtonElement => {
   return button;
 };
 
-const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void | string => {
+const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void => {
   const codeSnippets = doc.current?.querySelectorAll("div.remark-highlight");
 
   if (codeSnippets === undefined) {
-    return "Error";
+    return;
   }
 
   codeSnippets.forEach((item) => {
