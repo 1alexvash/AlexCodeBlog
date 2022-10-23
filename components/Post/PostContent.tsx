@@ -2,8 +2,12 @@ import config from "config";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
+import { useEffect, useRef } from "react";
 
-import useRenderCopyButtons from "../../helpers/useRenderCopyButtons";
+import {
+  onClickCheck,
+  renderCopyButtons,
+} from "../../helpers/useRenderCopyButtons";
 
 interface Props {
   post: PostDocument;
@@ -18,8 +22,11 @@ const getFirstParagraph = (str: string) => {
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
+  const doc = useRef<HTMLDivElement>(null);
 
-  const [doc, onClick] = useRenderCopyButtons(post.content);
+  useEffect(() => {
+    renderCopyButtons(doc);
+  }, [post.content]);
 
   return (
     <article className="blogpost-content">
@@ -56,7 +63,7 @@ const PostContent = ({ post }: Props) => {
       </div>
       <div
         ref={doc}
-        onClick={onClick}
+        onClick={onClickCheck}
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 

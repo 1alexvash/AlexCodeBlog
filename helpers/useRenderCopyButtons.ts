@@ -1,4 +1,4 @@
-import { MouseEventHandler, RefObject, useEffect, useRef } from "react";
+import { MouseEventHandler, RefObject } from "react";
 const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
   const target = event.target;
   const copyText = (text: string): void => {
@@ -78,41 +78,34 @@ const createCopyButton = (): HTMLButtonElement => {
   return button;
 };
 
-const useRenderCopyButtons = (
-  content: string
-): readonly [RefObject<HTMLDivElement>, MouseEventHandler<HTMLDivElement>] => {
-  const doc = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const codeBlocks = doc.current?.querySelectorAll("div.remark-highlight");
+const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void | string => {
+  const codeBlocks = doc.current?.querySelectorAll("div.remark-highlight");
 
-    if (codeBlocks === undefined) {
+  if (codeBlocks === undefined) {
+    return "Error";
+  }
+
+  codeBlocks.forEach((item) => {
+    if (item.childNodes.length === 2) {
       return;
     }
+    item.prepend(createCopyButton());
 
-    codeBlocks.forEach((item) => {
-      if (item.childNodes.length === 2) {
-        return;
-      }
-      item.prepend(createCopyButton());
+    const button = item.childNodes[0];
 
-      const button = item.childNodes[0];
+    if (!(button instanceof HTMLElement)) {
+      return;
+    }
+    const buttonStyle = button.style;
 
-      if (!(button instanceof HTMLElement)) {
-        return;
-      }
-      const buttonStyle = button.style;
-
-      item.addEventListener("mouseenter", () => {
-        buttonStyle.display = "flex";
-      });
-
-      item.addEventListener("mouseleave", () => {
-        buttonStyle.display = "none";
-      });
+    item.addEventListener("mouseenter", () => {
+      buttonStyle.display = "flex";
     });
-  }, [content]);
 
-  return [doc, onClickCheck];
+    item.addEventListener("mouseleave", () => {
+      buttonStyle.display = "none";
+    });
+  });
 };
 
-export default useRenderCopyButtons;
+export { onClickCheck, renderCopyButtons };
