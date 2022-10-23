@@ -14,14 +14,27 @@ const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
     }
   };
 
+  const areChildNodesAndClassesValid = (
+    buttonImg: ChildNode,
+    buttonText: ChildNode,
+    target: Target
+  ): buttonImg is HTMLElement => {
+    if (
+      buttonImg instanceof HTMLElement &&
+      buttonText &&
+      targetClasslistCheck(target)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const copyText = (text: string): void => {
     navigator.clipboard.writeText(text);
   };
 
-  const setCopied = (
-    squares: HTMLElement,
-    spanText: ChildNode | HTMLElement
-  ): void => {
+  const setCopied = (squares: HTMLElement, spanText: ChildNode): void => {
     squares.style.display = "none";
 
     spanText.textContent = "Copied!";
@@ -32,51 +45,41 @@ const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
     }, 3000);
   };
 
+  const checkAndCopyText = (
+    buttonIcon: ChildNode,
+    buttonText: ChildNode,
+    target: Target,
+    textToCopy: string
+  ) => {
+    if (!areChildNodesAndClassesValid(buttonIcon, buttonText, target)) {
+      return;
+    }
+
+    setCopied(buttonIcon, buttonText);
+
+    copyText(textToCopy);
+  };
+
   if (target instanceof HTMLButtonElement) {
     const targetChildren = target.childNodes;
-    const spanText = targetChildren[1];
-    const squares = targetChildren[0];
+    const buttonIcon = targetChildren[0];
+    const buttonText = targetChildren[1];
     const textToCopy = target.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    if (
-      !(squares instanceof HTMLElement) ||
-      !spanText ||
-      !targetClasslistCheck(target)
-    ) {
-      return;
-    }
+    checkAndCopyText(buttonIcon, buttonText, target, textToCopy);
+  } else if (
+    target instanceof HTMLElement &&
+    target.parentElement instanceof HTMLButtonElement
+  ) {
+    const parentButton = target?.parentElement;
+    const buttonChildNodes = parentButton?.childNodes;
 
-    setCopied(squares, spanText);
-
-    copyText(textToCopy);
-  } else if (target instanceof HTMLSpanElement) {
-    const squares = target?.parentElement?.childNodes[0];
+    const buttonIcon = buttonChildNodes[0];
+    const buttonText = buttonChildNodes[1];
     const textToCopy =
-      target.parentElement?.parentElement?.childNodes[1]?.textContent ?? " ";
+      parentButton?.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    if (!(squares instanceof HTMLElement) || !targetClasslistCheck(target)) {
-      return;
-    }
-
-    setCopied(squares, target);
-
-    copyText(textToCopy);
-  } else if (target instanceof HTMLImageElement) {
-    const spanText = target.parentElement?.childNodes[1];
-    const textToCopy =
-      target.parentElement?.parentElement?.childNodes[1]?.textContent ?? " ";
-
-    if (
-      !(target instanceof HTMLElement) ||
-      !spanText ||
-      !targetClasslistCheck(target)
-    ) {
-      return;
-    }
-
-    setCopied(target, spanText);
-
-    copyText(textToCopy);
+    checkAndCopyText(buttonIcon, buttonText, target, textToCopy);
   }
 };
 
