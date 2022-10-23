@@ -100,13 +100,13 @@ const createCopyButton = (): HTMLButtonElement => {
 };
 
 const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void | string => {
-  const codeBlocks = doc.current?.querySelectorAll("div.remark-highlight");
+  const codeSnippets = doc.current?.querySelectorAll("div.remark-highlight");
 
-  if (codeBlocks === undefined) {
+  if (codeSnippets === undefined) {
     return "Error";
   }
 
-  codeBlocks.forEach((item) => {
+  codeSnippets.forEach((item) => {
     if (item.childNodes.length === 2) {
       return;
     }

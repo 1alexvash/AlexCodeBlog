@@ -13,19 +13,19 @@ interface Props {
   post: PostDocument;
 }
 
-const getFirstParagraph = (str: string) => {
-  const openedElement = str.indexOf("<p>") + 3;
-  const closedElement = str.indexOf("</p>");
+const getFirstParagraph = (string: string) => {
+  const openedElement = string.indexOf("<p>") + 3;
+  const closedElement = string.indexOf("</p>");
 
-  return str.slice(openedElement, closedElement);
+  return string.slice(openedElement, closedElement);
 };
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
-  const doc = useRef<HTMLDivElement>(null);
+  const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    renderCopyButtons(doc);
+    renderCopyButtons(document);
   }, [post.content]);
 
   return (
@@ -62,7 +62,7 @@ const PostContent = ({ post }: Props) => {
         ))}
       </div>
       <div
-        ref={doc}
+        ref={document}
         onClick={onClickCheck}
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
