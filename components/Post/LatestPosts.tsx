@@ -20,7 +20,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
             <a className="image">
               {post.featuredImage ? (
                 <Image
-                  src={post.featuredImage ?? "/post-images/placeholder.png"}
+                  src={post.featuredImage}
                   alt="blog post image"
                   layout="fill"
                   objectFit="cover"
