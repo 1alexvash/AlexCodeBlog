@@ -8,34 +8,30 @@ interface Props {
   post: PostDocumentWithoutContent;
 }
 
-export const DraftPostMark = () => {
-  return (
-    <div className="draft-post">
-      <div className="triangle-draft triangle triangle-item">
-        <span className="triangle-text-draft triangle-text">draft</span>
-      </div>
-      <div className="small-triangles-draft">
-        <div className="small-triangles-item-draft-first triangle small-triangles-item-draft small-triangles-item"></div>
-        <div className="small-triangles-item-draft-second triangle small-triangles-item-draft small-triangles-item"></div>
-      </div>
+export const DraftPostMark = () => (
+  <div className="draft-post">
+    <div className="triangle-draft triangle triangle-item">
+      <span className="triangle-text-draft triangle-text">draft</span>
     </div>
-  );
-};
+    <div className="small-triangles-draft">
+      <div className="small-triangles-item-draft-first triangle small-triangles-item-draft small-triangles-item"></div>
+      <div className="small-triangles-item-draft-second triangle small-triangles-item-draft small-triangles-item"></div>
+    </div>
+  </div>
+);
 
-export const FuturePostMark = () => {
-  return (
-    <div className="future-post">
-      <div className="triangle-future triangle triangle-item">
-        <span className="triangle-text-future triangle-text">future</span>
-        <span className="triangle-text-future-post triangle-text"> post</span>
-      </div>
-      <div className="small-triangles-future">
-        <div className="small-triangles-item-future-first triangle small-triangles-item-future small-triangles-item"></div>
-        <div className="small-triangles-item-future-second triangle small-triangles-item-future small-triangles-item"></div>
-      </div>
+export const FuturePostMark = () => (
+  <div className="future-post">
+    <div className="triangle-future triangle triangle-item">
+      <span className="triangle-text-future triangle-text">future</span>
+      <span className="triangle-text-future-post triangle-text"> post</span>
     </div>
-  );
-};
+    <div className="small-triangles-future">
+      <div className="small-triangles-item-future-first triangle small-triangles-item-future small-triangles-item"></div>
+      <div className="small-triangles-item-future-second triangle small-triangles-item-future small-triangles-item"></div>
+    </div>
+  </div>
+);
 
 const shimmer = (width: number, height: number) => `
   <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -67,7 +63,7 @@ const PostCard = ({ post }: Props) => {
             <a className="post-img">
               {post.featuredImage ? (
                 <Image
-                  src={post.featuredImage ?? "/post-images/placeholder.png"}
+                  src={post.featuredImage}
                   alt="blog post image"
                   layout="fill"
                   objectFit="cover"
