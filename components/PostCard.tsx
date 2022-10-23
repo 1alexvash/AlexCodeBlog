@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
+
 interface Props {
   post: PostDocumentWithoutContent;
 }

@@ -4,6 +4,7 @@ import { PostDocument } from "interfaces";
 import Head from "next/head";
 
 import { DraftPostMark, FuturePostMark } from "../PostCard";
+
 interface Props {
   post: PostDocument;
 }
