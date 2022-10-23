@@ -65,8 +65,8 @@ const PostCard = ({ post }: Props) => {
 
   return (
     <li>
-      {isPostADraft(post) ? <DraftPost /> : null}
-      {isPostInTheFuture(post) === false ? <FuturePost /> : null}
+      {isPostADraft(post) ? <DraftPostMark /> : null}
+      {isPostInTheFuture(post) === false ? <FuturePostMark /> : null}
       <div className={classNameOfPost}>
         <div className="content">
           <Link href={`/post/${post.slug}`}>
