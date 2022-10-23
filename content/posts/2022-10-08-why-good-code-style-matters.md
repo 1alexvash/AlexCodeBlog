@@ -6,18 +6,13 @@ draft: false
 tags:
   - CleanCode
 ---
-
 \[Preview picture]
 
 (clean code phrase)
 
 Let's imagine we have two guys, one guy has a formatting set to single quotes, and the other for double quotes. Suddenly the second guy needs to work, on the file of the first guy. What's going to happen?
 
-(gif example)
-
 That's right the entire file is going to get reformatted, not a big deal for a small file or project, but a disaster for any decent size project.
-
-(photo example before and after)
 
 So when this file gets to the code review, it just won't be possible to review anything, as it'll be extremely hard to find what **actually** has changed. In this case, just **forget** about high quality code, and code review all together.
 
@@ -36,7 +31,7 @@ When it comes to the code style, just use standard recommended options, don't im
 
 There are, some clear benefits like better structure, limiting complexity of a single line, so the code is not so mentally taxing for the brain.
 
-Have you ever seen this gif?
+Have you ever seen this GIF?
 
 ![](https://i.imgur.com/2c5OGeq.gif)
 
@@ -44,12 +39,10 @@ Did you ever wonder why you read so fast with this tool? It's because your eyes 
 
 How we read a normal text:
 
-![](https://i.imgur.com/6NvMfCa.jpg)
-
-![](https://i.imgur.com/tVCKWQt.jpg)
+![](/post-images/eye-reading-text-example.png)
 
 So you can see that the eye travels a lot, and the longer the line, the more it has to travel to read the text, and less efficient reading feels.
 
 Final example, on what mode do you read text on your phone?
 
-![](https://i.imgur.com/pORWYXs.jpg)
+![](/post-images/portrait-vs-landscape-mode.png)
