@@ -4,10 +4,7 @@ import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 
-import {
-  onClickCheck,
-  renderCopyButtons,
-} from "../../helpers/renderCopyButtons";
+import renderCopyButtons from "../../helpers/renderCopyButtons";
 
 interface Props {
   post: PostDocument;
@@ -25,7 +22,7 @@ const PostContent = ({ post }: Props) => {
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    renderCopyButtons(document);
+    return renderCopyButtons(document);
   }, [post.content]);
 
   return (
@@ -61,11 +58,7 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
-      <div
-        ref={document}
-        onClick={onClickCheck}
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} />
 
       {/* <Reactions /> This future might be added later */}
     </article>

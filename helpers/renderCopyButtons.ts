@@ -1,7 +1,7 @@
-import { MouseEventHandler, RefObject } from "react";
+import { RefObject } from "react";
 type Target = HTMLButtonElement | HTMLSpanElement | HTMLImageElement;
 
-const onClickCheck: MouseEventHandler<HTMLDivElement> = (event) => {
+const onClickCheck = (event: MouseEvent): void => {
   const target = event.target;
 
   const targetClasslistCheck = (target: Target) => {
@@ -102,12 +102,9 @@ const createCopyButton = (): HTMLButtonElement => {
   return button;
 };
 
-const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void => {
-  const codeSnippets = doc.current?.querySelectorAll("div.remark-highlight");
-
-  if (codeSnippets === undefined) {
-    return;
-  }
+const renderCopyButtons = (doc: RefObject<HTMLDivElement>): (() => void) => {
+  const codeSnippets =
+    doc.current?.querySelectorAll("div.remark-highlight") ?? [];
 
   codeSnippets.forEach((item) => {
     if (item.childNodes.length === 2) {
@@ -120,6 +117,7 @@ const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void => {
     if (!(button instanceof HTMLElement)) {
       return;
     }
+
     const buttonStyle = button.style;
 
     item.addEventListener("mouseenter", () => {
@@ -129,7 +127,20 @@ const renderCopyButtons = (doc: RefObject<HTMLDivElement>): void => {
     item.addEventListener("mouseleave", () => {
       buttonStyle.display = "none";
     });
+    button.addEventListener("click", (event) => {
+      onClickCheck(event);
+    });
   });
+  return (): void => {
+    codeSnippets.forEach((item) =>
+      item.childNodes[0].removeEventListener("click", (event) => {
+        if (!(event instanceof MouseEvent)) {
+          return;
+        }
+        onClickCheck(event);
+      })
+    );
+  };
 };
 
-export { onClickCheck, renderCopyButtons };
+export default renderCopyButtons;
