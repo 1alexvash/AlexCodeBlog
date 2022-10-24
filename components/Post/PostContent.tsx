@@ -39,19 +39,15 @@ const PostContent = ({ post }: Props) => {
       <div className="blogpost-image">
         {isPostADraft(post) ? <DraftPostMark /> : null}
         {isPostInTheFuture(post) === false ? <FuturePostMark /> : null}
-        {post.featuredImage ? (
-          <img
-            src={post.featuredImage}
-            alt="blog post image"
-            className="gray-filter-for-img"
-            width={790}
-            height={394}
-          />
-        ) : (
-          <div className="draft-img" style={{ height: "394px" }}>
-            <h1 className="draft-img-text">draft</h1>
-          </div>
-        )}
+        <img
+          src={
+            post.featuredImage ? post.featuredImage : "/post-images/draft.webp"
+          }
+          alt="blog post image"
+          className="gray-filter-for-img"
+          width={790}
+          height={394}
+        />
       </div>
       <div className="blogpost-date">
         <span>{toHumanReadableDate(post.date)}</span>
