@@ -71,23 +71,25 @@ const PostCard = ({ post }: Props) => {
         <div className="content">
           <Link href={`/post/${post.slug}`}>
             <a className="post-img">
-              {post.featuredImage ? (
-                <Image
-                  src={post.featuredImage}
-                  alt="blog post image"
-                  layout="fill"
-                  objectFit="cover"
-                  placeholder="blur"
-                  blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                    shimmer(378, 378)
-                  )}`}
-                  style={{ filter: "grayscale(50%)" }}
-                />
-              ) : (
-                <div className="draft-img" style={{ height: "100%" }}>
-                  <h1 className="draft-img-text">draft</h1>
-                </div>
-              )}
+              <Image
+                src={
+                  post.featuredImage
+                    ? post.featuredImage
+                    : "/post-images/draft.webp"
+                }
+                alt="blog post image"
+                layout="fill"
+                objectFit="cover"
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                  shimmer(378, 378)
+                )}`}
+                style={
+                  classNameOfPost.includes("posts-list-block-draft-or-future")
+                    ? { filter: "grayscale(50%)" }
+                    : {}
+                }
+              />
             </a>
           </Link>
           <div className="tags">

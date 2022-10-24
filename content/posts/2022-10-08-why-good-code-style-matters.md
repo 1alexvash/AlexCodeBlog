@@ -4,7 +4,7 @@ date: 2022-10-24T10:10:19.885Z
 
 featuredImage:
 
-draft: false
+draft: true
 tags:
   - CleanCode
 ---
