@@ -1,4 +1,8 @@
 import config from "config";
+import {
+  isPostADraft,
+  isPostInTheFuture,
+} from "helpers/checkOfDraftOrFuturePost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
@@ -33,8 +37,8 @@ const PostContent = ({ post }: Props) => {
       </Head>
 
       <div className="blogpost-image">
-        <DraftPostMark />
-        <FuturePostMark />
+        {isPostADraft(post) ? <DraftPostMark /> : null}
+        {isPostInTheFuture(post) === false ? <FuturePostMark /> : null}
         {post.featuredImage ? (
           <img
             src={post.featuredImage}
