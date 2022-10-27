@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "redux/store";
 
 import ThemeProvider from "@/components/ThemeProvider";
+import FontProvider from "@/components/FontProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -26,7 +27,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Script>
 
       <ThemeProvider>
-        <Component {...pageProps} />
+        <FontProvider>
+          <Component {...pageProps} />
+        </FontProvider>
       </ThemeProvider>
     </Provider>
   );
