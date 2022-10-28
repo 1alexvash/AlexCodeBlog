@@ -5,11 +5,9 @@ const onClickCheck = (event: MouseEvent): void => {
   const target = event.target;
 
   const targetClasslistCheck = (target: Target) => {
-    if (
-      target.className === "btn-copy" ||
-      target.className === "btn-copy-img" ||
-      target.className === "btn-copy-text"
-    ) {
+    const buttonCopyClasses = ["btn-copy", "btn-copy-img", "btn-copy-text"];
+
+    if (buttonCopyClasses.includes(target.className)) {
       return true;
     }
   };
@@ -102,9 +100,11 @@ const createCopyButton = (): HTMLButtonElement => {
   return button;
 };
 
-const renderCopyButtons = (doc: RefObject<HTMLDivElement>): (() => void) => {
+const renderCopyButtons = (
+  document: RefObject<HTMLDivElement>
+): (() => void) => {
   const codeSnippets =
-    doc.current?.querySelectorAll("div.remark-highlight") ?? [];
+    document.current?.querySelectorAll("div.remark-highlight") ?? [];
 
   codeSnippets.forEach((item) => {
     if (item.childNodes.length === 2) {
@@ -118,22 +118,21 @@ const renderCopyButtons = (doc: RefObject<HTMLDivElement>): (() => void) => {
       return;
     }
 
-    const buttonStyle = button.style;
-
     item.addEventListener("mouseenter", () => {
-      buttonStyle.display = "flex";
+      button.style.display = "flex";
     });
 
     item.addEventListener("mouseleave", () => {
-      buttonStyle.display = "none";
+      button.style.display = "none";
     });
     button.addEventListener("click", (event) => {
       onClickCheck(event);
     });
   });
+
   return (): void => {
-    codeSnippets.forEach((item) =>
-      item.childNodes[0].removeEventListener("click", (event) => {
+    codeSnippets.forEach((codeSnippet) =>
+      codeSnippet.childNodes[0].removeEventListener("click", (event) => {
         if (!(event instanceof MouseEvent)) {
           return;
         }
