@@ -1417,12 +1417,11 @@ blockquote p:last-child {
   align-items: center;
   justify-content: space-between;
   gap: 7px;
-  height: 42px;
   background: #45463f;
   border: #33393f 1px solid;
   border-radius: 4px;
   color: #f2f5f7;
-  padding: 5px 19px 6px 20px;
+  padding: 12px 20px;
   transition: all 0.3s ease-out;
   cursor: pointer;
   &:hover {
