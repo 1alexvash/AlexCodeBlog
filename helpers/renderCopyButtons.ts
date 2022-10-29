@@ -1,5 +1,4 @@
 import { RefObject } from "react";
-type Target = HTMLButtonElement | HTMLSpanElement | HTMLImageElement;
 
 const onClickCheck = (event: MouseEvent): void => {
   const target = event.target;
@@ -33,7 +32,6 @@ const onClickCheck = (event: MouseEvent): void => {
   const checkAndCopyText = (
     buttonIcon: ChildNode,
     buttonText: ChildNode,
-    target: Target,
     textToCopy: string
   ) => {
     if (!areChildNodesAndClassesValid(buttonIcon, buttonText)) {
@@ -51,7 +49,7 @@ const onClickCheck = (event: MouseEvent): void => {
     const buttonText = targetChildren[1];
     const textToCopy = target.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    checkAndCopyText(buttonIcon, buttonText, target, textToCopy);
+    checkAndCopyText(buttonIcon, buttonText, textToCopy);
   } else if (
     target instanceof HTMLElement &&
     target.parentElement instanceof HTMLButtonElement
@@ -64,7 +62,7 @@ const onClickCheck = (event: MouseEvent): void => {
     const textToCopy =
       parentButton?.parentElement?.childNodes[1]?.textContent ?? " ";
 
-    checkAndCopyText(buttonIcon, buttonText, target, textToCopy);
+    checkAndCopyText(buttonIcon, buttonText, textToCopy);
   }
 };
 
