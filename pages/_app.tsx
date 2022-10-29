@@ -23,9 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       </Script>
 
-      {/* <ThemeProvider> */}
       <Component {...pageProps} />
-      {/* </ThemeProvider> */}
     </Provider>
   );
 }
