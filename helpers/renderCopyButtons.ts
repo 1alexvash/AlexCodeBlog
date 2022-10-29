@@ -93,24 +93,24 @@ const renderCopyButtons = (
   const codeSnippets =
     document.current?.querySelectorAll("div.remark-highlight") ?? [];
 
-  codeSnippets.forEach((item) => {
-    if (item.childNodes.length === 2) {
+  codeSnippets.forEach((codeSnippet) => {
+    if (codeSnippet.childNodes.length === 2) {
       return;
     }
 
-    item.prepend(createCopyButton());
+    codeSnippet.prepend(createCopyButton());
 
-    const button = item.childNodes[0];
+    const button = codeSnippet.childNodes[0];
 
     if (!(button instanceof HTMLElement)) {
       return;
     }
 
-    item.addEventListener("mouseenter", () => {
+    codeSnippet.addEventListener("mouseenter", () => {
       button.style.display = "flex";
     });
 
-    item.addEventListener("mouseleave", () => {
+    codeSnippet.addEventListener("mouseleave", () => {
       button.style.display = "none";
     });
 
