@@ -6,14 +6,9 @@ const onClickCheck = (event: MouseEvent): void => {
 
   const areChildNodesAndClassesValid = (
     buttonImg: ChildNode,
-    buttonText: ChildNode,
-    target: Target
+    buttonText: ChildNode
   ): buttonImg is HTMLElement => {
-    if (
-      buttonImg instanceof HTMLElement &&
-      buttonText &&
-      target.className.slice(0, 8) === "btn-copy"
-    ) {
+    if (buttonImg instanceof HTMLElement && buttonText) {
       return true;
     } else {
       return false;
@@ -41,7 +36,7 @@ const onClickCheck = (event: MouseEvent): void => {
     target: Target,
     textToCopy: string
   ) => {
-    if (!areChildNodesAndClassesValid(buttonIcon, buttonText, target)) {
+    if (!areChildNodesAndClassesValid(buttonIcon, buttonText)) {
       return;
     }
 
@@ -118,6 +113,7 @@ const renderCopyButtons = (
     item.addEventListener("mouseleave", () => {
       button.style.display = "none";
     });
+
     button.addEventListener("click", (event) => {
       onClickCheck(event);
     });
