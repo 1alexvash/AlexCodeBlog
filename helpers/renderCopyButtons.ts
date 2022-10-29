@@ -4,14 +4,6 @@ type Target = HTMLButtonElement | HTMLSpanElement | HTMLImageElement;
 const onClickCheck = (event: MouseEvent): void => {
   const target = event.target;
 
-  const targetClasslistCheck = (target: Target) => {
-    const buttonCopyClasses = ["btn-copy", "btn-copy-img", "btn-copy-text"];
-
-    if (buttonCopyClasses.includes(target.className)) {
-      return true;
-    }
-  };
-
   const areChildNodesAndClassesValid = (
     buttonImg: ChildNode,
     buttonText: ChildNode,
@@ -20,7 +12,7 @@ const onClickCheck = (event: MouseEvent): void => {
     if (
       buttonImg instanceof HTMLElement &&
       buttonText &&
-      targetClasslistCheck(target)
+      target.className.slice(0, 8) === "btn-copy"
     ) {
       return true;
     } else {
@@ -110,6 +102,7 @@ const renderCopyButtons = (
     if (item.childNodes.length === 2) {
       return;
     }
+
     item.prepend(createCopyButton());
 
     const button = item.childNodes[0];
@@ -131,14 +124,15 @@ const renderCopyButtons = (
   });
 
   return (): void => {
-    codeSnippets.forEach((codeSnippet) =>
+    codeSnippets.forEach((codeSnippet) => {
       codeSnippet.childNodes[0].removeEventListener("click", (event) => {
         if (!(event instanceof MouseEvent)) {
           return;
         }
+
         onClickCheck(event);
-      })
-    );
+      });
+    });
   };
 };
 
