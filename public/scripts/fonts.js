@@ -1,41 +1,37 @@
-import { useEffect, useState } from "react";
+(async () => {
+  const isApple =
+    ["iPad", "iPhone", "iPod"].includes(navigator.platform) ||
+    (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 
-interface Props {
-  children: JSX.Element;
-}
+  const defaultDescriptors = {
+    style: "normal",
+    weight: "400",
+    display: "swap",
+  };
 
-const FontProvider = ({ children }: Props) => {
-  const [loading, setLoading] = useState(true);
+  const localFonts = [
+    {
+      family: "Ubuntu",
+      soure:
+        'url(/fonts/Ubuntu-Regular.woff2) format("woff2"), url("/fonts/Ubuntu-Regular.woff") format("woff")',
+    },
+    {
+      family: "Ubuntu",
+      soure:
+        'url(/fonts/Ubuntu-Medium.woff2) format("woff2"), url("/fonts/Ubuntu-Medium.woff") format("woff")',
+      descriptors: { weight: "500" },
+    },
+    {
+      family: "Ubuntu",
+      soure:
+        'url(/fonts/Ubuntu-Bold.woff2) format("woff2"), url("/fonts/Ubuntu-Bold.woff") format("woff")',
+      descriptors: { weight: "700" },
+    },
+  ];
 
-  useEffect(() => {
-    (async () => {
-      const defaultDescriptors = {
-        style: "normal",
-        weight: "400",
-        display: "swap",
-      };
-
-      const localFonts = [
-        {
-          family: "Ubuntu",
-          soure:
-            'url(/fonts/Ubuntu-Regular.woff2) format("woff2"), url("/fonts/Ubuntu-Regular.woff") format("woff")',
-        },
-        {
-          family: "Ubuntu",
-          soure:
-            'url(/fonts/Ubuntu-Medium.woff2) format("woff2"), url("/fonts/Ubuntu-Medium.woff") format("woff")',
-          descriptors: { weight: "500" },
-        },
-        {
-          family: "Ubuntu",
-          soure:
-            'url(/fonts/Ubuntu-Bold.woff2) format("woff2"), url("/fonts/Ubuntu-Bold.woff") format("woff")',
-          descriptors: { weight: "700" },
-        },
-      ];
-
-      const unicodes = [
+  const notoEmojiUnicodes = isApple
+    ? []
+    : [
         "U+1f1e6-1f1ff",
         "U+200d, U+2620, U+26a7, U+fe0f, U+1f308, U+1f38c, U+1f3c1, U+1f3f3-1f3f4, U+1f6a9, U+e0062-e0063, U+e0065, U+e0067, U+e006c, U+e006e, U+e0073-e0074, U+e0077, U+e007f",
         "U+23, U+2a, U+30-39, U+a9, U+ae, U+200d, U+203c, U+2049, U+20e3, U+2122, U+2139, U+2194-2199, U+21a9-21aa, U+23cf, U+23e9-23ef, U+23f8-23fa, U+24c2, U+25aa-25ab, U+25b6, U+25c0, U+25fb-25fe, U+2611, U+2622-2623, U+2626, U+262a, U+262e-262f, U+2638, U+2640, U+2642, U+2648-2653, U+2660, U+2663, U+2665-2666, U+2668, U+267b, U+267e-267f, U+2695, U+269b-269c, U+26a0, U+26a7, U+26aa-26ab, U+26ce, U+26d4, U+2705, U+2714, U+2716, U+271d, U+2721, U+2733-2734, U+2747, U+274c, U+274e, U+2753-2755, U+2757, U+2764, U+2795-2797, U+27a1, U+27b0, U+27bf, U+2934-2935, U+2b05-2b07, U+2b1b-2b1c, U+2b55, U+3030, U+303d, U+3297, U+3299, U+fe0f, U+1f170-1f171, U+1f17e-1f17f, U+1f18e, U+1f191-1f19a, U+1f201-1f202, U+1f21a, U+1f22f, U+1f232-1f23a, U+1f250-1f251, U+1f310, U+1f3a6, U+1f3b5-1f3b6, U+1f3bc, U+1f3e7, U+1f441, U+1f499-1f49c, U+1f49f-1f4a0, U+1f4a2, U+1f4ac-1f4ad, U+1f4b1-1f4b2, U+1f4b9, U+1f4db, U+1f4f2-1f4f6, U+1f500-1f50a, U+1f515, U+1f518-1f524, U+1f52f-1f53d, U+1f549, U+1f54e, U+1f5a4, U+1f5e8, U+1f5ef, U+1f6ab, U+1f6ad-1f6b1, U+1f6b3, U+1f6b7-1f6bc, U+1f6be, U+1f6c2-1f6c5, U+1f6d0-1f6d1, U+1f6d7, U+1f6dc, U+1f7e0-1f7eb, U+1f7f0, U+1f90d-1f90e, U+1f9e1, U+1fa75-1fa77, U+1faaf",
@@ -48,46 +44,36 @@ const FontProvider = ({ children }: Props) => {
         "U+200d, U+261d, U+2620, U+2639-263a, U+2665, U+270a-270d, U+2728, U+2763-2764, U+2b50, U+fe0f, U+1f31a-1f31f, U+1f32b, U+1f383, U+1f389, U+1f3fb-1f3ff, U+1f440-1f450, U+1f463-1f465, U+1f479-1f47b, U+1f47d-1f480, U+1f485, U+1f48b-1f48c, U+1f493-1f49f, U+1f4a4-1f4a6, U+1f4a8-1f4ab, U+1f4af, U+1f525, U+1f573, U+1f590, U+1f595-1f596, U+1f5a4, U+1f5e3, U+1f600-1f644, U+1f648-1f64a, U+1f64c, U+1f64f, U+1f90c-1f925, U+1f927-1f92f, U+1f932-1f933, U+1f970-1f976, U+1f978-1f97a, U+1f9a0, U+1f9b4-1f9b7, U+1f9bb, U+1f9be-1f9bf, U+1f9d0, U+1f9e0-1f9e1, U+1fa75-1fa79, U+1fac0-1fac2, U+1fae0-1fae6, U+1fae8, U+1faf0-1faf8",
       ];
 
-      const fonts = localFonts
-        .map(
-          ({ family, soure, descriptors = {} }) =>
-            new FontFace(family, soure, {
+  const fonts = localFonts
+    .map(
+      ({ family, soure, descriptors = {} }) =>
+        new FontFace(family, soure, {
+          ...defaultDescriptors,
+          ...descriptors,
+        })
+    )
+    .concat(
+      notoEmojiUnicodes.map(
+        (unicode, index) =>
+          new FontFace(
+            "Noto Color Emoji",
+            `url(https://fonts.gstatic.com/s/notocoloremoji/v24/Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabsE4tq3luCC7p-aXxcn.${index}.woff2) format('woff2')`,
+            {
               ...defaultDescriptors,
-              ...descriptors,
-            })
-        )
-        .concat(
-          unicodes.map(
-            (unicode, index) =>
-              new FontFace(
-                "Noto Color Emoji",
-                `url(https://fonts.gstatic.com/s/notocoloremoji/v24/Yq6P-KqIXTD0t4D9z1ESnKM3-HpFabsE4tq3luCC7p-aXxcn.${index}.woff2) format('woff2')`,
-                {
-                  ...defaultDescriptors,
-                  unicodeRange: unicode,
-                }
-              )
+              unicodeRange: unicode,
+            }
           )
-        );
+      )
+    );
 
-      try {
-        await Promise.all(
-          fonts.map(async (font) => {
-            await font.load();
-            document.fonts.add(font);
-          })
-        );
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
-
-  if (loading) return <></>;
-
-  return children;
-};
-
-export default FontProvider;
+  try {
+    await Promise.all(
+      fonts.map(async (font) => {
+        await font.load();
+        document.fonts.add(font);
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+})();
