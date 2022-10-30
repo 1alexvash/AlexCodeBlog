@@ -14,12 +14,12 @@ export const themeSlice = createSlice({
       const theme = action.payload;
       localStorage.theme = theme;
 
-      const body = document.querySelector("body");
+      const html = document.querySelector("html");
 
       if (theme === "dark") {
-        body?.classList.add("dark-theme");
+        html?.classList.add("dark-theme");
       } else {
-        body?.classList.remove("dark-theme");
+        html?.classList.remove("dark-theme");
       }
 
       return (state = theme);
