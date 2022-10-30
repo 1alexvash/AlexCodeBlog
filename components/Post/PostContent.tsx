@@ -6,21 +6,29 @@ import {
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
+import { useEffect, useRef } from "react";
+
+import renderCopyButtons from "../../helpers/renderCopyButtons";
 
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 interface Props {
   post: PostDocument;
 }
 
-const getFirstParagraph = (str: string) => {
-  const openedElement = str.indexOf("<p>") + 3;
-  const closedElement = str.indexOf("</p>");
+const getFirstParagraph = (string: string) => {
+  const openedElement = string.indexOf("<p>") + 3;
+  const closedElement = string.indexOf("</p>");
 
-  return str.slice(openedElement, closedElement);
+  return string.slice(openedElement, closedElement);
 };
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
+  const document = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    return renderCopyButtons(document);
+  }, [post.content]);
 
   return (
     <article className="blogpost-content">
@@ -66,8 +74,7 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
-
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} />
 
       {/* <Reactions /> This future might be added later */}
     </article>
