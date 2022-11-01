@@ -70,7 +70,6 @@ const createCopyButton = (): HTMLButtonElement => {
   const button = document.createElement("button");
   const buttonIcon = document.createElement("img");
   const buttonText = document.createElement("span");
-
   button.classList.add("btn-copy");
   button.style.display = "none";
   button.setAttribute("type", "button");
@@ -92,7 +91,10 @@ const renderCopyButtons = (
     document.current?.querySelectorAll("div.remark-highlight") ?? [];
 
   codeSnippets.forEach((codeSnippet) => {
-    if (codeSnippet.childNodes.length === 2) {
+    if (
+      codeSnippet.childNodes.length === 2 ||
+      !(codeSnippet instanceof HTMLElement)
+    ) {
       return;
     }
 
@@ -102,6 +104,10 @@ const renderCopyButtons = (
 
     if (!(button instanceof HTMLElement)) {
       return;
+    }
+
+    if (codeSnippet.clientHeight <= 60) {
+      button.style.top = "6px";
     }
 
     codeSnippet.addEventListener("mouseenter", () => {
