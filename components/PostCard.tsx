@@ -65,8 +65,8 @@ const PostCard = ({ post }: Props) => {
 
   return (
     <li>
-      {isPostADraft(post) ? <DraftPostMark /> : null}
-      {isPostInTheFuture(post) === false ? <FuturePostMark /> : null}
+      {isPostADraft(post) && <DraftPostMark />}
+      {isPostInTheFuture(post) === false && <FuturePostMark />}
       <div className={classNameOfPost}>
         <div className="content">
           <Link href={`/post/${post.slug}`}>
@@ -85,7 +85,7 @@ const PostCard = ({ post }: Props) => {
                   shimmer(378, 378)
                 )}`}
                 style={
-                  classNameOfPost.includes("posts-list-block-draft-or-future")
+                  isPostADraft(post) || isPostInTheFuture(post) === false
                     ? { filter: "grayscale(50%)" }
                     : {}
                 }
