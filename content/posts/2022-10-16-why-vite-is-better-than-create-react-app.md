@@ -7,7 +7,6 @@ tags:
   - Vite
   - React
 ---
-
 First thing first if you don't know.
 
 **Create React App** – is a technology for running react applications, it does automatic project bundling, so you don't have to set up your own Webpack server by configuring JSX plugins, and other stuff, so your browser can understand "react language".
@@ -22,15 +21,15 @@ When we just start using Vite, it already welcomes as with a user-friendly inter
 
 ![vite command line interface](/post-images/animation.gif)
 
-(Add some details)
+It gives as flexibility to choose between JavaScript / TypeScript, or play around with different frameworks.
 
-And Create React App CLI, just doesn't feel stable overall, I had many cases when the project was stuck during initialization, or I had some issues along the way
+And Create React App CLI, just doesn't feel stable overall, I had many cases when the project was stuck during initialization, or I had some other issues along the way
 
 ### Config
 
 Vite has this cool **vite.config.js** file, where you can easily change for example the port number, or whether you want to have server open, upon launching the app.
 
-It is just nice to have, and makes the overall experience feel overall smother.
+It is just nice to have, and makes the overall experience feel overall smoother.
 
 ### Speed
 
@@ -40,13 +39,17 @@ Initializing the project is 100x faster than using recommend bundler from React 
 
 Starting the dev server is 10 times faster.
 
-Installing dependencies is up to 5 times faster.
-
-But, most importantly it changes the page instantly without a refresh, so you can code way faster.
+Installing initial dependencies is 5 times faster.
 
 **Why it is fast in the first place?**
 
-It's because Vite is smart enough to understand to only compile the files, that actually changed not the whole application
+But, most importantly it changes the page instantly without a full-page refresh, so you can code way faster.
+
+![](/post-images/webpack-vs-vite-1.png)
+
+It is able to achieve it through smart bundling by compiling files which actually changed during save.
+
+![](/post-images/webpack-vs-vite-2.png)
 
 ## The bottom line:
 
