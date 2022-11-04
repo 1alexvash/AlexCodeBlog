@@ -6,7 +6,18 @@ class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <script src="/scripts/fonts.js" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=""
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap"
+            rel="stylesheet"
+          />
+
+          {/* <script src="/scripts/fonts.js" /> */}
           <script src="/scripts/theme.js" />
         </Head>
         <body>
