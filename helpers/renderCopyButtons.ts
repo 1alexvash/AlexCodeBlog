@@ -3,17 +3,6 @@ import { RefObject } from "react";
 const onClickCheck = (event: MouseEvent): void => {
   const target = event.target;
 
-  const areChildNodesAndClassesValid = (
-    buttonImg: ChildNode,
-    buttonText: ChildNode
-  ): buttonImg is HTMLElement => {
-    if (buttonImg instanceof HTMLElement && buttonText) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const copyText = (text: string): void => {
     navigator.clipboard.writeText(text);
   };
@@ -30,11 +19,11 @@ const onClickCheck = (event: MouseEvent): void => {
   };
 
   const checkAndCopyText = (
-    buttonIcon: ChildNode,
-    buttonText: ChildNode,
+    buttonIcon: Element | null,
+    buttonText: Element | null,
     textToCopy: string
   ) => {
-    if (!areChildNodesAndClassesValid(buttonIcon, buttonText)) {
+    if (!(buttonIcon instanceof HTMLElement && buttonText)) {
       return;
     }
 
@@ -44,23 +33,22 @@ const onClickCheck = (event: MouseEvent): void => {
   };
 
   if (target instanceof HTMLButtonElement) {
-    const targetChildren = target.childNodes;
-    const buttonIcon = targetChildren[0];
-    const buttonText = targetChildren[1];
-    const textToCopy = target.parentElement?.childNodes[1]?.textContent ?? " ";
+    const buttonIcon = target.querySelector("img.btn-copy-img");
+    const buttonText = target.querySelector("span.btn-copy-text");
+    const textToCopy =
+      target.parentElement?.querySelector("code")?.textContent ?? " ";
 
     checkAndCopyText(buttonIcon, buttonText, textToCopy);
   } else if (
     target instanceof HTMLElement &&
     target.parentElement instanceof HTMLButtonElement
   ) {
-    const parentButton = target?.parentElement;
-    const buttonChildNodes = parentButton?.childNodes;
-
-    const buttonIcon = buttonChildNodes[0];
-    const buttonText = buttonChildNodes[1];
+    const targetParent = target?.parentElement;
+    const buttonIcon = targetParent.querySelector("img.btn-copy-img");
+    const buttonText = targetParent.querySelector("span.btn-copy-text");
     const textToCopy =
-      parentButton?.parentElement?.childNodes[1]?.textContent ?? " ";
+      target?.parentElement?.parentElement?.querySelector("code")
+        ?.textContent ?? " ";
 
     checkAndCopyText(buttonIcon, buttonText, textToCopy);
   }
@@ -70,7 +58,6 @@ const createCopyButton = (): HTMLButtonElement => {
   const button = document.createElement("button");
   const buttonIcon = document.createElement("img");
   const buttonText = document.createElement("span");
-
   button.classList.add("btn-copy");
   button.style.display = "none";
   button.setAttribute("type", "button");
@@ -92,7 +79,10 @@ const renderCopyButtons = (
     document.current?.querySelectorAll("div.remark-highlight") ?? [];
 
   codeSnippets.forEach((codeSnippet) => {
-    if (codeSnippet.childNodes.length === 2) {
+    if (
+      codeSnippet.querySelector("button.btn-copy") ||
+      !(codeSnippet instanceof HTMLElement)
+    ) {
       return;
     }
 
@@ -102,6 +92,10 @@ const renderCopyButtons = (
 
     if (!(button instanceof HTMLElement)) {
       return;
+    }
+
+    if (codeSnippet.clientHeight <= 60) {
+      button.style.top = "6px";
     }
 
     codeSnippet.addEventListener("mouseenter", () => {
@@ -119,13 +113,15 @@ const renderCopyButtons = (
 
   return (): void => {
     codeSnippets.forEach((codeSnippet) => {
-      codeSnippet.childNodes[0].removeEventListener("click", (event) => {
-        if (!(event instanceof MouseEvent)) {
-          return;
-        }
+      codeSnippet
+        .querySelector("button.btn-copy")
+        ?.removeEventListener("click", (event) => {
+          if (!(event instanceof MouseEvent)) {
+            return;
+          }
 
-        onClickCheck(event);
-      });
+          onClickCheck(event);
+        });
     });
   };
 };
