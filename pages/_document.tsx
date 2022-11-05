@@ -12,7 +12,7 @@ class CustomDocument extends Document {
             as="font"
           />
 
-          {/* <script src="/scripts/fonts.js" /> */}
+          <script src="/scripts/fonts.js" />
           <script src="/scripts/theme.js" />
         </Head>
         <body>
