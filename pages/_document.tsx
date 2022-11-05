@@ -6,6 +6,12 @@ class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap"
+            rel="preload"
+            as="font"
+          />
+
           <script src="/scripts/fonts.js" />
           <script src="/scripts/theme.js" />
         </Head>

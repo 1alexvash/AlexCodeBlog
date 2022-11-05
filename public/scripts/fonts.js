@@ -9,22 +9,24 @@
     display: "swap",
   };
 
-  const localFonts = [
-    {
-      source:
-        'url(/fonts/Ubuntu-Regular.woff2) format("woff2"), url("/fonts/Ubuntu-Regular.woff") format("woff")',
-    },
-    {
-      source:
-        'url(/fonts/Ubuntu-Medium.woff2) format("woff2"), url("/fonts/Ubuntu-Medium.woff") format("woff")',
-      descriptors: { weight: "500" },
-    },
-    {
-      source:
-        'url(/fonts/Ubuntu-Bold.woff2) format("woff2"), url("/fonts/Ubuntu-Bold.woff") format("woff")',
-      descriptors: { weight: "700" },
-    },
-  ];
+  // TODO: Needs a potential refactor
+  // const localFonts = [
+  //   {
+  //     source:
+  //       'url(/fonts/Ubuntu-Regular.woff2) format("woff2"), url("/fonts/Ubuntu-Regular.woff") format("woff")',
+  //   },
+  //   {
+  //     source:
+  //       'url(/fonts/Ubuntu-Medium.woff2) format("woff2"), url("/fonts/Ubuntu-Medium.woff") format("woff")',
+  //     descriptors: { weight: "500" },
+  //   },
+  //   {
+  //     source:
+  //       'url(/fonts/Ubuntu-Bold.woff2) format("woff2"), url("/fonts/Ubuntu-Bold.woff") format("woff")',
+  //     descriptors: { weight: "700" },
+  //   },
+  // ];
+  const localFonts = [];
 
   const emojiUnicodes = isApple
     ? []
