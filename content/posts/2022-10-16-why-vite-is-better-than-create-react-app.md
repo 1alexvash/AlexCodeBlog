@@ -7,6 +7,7 @@ tags:
   - Vite
   - React
 ---
+
 First thing first if you don't know.
 
 **Create React App** – is a technology for running react applications, it does automatic project bundling, so you don't have to set up your own Webpack server by configuring JSX plugins, and other stuff, so your browser can understand "react language".
@@ -49,10 +50,10 @@ Let's compare bundling process:
 
 ![](/post-images/webpack-vs-vite-1.png)
 
-It is able to  achieve it through smart bundling by compiling files which actually changed during save, not the entire application.
+It is able to achieve it through smart bundling by compiling files which actually changed during save, not the entire application.
 
 ![](/post-images/webpack-vs-vite-2.png)
 
 ## The bottom line:
 
-Just try it, and you may as well fall in  love with it just like me.
+Just try it, and you may as well fall in 💘 love with it just like me.

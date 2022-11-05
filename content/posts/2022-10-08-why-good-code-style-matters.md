@@ -8,6 +8,7 @@ draft: true
 tags:
   - CleanCode
 ---
+
 Let's imagine we have two guys, one guy has a formatting set to single quotes, and the other for double quotes. Suddenly the second guy needs to work, on the file of the first guy. What's going to happen?
 
 That's right the entire file is going to get reformatted, not a big deal for a small file or project, but a disaster for any decent size project.
@@ -46,7 +47,7 @@ How we read a normal text:
 
 ![](/post-images/eye-reading-text-example.png)
 
-So, you can see that the eye travels a lot, and the longer the line, the more it has to travel to read the text, and less efficient reading feels.
+So, as you can see that the eye travels a lot, and the longer the line, the more it has to travel to read the text, and less efficient reading feels.
 
 Final example, on what mode do you read text on your phone?
 
