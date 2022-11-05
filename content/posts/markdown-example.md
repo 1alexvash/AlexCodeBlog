@@ -1,6 +1,6 @@
 ---
 title: Markdown example
-date: 2022-08-28T15:40:22.718Z
+date: 2022-10-24T10:10:18.885Z
 featuredImage: /post-images/camera.jpg
 draft: false
 tags:
