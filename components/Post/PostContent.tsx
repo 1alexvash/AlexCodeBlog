@@ -8,7 +8,6 @@ import { PostDocument } from "interfaces";
 import Head from "next/head";
 
 import { DraftPostMark, FuturePostMark } from "../PostCard";
-
 interface Props {
   post: PostDocument;
 }
@@ -37,16 +36,22 @@ const PostContent = ({ post }: Props) => {
       </Head>
 
       <div className="blogpost-image">
-        {isPostADraft(post) ? <DraftPostMark /> : null}
-        {isPostInTheFuture(post) === false ? <FuturePostMark /> : null}
+        {isPostADraft(post) && <DraftPostMark />}
+        {isPostInTheFuture(post) && <FuturePostMark />}
+
         <img
           src={
             post.featuredImage ? post.featuredImage : "/post-images/draft.webp"
           }
           alt="blog post image"
-          className="gray-filter-for-img"
           width={790}
           height={394}
+          style={
+            isPostADraft(post) || isPostInTheFuture(post)
+              ? { filter: "grayscale(50%)", borderRadius: "3px" }
+              : //Added borderRadius, because it haven't been working
+                {}
+          }
         />
       </div>
       <div className="blogpost-date">

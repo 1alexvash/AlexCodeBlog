@@ -11,7 +11,7 @@ export function isPostADraft(post: PostDocumentWithoutContent) {
 }
 
 export function isPostInTheFuture(post: PostDocumentWithoutContent) {
-  if (today.toISOString() > post.date) {
+  if (today.toISOString() < post.date) {
     return true;
   } else {
     return false;
