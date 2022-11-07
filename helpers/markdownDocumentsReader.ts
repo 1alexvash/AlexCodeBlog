@@ -22,17 +22,23 @@ export function getPostDocumentBySlug(slug: string) {
   return JSONSerialize({ slug: realSlug, ...data, content }) as PostDocument;
 }
 
-export function getAllPostDocuments(): PostDocumentWithoutContent[] {
+export function getAllPostDocuments(
+  getDraftFuturePosts: boolean
+): PostDocumentWithoutContent[] {
   const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => {
       {
-        if (isDev) {
+        if (getDraftFuturePosts) {
+          return (
+            isPostADraft(post) === true || isPostInTheFuture(post) === true
+          );
+        } else if (isDev) {
           return true;
         } else {
           return (
-            isPostADraft(post) === false && isPostInTheFuture(post) === true
+            isPostADraft(post) === false && isPostInTheFuture(post) === false
           );
         }
       }
