@@ -2,17 +2,24 @@ import config from "config";
 import { useEffect, useState } from "react";
 
 const Intro = () => {
-  const [data, setData] = useState();
+  const [upcommingPosts, setUpcommingPosts] = useState();
+  let admin = false;
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("admin") == "true") {
+      console.log(upcommingPosts);
+      admin = true;
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       const posts = await fetch("/api/getUpcomingPosts").then((data) =>
         data.json()
       );
 
-      setData(posts);
+      setUpcommingPosts(posts);
     };
     fetchData();
-  }, []);
+  }, [admin]);
   return (
     <section className="intro-section">
       <div className="container">
@@ -21,7 +28,14 @@ const Intro = () => {
             <div className="image">
               <img
                 onClick={() => {
-                  console.log(data);
+                  if (localStorage.getItem("admin") == "true") {
+                    alert("Turning off editor mode");
+                    localStorage.setItem("admin", "false");
+                  } else {
+                    alert("Turning on editor mode");
+                    localStorage.setItem("admin", "true");
+                    console.log(upcommingPosts);
+                  }
                 }}
                 src="/images/author-avatar.jpg"
                 alt="author-avatar"

@@ -7,7 +7,7 @@ import { isPostADraft, isPostInTheFuture } from "./checkOfDraftOrFuturePost";
 
 const documentsDirectory = join(process.cwd(), "content/posts");
 
-const isDev = false;
+const isDev = process.env.NODE_ENV === "development";
 
 function JSONSerialize<Type>(data: Type): Type {
   return JSON.parse(JSON.stringify(data));
@@ -30,10 +30,12 @@ export function getAllPostDocuments(
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => {
       {
-        if (isDev) {
+        if (getDraftFuturePosts) {
+          return (
+            isPostADraft(post) === true || isPostInTheFuture(post) === false
+          );
+        } else if (isDev) {
           return true;
-        } else if (getDraftFuturePosts) {
-          isPostADraft(post) === false && isPostInTheFuture(post) === true;
         } else {
           return (
             isPostADraft(post) === false && isPostInTheFuture(post) === true
