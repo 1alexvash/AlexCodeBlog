@@ -9,7 +9,6 @@ import Head from "next/head";
 import { useEffect, useRef } from "react";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
-
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {

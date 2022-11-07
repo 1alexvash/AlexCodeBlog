@@ -7,7 +7,7 @@ import { isPostADraft, isPostInTheFuture } from "./checkOfDraftOrFuturePost";
 
 const documentsDirectory = join(process.cwd(), "content/posts");
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = false;
 
 function JSONSerialize<Type>(data: Type): Type {
   return JSON.parse(JSON.stringify(data));
@@ -22,7 +22,9 @@ export function getPostDocumentBySlug(slug: string) {
   return JSONSerialize({ slug: realSlug, ...data, content }) as PostDocument;
 }
 
-export function getAllPostDocuments(): PostDocumentWithoutContent[] {
+export function getAllPostDocuments(
+  getDraftFuturePosts: boolean
+): PostDocumentWithoutContent[] {
   const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
@@ -30,6 +32,8 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
       {
         if (isDev) {
           return true;
+        } else if (getDraftFuturePosts) {
+          isPostADraft(post) === false && isPostInTheFuture(post) === true;
         } else {
           return (
             isPostADraft(post) === false && isPostInTheFuture(post) === true
