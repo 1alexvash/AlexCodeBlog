@@ -32,7 +32,7 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
           return true;
         } else {
           return (
-            isPostADraft(post) === false && isPostInTheFuture(post) === true
+            isPostADraft(post) === false && isPostInTheFuture(post) === false
           );
         }
       }
