@@ -1403,19 +1403,19 @@ blockquote p:last-child {
   max-width: calc(100vw - 30px);
 }
 
-.triangle {
+.trn {
   width: 0px;
   height: 0px;
   position: absolute;
   z-index: 3;
 }
 
-.triangle-item {
+.trn-i {
   border-top: 62px solid transparent;
   border-bottom: 62px solid transparent;
 }
 
-.triangle-text {
+.trn-txt {
   display: block;
   position: relative;
   transform: rotate(88deg);
@@ -1424,12 +1424,12 @@ blockquote p:last-child {
   text-transform: uppercase;
 }
 
-.small-triangles-item {
+.sm-trns-i {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
 }
 
-.triangle-draft {
+.trn-drt {
   top: -45px;
   transform: rotate(225deg);
   left: -13px;
@@ -1437,61 +1437,61 @@ blockquote p:last-child {
   z-index: 3;
 }
 
-.triangle-text-draft {
+.trn-txt-drt {
   right: 42px;
   font-size: 16px;
   top: -35px;
 }
 
-.small-triangles-item-draft {
+.sm-trns-i-drt {
   border-left: 5px solid rgb(0, 0, 0);
   transform: rotate(45deg);
 }
 
-.small-triangles-item-draft-first {
+.sm-trns-i-drt-first {
   top: -5px;
   left: 80px;
 }
 
-.small-triangles-item-draft-second {
+.sm-trns-i-drt-sec {
   top: 76px;
   left: -1px;
 }
 
-.triangle-future {
+.trn-fut {
   top: -45px;
   transform: rotate(315deg);
   right: -13px;
   border-left: 62px solid #fe6c0a;
 }
 
-.triangle-text-future {
+.trn-txt-fut {
   right: 37px;
   font-size: 14px;
   top: -34px;
 }
 
-.small-triangles-item-future {
+.sm-trns-i-fut {
   border-left: 5px solid #a24100;
   transform: rotate(-225deg);
 }
 
-.small-triangles-item-future-first {
+.sm-trns-i-fut-first {
   top: -5px;
   right: 79px;
 }
 
-.small-triangles-item-future-second {
+.sm-trns-i-fut-sec {
   top: 76px;
   right: -2px;
 }
 
-.triangle-text-future-post {
+.trn-txt-fut-post {
   right: 50px;
   top: -43px;
 }
 
-.posts-list-block-draft-or-future .post-img:after {
+.posts-list-block-drt-or-fut .post-img:after {
   border: none;
   height: 50%;
 }

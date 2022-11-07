@@ -14,26 +14,26 @@ interface Props {
 }
 
 export const DraftPostMark = () => (
-  <div className="draft-post">
-    <div className="triangle-draft triangle triangle-item">
-      <span className="triangle-text-draft triangle-text">draft</span>
+  <div className="drt-post">
+    <div className="trn-drt trn trn-i">
+      <span className="trn-txt-drt trn-txt">draft</span>
     </div>
-    <div className="small-triangles-draft">
-      <div className="small-triangles-item-draft-first triangle small-triangles-item-draft small-triangles-item"></div>
-      <div className="small-triangles-item-draft-second triangle small-triangles-item-draft small-triangles-item"></div>
+    <div className="sm-trns-drt">
+      <div className="sm-trns-i-drt-first trn sm-trns-i-drt sm-trns-i"></div>
+      <div className="sm-trns-i-drt-sec trn sm-trns-i-drt sm-trns-i"></div>
     </div>
   </div>
 );
 
 export const FuturePostMark = () => (
-  <div className="future-post">
-    <div className="triangle-future triangle triangle-item">
-      <span className="triangle-text-future triangle-text">future</span>
-      <span className="triangle-text-future-post triangle-text"> post</span>
+  <div className="fut-post">
+    <div className="trn-fut trn trn-i">
+      <span className="trn-txt-fut trn-txt">future</span>
+      <span className="trn-txt-fut-post trn-txt"> post</span>
     </div>
-    <div className="small-triangles-future">
-      <div className="small-triangles-item-future-first triangle small-triangles-item-future small-triangles-item"></div>
-      <div className="small-triangles-item-future-second triangle small-triangles-item-future small-triangles-item"></div>
+    <div className="sm-trns-fut">
+      <div className="sm-trns-i-fut-first trn sm-trns-i-fut sm-trns-i"></div>
+      <div className="sm-trns-i-fut-sec trn sm-trns-i-fut sm-trns-i"></div>
     </div>
   </div>
 );
@@ -60,7 +60,7 @@ const PostCard = ({ post }: Props) => {
 
   const classNameOfPost =
     isPostADraft(post) === true || isPostInTheFuture(post) === false
-      ? "posts-list-block posts-list-block-draft-or-future"
+      ? "posts-list-block posts-list-block-drt-or-fut"
       : "posts-list-block";
 
   return (

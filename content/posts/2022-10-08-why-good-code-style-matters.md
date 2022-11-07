@@ -4,7 +4,7 @@ date: 2023-10-24T10:10:19.885Z
 
 featuredImage: /post-images/good-style-article-prettier.png
 
-draft: false
+draft: true
 tags:
   - CleanCode
 ---
