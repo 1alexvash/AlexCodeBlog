@@ -42,7 +42,9 @@ const Header = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const posts = await fetch("/api/getAllPosts").then((data) => data.json());
+      const posts = await fetch("/api/getUpcommingPosts").then((data) =>
+        data.json()
+      );
 
       setSearch((search) => ({
         ...search,
