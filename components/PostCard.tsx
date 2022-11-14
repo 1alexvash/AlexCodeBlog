@@ -85,11 +85,12 @@ const PostCard = ({ post }: Props) => {
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(
                   shimmer(378, 378)
                 )}`}
-                style={
-                  isPostADraft(post) || isPostInTheFuture(post)
-                    ? { filter: "grayscale(50%)" }
-                    : {}
-                }
+                style={{
+                  filter:
+                    isPostADraft(post) || isPostInTheFuture(post)
+                      ? "grayscale(50%)"
+                      : "none",
+                }}
               />
             </a>
           </Link>

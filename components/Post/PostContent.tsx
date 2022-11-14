@@ -47,11 +47,13 @@ const PostContent = ({ post }: Props) => {
           alt="blog post image"
           width={790}
           height={394}
-          style={
-            isPostADraft(post) || isPostInTheFuture(post)
-              ? { filter: "grayscale(50%)", borderRadius: "3px" }
-              : {}
-          }
+          style={{
+            filter:
+              isPostADraft(post) || isPostInTheFuture(post)
+                ? "grayscale(50%)"
+                : "none",
+            borderRadius: "3px",
+          }}
         />
       </div>
       <div className="blogpost-date">
