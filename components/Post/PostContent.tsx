@@ -8,6 +8,7 @@ import { PostDocument } from "interfaces";
 import Head from "next/head";
 
 import { DraftPostMark, FuturePostMark } from "../PostCard";
+
 interface Props {
   post: PostDocument;
 }
@@ -49,8 +50,7 @@ const PostContent = ({ post }: Props) => {
           style={
             isPostADraft(post) || isPostInTheFuture(post)
               ? { filter: "grayscale(50%)", borderRadius: "3px" }
-              : //Added borderRadius, because it haven't been working
-                {}
+              : {}
           }
         />
       </div>
