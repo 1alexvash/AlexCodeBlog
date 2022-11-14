@@ -30,10 +30,13 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
       {
         if (isDev) {
           return true;
+        } else if (
+          isPostADraft(post) === false &&
+          isPostInTheFuture(post) === false
+        ) {
+          return true;
         } else {
-          return (
-            isPostADraft(post) === false && isPostInTheFuture(post) === false
-          );
+          return false;
         }
       }
     })
