@@ -27,17 +27,15 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => {
-      {
-        if (isDev) {
-          return true;
-        } else if (
-          isPostADraft(post) === false &&
-          isPostInTheFuture(post) === false
-        ) {
-          return true;
-        } else {
-          return false;
-        }
+      if (isDev) {
+        return true;
+      } else if (
+        isPostADraft(post) === false &&
+        isPostInTheFuture(post) === false
+      ) {
+        return true;
+      } else {
+        return false;
       }
     })
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
