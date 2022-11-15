@@ -59,7 +59,7 @@ const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
 
   const classNameOfPost =
-    isPostADraft(post) === true || isPostInTheFuture(post) === true
+    isPostADraft(post) || isPostInTheFuture(post)
       ? "posts-list-block posts-list-block-drt-or-fut"
       : "posts-list-block";
 

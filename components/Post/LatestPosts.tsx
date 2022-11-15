@@ -31,11 +31,12 @@ const LatestPosts = ({ latestPosts }: Props) => {
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
-                style={
-                  isPostADraft(post) || isPostInTheFuture(post)
-                    ? { filter: "grayscale(50%)" }
-                    : {}
-                }
+                style={{
+                  filter:
+                    isPostADraft(post) || isPostInTheFuture(post)
+                      ? "grayscale(50%)"
+                      : "none",
+                }}
               />
             </a>
           </Link>
