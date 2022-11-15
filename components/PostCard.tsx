@@ -58,17 +58,18 @@ const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
 
-  const classNameOfPost =
-    isPostADraft(post) || isPostInTheFuture(post)
-      ? "posts-list-block posts-list-block-drt-or-fut"
-      : "posts-list-block";
-
   return (
     <li>
       {isPostADraft(post) && <DraftPostMark />}
       {isPostInTheFuture(post) && <FuturePostMark />}
 
-      <div className={classNameOfPost}>
+      <div
+        className={`posts-list-block ${
+          isPostADraft(post) || isPostInTheFuture(post)
+            ? "posts-list-block-draft-or-future"
+            : ""
+        }`}
+      >
         <div className="content">
           <Link href={`/post/${post.slug}`}>
             <a className="post-img">
