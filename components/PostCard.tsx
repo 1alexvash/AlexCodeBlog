@@ -74,11 +74,7 @@ const PostCard = ({ post }: Props) => {
           <Link href={`/post/${post.slug}`}>
             <a className="post-img">
               <Image
-                src={
-                  post.featuredImage
-                    ? post.featuredImage
-                    : "/post-images/draft.webp"
-                }
+                src={post.featuredImage ?? "/post-images/draft.webp"}
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
