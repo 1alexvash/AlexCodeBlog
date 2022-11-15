@@ -23,11 +23,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
           <Link href={post.slug}>
             <a className="image">
               <Image
-                src={
-                  post.featuredImage
-                    ? post.featuredImage
-                    : "/post-images/draft.webp"
-                }
+                src={post.featuredImage ?? "/post-images/draft.webp"}
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"

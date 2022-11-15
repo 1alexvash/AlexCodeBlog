@@ -41,9 +41,7 @@ const PostContent = ({ post }: Props) => {
         {isPostInTheFuture(post) && <FuturePostMark />}
 
         <img
-          src={
-            post.featuredImage ? post.featuredImage : "/post-images/draft.webp"
-          }
+          src={post.featuredImage ?? "/post-images/draft.webp"}
           alt="blog post image"
           width={790}
           height={394}

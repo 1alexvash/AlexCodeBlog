@@ -3,7 +3,7 @@ import { PostDocumentWithoutContent } from "interfaces";
 const today = new Date();
 
 export function isPostADraft(post: PostDocumentWithoutContent) {
-  if (post.draft === true) {
+  if (post.draft) {
     return true;
   } else {
     return false;
