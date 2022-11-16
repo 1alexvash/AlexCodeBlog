@@ -1166,13 +1166,11 @@ blockquote p:last-child {
   margin-right: 30px;
 }
 
-.simple-form {
+.search-block {
   text-align: left;
 }
 
-.simple-form input,
-.simple-form textarea,
-.simple-form select {
+.search-block input {
   display: block;
   width: 100%;
   transition: border-color 0.3s ease-out;
@@ -1186,53 +1184,45 @@ blockquote p:last-child {
   background: #505050;
 }
 
-.simple-form input:focus,
-.simple-form textarea:focus,
-.simple-form select:focus {
+.search-block input:focus,
+.search-block textarea:focus,
+.search-block select:focus {
   border-color: #cdcdcd;
 }
 
-.simple-form input::-webkit-input-placeholder,
-.simple-form textarea::-webkit-input-placeholder,
-.simple-form select::-webkit-input-placeholder {
+.search-block input::-webkit-input-placeholder,
+.search-block textarea::-webkit-input-placeholder,
+.search-block select::-webkit-input-placeholder {
   color: #fff;
   opacity: 0.5;
 }
 
-.simple-form input:-moz-placeholder,
-.simple-form textarea:-moz-placeholder,
-.simple-form select:-moz-placeholder {
+.search-block input:-moz-placeholder,
+.search-block textarea:-moz-placeholder,
+.search-block select:-moz-placeholder {
   color: #fff;
   opacity: 0.5;
 }
 
-.simple-form input::-moz-placeholder,
-.simple-form textarea::-moz-placeholder,
-.simple-form select::-moz-placeholder {
+.search-block input::-moz-placeholder,
+.search-block textarea::-moz-placeholder,
+.search-block select::-moz-placeholder {
   color: #fff;
   opacity: 0.5;
 }
 
-.simple-form input:-ms-input-placeholder,
-.simple-form textarea:-ms-input-placeholder,
-.simple-form select:-ms-input-placeholder {
+.search-block input:-ms-input-placeholder,
+.search-block textarea:-ms-input-placeholder,
+.search-block select:-ms-input-placeholder {
   color: #fff;
   opacity: 0.5;
 }
 
-.simple-form textarea {
+.search-block textarea {
   resize: none;
   height: 262px;
   line-height: 1.2;
   padding: 18px 19px;
-}
-
-.simple-form .input-block {
-  margin-bottom: 20px;
-}
-
-.simple-form .btn {
-  width: 100%;
 }
 
 .comments-form {
