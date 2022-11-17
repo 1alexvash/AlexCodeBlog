@@ -26,75 +26,65 @@ const MobileSearch = ({
   const dispatch = useAppDispatch();
 
   return (
-    <div className="mobile-search">
-      <div className="mobile-search-content">
-        <form
-          action="#"
-          method="post"
-          className="mobile-search-form simple-form"
-        >
-          <div className="input-block">
-            <input
-              type="text"
-              placeholder="Site search"
-              value={search.value}
-              onChange={(event) => {
-                setSearch((search) => ({
-                  ...search,
-                  value: event.target.value,
-                }));
-              }}
-              ref={mobileInputRef}
-            />
-          </div>
-        </form>
+    <div className="mobile-search search-block">
+      <input
+        type="text"
+        placeholder="Site search"
+        value={search.value}
+        onChange={(event) => {
+          setSearch((search) => ({
+            ...search,
+            value: event.target.value,
+          }));
+        }}
+        ref={mobileInputRef}
+      />
 
-        {search.value.trim().length > 0 ? (
-          search.isLoaded ? (
-            filteredPosts.length > 0 ? (
-              <div className="mobile-search-results">
-                {filteredPosts.map((post, index) => (
-                  <div className="mobile-posts-block" key={index}>
-                    <div className="inner-flex">
-                      <a href={`/post/${post.slug}`} className="image">
-                        <img
-                          src={
-                            post.featuredImage ?? "/post-images/placeholder.png"
-                          }
-                          alt="blog post image"
-                        />
-                      </a>
-                      <a href={`/post/${post.slug}`} className="name">
-                        {post.title}
-                      </a>
-                    </div>
-                    <div className="tags">
-                      {post.tags.map((tag) => (
-                        <Link href="/" key={tag}>
-                          <a
-                            href=""
-                            key={tag}
-                            onClick={() => {
-                              setShowMenu(false);
-                              dispatch(setTags([tag]));
-                            }}
-                          >
-                            #{tag}
-                          </a>
-                        </Link>
-                      ))}
-                    </div>
+      {search.value.trim().length > 0 ? (
+        search.isLoaded ? (
+          filteredPosts.length > 0 ? (
+            <div className="mobile-search-results">
+              {filteredPosts.map((post, index) => (
+                <div className="mobile-posts-block" key={index}>
+                  <div className="inner-flex">
+                    <a href={`/post/${post.slug}`} className="image">
+                      <img
+                        src={
+                          post.featuredImage ?? "/post-images/placeholder.png"
+                        }
+                        alt="blog post image"
+                      />
+                    </a>
+                    <a href={`/post/${post.slug}`} className="name">
+                      {post.title}
+                    </a>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <NotFound />
-            )
+                  <div className="tags">
+                    {post.tags.map((tag) => (
+                      <Link href="/" key={tag}>
+                        <a
+                          href=""
+                          key={tag}
+                          onClick={() => {
+                            setShowMenu(false);
+                            dispatch(setTags([tag]));
+                          }}
+                        >
+                          #{tag}
+                        </a>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
-            <MobileSkeletons />
+            <NotFound />
           )
-        ) : null}
-      </div>
+        ) : (
+          <MobileSkeletons />
+        )
+      ) : null}
 
       {search.value.trim().length > 0 && (
         <div

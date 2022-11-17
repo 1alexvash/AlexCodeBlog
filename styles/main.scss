@@ -369,51 +369,40 @@ header {
   width: 100%;
 }
 
-.desktop-search-content {
-  position: relative;
-}
-
-.desktop-search-content .no-results {
+.desktop-search .no-results {
   font-weight: 400;
   font-size: 18px;
   color: #fff;
 }
 
-.desktop-search-form {
+.desktop-search input:focus {
+  border-color: #fe6c0a !important;
+}
+
+.desktop-search input::-webkit-input-placeholder {
+  color: #777777 !important;
+  opacity: 1;
+}
+
+.desktop-search input:-moz-placeholder {
+  color: #777777 !important;
+  opacity: 1;
+}
+
+.desktop-search input::-moz-placeholder {
+  color: #777777 !important;
+  opacity: 1;
+}
+
+.desktop-search input:-ms-input-placeholder {
+  color: #777777 !important;
+  opacity: 1;
+}
+
+.desktop-search input {
   margin-bottom: 20px;
-}
-
-.desktop-search-form .input-block {
-  margin-bottom: 0;
-}
-
-.desktop-search-form .input-block input {
   color: #3a3a3a !important;
-  background: #fff;
-}
-
-.desktop-search-form .input-block input:focus {
-  border-color: #fe6c0a;
-}
-
-.desktop-search-form .input-block input::-webkit-input-placeholder {
-  color: #777777 !important;
-  opacity: 1;
-}
-
-.desktop-search-form .input-block input:-moz-placeholder {
-  color: #777777 !important;
-  opacity: 1;
-}
-
-.desktop-search-form .input-block input::-moz-placeholder {
-  color: #777777 !important;
-  opacity: 1;
-}
-
-.desktop-search-form .input-block input:-ms-input-placeholder {
-  color: #777777 !important;
-  opacity: 1;
+  background: #fff !important;
 }
 
 .desktop-search-results {
@@ -1166,13 +1155,11 @@ blockquote p:last-child {
   margin-right: 30px;
 }
 
-.simple-form {
+.search-block {
   text-align: left;
 }
 
-.simple-form input,
-.simple-form textarea,
-.simple-form select {
+.search-block input {
   display: block;
   width: 100%;
   transition: border-color 0.3s ease-out;
@@ -1186,53 +1173,11 @@ blockquote p:last-child {
   background: #505050;
 }
 
-.simple-form input:focus,
-.simple-form textarea:focus,
-.simple-form select:focus {
-  border-color: #cdcdcd;
-}
-
-.simple-form input::-webkit-input-placeholder,
-.simple-form textarea::-webkit-input-placeholder,
-.simple-form select::-webkit-input-placeholder {
-  color: #fff;
-  opacity: 0.5;
-}
-
-.simple-form input:-moz-placeholder,
-.simple-form textarea:-moz-placeholder,
-.simple-form select:-moz-placeholder {
-  color: #fff;
-  opacity: 0.5;
-}
-
-.simple-form input::-moz-placeholder,
-.simple-form textarea::-moz-placeholder,
-.simple-form select::-moz-placeholder {
-  color: #fff;
-  opacity: 0.5;
-}
-
-.simple-form input:-ms-input-placeholder,
-.simple-form textarea:-ms-input-placeholder,
-.simple-form select:-ms-input-placeholder {
-  color: #fff;
-  opacity: 0.5;
-}
-
-.simple-form textarea {
+.search-block textarea {
   resize: none;
   height: 262px;
   line-height: 1.2;
   padding: 18px 19px;
-}
-
-.simple-form .input-block {
-  margin-bottom: 20px;
-}
-
-.simple-form .btn {
-  width: 100%;
 }
 
 .comments-form {

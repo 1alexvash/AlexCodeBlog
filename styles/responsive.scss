@@ -444,59 +444,51 @@
     z-index: 40;
   }
 
-  .mobile-search-form {
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .mobile-search-form .input-block {
-    margin-bottom: 0;
-  }
-
-  .mobile-search-form .input-block input {
+  .mobile-search input {
     color: #3a3a3a !important;
     background: #fff;
     border-color: #c8c8c8;
+    margin-bottom: 20px;
   }
 
-  .mobile-search-form .input-block input:focus {
+  .mobile-search input:focus {
     border-color: #fe6c0a;
   }
 
-  .mobile-search-form .input-block input::-webkit-input-placeholder {
+  .mobile-search input::-webkit-input-placeholder {
     color: #777777 !important;
     opacity: 1;
   }
 
-  .mobile-search-form .input-block input:-moz-placeholder {
+  .mobile-search input:-moz-placeholder {
     color: #777777 !important;
     opacity: 1;
   }
 
-  .mobile-search-form .input-block input::-moz-placeholder {
+  .mobile-search input::-moz-placeholder {
     color: #777777 !important;
     opacity: 1;
   }
 
-  .mobile-search-form .input-block input:-ms-input-placeholder {
+  .mobile-search input:-ms-input-placeholder {
     color: #777777 !important;
     opacity: 1;
   }
 
-  .mobile-search-content {
+  .mobile-search {
     position: relative;
     z-index: 42;
     padding: 0 20px;
   }
 
-  .mobile-search-content .no-results {
+  .mobile-search .no-results {
     font-weight: 400;
     color: #fff;
   }
 
   .mobile-search-overlay {
     position: fixed;
-    z-index: 41;
+    z-index: -1;
     height: 100vh;
     width: 100%;
     background: rgba(0, 0, 0, 0.74);
