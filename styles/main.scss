@@ -1436,26 +1436,29 @@ blockquote p:last-child {
   border-left: 62px solid #3a3a3a;
   z-index: 3;
 }
+.triangle-draft::before {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #717171;
+  transform: rotate(45deg);
+  right: 59px;
+  top: 55px;
+}
+.triangle-draft::after {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #717171;
+  transform: rotate(45deg);
+  right: 59px;
+  bottom: 55px;
+}
 
 .triangle-text-draft {
   right: 42px;
   font-size: 16px;
   top: -35px;
-}
-
-.small-triangles-item-draft {
-  border-left: 5px solid rgb(0, 0, 0);
-  transform: rotate(45deg);
-}
-
-.small-triangles-item-draft-first {
-  top: -5px;
-  left: 80px;
-}
-
-.small-triangles-item-draft-second {
-  top: 76px;
-  left: -1px;
 }
 
 .triangle-future {
@@ -1470,20 +1473,23 @@ blockquote p:last-child {
   font-size: 14px;
   top: -34px;
 }
-
-.small-triangles-item-future {
-  border-left: 5px solid #a24100;
-  transform: rotate(-225deg);
+.triangle-future::before {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #a24100;
+  transform: rotate(45deg);
+  right: 59px;
+  top: 55px;
 }
-
-.small-triangles-item-future-first {
-  top: -5px;
-  right: 79px;
-}
-
-.small-triangles-item-future-second {
-  top: 76px;
-  right: -2px;
+.triangle-future::after {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #a24100;
+  transform: rotate(45deg);
+  right: 59px;
+  bottom: 55px;
 }
 
 .triangle-text-future-post {
