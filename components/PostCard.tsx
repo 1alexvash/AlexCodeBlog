@@ -18,10 +18,6 @@ export const DraftPostMark = () => (
     <div className="triangle-draft triangle triangle-item">
       <span className="triangle-text-draft triangle-text">draft</span>
     </div>
-    <div className="small-triangles-draft">
-      <div className="small-triangles-item-draft-first triangle small-triangles-item-draft small-triangles-item"></div>
-      <div className="small-triangles-item-draft-second triangle small-triangles-item-draft small-triangles-item"></div>
-    </div>
   </div>
 );
 
@@ -30,10 +26,6 @@ export const FuturePostMark = () => (
     <div className="triangle-future triangle triangle-item">
       <span className="triangle-text-future triangle-text">future</span>
       <span className="triangle-text-future-post triangle-text"> post</span>
-    </div>
-    <div className="small-triangles-future">
-      <div className="small-triangles-item-future-first triangle small-triangles-item-future small-triangles-item"></div>
-      <div className="small-triangles-item-future-second triangle small-triangles-item-future small-triangles-item"></div>
     </div>
   </div>
 );
