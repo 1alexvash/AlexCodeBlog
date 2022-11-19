@@ -29,14 +29,13 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
     .filter((post: PostDocument) => {
       if (isDev) {
         return true;
-      } else if (
-        isPostADraft(post) === false &&
-        isPostInTheFuture(post) === false
-      ) {
-        return true;
-      } else {
+      }
+
+      if (isPostADraft(post) || isPostInTheFuture(post)) {
         return false;
       }
+
+      return true;
     })
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
     .map((post) => {
