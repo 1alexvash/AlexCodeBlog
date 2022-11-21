@@ -253,5 +253,8 @@
 
   .btn-copy {
     background: #18191d;
+    &:hover {
+      border: 1px solid #f2f5f7;
+    }
   }
 }
