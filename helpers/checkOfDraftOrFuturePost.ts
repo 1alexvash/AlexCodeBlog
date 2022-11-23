@@ -16,9 +16,16 @@ const yesterday = new Date(today);
 yesterday.setDate(yesterday.getDate() - 1);
 //THIS IS ⬆️ FOR TESTING, DON't MERGE IT
 export function isPostInTheFuture(post: { date: Date | string }) {
-  if (today.toISOString() < post.date.toString()) {
+  const dateOfPost = new Date(post.date);
+  console.log("dateOfPost", dateOfPost);
+  console.log("today", today);
+  if (today < dateOfPost) {
     return true;
   } else {
     return false;
   }
 }
+
+console.log(isPostInTheFuture({ date: tomorrow }));
+console.log(isPostInTheFuture({ date: yesterday }));
+//THIS IS ⬆️ FOR TESTING, DON't MERGE IT
