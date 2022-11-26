@@ -1,3 +1,7 @@
+import {
+  isPostADraft,
+  isPostInTheFuture,
+} from "helpers/checkOfDraftOrFuturePost";
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,10 +23,16 @@ const LatestPosts = ({ latestPosts }: Props) => {
           <Link href={post.slug}>
             <a className="image">
               <Image
-                src={post.featuredImage ?? "/post-images/placeholder.png"}
+                src={post.featuredImage ?? "/post-images/draft.webp"}
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
+                style={{
+                  filter:
+                    isPostADraft(post) || isPostInTheFuture(post)
+                      ? "grayscale(50%)"
+                      : "none",
+                }}
               />
             </a>
           </Link>

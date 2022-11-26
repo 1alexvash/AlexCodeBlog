@@ -61,7 +61,6 @@ export async function getStaticProps({ params }: Params) {
     ...postDocument,
     content,
   };
-
   const tenLatestPosts = getAllPostDocuments().slice(0, 10);
 
   return {

@@ -1,10 +1,16 @@
 import config from "config";
+import {
+  isPostADraft,
+  isPostInTheFuture,
+} from "helpers/checkOfDraftOrFuturePost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+
+import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
   post: PostDocument;
@@ -39,11 +45,21 @@ const PostContent = ({ post }: Props) => {
       </Head>
 
       <div className="blogpost-image">
+        {isPostADraft(post) && <DraftPostMark />}
+        {isPostInTheFuture(post) && <FuturePostMark />}
+
         <img
-          src={post.featuredImage ?? "/post-images/placeholder.png"}
+          src={post.featuredImage ?? "/post-images/draft.webp"}
           alt="blog post image"
           width={790}
           height={394}
+          style={{
+            filter:
+              isPostADraft(post) || isPostInTheFuture(post)
+                ? "grayscale(50%)"
+                : "none",
+            borderRadius: "3px",
+          }}
         />
       </div>
       <div className="blogpost-date">

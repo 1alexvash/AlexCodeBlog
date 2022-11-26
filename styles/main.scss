@@ -547,7 +547,6 @@ header {
 .posts-list li {
   margin: 0 15px 30px;
   width: calc(33.333% - 30px);
-  overflow: hidden;
   position: relative;
 }
 
@@ -567,10 +566,6 @@ header {
   z-index: 2;
   border-radius: 3px;
   overflow: hidden;
-}
-
-.posts-list-block:hover .post-img:after {
-  height: 100%;
 }
 
 .posts-list-block .content {
@@ -594,10 +589,6 @@ header {
   border: 1px solid transparent;
 }
 
-.posts-list-block:hover .content:after {
-  border-color: #fe6c0a;
-}
-
 .posts-list-block .content:after {
   content: "";
   left: 0;
@@ -611,6 +602,10 @@ header {
   display: block;
   transition: all 0.3s ease-out;
   pointer-events: none;
+}
+
+.posts-list-block:hover .content:after {
+  border-color: #fe6c0a;
 }
 
 .posts-list-block .post-img {
@@ -955,8 +950,7 @@ h2 {
 
 .blogpost-image {
   margin-bottom: 26px;
-  border-radius: 3px;
-  overflow: hidden;
+  position: relative;
 }
 
 .blogpost-image img {
@@ -1379,4 +1373,107 @@ blockquote p:last-child {
 
 .btn-copy-text {
   font-size: 14px;
+}
+
+.triangle {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  z-index: 3;
+}
+
+.triangle-item {
+  border-top: 62px solid transparent;
+  border-bottom: 62px solid transparent;
+}
+
+.triangle-text {
+  display: block;
+  position: relative;
+  transform: rotate(88deg);
+  font-weight: 500;
+  color: white;
+  text-transform: uppercase;
+}
+
+.small-triangles-item {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.triangle-draft {
+  top: -45px;
+  transform: rotate(225deg);
+  left: -13px;
+  border-left: 62px solid #3a3a3a;
+  z-index: 3;
+}
+.triangle-draft::before {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #717171;
+  transform: rotate(45deg);
+  right: 59px;
+  top: 55px;
+}
+.triangle-draft::after {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #717171;
+  transform: rotate(45deg);
+  right: 59px;
+  bottom: 55px;
+}
+
+.triangle-draft-text {
+  right: 42px;
+  font-size: 16px;
+  top: -35px;
+}
+
+.triangle-future {
+  top: -45px;
+  transform: rotate(315deg);
+  right: -13px;
+  border-left: 62px solid #fe6c0a;
+}
+
+.triangle-text-future {
+  right: 37px;
+  font-size: 14px;
+  top: -34px;
+}
+.triangle-future::before {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #a24100;
+  transform: rotate(45deg);
+  right: 59px;
+  top: 55px;
+}
+.triangle-future::after {
+  content: "";
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-left: 6px solid #a24100;
+  transform: rotate(45deg);
+  right: 59px;
+  bottom: 55px;
+}
+
+.triangle-text-future-post {
+  right: 50px;
+  top: -43px;
+}
+
+.posts-list-block-draft-or-future .post-img:after {
+  border: none;
+  height: 50%;
+}
+
+.posts-list-block:hover .post-img:after {
+  height: 100%;
 }

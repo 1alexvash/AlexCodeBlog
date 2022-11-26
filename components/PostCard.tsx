@@ -1,12 +1,34 @@
+import {
+  isPostADraft,
+  isPostInTheFuture,
+} from "helpers/checkOfDraftOrFuturePost";
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
+
 interface Props {
   post: PostDocumentWithoutContent;
 }
+
+export const DraftPostMark = () => (
+  <div className="draft-post">
+    <div className="triangle triangle-draft  triangle-item">
+      <span className="triangle-draft-text triangle-text">draft</span>
+    </div>
+  </div>
+);
+
+export const FuturePostMark = () => (
+  <div className="future-post">
+    <div className="triangle triangle-future  triangle-item">
+      <span className="triangle-text-future triangle-text">future</span>
+      <span className="triangle-text-future-post triangle-text"> post</span>
+    </div>
+  </div>
+);
 
 const shimmer = (width: number, height: number) => `
   <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -30,12 +52,21 @@ const PostCard = ({ post }: Props) => {
 
   return (
     <li>
-      <div className="posts-list-block">
+      {isPostADraft(post) && <DraftPostMark />}
+      {isPostInTheFuture(post) && <FuturePostMark />}
+
+      <div
+        className={`posts-list-block ${
+          isPostADraft(post) || isPostInTheFuture(post)
+            ? "posts-list-block-draft-or-future"
+            : ""
+        }`}
+      >
         <div className="content">
           <Link href={`/post/${post.slug}`}>
             <a className="post-img">
               <Image
-                src={post.featuredImage ?? "/post-images/placeholder.png"}
+                src={post.featuredImage ?? "/post-images/draft.webp"}
                 alt="blog post image"
                 layout="fill"
                 objectFit="cover"
@@ -43,6 +74,12 @@ const PostCard = ({ post }: Props) => {
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(
                   shimmer(378, 378)
                 )}`}
+                style={{
+                  filter:
+                    isPostADraft(post) || isPostInTheFuture(post)
+                      ? "grayscale(50%)"
+                      : "none",
+                }}
               />
             </a>
           </Link>

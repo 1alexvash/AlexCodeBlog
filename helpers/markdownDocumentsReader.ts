@@ -3,7 +3,11 @@ import matter from "gray-matter";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import { join } from "path";
 
+import { isPostADraft, isPostInTheFuture } from "./checkOfDraftOrFuturePost";
+
 const documentsDirectory = join(process.cwd(), "content/posts");
+
+const isDev = process.env.NODE_ENV === "development";
 
 function JSONSerialize<Type>(data: Type): Type {
   return JSON.parse(JSON.stringify(data));
@@ -22,7 +26,17 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
   const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
-    .filter((post: PostDocument) => post.draft === false)
+    .filter((post: PostDocument) => {
+      if (isDev) {
+        return true;
+      }
+
+      if (isPostADraft(post) || isPostInTheFuture(post)) {
+        return false;
+      }
+
+      return true;
+    })
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
     .map((post) => {
       const { content, ...postWithoutContent } = post;
