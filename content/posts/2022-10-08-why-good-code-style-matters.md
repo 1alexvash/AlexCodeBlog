@@ -1,11 +1,11 @@
 ---
 title: Why good code style matters
-date: 2023-10-24T10:10:19.885Z
+date: 2022-10-24T10:10:19.885Z
 
 featuredImage: /post-images/good-style-article-prettier.png
 
-draft: true
-# !This code is for testing only DO NOT MERGE IT!
+draft: false
+
 tags:
   - CleanCode
 ---

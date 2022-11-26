@@ -15,15 +15,15 @@ interface Props {
 
 export const DraftPostMark = () => (
   <div className="draft-post">
-    <div className="triangle-draft triangle triangle-item">
-      <span className="triangle-text-draft triangle-text">draft</span>
+    <div className="triangle triangle-draft  triangle-item">
+      <span className="triangle-draft-text triangle-text">draft</span>
     </div>
   </div>
 );
 
 export const FuturePostMark = () => (
   <div className="future-post">
-    <div className="triangle-future triangle triangle-item">
+    <div className="triangle triangle-future  triangle-item">
       <span className="triangle-text-future triangle-text">future</span>
       <span className="triangle-text-future-post triangle-text"> post</span>
     </div>
