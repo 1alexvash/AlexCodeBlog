@@ -22,18 +22,7 @@ const DesktopSearch = ({
   filteredPosts,
 }: Props) => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    const searchOverlay = document.querySelector("div.search-overlay-desktop");
 
-    searchOverlay?.addEventListener("keyup", (event) => {
-      if (event instanceof KeyboardEvent && event.key === "Escape") {
-        setSearch((search) => ({
-          ...search,
-          showSearch: false,
-        }));
-      }
-    });
-  }, []);
   return (
     <div
       className="search-overlay-desktop"
@@ -42,6 +31,14 @@ const DesktopSearch = ({
           ...search,
           showSearch: false,
         }));
+      }}
+      onKeyUp={(event) => {
+        if (event.key === "Escape") {
+          setSearch((search) => ({
+            ...search,
+            showSearch: false,
+          }));
+        }
       }}
     >
       <div
