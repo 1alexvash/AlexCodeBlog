@@ -1,6 +1,6 @@
 import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
-import React, { Dispatch, RefObject, SetStateAction } from "react";
+import React, { Dispatch, RefObject, SetStateAction, useEffect } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -22,7 +22,18 @@ const DesktopSearch = ({
   filteredPosts,
 }: Props) => {
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    const searchOverlay = document.querySelector("div.search-overlay-desktop");
 
+    searchOverlay?.addEventListener("keyup", (event) => {
+      if (event instanceof KeyboardEvent && event.key === "Escape") {
+        setSearch((search) => ({
+          ...search,
+          showSearch: false,
+        }));
+      }
+    });
+  }, []);
   return (
     <div
       className="search-overlay-desktop"
