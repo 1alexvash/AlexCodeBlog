@@ -22,7 +22,7 @@ const Intro = () => {
     fetchData();
   }, [admin]);
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = (event: any) => {
     if (event.detail === 2) {
       if (localStorage.getItem("admin") == "true") {
         alert("Turning off editor mode");
