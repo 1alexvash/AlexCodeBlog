@@ -2,7 +2,7 @@
 title: Why I'm starting this blog, and why you should as well
 date: 2021-10-15 13:08:28
 featuredImage: /post-images/2021-10-15-why-im-starting-this-blog-and-why-you-should-as-well.webp
-draft: true
+draft: false
 tags:
   - SoftSkills
 ---
