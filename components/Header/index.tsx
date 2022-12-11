@@ -116,8 +116,8 @@ const Header = () => {
       <div className="header-menu-outer">
         <ul className="header-menu">
           <li>
-            <Link href="/">
-              <a className="active">Home</a>
+            <Link href="/" className="active">
+              Home
             </Link>
           </li>
         </ul>

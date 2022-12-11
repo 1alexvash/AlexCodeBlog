@@ -20,43 +20,42 @@ const LatestPosts = ({ latestPosts }: Props) => {
       <h2>Latest posts</h2>
       {latestPosts.map((post) => (
         <div className="related-posts-block" key={post.title}>
-          <Link href={post.slug}>
-            <a className="image">
-              <Image
-                src={post.featuredImage ?? "/post-images/draft.webp"}
-                alt="blog post image"
-                layout="fill"
-                objectFit="cover"
-                style={{
-                  filter:
-                    isPostADraft(post) || isPostInTheFuture(post)
-                      ? "grayscale(50%)"
-                      : "none",
-                }}
-              />
-            </a>
+          <Link href={post.slug} className="image">
+
+            <Image
+              src={post.featuredImage ?? "/post-images/draft.webp"}
+              alt="blog post image"
+              layout="fill"
+              objectFit="cover"
+              style={{
+                filter:
+                  isPostADraft(post) || isPostInTheFuture(post)
+                    ? "grayscale(50%)"
+                    : "none",
+              }}
+            />
+
           </Link>
           <div className="inner">
-            <Link href={post.slug}>
-              <a className="name">{post.title}</a>
+            <Link href={post.slug} className="name">
+              {post.title}
             </Link>
             <div className="tags">
               {post.tags.map((tag) => (
-                <Link href="/" key={tag}>
-                  <a href="" key={tag} onClick={() => dispatch(setTags([tag]))}>
-                    #{tag}
-                  </a>
-                </Link>
+                (<Link href="/" key={tag} onClick={() => dispatch(setTags([tag]))}>
+                  #{tag}
+
+                </Link>)
               ))}
             </div>
           </div>
         </div>
       ))}
 
-      <Link href="/">
-        <a className="btn" onClick={() => dispatch(resetTags())}>
+      <Link href="/" className="btn" onClick={() => dispatch(resetTags())}>
+        
           See all posts
-        </a>
+        
       </Link>
     </div>
   );

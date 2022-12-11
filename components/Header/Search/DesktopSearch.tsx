@@ -67,22 +67,20 @@ const DesktopSearch = ({
                     </a>
                     <div className="tags">
                       {post.tags.map((tag) => (
-                        <Link href="/" key={tag}>
-                          <a
-                            href=""
-                            key={tag}
-                            onClick={() => {
-                              setSearch((search) => ({
-                                ...search,
-                                showSearch: false,
-                              }));
+                        (<Link
+                          href="/"
+                          key={tag}
+                          onClick={() => {
+                            setSearch((search) => ({
+                              ...search,
+                              showSearch: false,
+                            }));
 
-                              dispatch(setTags([tag]));
-                            }}
-                          >
-                            #{tag}
-                          </a>
-                        </Link>
+                            dispatch(setTags([tag]));
+                          }}>
+                          #{tag}
+
+                        </Link>)
                       ))}
                     </div>
                   </div>

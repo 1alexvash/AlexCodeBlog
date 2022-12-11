@@ -26,7 +26,7 @@ const Logo = () => {
 
   const onTheMainPage = router.pathname === "/";
 
-  return onTheMainPage ? logo : <Link href="/">{logo}</Link>;
+  return onTheMainPage ? logo : <Link href="/" legacyBehavior>{logo}</Link>;
 };
 
 export default Logo;
