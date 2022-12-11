@@ -25,15 +25,16 @@ const LatestPosts = ({ latestPosts }: Props) => {
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
-              layout="fill"
-              objectFit="cover"
+              fill
+              sizes="100vw"
               style={{
                 filter:
                   isPostADraft(post) || isPostInTheFuture(post)
                     ? "grayscale(50%)"
                     : "none",
-              }}
-            />
+
+                objectFit: "cover"
+              }} />
 
           </Link>
           <div className="inner">

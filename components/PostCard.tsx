@@ -68,19 +68,20 @@ const PostCard = ({ post }: Props) => {
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
-              layout="fill"
-              objectFit="cover"
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(378, 378)
               )}`}
+              fill
+              sizes="100vw"
               style={{
                 filter:
                   isPostADraft(post) || isPostInTheFuture(post)
                     ? "grayscale(50%)"
                     : "none",
-              }}
-            />
+
+                objectFit: "cover"
+              }} />
 
           </Link>
           <div className="tags">
