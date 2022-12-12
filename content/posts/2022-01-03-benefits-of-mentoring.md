@@ -2,7 +2,7 @@
 title: Benefits of mentoring
 date: 2022-01-03 02:56:25
 featuredImage: /post-images/2022-01-03-benefits-of-mentoring.webp
-draft: false
+draft: true
 tags:
   - SoftSkills
 ---
