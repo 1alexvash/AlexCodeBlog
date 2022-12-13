@@ -22,22 +22,19 @@ const DesktopSearch = ({
   filteredPosts,
 }: Props) => {
   const dispatch = useAppDispatch();
-
+  const closeSearch = () => {
+    setSearch((search) => ({
+      ...search,
+      showSearch: false,
+    }));
+  };
   return (
     <div
       className="search-overlay-desktop"
-      onClick={() => {
-        setSearch((search) => ({
-          ...search,
-          showSearch: false,
-        }));
-      }}
+      onClick={closeSearch}
       onKeyUp={(event) => {
         if (event.key === "Escape") {
-          setSearch((search) => ({
-            ...search,
-            showSearch: false,
-          }));
+          closeSearch();
         }
       }}
     >
@@ -80,10 +77,7 @@ const DesktopSearch = ({
                             href=""
                             key={tag}
                             onClick={() => {
-                              setSearch((search) => ({
-                                ...search,
-                                showSearch: false,
-                              }));
+                              closeSearch();
 
                               dispatch(setTags([tag]));
                             }}
@@ -104,15 +98,7 @@ const DesktopSearch = ({
           <DesktopSkeletons />
         )}
       </div>
-      <div
-        className="close-search"
-        onClick={() => {
-          setSearch((search) => ({
-            ...search,
-            showSearch: false,
-          }));
-        }}
-      >
+      <div className="close-search" onClick={closeSearch}>
         <img src="/images/close-search.svg" alt="search" />
       </div>
     </div>
