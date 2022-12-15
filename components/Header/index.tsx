@@ -120,6 +120,11 @@ const Header = () => {
               <a className="active">Home</a>
             </Link>
           </li>
+          <li style={{ marginTop: "13px" }}>
+            <audio controls>
+              <source src="/audio/audio-test.mp3" type="audio/mpeg" />
+            </audio>
+          </li>
         </ul>
         <div className="header-search-desktop">
           <img
