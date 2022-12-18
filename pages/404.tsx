@@ -28,9 +28,7 @@ const NotFoundPage = () => {
       </div>
       <div className="title">This page could not be found.</div>
       <Link href="/" as={undefined} className="btn">
-        
-          Go home
-        
+        Go home
       </Link>
     </section>
   );

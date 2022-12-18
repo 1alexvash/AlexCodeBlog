@@ -5,6 +5,8 @@ import Script from "next/script";
 import { Provider } from "react-redux";
 import store from "redux/store";
 
+import ThemeProvider from "@/components/ThemeProvider";
+
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Provider store={store}>
     {/* Google Analytics */}
@@ -17,12 +19,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
+          
           gtag('config', 'G-1JHZSH8YH4');
-        `}
+          `}
     </Script>
 
-    <Component {...pageProps} />
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
   </Provider>
 );
 
