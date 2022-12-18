@@ -866,6 +866,7 @@ h2 {
 }
 
 .blogpost-content {
+  min-width: 1px;
   -ms-flex-positive: 1;
   flex-grow: 1;
   border-right: 1px solid #e7e7e7;
