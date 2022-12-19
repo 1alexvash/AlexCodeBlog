@@ -1,6 +1,6 @@
 import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
-import React, { Dispatch, RefObject, SetStateAction, useEffect } from "react";
+import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -31,15 +31,7 @@ const DesktopSearch = ({
   };
 
   return (
-    <div
-      className="search-overlay-desktop"
-      onClick={closeSearch}
-      onKeyUp={(event) => {
-        if (event.key === "Escape") {
-          closeSearch();
-        }
-      }}
-    >
+    <div className="search-overlay-desktop" onClick={closeSearch}>
       <div
         className="desktop-search container search-block"
         onClick={(event) => event.stopPropagation()}
@@ -53,6 +45,11 @@ const DesktopSearch = ({
               ...search,
               value: event.target.value,
             }));
+          }}
+          onKeyUp={(event) => {
+            if (event.key === "Escape") {
+              closeSearch();
+            }
           }}
           ref={desktopInputRef}
         />
