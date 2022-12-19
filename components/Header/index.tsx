@@ -1,4 +1,5 @@
 import config from "config";
+import Fuse from "fuse.js";
 import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -25,10 +26,12 @@ const Header = () => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const filteredPosts = search.posts.filter((post) => {
-    return post.title.toLowerCase().includes(search.value.toLowerCase());
-  });
+  const fuseSearch = new Fuse(search.posts, { keys: ["title"] });
 
+  const filteredPosts =
+    search.value.trim().length > 0
+      ? fuseSearch.search(search.value).map((result) => result.item)
+      : search.posts;
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
