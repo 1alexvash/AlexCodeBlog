@@ -22,12 +22,14 @@ const DesktopSearch = ({
   filteredPosts,
 }: Props) => {
   const dispatch = useAppDispatch();
+
   const closeSearch = () => {
     setSearch((search) => ({
       ...search,
       showSearch: false,
     }));
   };
+
   return (
     <div
       className="search-overlay-desktop"
