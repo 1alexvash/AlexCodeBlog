@@ -1,3 +1,4 @@
+import withBundleAnalyzer from "@next/bundle-analyzer";
 import address from "address";
 import chalk from "chalk";
 
@@ -6,6 +7,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 };
+
+withBundleAnalyzer({});
 
 if (process.env.NODE_ENV === "development") {
   console.log(
