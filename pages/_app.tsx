@@ -19,9 +19,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          
-          gtag('config', 'G-1JHZSH8YH4');
-          `}
+		
+          gtag('config', 'G-1JHZSH8YH4', { 'optimize_id': 'G-1JHZSH8YH4'});
+        `}
     </Script>
 
     <ThemeProvider>
