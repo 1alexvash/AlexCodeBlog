@@ -1,3 +1,6 @@
+// Code duplicate to prevent the following error:
+// https://github.com/vercel/next.js/discussions/12533
+
 (() => {
   const defaultTheme = "light";
 
@@ -22,8 +25,8 @@
   const html = document.querySelector("html");
 
   if (theme === "dark") {
-    html?.classList.add("dark-theme");
+    html.classList.add("dark-theme");
   } else {
-    html?.classList.remove("dark-theme");
+    html.classList.remove("dark-theme");
   }
 })();

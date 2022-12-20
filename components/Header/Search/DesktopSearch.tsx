@@ -23,16 +23,15 @@ const DesktopSearch = ({
 }: Props) => {
   const dispatch = useAppDispatch();
 
+  const closeSearch = () => {
+    setSearch((search) => ({
+      ...search,
+      showSearch: false,
+    }));
+  };
+
   return (
-    <div
-      className="search-overlay-desktop"
-      onClick={() => {
-        setSearch((search) => ({
-          ...search,
-          showSearch: false,
-        }));
-      }}
-    >
+    <div className="search-overlay-desktop" onClick={closeSearch}>
       <div
         className="desktop-search container search-block"
         onClick={(event) => event.stopPropagation()}
@@ -46,6 +45,11 @@ const DesktopSearch = ({
               ...search,
               value: event.target.value,
             }));
+          }}
+          onKeyUp={(event) => {
+            if (event.key === "Escape") {
+              closeSearch();
+            }
           }}
           ref={desktopInputRef}
         />
@@ -67,22 +71,20 @@ const DesktopSearch = ({
                     </a>
                     <div className="tags">
                       {post.tags.map((tag) => (
-                        <Link href="/" key={tag}>
-                          <a
-                            href=""
-                            key={tag}
-                            onClick={() => {
-                              setSearch((search) => ({
-                                ...search,
-                                showSearch: false,
-                              }));
+                        (<Link
+                          href="/"
+                          key={tag}
+                          onClick={() => {
+                            setSearch((search) => ({
+                              ...search,
+                              showSearch: false,
+                            }));
 
-                              dispatch(setTags([tag]));
-                            }}
-                          >
-                            #{tag}
-                          </a>
-                        </Link>
+                            dispatch(setTags([tag]));
+                          }}>
+                          #{tag}
+
+                        </Link>)
                       ))}
                     </div>
                   </div>
@@ -96,15 +98,7 @@ const DesktopSearch = ({
           <DesktopSkeletons />
         )}
       </div>
-      <div
-        className="close-search"
-        onClick={() => {
-          setSearch((search) => ({
-            ...search,
-            showSearch: false,
-          }));
-        }}
-      >
+      <div className="close-search" onClick={closeSearch}>
         <img src="/images/close-search.svg" alt="search" />
       </div>
     </div>

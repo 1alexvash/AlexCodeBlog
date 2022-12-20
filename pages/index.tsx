@@ -32,9 +32,20 @@ const Home: NextPage<{
   posts: PostDocumentWithoutContent[];
   upcomingPosts: PostDocumentWithoutContent[];
 }> = ({ posts, upcomingPosts }) => {
-  const uniqueTags = Array.from(
-    new Set([...posts.map((post) => post.tags).flat()])
-  );
+  const tags = posts.map((post) => post.tags).flat();
+
+  const tagsFrequency = tags.reduce((acc, tag) => {
+    if (acc[tag]) {
+      acc[tag] += 1;
+    } else {
+      acc[tag] = 1;
+    }
+    return acc;
+  }, {} as Record<string, number>);
+
+  const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
+
+  const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
   const filteredPosts = posts.filter((post) => {
@@ -71,7 +82,8 @@ const Home: NextPage<{
       <section className="simple-section">
         <div className="container">
           {admin ? <UpcomingPosts posts={upcomingPosts} /> : null}
-          <Tags uniqueTags={uniqueTags} />
+          {/* TODO: Implement tags count for the admin user */}
+          <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
