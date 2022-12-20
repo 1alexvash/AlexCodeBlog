@@ -17,7 +17,7 @@ html {
 }
 
 body {
-  font-family: Ubuntu, Arial, Tahoma, sans-serif, "Noto Color Emoji";
+  font-family: Arial, Tahoma, sans-serif, "Noto Color Emoji";
   color: #616161;
   background: #fff;
 }
@@ -30,7 +30,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   border: none;
-  border-radius: 5px;
+  border-radius: 0px;
   background: #fe6c0a;
 }
 
@@ -94,7 +94,7 @@ strong {
 button.btn {
   cursor: pointer;
   line-height: 1.2;
-  font-family: Ubuntu, Arial, Tahoma, sans-serif;
+  font-family: Arial, Tahoma, sans-serif;
 }
 
 .breadcrumbs-outer {
@@ -866,6 +866,7 @@ h2 {
 }
 
 .blogpost-content {
+  min-width: 1px;
   -ms-flex-positive: 1;
   flex-grow: 1;
   border-right: 1px solid #e7e7e7;
@@ -1161,7 +1162,7 @@ blockquote p:last-child {
   padding: 0 19px;
   color: #fff;
   font-size: 16px;
-  font-family: Ubuntu, Arial, Tahoma, sans-serif;
+  font-family: Arial, Tahoma, sans-serif;
   border-radius: 4px;
   border: solid 1px transparent;
   background: #505050;

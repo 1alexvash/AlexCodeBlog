@@ -63,44 +63,43 @@ const PostCard = ({ post }: Props) => {
         }`}
       >
         <div className="content">
-          <Link href={`/post/${post.slug}`}>
-            <a className="post-img">
-              <Image
-                src={post.featuredImage ?? "/post-images/draft.webp"}
-                alt="blog post image"
-                layout="fill"
-                objectFit="cover"
-                placeholder="blur"
-                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                  shimmer(378, 378)
-                )}`}
-                style={{
-                  filter:
-                    isPostADraft(post) || isPostInTheFuture(post)
-                      ? "grayscale(50%)"
-                      : "none",
-                }}
-              />
-            </a>
+          <Link href={`/post/${post.slug}`} className="post-img">
+
+            <Image
+              src={post.featuredImage ?? "/post-images/draft.webp"}
+              alt="blog post image"
+              placeholder="blur"
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                shimmer(378, 378)
+              )}`}
+              fill
+              sizes="100vw"
+              style={{
+                filter:
+                  isPostADraft(post) || isPostInTheFuture(post)
+                    ? "grayscale(50%)"
+                    : "none",
+
+                objectFit: "cover"
+              }} />
+
           </Link>
           <div className="tags">
             {post.tags.map((tag) => (
-              <Link href="/" key={tag}>
-                <a
-                  href=""
-                  key={tag}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    dispatch(setTags([tag]));
-                  }}
-                >
-                  #{tag}
-                </a>
-              </Link>
+              (<Link
+                href="/"
+                key={tag}
+                onClick={(event) => {
+                  event.preventDefault();
+                  dispatch(setTags([tag]));
+                }}>
+                #{tag}
+
+              </Link>)
             ))}
           </div>
-          <Link href={`/post/${post.slug}`}>
-            <a className="link">{post.title}</a>
+          <Link href={`/post/${post.slug}`} className="link">
+            {post.title}
           </Link>
         </div>
       </div>
