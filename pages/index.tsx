@@ -4,7 +4,10 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
+import {
+  getAllPostDocuments,
+  getUpcomingPosts,
+} from "helpers/markdownDocumentsReader";
 import { PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
@@ -25,7 +28,10 @@ const UpcomingPosts = dynamic(() => import("@/components/UpcomingPosts"), {
 
 const admin = getCookie("admin");
 
-const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
+const Home: NextPage<{
+  posts: PostDocumentWithoutContent[];
+  upcomingPosts: PostDocumentWithoutContent[];
+}> = ({ posts, upcomingPosts }) => {
   const uniqueTags = Array.from(
     new Set([...posts.map((post) => post.tags).flat()])
   );
@@ -37,11 +43,6 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
     }
 
     return selectedTags.some((tag) => post.tags.includes(tag));
-  });
-  const filteredUpcomingPosts = posts.filter((post) => {
-    if (isPostADraft(post) || isPostInTheFuture(post)) {
-      return true;
-    }
   });
 
   const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
@@ -69,7 +70,7 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
       <Intro />
       <section className="simple-section">
         <div className="container">
-          {admin ? <UpcomingPosts posts={filteredUpcomingPosts} /> : null}
+          {admin ? <UpcomingPosts posts={upcomingPosts} /> : null}
           <Tags uniqueTags={uniqueTags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
@@ -82,10 +83,12 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
 
 export const getStaticProps = async () => {
   const posts = getAllPostDocuments();
+  const upcomingPosts = getUpcomingPosts();
 
   return {
     props: {
       posts,
+      upcomingPosts,
     },
   };
 };
