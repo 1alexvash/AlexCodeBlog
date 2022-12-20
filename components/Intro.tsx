@@ -1,36 +1,15 @@
 import config from "config";
-import { useEffect, useState } from "react";
+import { getCookie, setCookie } from "cookies-next";
 
 const Intro = () => {
-  const [upcommingPosts, setUpcommingPosts] = useState();
-
-  let admin = false;
-
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("admin") == "true") {
-      console.log(upcommingPosts);
-      admin = true;
-    }
-  }
-  useEffect(() => {
-    const fetchData = async () => {
-      const posts = await fetch("/api/getUpcomingPosts").then((data) =>
-        data.json()
-      );
-      setUpcommingPosts(posts);
-    };
-    fetchData();
-  }, [admin]);
-
   const handleClick = (event: any) => {
     if (event.detail === 2) {
-      if (localStorage.getItem("admin") == "true") {
+      if (getCookie("admin")) {
         alert("Turning off editor mode");
-        localStorage.setItem("admin", "false");
+        setCookie("admin", "false");
       } else {
         alert("Turning on editor mode");
-        localStorage.setItem("admin", "true");
-        console.log(upcommingPosts);
+        setCookie("admin", "true");
       }
     }
   };
