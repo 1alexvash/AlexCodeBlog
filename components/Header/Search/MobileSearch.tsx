@@ -61,18 +61,16 @@ const MobileSearch = ({
                   </div>
                   <div className="tags">
                     {post.tags.map((tag) => (
-                      <Link href="/" key={tag}>
-                        <a
-                          href=""
-                          key={tag}
-                          onClick={() => {
-                            setShowMenu(false);
-                            dispatch(setTags([tag]));
-                          }}
-                        >
-                          #{tag}
-                        </a>
-                      </Link>
+                      (<Link
+                        href="/"
+                        key={tag}
+                        onClick={() => {
+                          setShowMenu(false);
+                          dispatch(setTags([tag]));
+                        }}>
+                        #{tag}
+
+                      </Link>)
                     ))}
                   </div>
                 </div>

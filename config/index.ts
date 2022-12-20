@@ -29,7 +29,7 @@ const config = {
   host_url: "https://alex-code.com/",
   defaultImage:
     "https://alex-code.com/post-images/2022-08-05-book-review-so-good-they-cant-ignore-you.webp",
-  posts_per_page: 12,
+  posts_per_page: 15,
 };
 
 export default config;

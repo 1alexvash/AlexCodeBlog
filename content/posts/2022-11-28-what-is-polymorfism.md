@@ -1,11 +1,10 @@
 ---
 title: What is polymorfism?
 date: 2022-11-28T11:32:28.173Z
-featuredImage: /post-images/portrait-vs-landscape.png
+featuredImage: /post-images/what-is-polymorphism.jpg
 draft: false
 tags: []
 ---
-
 
 (Article draft)
 

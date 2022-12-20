@@ -4,7 +4,7 @@ date: 2021-10-30 10:19:31
 featuredImage: /post-images/2021-10-30-a-book-every-software-developer-has-to-read.webp
 draft: false
 tags:
-  - BookRecommendations
+  - BookReview
 ---
 
 There are some Java books that are good for Java developers, there are some C++ book that are good for C++ developers, and so on.
