@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.0.7",
