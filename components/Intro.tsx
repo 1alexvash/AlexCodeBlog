@@ -4,6 +4,7 @@ import { setAdmin } from "redux/slices/admin";
 
 const Intro = () => {
   const dispatch = useDispatch();
+
   const handleClick = (event: any) => {
     if (event.detail === 2) {
       if (localStorage.admin == "true") {
