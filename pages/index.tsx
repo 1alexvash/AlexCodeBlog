@@ -1,16 +1,10 @@
 import config from "config";
-import { getCookie } from "cookies-next";
-import {
-  isPostADraft,
-  isPostInTheFuture,
-} from "helpers/checkOfDraftOrFuturePost";
 import {
   getAllPostDocuments,
   getUpcomingPosts,
 } from "helpers/markdownDocumentsReader";
 import { PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
 
@@ -21,12 +15,7 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
-
-const UpcomingPosts = dynamic(() => import("@/components/UpcomingPosts"), {
-  ssr: false,
-});
-
-const admin = getCookie("admin");
+import UpcomingPosts from "@/components/UpcomingPosts";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutContent[];
@@ -63,6 +52,8 @@ const Home: NextPage<{
     (currentPage + 1) * config.posts_per_page
   );
 
+  const admin = useAppSelector((state) => state.admin);
+
   return (
     <>
       <Head>
@@ -81,7 +72,7 @@ const Home: NextPage<{
       <Intro />
       <section className="simple-section">
         <div className="container">
-          {admin ? <UpcomingPosts posts={upcomingPosts} /> : null}
+          {admin == "true" ? <UpcomingPosts posts={upcomingPosts} /> : null}
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />

@@ -5,6 +5,7 @@ import Script from "next/script";
 import { Provider } from "react-redux";
 import store from "redux/store";
 
+import AdminProvider from "@/components/AdminProvider";
 import ThemeProvider from "@/components/ThemeProvider";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
@@ -24,9 +25,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
           `}
     </Script>
 
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <AdminProvider>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </AdminProvider>
   </Provider>
 );
 

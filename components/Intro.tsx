@@ -1,15 +1,17 @@
 import config from "config";
-import { getCookie, setCookie } from "cookies-next";
+import { useDispatch } from "react-redux";
+import { setAdmin } from "redux/slices/admin";
 
 const Intro = () => {
+  const dispatch = useDispatch();
   const handleClick = (event: any) => {
     if (event.detail === 2) {
-      if (getCookie("admin")) {
+      if (localStorage.admin == "true") {
         alert("Turning off editor mode");
-        setCookie("admin", "false");
+        dispatch(setAdmin("false"));
       } else {
         alert("Turning on editor mode");
-        setCookie("admin", "true");
+        dispatch(setAdmin("true"));
       }
     }
   };

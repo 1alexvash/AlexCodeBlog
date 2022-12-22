@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import premissionsSlice from "./slices/admin";
 import paginationSlice from "./slices/pagination";
 import selectedTagsSlice from "./slices/selectedTags";
 import themeSlice from "./slices/theme";
@@ -9,6 +10,7 @@ const store = configureStore({
     selectedTags: selectedTagsSlice,
     pagination: paginationSlice,
     theme: themeSlice,
+    admin: premissionsSlice,
   },
 });
 
