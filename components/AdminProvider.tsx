@@ -7,12 +7,12 @@ interface Props {
   children: JSX.Element;
 }
 
-const getStoragePremissions = (): Admin | undefined => {
+const getStoragePermissions = (): Admin | undefined => {
   return localStorage.admin;
 };
 
 const getInitialAdmin = (): Admin =>
-  getStoragePremissions() || defaultPermissions;
+  getStoragePermissions() || defaultPermissions;
 
 const AdminProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
