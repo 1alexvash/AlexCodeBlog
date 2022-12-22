@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type Admin = "true" | "false";
 
-export const defaultPremissions = "false";
+export const defaultPermissions = "false";
 
-const initialState = defaultPremissions;
+const initialState = defaultPermissions;
 
-export const premissionsSlice = createSlice({
+export const permissionsSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
@@ -19,6 +19,6 @@ export const premissionsSlice = createSlice({
   },
 });
 
-export const { setAdmin } = premissionsSlice.actions;
+export const { setAdmin } = permissionsSlice.actions;
 
-export default premissionsSlice.reducer;
+export default permissionsSlice.reducer;

@@ -1,4 +1,4 @@
-import { Admin, defaultPremissions, setAdmin } from "redux/slices/admin";
+import { Admin, defaultPermissions, setAdmin } from "redux/slices/admin";
 import { useAppDispatch } from "redux/typesHooks";
 
 import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
@@ -12,7 +12,7 @@ const getStoragePremissions = (): Admin | undefined => {
 };
 
 const getInitialAdmin = (): Admin =>
-  getStoragePremissions() || defaultPremissions;
+  getStoragePremissions() || defaultPermissions;
 
 const AdminProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
