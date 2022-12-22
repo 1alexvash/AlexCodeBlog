@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
-    "cookies-next": "^2.1.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "gray-matter": "^4.0.3",
     "next": "^13.0.6",
