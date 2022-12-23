@@ -8,7 +8,7 @@ import store from "redux/store";
 
 import ThemeProvider from "@/components/ThemeProvider";
 
-const notoColorEmoji = Noto_Color_Emoji({ weight: "400" });
+const notoColorEmoji = Noto_Color_Emoji({ weight: "400", subsets: ["emoji"] });
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Provider store={store}>
