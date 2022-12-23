@@ -5,15 +5,13 @@ import { setAdmin } from "redux/slices/admin";
 const Intro = () => {
   const dispatch = useDispatch();
 
-  const handleClick = (event: any) => {
-    if (event.detail === 2) {
-      if (localStorage.admin == "true") {
-        alert("Turning off editor mode");
-        dispatch(setAdmin("false"));
-      } else {
-        alert("Turning on editor mode");
-        dispatch(setAdmin("true"));
-      }
+  const handleClick = () => {
+    if (localStorage.admin == "true") {
+      alert("Turning off editor mode");
+      dispatch(setAdmin("false"));
+    } else {
+      alert("Turning on editor mode");
+      dispatch(setAdmin("true"));
     }
   };
 
@@ -24,7 +22,7 @@ const Intro = () => {
           <div className="intro-avatar">
             <div className="image">
               <img
-                onClick={handleClick}
+                onDoubleClick={handleClick}
                 src="/images/author-avatar.jpg"
                 alt="author-avatar"
                 width={90}
