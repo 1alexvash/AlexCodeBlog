@@ -410,6 +410,8 @@ header {
   overflow: auto;
   background: #fff;
   padding: 30px 30px 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .desktop-search-results::-webkit-scrollbar {
