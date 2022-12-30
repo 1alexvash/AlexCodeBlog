@@ -22,11 +22,11 @@
 
   localStorage.setItem("theme", theme);
 
-  const html = document.querySelector("html");
+  const body = document.querySelector("body");
 
   if (theme === "dark") {
-    html.classList.add("dark-theme");
+    body.classList.add("dark-theme");
   } else {
-    html.classList.remove("dark-theme");
+    body.classList.remove("dark-theme");
   }
 })();

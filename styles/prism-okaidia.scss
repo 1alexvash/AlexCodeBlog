@@ -38,7 +38,7 @@ pre[class*="language-"] {
   background: #272822;
 }
 
-html.dark-theme body {
+body.dark-theme {
   :not(pre) > code[class*="language-"],
   pre[class*="language-"] {
     background: #33393f;
