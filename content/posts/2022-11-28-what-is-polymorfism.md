@@ -42,7 +42,7 @@ Doesn't seem like a big deal, right?
 
 Until the moment you start implementing the actual logic for it, and realize that you need to have a dedicated server somewhere on the back-end to store those images.
 
-# Why should I care?
+## Why should I care?
 
 There are a few reasons:
 
