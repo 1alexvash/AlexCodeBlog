@@ -4,7 +4,6 @@ import { Head, Html, Main, NextScript } from "next/document";
 const Document = () => (
   <Html lang="en">
     <Head>
-      <script src="/scripts/fonts.js" />
       <script src="/scripts/theme.js" />
     </Head>
     <body>
