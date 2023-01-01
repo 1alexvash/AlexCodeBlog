@@ -5,9 +5,6 @@ featuredImage: /post-images/what-is-polymorphism.jpg
 draft: false
 tags: []
 ---
-
-(Article draft)
-
 I was asked this question, so many times during job interviews that I decided to write an entire article about it.
 
 Even though the word sounds scary, the entire concept behind is very simple.
@@ -17,7 +14,11 @@ Even though the word sounds scary, the entire concept behind is very simple.
 Let's start off with the example (as a picture worth a thousand of word or something)
 
 Example #1
-\[a picture with a car and a track]
+
+
+![](/post-images/what-is-polymorphism-example-1.png)
+
+
 A car is a car
 A track is car
 They are both cars, but they are not entirely the same.
@@ -25,14 +26,18 @@ They are both cars, but they are not entirely the same.
 What's common about them? They both take you from point A to point B; hence they are cars, but driving a track makes you money, while driving a car is an expense hence polymorphism.
 
 Example #2
-\[a picture of a user, and admin user]
+
+
+![](/post-images/what-is-polymorphism-example-2.png)
+
+
 Let's say we have some social network or web forum, and on that platform we apparently have some users, they both can create posts, create comments, chat, and etc. But only admin user can remove content created by other people.
 
 Example #3
 
 I think by now you should be starting to feel the power of this idea, but let's get into a more subtle example, where you might not initially spot polymorphism
 
-\[A picture of chat with regular messages, and photos]
+![](/post-images/what-is-polymorphism-example-3.png)
 
 Do you see it or not?
 
