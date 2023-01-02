@@ -53,7 +53,7 @@ Do you see it?
 
 Those are all phones with chat messages, but the on the right has an image attached to it.
 
-It might not seem like a big deal, especialy if you haven't worked with back-end, but in reality you might have to deploy an extra dedicated server, just to store those images alone, and supports this feature.
+It might not seem like a big deal, especially if you haven't worked with back-end, but in reality you might have to deploy an extra dedicated server, just to store those images alone, and supports this feature.
 
 ## Why should I care?
 
@@ -61,7 +61,7 @@ There are a few reasons:
 
 1. It's going to give you a couple of extra points on job interviews
 2. It will increase your knowledge about architecture,
-   [or also known as high level thinking](https://i.imgur.com/hunkkp4.png)
+   [or also known as high-level thinking](https://i.imgur.com/hunkkp4.png)
 3. By better planning in advance, you can save a lot of time and work faster
 4. Not only this knowledge is important for general intelligence, but it's also required for senion level jobs
-5. W̶o̶m̶e̶n̶ ̶w̶i̶l̶l̶ ̶l̶i̶k̶e̶ ̶y̶o̶u̶ ̶m̶o̶r̶e - I don't know I only impressed dudes with this one, you go ahead and try it, and let me know how it went 😜
+5. W̶o̶m̶e̶n̶ ̶w̶i̶l̶l̶ ̶l̶i̶k̶e̶ ̶y̶o̶u̶ ̶m̶o̶r̶e - I don't know, I only impressed dudes with this one, you go ahead and try it, and let me know how it went 😜
