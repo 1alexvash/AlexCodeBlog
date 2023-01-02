@@ -1,9 +1,10 @@
 ---
 title: What is polymorphism?
-date: 2022-11-28T11:32:28.173Z
+date: 2023-01-01T15:00:00.000Z
 featuredImage: /post-images/what-is-polymorphism.jpg
 draft: false
-tags: [ProgrammingConcept]
+tags:
+  - ProgrammingConcept
 ---
 
 I was asked this question, so many times during job interviews that I decided to write an entire article about it.
