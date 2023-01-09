@@ -1,14 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type Admin = true | false;
-
 const initialState = false;
 
 export const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
-    setAdmin: (state, action: PayloadAction<Admin>) => {
+    setAdmin: (state, action: PayloadAction<boolean>) => {
       const admin = action.payload;
       localStorage.admin = admin;
 
