@@ -1,4 +1,4 @@
-import { Admin, defaultPermissions, setAdmin } from "redux/slices/admin";
+import { Admin, setAdmin } from "redux/slices/admin";
 import { useAppDispatch } from "redux/typesHooks";
 
 import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
@@ -7,12 +7,11 @@ interface Props {
   children: JSX.Element;
 }
 
-const getStoragePermissions = (): Admin | undefined => {
-  return localStorage.admin;
+const getAdmin = (): Admin | undefined => {
+  return JSON.parse(localStorage.admin);
 };
 
-const getInitialAdmin = (): Admin =>
-  getStoragePermissions() || defaultPermissions;
+const getInitialAdmin = (): Admin => getAdmin() || false;
 
 const AdminProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();

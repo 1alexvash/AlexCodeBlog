@@ -1,17 +1,18 @@
 import config from "config";
 import { useDispatch } from "react-redux";
 import { setAdmin } from "redux/slices/admin";
+import { useAppSelector } from "redux/typesHooks";
 
 const Intro = () => {
   const dispatch = useDispatch();
 
+  const admin = useAppSelector((state) => state.admin);
+
   const handleClick = () => {
     if (localStorage.admin == "true") {
-      alert("Turning off editor mode");
-      dispatch(setAdmin("false"));
+      dispatch(setAdmin(false));
     } else {
-      alert("Turning on editor mode");
-      dispatch(setAdmin("true"));
+      dispatch(setAdmin(true));
     }
   };
 
@@ -20,7 +21,12 @@ const Intro = () => {
       <div className="container">
         <div className="intro-content">
           <div className="intro-avatar">
-            <div className="image">
+            <div
+              className="image"
+              style={
+                admin ? { border: "3px solid #fe6c0a" } : { border: "none" }
+              }
+            >
               <img
                 onDoubleClick={handleClick}
                 src="/images/author-avatar.jpg"
@@ -28,6 +34,16 @@ const Intro = () => {
                 width={90}
                 height={90}
               />
+              {admin ? (
+                <div className="edit-background">
+                  <img
+                    src="/images/edit.svg"
+                    alt="edit"
+                    width={19}
+                    height={19}
+                  />
+                </div>
+              ) : null}
             </div>
             <div className="name">{config.author_name}</div>
             <div className="job">{config.author_position}</div>

@@ -53,6 +53,9 @@ hr {
   height: 1px;
   border: none;
   background: #e8e8e8;
+  position: absolute;
+  width: 100%;
+  left: 0;
 }
 
 .page {
@@ -440,6 +443,7 @@ header {
 }
 
 .intro-avatar {
+  position: relative;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-left: auto;
@@ -462,6 +466,21 @@ header {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.intro-avatar .image .edit-background {
+  position: absolute;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  top: 36%;
+  left: 36%;
+}
+
+.intro-avatar .image .edit-background img {
+  object-fit: none;
 }
 
 .intro-avatar .name {

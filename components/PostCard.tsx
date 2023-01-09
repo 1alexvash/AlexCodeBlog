@@ -2,6 +2,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
+import { isUpcomingPost } from "helpers/isUpcomingPost";
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,14 +58,11 @@ const PostCard = ({ post }: Props) => {
 
       <div
         className={`posts-list-block ${
-          isPostADraft(post) || isPostInTheFuture(post)
-            ? "posts-list-block-draft-or-future"
-            : ""
+          isUpcomingPost(post) ? "posts-list-block-draft-or-future" : ""
         }`}
       >
         <div className="content">
           <Link href={`/post/${post.slug}`} className="post-img">
-
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
@@ -75,27 +73,24 @@ const PostCard = ({ post }: Props) => {
               fill
               sizes="100vw"
               style={{
-                filter:
-                  isPostADraft(post) || isPostInTheFuture(post)
-                    ? "grayscale(50%)"
-                    : "none",
+                filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
 
-                objectFit: "cover"
-              }} />
-
+                objectFit: "cover",
+              }}
+            />
           </Link>
           <div className="tags">
             {post.tags.map((tag) => (
-              (<Link
+              <Link
                 href="/"
                 key={tag}
                 onClick={(event) => {
                   event.preventDefault();
                   dispatch(setTags([tag]));
-                }}>
+                }}
+              >
                 #{tag}
-
-              </Link>)
+              </Link>
             ))}
           </div>
           <Link href={`/post/${post.slug}`} className="link">

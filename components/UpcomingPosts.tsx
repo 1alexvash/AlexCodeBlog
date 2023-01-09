@@ -7,7 +7,7 @@ interface Props {
 }
 
 const UpcomingPosts = ({ posts }: Props) => (
-  <div style={{ marginBottom: "50px" }}>
+  <div style={{ marginBottom: "70px" }}>
     <div className="intro-text" style={{ marginBottom: "36px" }}>
       <h1>Upcoming Posts</h1>
     </div>
@@ -16,6 +16,7 @@ const UpcomingPosts = ({ posts }: Props) => (
         <PostCard key={index} post={post} />
       ))}
     </ul>
+    <hr />
   </div>
 );
 

@@ -3,7 +3,7 @@ import matter from "gray-matter";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import { join } from "path";
 
-import { isPostADraft, isPostInTheFuture } from "./checkOfDraftOrFuturePost";
+import { isUpcomingPost } from "./isUpcomingPost";
 
 const documentsDirectory = join(process.cwd(), "content/posts");
 
@@ -31,7 +31,7 @@ export function getAllPostDocuments(): PostDocumentWithoutContent[] {
         return true;
       }
 
-      if (isPostADraft(post) || isPostInTheFuture(post)) {
+      if (isUpcomingPost(post)) {
         return false;
       }
 
@@ -51,7 +51,7 @@ export function getUpcomingPosts(): PostDocumentWithoutContent[] {
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
     .filter((post: PostDocument) => {
-      if (isPostADraft(post) || isPostInTheFuture(post)) {
+      if (isUpcomingPost(post)) {
         return true;
       }
     })
