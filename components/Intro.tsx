@@ -9,7 +9,7 @@ const Intro = () => {
   const admin = useAppSelector((state) => state.admin);
 
   const handleClick = () => {
-    if (localStorage.admin == "true") {
+    if (admin == true) {
       dispatch(setAdmin(false));
     } else {
       dispatch(setAdmin(true));
