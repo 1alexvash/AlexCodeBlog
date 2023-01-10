@@ -72,7 +72,7 @@ const Home: NextPage<{
       <Intro />
       <section className="simple-section">
         <div className="container">
-          {/* {admin ? <UpcomingPosts posts={upcomingPosts} /> : null} */}
+          {admin ? <UpcomingPosts posts={upcomingPosts} /> : null}
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
@@ -86,12 +86,12 @@ const Home: NextPage<{
 
 export const getStaticProps = async () => {
   const posts = getAllPostDocuments();
-  //   const upcomingPosts = getUpcomingPosts();
+  const upcomingPosts = getUpcomingPosts();
 
   return {
     props: {
       posts,
-      //   upcomingPosts,
+      upcomingPosts,
     },
   };
 };

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const getAdmin = (): boolean | undefined => {
-  return JSON.parse(localStorage.admin);
+  return localStorage.admin;
 };
 
 const getInitialAdmin = (): boolean => getAdmin() || false;
