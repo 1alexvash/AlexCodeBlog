@@ -35,14 +35,13 @@ const Intro = () => {
                 height={90}
               />
               {admin ? (
-                <div className="edit-background">
-                  <img
-                    src="/images/edit.svg"
-                    alt="edit"
-                    width={19}
-                    height={19}
-                  />
-                </div>
+                <img
+                  className="edit"
+                  src="/images/edit.svg"
+                  alt="edit"
+                  width={19}
+                  height={19}
+                />
               ) : null}
             </div>
             <div className="name">{config.author_name}</div>
