@@ -86,12 +86,12 @@ const Home: NextPage<{
 
 export const getStaticProps = async () => {
   const posts = getAllPostDocuments();
-  const upcomingPosts = getUpcomingPosts();
+  //   const upcomingPosts = getUpcomingPosts();
 
   return {
     props: {
       posts,
-      upcomingPosts,
+      //   upcomingPosts,
     },
   };
 };
