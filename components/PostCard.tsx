@@ -2,7 +2,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { isUpcomingPost } from "helpers/isUpcomingPost";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,7 +58,7 @@ const PostCard = ({ post }: Props) => {
 
       <div
         className={`posts-list-block ${
-          isUpcomingPost(post) ? "posts-list-block-draft-or-future" : ""
+          isUpcomingPost(post) ? "upcoming-posts-list-block" : ""
         }`}
       >
         <div className="content">

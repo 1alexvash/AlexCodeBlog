@@ -3,7 +3,7 @@ import matter from "gray-matter";
 import { PostDocument, PostDocumentWithoutContent } from "interfaces";
 import { join } from "path";
 
-import { isUpcomingPost } from "./isUpcomingPost";
+import isUpcomingPost from "./isUpcomingPost";
 
 const documentsDirectory = join(process.cwd(), "content/posts");
 

@@ -23,26 +23,26 @@ const Intro = () => {
           <div className="intro-avatar">
             <div
               className="image"
-              style={
-                admin ? { border: "3px solid #fe6c0a" } : { border: "none" }
-              }
+              style={{ border: admin ? "3px solid #fe6c0a" : "none" }}
             >
-              <img
-                onDoubleClick={handleClick}
-                src="/images/author-avatar.jpg"
-                alt="author-avatar"
-                width={90}
-                height={90}
-              />
-              {admin ? (
+              <div className={`wrapper`}>
                 <img
-                  className="edit"
-                  src="/images/edit.svg"
-                  alt="edit"
-                  width={19}
-                  height={19}
+                  onDoubleClick={handleClick}
+                  src="/images/author-avatar.jpg"
+                  alt="author-avatar"
+                  width={90}
+                  height={90}
                 />
-              ) : null}
+                {admin && (
+                  <img
+                    className="editor-icon"
+                    src="/images/edit.svg"
+                    alt="edit"
+                    width={19}
+                    height={19}
+                  />
+                )}
+              </div>
             </div>
             <div className="name">{config.author_name}</div>
             <div className="job">{config.author_position}</div>

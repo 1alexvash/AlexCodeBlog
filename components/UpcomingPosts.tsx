@@ -16,13 +16,7 @@ const UpcomingPosts = ({ posts }: Props) => (
         <PostCard key={index} post={post} />
       ))}
     </ul>
-    <hr
-      style={{
-        position: "absolute",
-        width: "100%",
-        left: 0,
-      }}
-    />
+    <hr style={{ position: "absolute", width: "100%", left: 0 }} />
   </div>
 );
 

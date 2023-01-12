@@ -1,4 +1,4 @@
-import { isUpcomingPost } from "helpers/isUpcomingPost";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";

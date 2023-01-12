@@ -458,23 +458,24 @@ header {
   margin: 0 auto 16px;
 }
 
-.intro-avatar .image img {
+.intro-avatar .image .wrapper img {
   display: block;
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-.intro-avatar .image .edit {
+.intro-avatar .image .wrapper .editor-icon {
   position: absolute;
   width: 39px;
   height: 39px;
   border-radius: 50%;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  top: 36%;
-  left: 36%;
   object-fit: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .intro-avatar .name {
@@ -1483,7 +1484,7 @@ blockquote p:last-child {
   top: -43px;
 }
 
-.posts-list-block-draft-or-future .post-img:after {
+.upcoming-posts-list-block .post-img:after {
   border: none;
   height: 50%;
 }
