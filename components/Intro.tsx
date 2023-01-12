@@ -25,7 +25,7 @@ const Intro = () => {
               className="image"
               style={{ border: admin ? "3px solid #fe6c0a" : "none" }}
             >
-              <div className={`wrapper`}>
+              <div className="wrapper">
                 <img
                   onDoubleClick={handleClick}
                   src="/images/author-avatar.jpg"
