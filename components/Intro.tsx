@@ -36,7 +36,7 @@ const Intro = () => {
                 {admin && (
                   <img
                     className="editor-icon"
-                    src="/images/edit.svg"
+                    src="/images/editor-icon.svg"
                     alt="edit"
                     width={19}
                     height={19}
