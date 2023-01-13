@@ -9,6 +9,7 @@ import Head from "next/head";
 import { useEffect, useRef } from "react";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+import { AudioPlayer } from "../AudioPlayer";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
@@ -73,6 +74,7 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
+      <AudioPlayer />
       <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} />
 
       {/* <Reactions /> This future might be added later */}

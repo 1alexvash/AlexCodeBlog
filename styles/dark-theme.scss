@@ -257,4 +257,16 @@
       border: 1px solid #f2f5f7;
     }
   }
+
+  .audio {
+    background: #33393f;
+  }
+
+  .audio .progress-bar input {
+    background: #18191d;
+  }
+
+  .audio .progress-bar .current-time {
+    color: #9f9f9f;
+  }
 }
