@@ -26,7 +26,7 @@ const SkeletonMobile = () => {
   return (
     <div className="mobile-posts-block">
       <div className="inner-flex">
-        <div className="image skeleton" style={{ borderRadius: "3px" }}></div>
+        <div className="image skeleton" style={{ borderRadius: "3px" }} />
         {titleSkeleton}
       </div>
       <div className="tags">
