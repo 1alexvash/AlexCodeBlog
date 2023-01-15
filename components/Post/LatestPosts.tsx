@@ -21,11 +21,11 @@ const LatestPosts = ({ latestPosts }: Props) => {
       {latestPosts.map((post) => (
         <div className="related-posts-block" key={post.title}>
           <Link href={post.slug} className="image">
-
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
-              fill
+              width="102"
+              height="102"
               sizes="100vw"
               style={{
                 filter:
@@ -33,9 +33,9 @@ const LatestPosts = ({ latestPosts }: Props) => {
                     ? "grayscale(50%)"
                     : "none",
 
-                objectFit: "cover"
-              }} />
-
+                objectFit: "cover",
+              }}
+            />
           </Link>
           <div className="inner">
             <Link href={post.slug} className="name">
@@ -43,10 +43,13 @@ const LatestPosts = ({ latestPosts }: Props) => {
             </Link>
             <div className="tags">
               {post.tags.map((tag) => (
-                (<Link href="/" key={tag} onClick={() => dispatch(setTags([tag]))}>
+                <Link
+                  href="/"
+                  key={tag}
+                  onClick={() => dispatch(setTags([tag]))}
+                >
                   #{tag}
-
-                </Link>)
+                </Link>
               ))}
             </div>
           </div>
@@ -54,9 +57,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
       ))}
 
       <Link href="/" className="btn" onClick={() => dispatch(resetTags())}>
-        
-          See all posts
-        
+        See all posts
       </Link>
     </div>
   );
