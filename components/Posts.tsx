@@ -8,8 +8,8 @@ interface Props {
 
 const Posts = ({ posts }: Props) => (
   <ul className="posts-list">
-    {posts.map((post, index) => (
-      <PostCard key={index} post={post} />
+    {posts.map((post) => (
+      <PostCard key={post.title} post={post} />
     ))}
   </ul>
 );
