@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Content Manager</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <title>TinaCMS</title>
   </head>
-  <style>
-    [data-slate-editor] {
-      -webkit-user-modify: read-write !important;
-    }
-    .frame-content {
-      font-family: Arial;
-    }
-    .frame-content img {
-      width: 100%;
-    }
-  </style>
-  <body>
-    <!-- Include the script that builds the page and powers Netlify CMS -->
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+
+  <!-- if development -->
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
+  <script type="module" src="http://localhost:5173/@vite/client"></script>
+  <script
+    type="module"
+    src="http://localhost:5173/admin/src/main.tsx"
+  ></script>
+  <body class="tina-tailwind">
+    <div id="root"></div>
   </body>
 </html>
