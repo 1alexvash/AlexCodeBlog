@@ -26,7 +26,8 @@ const Intro = () => {
       imageWrapper?.setAttribute("admin", "");
       editIcon?.setAttribute("admin", "");
       setIsFirstRender(false);
-    } else if (!admin && isFirstRender === false) {
+    }
+    if (!admin && isFirstRender === false) {
       imageWrapper?.setAttribute("closing", "");
       editIcon?.setAttribute("closing", "");
       imageWrapper?.addEventListener(
