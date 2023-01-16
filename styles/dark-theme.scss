@@ -1,4 +1,4 @@
-.dark-theme body {
+.dark-theme {
   background: #18191d;
   color: #f2f5f7;
 
@@ -56,13 +56,13 @@
   .upcoming-posts-title h1 {
     color: #fff;
   }
-
-  .filter-tags-list a {
+  
+  .filter-tags-list li {
     background: #33393f;
     color: #f2f5f7;
   }
 
-  .filter-tags-list a:hover {
+  .filter-tags-list li:hover {
     border-color: #f2f5f7;
   }
 

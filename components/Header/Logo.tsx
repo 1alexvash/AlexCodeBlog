@@ -4,7 +4,7 @@ import React from "react";
 
 const Logo = () => {
   const logo = (
-    <a className="main-logo">
+    <span className="main-logo">
       <img
         className="light"
         src="/images/main-logo.svg"
@@ -19,14 +19,14 @@ const Logo = () => {
         width={180}
         height={60}
       />
-    </a>
+    </span>
   );
 
   const router = useRouter();
 
   const onTheMainPage = router.pathname === "/";
 
-  return onTheMainPage ? logo : <Link href="/" legacyBehavior>{logo}</Link>;
+  return onTheMainPage ? logo : <Link href="/">{logo}</Link>;
 };
 
 export default Logo;
