@@ -50,11 +50,7 @@ export function getUpcomingPosts(): PostDocumentWithoutContent[] {
   const slugs = fs.readdirSync(documentsDirectory);
   const docs = slugs
     .map((slug) => getPostDocumentBySlug(slug))
-    .filter((post: PostDocument) => {
-      if (isUpcomingPost(post)) {
-        return true;
-      }
-    })
+    .filter((post: PostDocument) => isUpcomingPost(post))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
     .map((post) => {
       const { content, ...postWithoutContent } = post;

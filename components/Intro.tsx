@@ -1,12 +1,14 @@
 import config from "config";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAdmin } from "redux/slices/admin";
 import { useAppSelector } from "redux/typesHooks";
 
 const Intro = () => {
   const dispatch = useDispatch();
-
   const admin = useAppSelector((state) => state.admin);
+
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   const handleClick = () => {
     if (admin === true) {
@@ -16,32 +18,51 @@ const Intro = () => {
     }
   };
 
+  useEffect(() => {
+    const imageWrapper = document.querySelector("div.image-wrapper");
+    const editIcon = document.querySelector("img.editor-icon");
+
+    if (admin) {
+      imageWrapper?.setAttribute("admin", "");
+      editIcon?.setAttribute("admin", "");
+      setIsFirstRender(false);
+    } else if (!admin && isFirstRender === false) {
+      imageWrapper?.setAttribute("closing", "");
+      editIcon?.setAttribute("closing", "");
+      imageWrapper?.addEventListener(
+        "animationend",
+        () => {
+          editIcon?.removeAttribute("closing");
+          imageWrapper?.removeAttribute("closing");
+        },
+        { once: true }
+      );
+      imageWrapper?.removeAttribute("admin");
+      editIcon?.removeAttribute("admin");
+    }
+  }, [admin, isFirstRender]);
+
   return (
     <section className="intro-section">
       <div className="container">
         <div className="intro-content">
           <div className="intro-avatar">
-            <div
-              className="image"
-              style={{ border: admin ? "3px solid #fe6c0a" : "none" }}
-            >
-              <div className="wrapper">
+            <div className="image">
+              <div className="image-wrapper">
                 <img
                   onDoubleClick={handleClick}
                   src="/images/author-avatar.jpg"
                   alt="author-avatar"
-                  width={90}
-                  height={90}
+                  width="90"
+                  height="90"
                 />
-                {admin && (
-                  <img
-                    className="editor-icon"
-                    src="/images/editor-icon.svg"
-                    alt="edit"
-                    width={19}
-                    height={19}
-                  />
-                )}
+                <img
+                  className="editor-icon"
+                  src="/images/editor-icon.svg"
+                  alt="edit"
+                  width="19"
+                  height="19"
+                />
               </div>
             </div>
             <div className="name">{config.author_name}</div>

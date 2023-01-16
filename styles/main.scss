@@ -458,14 +458,37 @@ header {
   margin: 0 auto 16px;
 }
 
-.intro-avatar .image .wrapper img {
+.intro-avatar .image .image-wrapper:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  left: 50%;
+  top: 26.7%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #fe6c0a;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.intro-avatar .image .image-wrapper[admin]:after {
+  animation: fade-in 500ms forwards;
+}
+
+.intro-avatar .image .image-wrapper[closing]:after {
+  animation: fade-out 500ms forwards;
+}
+
+.intro-avatar .image .image-wrapper img {
   display: block;
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-.intro-avatar .image .wrapper .editor-icon {
+.intro-avatar .image .image-wrapper .editor-icon {
   position: absolute;
   width: 39px;
   height: 39px;
@@ -476,6 +499,35 @@ header {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+
+.intro-avatar .image .image-wrapper .editor-icon[admin] {
+  animation: fade-in 500ms forwards;
+}
+
+.intro-avatar .image .image-wrapper .editor-icon[closing] {
+  animation: fade-out 500ms forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .intro-avatar .name {
@@ -730,6 +782,24 @@ header {
   color: #fff !important;
   background: #fe6c0a !important;
   border-color: #fe6c0a !important;
+}
+
+.upcoming-posts-block {
+  margin-bottom: 70px;
+}
+
+.upcoming-posts-block .upcoming-posts-title h1 {
+  color: #3a3a3a;
+  line-height: 1.28;
+  font-weight: 700;
+  font-size: 43px;
+  margin-bottom: 36px;
+}
+
+.upcoming-posts-block hr {
+  position: absolute;
+  width: 100%;
+  left: 0;
 }
 
 /*footer =======================================================*/

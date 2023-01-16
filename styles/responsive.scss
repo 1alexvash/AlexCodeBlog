@@ -259,10 +259,14 @@
     margin-bottom: 20px;
   }
 
-  .intro-avatar .image .wrapper .editor-icon {
+  .intro-avatar .image .image-wrapper .editor-icon {
     left: 50%;
     top: 55%;
     transform: translate(-50%, -50%);
+  }
+
+  .intro-avatar .image .image-wrapper:after {
+    top: 30.5%;
   }
 
   .posts-list li {
@@ -616,6 +620,11 @@
   .intro-text h1 {
     font-size: 30px;
     margin-bottom: 13px;
+  }
+
+  .upcoming-posts-title h1 {
+    font-size: 26px;
+    margin-bottom: 27px;
   }
 
   .filter-tags-list {
