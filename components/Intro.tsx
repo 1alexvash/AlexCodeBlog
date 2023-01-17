@@ -19,7 +19,7 @@ const Intro = () => {
   };
 
   useEffect(() => {
-    const imageWrapper = document.querySelector("div.image-wrapper");
+    const imageWrapper = document.querySelector("div.image-avatar");
     const editIcon = document.querySelector("img.editor-icon");
 
     if (admin) {
@@ -48,23 +48,23 @@ const Intro = () => {
       <div className="container">
         <div className="intro-content">
           <div className="intro-avatar">
-            <div className="image">
-              <div className="image-wrapper">
-                <img
-                  onDoubleClick={handleClick}
-                  src="/images/author-avatar.jpg"
-                  alt="author-avatar"
-                  width="90"
-                  height="90"
-                />
-                <img
-                  className="editor-icon"
-                  src="/images/editor-icon.svg"
-                  alt="edit"
-                  width="19"
-                  height="19"
-                />
-              </div>
+            <div className="image-avatar">
+              <img
+                onDoubleClick={handleClick}
+                src="/images/author-avatar.jpg"
+                alt="author-avatar"
+                width="90"
+                height="90"
+              />
+            </div>
+            <div className="image-editor">
+              <img
+                className="editor-icon"
+                src="/images/editor-icon.svg"
+                alt="edit"
+                width="19"
+                height="19"
+              />
             </div>
             <div className="name">{config.author_name}</div>
             <div className="job">{config.author_position}</div>

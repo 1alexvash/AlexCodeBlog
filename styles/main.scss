@@ -453,7 +453,8 @@ header {
   order: 2;
 }
 
-.intro-avatar .image {
+.intro-avatar .image-avatar {
+  position: relative;
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -461,14 +462,14 @@ header {
   margin: 0 auto 16px;
 }
 
-.intro-avatar .image .image-wrapper:after {
+.intro-avatar .image-avatar:after {
   content: "";
   position: absolute;
   border-radius: 50%;
   width: 90px;
   height: 90px;
   left: 50%;
-  top: 26.7%;
+  top: 50%;
   transform: translate(-50%, -50%);
   border: 3px solid #fe6c0a;
   z-index: 1;
@@ -476,22 +477,22 @@ header {
   opacity: 0;
 }
 
-.intro-avatar .image .image-wrapper[admin]:after {
+.intro-avatar .image-avatar[admin]:after {
   animation: fade-in 500ms forwards;
 }
 
-.intro-avatar .image .image-wrapper[closing]:after {
+.intro-avatar .image-avatar[closing]:after {
   animation: fade-out 500ms forwards;
 }
 
-.intro-avatar .image .image-wrapper img {
+.intro-avatar .image-avatar img {
   display: block;
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-.intro-avatar .image .image-wrapper .editor-icon {
+.intro-avatar .image-editor .editor-icon {
   position: absolute;
   width: 39px;
   height: 39px;
@@ -507,11 +508,11 @@ header {
   opacity: 0;
 }
 
-.intro-avatar .image .image-wrapper .editor-icon[admin] {
+.intro-avatar .image-editor .editor-icon[admin] {
   animation: fade-in 500ms forwards;
 }
 
-.intro-avatar .image .image-wrapper .editor-icon[closing] {
+.intro-avatar .image-editor .editor-icon[closing] {
   animation: fade-out 500ms forwards;
 }
 

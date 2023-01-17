@@ -259,14 +259,10 @@
     margin-bottom: 20px;
   }
 
-  .intro-avatar .image .image-wrapper .editor-icon {
+  .intro-avatar .image-editor .editor-icon {
     left: 50%;
     top: 55%;
     transform: translate(-50%, -50%);
-  }
-
-  .intro-avatar .image .image-wrapper:after {
-    top: 30.5%;
   }
 
   .posts-list li {
