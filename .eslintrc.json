@@ -1,9 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
+  "extends": ["airbnb-typescript"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "quotes": "off"
+    "quotes": ["error", "double"],
+    "@typescript-eslint/quotes": "off"
   }
 }
