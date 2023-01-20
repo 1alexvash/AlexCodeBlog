@@ -1,10 +1,17 @@
 {
-  "extends": ["next,airbnb,airbnb-typescript"],
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
     "quotes": ["error", "double"],
-    "@typescript-eslint/quotes": "off"
+    "@typescript-eslint/quotes": "off",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
   }
 }
