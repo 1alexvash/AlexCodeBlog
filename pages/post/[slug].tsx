@@ -33,7 +33,7 @@ const Post: NextPage<{
     </Head>
     <StandWithUkraine />
     <Header />
-    <BreadCrumbs />
+    <BreadCrumbs title={post.title} />
     <PageProgress />
     <section className="blogpost-section">
       <div className="container">
