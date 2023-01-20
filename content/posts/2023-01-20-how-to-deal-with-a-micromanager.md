@@ -6,7 +6,10 @@ draft: false
 tags:
   - SoftSkills
 ---
-Let's say at your work you have Lily, and she is a micromanager. She is nice and all, but sometimes she gets annoying as hell, so you'd like to know how to deal with her.
+
+Let's say at your work you have Lily, and she is a micromanager.
+
+She is nice and all, but sometimes she gets annoying as hell, so you'd like to know how to deal with her.
 
 It all sounds good, but let's take a spin, and look at this from the manager perspective, as from yours it probably just looks like I'm doing my job, trying to get focused, so why is she distracting me all the time?
 
@@ -20,19 +23,19 @@ So right there you can see her incentives for your work being done well.
 
 Just imagine. If Lily gets asked by her boss, about some important feature we promised to deliver weeks ago, what she is going to do?
 
-What if she gets asked multiply times a day? Probably even outside the work time as the client might be threatening to cut the pay or some other bad stuff, you don't to deal with.
+What if she gets asked multiply times a day? Probably even outside the work time as the client might be threatening to cut the pay or some other bad stuff, you don't want to deal with as a developer.
 
 Well, then her reaction is obvious.
 
 ![](/post-images/harassment-chain.jpg)
 
-I call it harassment chain
+I call it **harassment chain.**
 
 The good part you can totally reverse it, so let's dive into the solution.
 
 ### Solution
 
-Overreporting. 
+<u>Overreporting.</u>
 
 It's totally out of the blue, out of the script, as it is traditionally her job to get to you and collect the important information, and that's why it is effective.
 
