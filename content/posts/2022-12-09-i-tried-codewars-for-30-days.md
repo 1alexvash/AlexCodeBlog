@@ -1,9 +1,15 @@
 ---
 title: I tried CodeWars for 30 days
-date: 2022-12-09T14:30:10.009Z
+date: 2023-01-21T11:57:38.843Z
 featuredImage: /post-images/codewars-challenge.jpg
-draft: true
+draft: false
 tags:
-  - TestTag
+  - Tools
 ---
-The draft of the text
+![](/post-images/codewars-good-and-bad-code.png)
+
+![](/post-images/codewars-faang.png)
+
+![](/post-images/codewars-chocolate.png)
+
+![](/post-images/codewars-kata.jpg)
