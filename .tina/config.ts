@@ -31,6 +31,21 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
+
+          // date
+
+          {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+            required: true,
+            // TODO: default to today
+          },
+
+          // featured image
+          // draft
+          // tags
+
           {
             type: "rich-text",
             name: "body",
