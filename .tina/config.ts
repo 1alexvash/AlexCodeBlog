@@ -32,19 +32,28 @@ export default defineConfig({
             required: true,
           },
 
+          // TODO: audio file
+
           // date
 
           {
             type: "datetime",
             name: "date",
             label: "Date",
-            required: true,
+            required: true, // For some reason, this is not working
             // TODO: default to today
           },
 
           // featured image
           // draft
-          // tags
+
+          {
+            label: "Tags",
+            name: "tags",
+            type: "string",
+            list: true,
+            // TODO: At least one tag is required
+          },
 
           {
             type: "rich-text",
