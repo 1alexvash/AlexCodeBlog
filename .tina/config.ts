@@ -23,6 +23,8 @@ export default defineConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
+        // format: "md", // TODO: investigate whether it's an appropriate format
+        // TODO: move to .mdx
         fields: [
           {
             type: "string",
@@ -44,7 +46,13 @@ export default defineConfig({
             // TODO: default to today
           },
 
-          // featured image
+          {
+            type: "image",
+            label: "Hero image",
+            name: "featuredImage",
+            required: false,
+          },
+
           // draft
 
           {
