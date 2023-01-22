@@ -74,14 +74,14 @@ export async function getStaticProps({ params }: Params) {
 export async function getStaticPaths() {
   const postDocuments = getAllPostDocuments();
 
+  const paths = postDocuments.map(({ slug }) => ({
+    params: {
+      slug,
+    },
+  }));
+
   return {
-    paths: postDocuments.map(({ slug }) => {
-      return {
-        params: {
-          slug,
-        },
-      };
-    }),
+    paths,
     fallback: "blocking",
   };
 }
