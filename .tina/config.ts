@@ -54,17 +54,17 @@ export default defineConfig({
             description: "If this is checked the post will not be published",
           },
           {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+          },
+          {
             label: "Tags",
             name: "tags",
             type: "string",
             list: true,
             // TODO: At least one tag is required
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
           },
         ],
         ui: {
