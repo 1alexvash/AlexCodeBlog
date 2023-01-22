@@ -23,8 +23,8 @@ export default defineConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
-        // format: "md", // TODO: investigate whether it's an appropriate format
-        // TODO: move to .mdx
+        format: "md",
+        // TODO: Try .mdx
         fields: [
           {
             type: "string",
