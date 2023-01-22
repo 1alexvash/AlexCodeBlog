@@ -86,4 +86,16 @@ export async function getStaticPaths() {
   };
 }
 
+// ! TODO: Implement GraphQL fetching via TinaCMS
+// https://tina.io/guides/tinacms/nextjs-data-fetching/guide/
+// export const getStaticPaths = async () => {
+//   const postListResponse = await client.queries.postConnection()
+//   return {
+//     paths: postListResponse.data.postConnection.edges.map((page) => ({
+//       params: { filename: page.node._sys.filename },
+//     })),
+//     fallback: 'blocking',
+//   }
+// }
+
 export default Post;
