@@ -39,7 +39,6 @@ export default defineConfig({
             name: "date",
             label: "Date",
             required: true, // For some reason, this is not working
-            // TODO: default to today
           },
           {
             type: "image",
@@ -75,6 +74,15 @@ export default defineConfig({
             featuredImage: "",
             draft: false,
             tags: ["First Tag"],
+          },
+          filename: {
+            readonly: true,
+            slugify: (values) => {
+              const date = new Date(values.date).toISOString().split("T")[0];
+              const slug = values?.title?.toLowerCase().replace(/ /g, "-");
+
+              return `${date}-${slug}`;
+            },
           },
           // This is an DEMO router. You can remove this to fit your site
           router: ({ document }) => `/demo/blog/${document._sys.filename}`,
