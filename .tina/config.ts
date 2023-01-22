@@ -33,11 +33,7 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
-
           // TODO: audio file
-
-          // date
-
           {
             type: "datetime",
             name: "date",
@@ -45,16 +41,19 @@ export default defineConfig({
             required: true, // For some reason, this is not working
             // TODO: default to today
           },
-
           {
             type: "image",
             label: "Hero image",
-            name: "featuredImage",
+            name: "featuredImage", // TODO: rename to heroImage
             required: false,
           },
-
-          // draft
-
+          {
+            name: "draft",
+            label: "Draft",
+            type: "boolean",
+            required: true,
+            description: "If this is checked the post will not be published",
+          },
           {
             label: "Tags",
             name: "tags",
@@ -62,7 +61,6 @@ export default defineConfig({
             list: true,
             // TODO: At least one tag is required
           },
-
           {
             type: "rich-text",
             name: "body",
