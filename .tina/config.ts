@@ -38,7 +38,7 @@ export default defineConfig({
             type: "datetime",
             name: "date",
             label: "Date",
-            required: true, // For some reason, this is not working
+            required: true,
           },
           {
             type: "image",
@@ -71,7 +71,6 @@ export default defineConfig({
           defaultItem: {
             title: "",
             date: new Date().toISOString(),
-            featuredImage: "",
             draft: false,
             tags: ["First Tag"],
           },
