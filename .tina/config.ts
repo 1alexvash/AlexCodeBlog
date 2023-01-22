@@ -69,6 +69,13 @@ export default defineConfig({
           },
         ],
         ui: {
+          defaultItem: {
+            title: "",
+            date: new Date().toISOString(),
+            featuredImage: "",
+            draft: false,
+            tags: ["First Tag"],
+          },
           // This is an DEMO router. You can remove this to fit your site
           router: ({ document }) => `/demo/blog/${document._sys.filename}`,
         },
