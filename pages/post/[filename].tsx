@@ -16,6 +16,8 @@ import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
+import { client } from "../../.tina/__generated__/client";
+
 const Post: NextPage<{
   post: PostDocument;
   latestPosts: PostDocumentWithoutContent[];
@@ -42,7 +44,6 @@ const Post: NextPage<{
           <LatestPosts latestPosts={latestPosts} />
         </div>
       </div>
-      {/* <CommentsSection /> This feature not used, and needed for the time being */}
     </section>
     <Footer />
   </>
@@ -50,12 +51,12 @@ const Post: NextPage<{
 
 type Params = {
   params: {
-    slug: string;
+    filename: string;
   };
 };
 
 export async function getStaticProps({ params }: Params) {
-  const postDocument = getPostDocumentBySlug(params.slug);
+  const postDocument = getPostDocumentBySlug(params.filename);
   const content = await markdownToHtml(postDocument.content || "");
   const post = {
     ...postDocument,
@@ -72,11 +73,11 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const postDocuments = getAllPostDocuments();
+  const postListResponse = await client.queries.postConnection();
 
-  const paths = postDocuments.map(({ slug }) => ({
+  const paths = postListResponse.data.postConnection.edges?.map((page) => ({
     params: {
-      slug,
+      filename: page?.node?._sys.filename,
     },
   }));
 
@@ -85,17 +86,5 @@ export async function getStaticPaths() {
     fallback: "blocking",
   };
 }
-
-// ! TODO: Implement GraphQL fetching via TinaCMS
-// https://tina.io/guides/tinacms/nextjs-data-fetching/guide/
-// export const getStaticPaths = async () => {
-//   const postListResponse = await client.queries.postConnection()
-//   return {
-//     paths: postListResponse.data.postConnection.edges.map((page) => ({
-//       params: { filename: page.node._sys.filename },
-//     })),
-//     fallback: 'blocking',
-//   }
-// }
 
 export default Post;
