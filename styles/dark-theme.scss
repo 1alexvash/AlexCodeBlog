@@ -206,40 +206,6 @@
     color: #f2f5f7;
   }
 
-  .simple-section.gray-bg {
-    background: #070808;
-  }
-
-  .comments-block {
-    background: #18191d;
-  }
-
-  .comments-block.replied {
-    border-color: #595959;
-  }
-
-  .comments-block .name {
-    color: #fff;
-  }
-
-  .comments-block .reply {
-    color: #f2f5f7;
-    background: #33393f;
-    border-color: transparent;
-  }
-
-  .comments-block .reply:hover {
-    border-color: #fe6c0a;
-  }
-
-  .comments-block .reply img {
-    filter: brightness(0) invert(1);
-  }
-
-  .comments-form {
-    background: #33393f;
-  }
-
   blockquote {
     background: rgba(254, 108, 10, 0.22);
   }
