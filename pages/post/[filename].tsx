@@ -20,34 +20,40 @@ import { client } from "../../.tina/__generated__/client";
 
 const Post: NextPage<{
   post: PostDocument;
+  postResponse: any;
   latestPosts: PostDocumentWithoutContent[];
-}> = ({ post, latestPosts }) => (
-  <>
-    <Head>
-      <title>{post.title}</title>
-      <meta name="description" content={config.site_description} />
-      <meta property="og:description" content={config.site_description} />
-      <meta property="og:url" content={config.host_url} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={config.site_title} />
-      <meta property="og:image" content={config.defaultImage} />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <StandWithUkraine />
-    <Header />
-    <BreadCrumbs title={post.title} />
-    <PageProgress />
-    <section className="blogpost-section">
-      <div className="container">
-        <div className="blogpost-outer">
-          <PostContent post={post} />
-          <LatestPosts latestPosts={latestPosts} />
+}> = ({ post, postResponse, latestPosts }) => {
+  // TODO: Might need to reimplement code to TinaMarkdown component
+  console.log("post:", post);
+  console.log("postResponse:", postResponse);
+  return (
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={config.site_description} />
+        <meta property="og:description" content={config.site_description} />
+        <meta property="og:url" content={config.host_url} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:image" content={config.defaultImage} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <StandWithUkraine />
+      <Header />
+      <BreadCrumbs title={post.title} />
+      <PageProgress />
+      <section className="blogpost-section">
+        <div className="container">
+          <div className="blogpost-outer">
+            <PostContent post={post} />
+            <LatestPosts latestPosts={latestPosts} />
+          </div>
         </div>
-      </div>
-    </section>
-    <Footer />
-  </>
-);
+      </section>
+      <Footer />
+    </>
+  );
+};
 
 type Params = {
   params: {
@@ -56,7 +62,14 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
+  const postResponse = await client.queries.post({
+    relativePath: params.filename + ".md",
+  });
+
+  // console.log("postResponse:", postResponse);
+
   const postDocument = getPostDocumentBySlug(params.filename);
+
   const content = await markdownToHtml(postDocument.content || "");
   const post = {
     ...postDocument,
@@ -67,6 +80,7 @@ export async function getStaticProps({ params }: Params) {
   return {
     props: {
       post,
+      postResponse,
       latestPosts: tenLatestPosts,
     },
   };
