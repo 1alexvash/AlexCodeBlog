@@ -5,9 +5,11 @@ import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 interface Props {
   uniqueTags: string[];
+  admin: boolean;
+  countOfPostsInTags: number[];
 }
 
-const Tags = ({ uniqueTags }: Props) => {
+const Tags = ({ uniqueTags, admin, countOfPostsInTags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
 
   const dispatch = useAppDispatch();
@@ -27,7 +29,7 @@ const Tags = ({ uniqueTags }: Props) => {
       >
         ALL
       </li>
-      {uniqueTags.map((uniqueTag) => (
+      {uniqueTags.map((uniqueTag, index) => (
         <li
           key={uniqueTag}
           className={selectedTags.includes(uniqueTag) ? "active" : ""}
@@ -44,6 +46,7 @@ const Tags = ({ uniqueTags }: Props) => {
           }}
         >
           {uniqueTag}
+          {admin && ` ${countOfPostsInTags[index]}`}
         </li>
       ))}
     </ul>

@@ -35,6 +35,7 @@ const Home: NextPage<{
   const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
 
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
+  const countOfPostsInTags = sortedTags.map((tag) => tag[1]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
   const filteredPosts = posts.filter((post) => {
@@ -74,7 +75,11 @@ const Home: NextPage<{
         <div className="container">
           {admin && <UpcomingPosts posts={upcomingPosts} />}
           {/* TODO: Implement tags count for the admin user */}
-          <Tags uniqueTags={uniqueSortedTags} />
+          <Tags
+            uniqueTags={uniqueSortedTags}
+            admin={admin}
+            countOfPostsInTags={countOfPostsInTags}
+          />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
