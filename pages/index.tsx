@@ -77,7 +77,6 @@ const Home: NextPage<{
           {/* TODO: Implement tags count for the admin user */}
           <Tags
             uniqueTags={uniqueSortedTags}
-            admin={admin}
             countOfPostsInTags={countOfPostsInTags}
           />
           <Posts posts={postsToRender} />

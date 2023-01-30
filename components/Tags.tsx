@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 interface Props {
   uniqueTags: string[];
-  admin: boolean;
   countOfPostsInTags: number[];
 }
 
-const Tags = ({ uniqueTags, admin, countOfPostsInTags }: Props) => {
+const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
+  const admin = useAppSelector((state) => state.admin);
 
   const dispatch = useAppDispatch();
 
