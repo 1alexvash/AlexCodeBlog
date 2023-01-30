@@ -42,7 +42,6 @@ const Post: NextPage<{
           <LatestPosts latestPosts={latestPosts} />
         </div>
       </div>
-      {/* <CommentsSection /> This feature not used, and needed for the time being */}
     </section>
     <Footer />
   </>
