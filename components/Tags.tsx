@@ -46,7 +46,7 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
           }}
         >
           {uniqueTag}
-          {admin && ` ${countOfPostsInTags[index]}`}
+          {admin && ` [${countOfPostsInTags[index]}]`}
         </li>
       ))}
     </ul>
