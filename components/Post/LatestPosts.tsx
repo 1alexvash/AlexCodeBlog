@@ -9,7 +9,7 @@ import { useAppDispatch } from "redux/typesHooks";
 
 import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
-  latestPosts: PostDocumentWithoutContent[];
+  latestPosts: any | PostDocumentWithoutContent[]; // TODO: interface is broken by graphql
 }
 
 const LatestPosts = ({ latestPosts }: Props) => {
@@ -18,9 +18,9 @@ const LatestPosts = ({ latestPosts }: Props) => {
   return (
     <div className="related-posts">
       <h2>Latest posts</h2>
-      {latestPosts.map((post) => (
+      {latestPosts.map((post: any) => (
         <div className="related-posts-block" key={post.title}>
-          <Link href={post.slug} className="image">
+          <Link href={post._sys.filename} className="image">
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
@@ -38,11 +38,11 @@ const LatestPosts = ({ latestPosts }: Props) => {
             />
           </Link>
           <div className="inner">
-            <Link href={post.slug} className="name">
+            <Link href={post._sys.filename} className="name">
               {post.title}
             </Link>
             <div className="tags">
-              {post.tags.map((tag) => (
+              {post.tags.map((tag: any) => (
                 <Link
                   href="/"
                   key={tag}

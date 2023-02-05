@@ -1,6 +1,5 @@
 import config from "config";
-import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
-import { PostDocument, PostDocumentWithoutContent } from "interfaces";
+import { PostDocument } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -18,7 +17,7 @@ const latestPostsToShow = 10;
 
 const Post: NextPage<{
   post: any | PostDocument;
-  latestPosts: PostDocumentWithoutContent[];
+  latestPosts: any[]; // The interface is broken by graphql
 }> = ({ post, latestPosts }) => (
   <>
     <Head>
@@ -58,12 +57,16 @@ export async function getStaticProps({ params }: Params) {
     relativePath: params.filename + ".md",
   });
 
-  const latestPosts = getAllPostDocuments().slice(0, latestPostsToShow);
+  const latestPostsResponseFromTina = await client.queries.postConnection({
+    last: latestPostsToShow,
+  });
 
   return {
     props: {
       post: post.data.post,
-      latestPosts,
+      latestPosts: latestPostsResponseFromTina.data.postConnection.edges?.map(
+        (edge) => edge?.node
+      ),
     },
   };
 }
