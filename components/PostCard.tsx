@@ -63,7 +63,7 @@ const PostCard = ({ post }: Props) => {
         }`}
       >
         <div className="content">
-          <Link href={`/post/${post.slug}`} className="post-img">
+          <Link href={`/post/${post._sys.filename}`} className="post-img">
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
