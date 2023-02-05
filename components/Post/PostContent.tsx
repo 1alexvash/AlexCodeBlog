@@ -12,17 +12,21 @@ import renderCopyButtons from "../../helpers/renderCopyButtons";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
-  post: PostDocument;
+  post: any | PostDocument;
 }
 
 const getFirstParagraph = (string: string) => {
-  const openedElement = string.indexOf("<p>") + 3;
-  const closedElement = string.indexOf("</p>");
+  // TODO: need to reimplement this function
+  // const openedElement = string.indexOf("<p>") + 3;
+  // const closedElement = string.indexOf("</p>");
 
-  return string.slice(openedElement, closedElement);
+  // return string.slice(openedElement, closedElement);
+
+  return string;
 };
 
 const PostContent = ({ post }: Props) => {
+  console.log("post:", post);
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
 
@@ -66,14 +70,14 @@ const PostContent = ({ post }: Props) => {
       </div>
       <h1>{post.title}</h1>
 
-      <div className="tags">
+      {/* <div className="tags">
         {post.tags.map((tag) => (
           <a href="" key={tag}>
             #{tag}
           </a>
         ))}
-      </div>
-      <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} />
+      </div> */}
+      {/* <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} /> */}
 
       {/* <Reactions /> This future might be added later */}
     </article>
