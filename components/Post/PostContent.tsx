@@ -7,6 +7,7 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
@@ -70,16 +71,17 @@ const PostContent = ({ post }: Props) => {
       </div>
       <h1>{post.title}</h1>
 
-      {/* <div className="tags">
-        {post.tags.map((tag) => (
+      <div className="tags">
+        {post.tags.map((tag: any) => (
           <a href="" key={tag}>
             #{tag}
           </a>
         ))}
-      </div> */}
+      </div>
       {/* <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} /> */}
 
       {/* <Reactions /> This future might be added later */}
+      <TinaMarkdown content={post.body} />
     </article>
   );
 };
