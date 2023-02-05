@@ -20,12 +20,12 @@ import { client } from "../../.tina/__generated__/client";
 
 const Post: NextPage<{
   post: PostDocument;
-  postResponse: any;
+  tinaPost: any;
   latestPosts: PostDocumentWithoutContent[];
-}> = ({ post, postResponse, latestPosts }) => {
+}> = ({ post, tinaPost, latestPosts }) => {
   // TODO: Might need to reimplement code to TinaMarkdown component
   console.log("post:", post);
-  console.log("postResponse:", postResponse);
+  console.log("tinaPost:", tinaPost);
   return (
     <>
       <Head>
@@ -62,11 +62,9 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const postResponse = await client.queries.post({
+  const tinaPost = await client.queries.post({
     relativePath: params.filename + ".md",
   });
-
-  // console.log("postResponse:", postResponse);
 
   const postDocument = getPostDocumentBySlug(params.filename);
 
@@ -80,7 +78,7 @@ export async function getStaticProps({ params }: Params) {
   return {
     props: {
       post,
-      postResponse,
+      tinaPost: tinaPost.data.post,
       latestPosts: tenLatestPosts,
     },
   };
