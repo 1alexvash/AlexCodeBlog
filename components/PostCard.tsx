@@ -10,7 +10,7 @@ import { useAppDispatch } from "redux/typesHooks";
 import { setTags } from "../redux/slices/selectedTags";
 
 interface Props {
-  post: PostDocumentWithoutContent;
+  post: any | PostDocumentWithoutContent; // TODO: interface is broken by TinaCMS
 }
 
 export const DraftPostMark = () => (
@@ -85,7 +85,7 @@ const PostCard = ({ post }: Props) => {
             />
           </Link>
           <div className="tags">
-            {post.tags.map((tag) => (
+            {post.tags.map((tag: any) => (
               <Link
                 href="/"
                 key={tag}
