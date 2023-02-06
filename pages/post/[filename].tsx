@@ -51,18 +51,18 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const post = await client.queries.post({
-    relativePath: params.filename + ".md",
-  });
+  const relativePath = params.filename + ".md";
 
-  const latestPostsResponseFromTina = await client.queries.postConnection({
+  const post = await client.queries.post({ relativePath });
+
+  const latestPosts = await client.queries.postConnection({
     last: config.latest_posts_per_page,
   });
 
   return {
     props: {
       post: post.data.post,
-      latestPosts: latestPostsResponseFromTina.data.postConnection.edges?.map(
+      latestPosts: latestPosts.data.postConnection.edges?.map(
         (edge) => edge?.node
       ),
     },
@@ -74,7 +74,7 @@ export async function getStaticPaths() {
 
   const paths = postListResponse.data.postConnection.edges?.map((page) => ({
     params: {
-      filename: page?.node?._sys.filename,
+      filename: page?.node?._sys.filename.toString(),
     },
   }));
 
