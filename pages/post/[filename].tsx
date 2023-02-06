@@ -13,8 +13,6 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { client } from "../../.tina/__generated__/client";
 
-const latestPostsToShow = 10;
-
 const Post: NextPage<{
   post: any | PostDocument;
   latestPosts: any[]; // The interface is broken by graphql
@@ -58,7 +56,7 @@ export async function getStaticProps({ params }: Params) {
   });
 
   const latestPostsResponseFromTina = await client.queries.postConnection({
-    last: latestPostsToShow,
+    last: config.latest_posts_per_page,
   });
 
   return {
