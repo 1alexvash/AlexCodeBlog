@@ -1,6 +1,4 @@
 import config from "config";
-import { PostDocument } from "interfaces";
-import type { NextPage } from "next";
 import Head from "next/head";
 import { useTina } from "tinacms/dist/react";
 
@@ -14,25 +12,24 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { client } from "../../.tina/__generated__/client";
 
-const Post: NextPage<{
-  post: any | PostDocument;
-  latestPosts: any[]; // The interface is broken by graphql
+interface Props {
   data: any;
   query: any;
   variables: any;
-}> = (props) => {
+  latestPosts: any[]; // The interface is broken by graphql
+}
+
+const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
   });
-  console.log("data:", data);
-  console.log("props:", props);
 
   return (
     <>
       <Head>
-        {/* <title>{post.title}</title> */}
+        <title>{data.post.title}</title>
         <meta name="description" content={config.site_description} />
         <meta property="og:description" content={config.site_description} />
         <meta property="og:url" content={config.host_url} />
@@ -43,13 +40,13 @@ const Post: NextPage<{
       </Head>
       <StandWithUkraine />
       <Header />
-      {/* <BreadCrumbs title={post.title} /> */}
+      <BreadCrumbs title={data.post.title} />
       <PageProgress />
       <section className="blogpost-section">
         <div className="container">
           <div className="blogpost-outer">
-            {/* <PostContent post={post} /> */}
-            {/* <LatestPosts latestPosts={latestPosts} /> */}
+            <PostContent post={data.post} />
+            <LatestPosts latestPosts={latestPosts} />
           </div>
         </div>
       </section>
