@@ -4,6 +4,7 @@ import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
 import PageProgress from "@/components/Post/PageProgress";
@@ -42,14 +43,10 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <Header />
       <BreadCrumbs title={data.post.title} />
       <PageProgress />
-      <section className="blogpost-section">
-        <div className="container">
-          <div className="blogpost-outer">
-            <PostContent post={data.post} />
-            <LatestPosts latestPosts={latestPosts} />
-          </div>
-        </div>
-      </section>
+      <BlogPostSectionWrapper>
+        <PostContent post={data.post} />
+        <LatestPosts latestPosts={latestPosts} />
+      </BlogPostSectionWrapper>
       <Footer />
     </>
   );
@@ -63,7 +60,6 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const relativePath = params.filename + ".md";
-  console.log("relativePath:", relativePath);
 
   const postResponse = await client.queries.post({ relativePath });
 
