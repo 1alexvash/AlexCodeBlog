@@ -8,11 +8,15 @@ const PageProgress = () => {
       document.getElementsByTagName("footer")[0].clientHeight;
 
     const calculateScrollProgress = () => {
+      const { innerWidth } = window;
+
+      console.log(footerHeight);
+
       let percentage =
         ((document.body.scrollTop || document.documentElement.scrollTop) /
           (document.documentElement.scrollHeight -
             document.documentElement.clientHeight -
-            footerHeight)) *
+            200)) *
         100;
 
       progressBarRef.current.style.setProperty(
