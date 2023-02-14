@@ -16,7 +16,7 @@ const PageProgress = () => {
         ((document.body.scrollTop || document.documentElement.scrollTop) /
           (document.documentElement.scrollHeight -
             document.documentElement.clientHeight -
-            200)) *
+            300)) *
         100;
 
       progressBarRef.current.style.setProperty(
