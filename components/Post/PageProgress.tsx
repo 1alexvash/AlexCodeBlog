@@ -4,14 +4,15 @@ const PageProgress = () => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    const { innerWidth } = window;
+    const footerHeight =
+      document.getElementsByTagName("footer")[0].clientHeight;
 
     const calculateScrollProgress = () => {
       let percentage =
         ((document.body.scrollTop || document.documentElement.scrollTop) /
           (document.documentElement.scrollHeight -
             document.documentElement.clientHeight -
-            181)) *
+            footerHeight)) *
         100;
 
       progressBarRef.current.style.setProperty(
