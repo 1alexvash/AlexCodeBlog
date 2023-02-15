@@ -5,7 +5,7 @@ const PageProgress = () => {
 
   useEffect(() => {
     const { innerWidth } = window;
-    const heightOfMobileBar = 85;
+    const heightOfMobileBar = 90;
 
     const footerHeight =
       document.getElementsByTagName("footer")[0].clientHeight;
