@@ -65,7 +65,9 @@ export default defineConfig({
             name: "tags",
             type: "string",
             list: true,
-            // TODO: At least one tag is required
+            ui: {
+              min: 1,
+            },
           },
         ],
         ui: {
