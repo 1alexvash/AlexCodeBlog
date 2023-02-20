@@ -3,6 +3,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
+import getFirstParagraph from "helpers/getFirstParagraph";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
@@ -15,13 +16,6 @@ interface Props {
   post: PostDocument;
 }
 
-const getFirstParagraph = (string: string) => {
-  const openedElement = string.indexOf("<p>") + 3;
-  const closedElement = string.indexOf("</p>");
-
-  return string.slice(openedElement, closedElement);
-};
-
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
@@ -32,6 +26,16 @@ const PostContent = ({ post }: Props) => {
 
   return (
     <article className="blogpost-content">
+      <Head>
+        <title>{post.title}</title>
+        <meta property="og:title" content={config.site_keywords[0]} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={config.host_url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:image" content={post.featuredImage} />
+      </Head>
+
       <div className="blogpost-image">
         {isPostADraft(post) && <DraftPostMark />}
         {isPostInTheFuture(post) && <FuturePostMark />}
