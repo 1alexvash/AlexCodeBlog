@@ -1,5 +1,7 @@
 import "../styles/root.scss";
 
+import CssBaseline from "@mui/material/CssBaseline";
+import MUIThemeProvider from "components/MUI/MUIThemeProvider";
 import type { AppProps } from "next/app";
 import Script from "next/script";
 import { Provider } from "react-redux";
@@ -27,9 +29,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       `}
     </Script>
 
-    <ThemeProvider>
+    <MUIThemeProvider>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </MUIThemeProvider>
   </Provider>
 );
 

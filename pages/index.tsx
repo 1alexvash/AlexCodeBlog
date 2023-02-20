@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import config from "config";
 import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
 import { PostDocumentWithoutContent } from "interfaces";
@@ -63,6 +64,7 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
       <Intro />
       <section className="simple-section">
         <div className="container">
+          <Box>123</Box>
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />

@@ -1,3 +1,4 @@
+import NextBundleAnalyzer from "@next/bundle-analyzer";
 import address from "address";
 import chalk from "chalk";
 
@@ -15,4 +16,8 @@ if (process.env.NODE_ENV === "development") {
   );
 }
 
-export default nextConfig;
+const withBundleAnalyzer = NextBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
+export default withBundleAnalyzer(nextConfig);
