@@ -37,6 +37,7 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:site_name" content={config.site_title} />
         <meta property="og:title" content={config.site_title} />
         <meta property="og:description" content={description} />
+        <meta property="description" content={description} />
         <meta property="og:image" content={post.featuredImage} />
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
