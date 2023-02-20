@@ -23,6 +23,7 @@ const Post: NextPage<{
   <>
     <Head>
       <title>{post.title}</title>
+      <meta property="og:title" content={post.title} />
       <meta name="description" content={config.site_description} />
       <meta property="og:description" content={config.site_description} />
       <meta property="og:url" content={config.host_url} />
