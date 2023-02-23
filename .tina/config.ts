@@ -66,6 +66,14 @@ export default defineConfig({
             type: "string",
             list: true,
             ui: {
+              validate: (values) => {
+                return values.map((value) => {
+                  if (value.length === 0) {
+                    return "Type something";
+                  }
+                  return "";
+                });
+              },
               min: 1,
             },
           },
