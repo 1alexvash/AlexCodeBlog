@@ -5,7 +5,7 @@ import Script from "next/script";
 import { Provider } from "react-redux";
 import store from "redux/store";
 
-import ThemeProvider from "@/components/ThemeProvider";
+import MUIThemeProvider from "@/components/MUI/MUIThemeProvider";
 
 const GA_TRACKING_ID = "G-1JHZSH8YH4";
 
@@ -27,9 +27,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       `}
     </Script>
 
-    <ThemeProvider>
+    <MUIThemeProvider>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </MUIThemeProvider>
   </Provider>
 );
 
