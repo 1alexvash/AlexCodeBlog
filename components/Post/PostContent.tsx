@@ -9,7 +9,7 @@ import Head from "next/head";
 import { useEffect, useRef } from "react";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
-import { AudioPlayer } from "../AudioPlayer";
+import AudioPlayer from "../AudioPlayer";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {

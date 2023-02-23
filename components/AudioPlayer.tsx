@@ -1,32 +1,82 @@
 import { useEffect, useRef, useState } from "react";
-import { useAppSelector } from "redux/typesHooks";
 
 const AudioPlayer = () => {
-  const theme = useAppSelector((state) => state.theme);
-
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [activeVolume, setActiveVolume] = useState(false);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [volume, setVolume] = useState(100);
 
   const audioPlayer = useRef<HTMLAudioElement>(null);
   const progressBar = useRef<HTMLInputElement>(null);
+  const volumeBar = useRef<HTMLInputElement>(null);
+
   const animationRef = useRef(0);
 
+  const onLoadedMetadata = () => {
+    if (audioPlayer.current) {
+      setDuration(audioPlayer.current.duration);
+    }
+  };
+
   useEffect(() => {
-    // bug - returns NaN when data is available https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/duration
-    const seconds = Math.floor(audioPlayer.current!.duration);
+    if (audioPlayer.current?.duration) {
+      const seconds = Math.floor(audioPlayer.current.duration);
 
-    setDuration(seconds);
-    progressBar.current!.max = String(seconds);
-  }, [audioPlayer.current?.readyState]);
+      setDuration(seconds);
+      progressBar.current!.max = String(seconds);
+    }
 
-  const calculateTime = (secs: number) => {
-    const minutes = Math.floor(secs / 60);
-    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(secs % 60);
-    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    if (
+      Math.ceil(audioPlayer.current!.currentTime) ===
+      Number(progressBar.current!.max)
+    ) {
+      setIsPlaying(false);
+    }
+  }, [
+    audioPlayer?.current?.onloadedmetadata,
+    audioPlayer.current?.readyState,
+    audioPlayer.current?.currentTime,
+  ]);
 
-    return `${returnedMinutes}:${returnedSeconds}`;
+  useEffect(() => {
+    volumeBar.current!.value = "100";
+    changeRangeOfVolumeBar();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const volumeBarElem = document.querySelector("span.volume-bar");
+
+    if (activeVolume) {
+      volumeBarElem?.setAttribute("open", "");
+      setIsFirstRender(false);
+    }
+    if (!activeVolume && isFirstRender === false) {
+      volumeBarElem?.setAttribute("closing", "");
+      volumeBarElem?.addEventListener(
+        "animationend",
+        () => {
+          volumeBarElem?.removeAttribute("closing");
+        },
+        { once: true }
+      );
+      volumeBarElem?.removeAttribute("open");
+    }
+  }, [activeVolume, isFirstRender]);
+
+  const calculateTime = (time: number) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+      return `${returnedMinutes}:${returnedSeconds}`;
+    }
+
+    return "00:00";
   };
 
   const togglePlayPause = () => {
@@ -48,9 +98,22 @@ const AudioPlayer = () => {
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
 
-  const changeRange = () => {
+  const changeRangeOfProgressBar = () => {
     audioPlayer.current!.currentTime = Number(progressBar.current?.value);
     changePlayerCurrentTime();
+  };
+
+  const changeRangeOfVolumeBar = () => {
+    audioPlayer.current!.volume = Number(volumeBar.current?.value) / 100;
+    changePlayerVolume();
+  };
+
+  const changePlayerVolume = () => {
+    volumeBar.current?.style.setProperty(
+      "--seek-before-width",
+      `${Number(volumeBar.current.value)}%`
+    );
+    setVolume(Number(volumeBar.current?.value));
   };
 
   const changePlayerCurrentTime = () => {
@@ -67,15 +130,16 @@ const AudioPlayer = () => {
         ref={audioPlayer}
         src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3"
         preload="metadata"
+        onLoadedMetadata={onLoadedMetadata}
       ></audio>
       <button onClick={togglePlayPause} className="play">
         {isPlaying ? (
           <img
-            className="play-icon"
-            src="/images/play-icon.svg"
+            className="pause-icon"
+            src="/images/pause-icon.svg"
             alt="play"
-            width={16}
-            height={15}
+            width={15}
+            height={14}
           />
         ) : (
           <img
@@ -91,42 +155,64 @@ const AudioPlayer = () => {
         <div>
           <input
             type="range"
-            className=""
             defaultValue="0"
             ref={progressBar}
-            onChange={changeRange}
+            onChange={changeRangeOfProgressBar}
           />
         </div>
 
         <div className="current-time">
-          <div className="">{calculateTime(currentTime)}</div>
-
-          <div className="">
-            {duration && !isNaN(duration) && calculateTime(duration)}
-          </div>
+          <div>{calculateTime(currentTime)}</div>
+          <div>{calculateTime(duration)}</div>
         </div>
       </div>
       <button className="volume">
-        {theme === "light" ? (
+        {Boolean(volume) ? (
           <img
-            className="play-icon"
-            src="/images/volume-icon-light.svg"
+            className="volume-icon"
+            src="/images/volume-icon.svg"
             alt="play"
             width={22}
             height={16}
+            onClick={() => setActiveVolume(!activeVolume)}
+            style={
+              activeVolume
+                ? {
+                    filter:
+                      "invert(47%) sepia(66%) saturate(2546%) hue-rotate(356deg) brightness(101%) contrast(99%)",
+                  }
+                : {}
+            }
           />
         ) : (
           <img
-            className="play-icon"
-            src="/images/volume-icon-dark.svg"
+            className="volume-icon"
+            src="/images/mute-volume-icon.svg"
             alt="play"
             width={22}
             height={16}
+            onClick={() => setActiveVolume(!activeVolume)}
+            style={
+              activeVolume
+                ? {
+                    filter:
+                      "invert(47%) sepia(66%) saturate(2546%) hue-rotate(356deg) brightness(101%) contrast(99%)",
+                  }
+                : {}
+            }
           />
         )}
       </button>
+      <span className="volume-bar">
+        <input
+          type="range"
+          defaultValue="100"
+          ref={volumeBar}
+          onChange={changeRangeOfVolumeBar}
+        />
+      </span>
     </div>
   );
 };
 
-export { AudioPlayer };
+export default AudioPlayer;
