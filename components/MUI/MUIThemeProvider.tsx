@@ -25,24 +25,24 @@ interface DefaultThemeProps {
 }
 
 const MUIThemeProvider = ({ children }: DefaultThemeProps) => {
-  const themeDisp = useAppSelector((state) => state.theme) as ThemeMode;
-  const [themeProv, setThemeProv] = useState<ThemeMode>(themeDisp);
+  const themeStore = useAppSelector((state) => state.theme) as ThemeMode;
+  const [themeProvider, setThemeProvider] = useState<ThemeMode>(themeStore);
 
   const dispatch = useAppDispatch();
 
   useIsomorphicLayoutEffect(() => {
     const theme = getInitialTheme();
 
-    setThemeProv(theme);
+    setThemeProvider(theme);
 
     dispatch(setTheme(theme));
-  }, [dispatch, setThemeProv]);
+  }, [dispatch, setThemeProvider]);
 
   useEffect(() => {
-    setThemeProv(themeDisp);
-  }, [themeDisp]);
+    setThemeProvider(themeStore);
+  }, [themeStore]);
 
-  const theme = getTheme(themeProv);
+  const theme = getTheme(themeProvider);
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
