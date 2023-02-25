@@ -1,7 +1,9 @@
+import { ThemeProvider as MUIThemeProvider } from "@mui/material";
 import { defaultTheme, setTheme, Theme } from "redux/slices/theme";
 import { useAppDispatch } from "redux/typesHooks";
 
-import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
+import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
+import MUITheme from "./theme";
 
 interface Props {
   children: JSX.Element;
@@ -30,7 +32,7 @@ const ThemeProvider = ({ children }: Props) => {
     dispatch(setTheme(theme));
   }, [dispatch]);
 
-  return children;
+  return <MUIThemeProvider theme={MUITheme}>{children}</MUIThemeProvider>;
 };
 
 export default ThemeProvider;
