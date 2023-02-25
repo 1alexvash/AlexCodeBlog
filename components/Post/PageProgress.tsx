@@ -4,21 +4,24 @@ const PageProgress = () => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    const calculateScrollProgress = () => {
-      let percentage = (
-        ((document.body.scrollTop || document.documentElement.scrollTop) /
-          (document.documentElement.scrollHeight -
-            document.documentElement.clientHeight)) *
-        100
-      ).toPrecision(3);
-
-      progressBarRef.current.style.setProperty("width", percentage + "%");
+    // get scroll progres percentage
+    const getScrollPercentage = () => {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+      return (scrollTop / (scrollHeight - clientHeight)) * 100;
     };
 
-    document.addEventListener("scroll", calculateScrollProgress);
-    return () => {
-      document.removeEventListener("scroll", calculateScrollProgress);
+    // track in react
+    const handleScroll = () => {
+      const scrollPercentage = getScrollPercentage();
+      progressBarRef.current.style.width = `${scrollPercentage}%`;
     };
+
+    // add event listener
+    document.addEventListener("scroll", handleScroll);
+
+    // remove event listener
+    return () => document.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
