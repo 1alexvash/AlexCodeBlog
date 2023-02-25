@@ -1491,7 +1491,7 @@ blockquote p:last-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px 7px 10px;
+  padding: 8px 10px 7px 10px;
   background: #f2f5f7;
   border-radius: 4px;
   margin-bottom: 18px;
@@ -1519,14 +1519,18 @@ blockquote p:last-child {
 
 .audio .play img {
   position: absolute;
-  left: 54%;
+  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
+.audio .play .pause-icon {
+  filter: invert(20%) sepia(0%) saturate(87%) hue-rotate(231deg) brightness(95%)
+    contrast(89%);
+}
+
 .audio .volume {
   background-color: transparent;
-  margin-bottom: 2px;
 }
 
 .audio .volume-bar {
@@ -1589,8 +1593,7 @@ blockquote p:last-child {
 }
 
 .audio .progress-bar {
-  margin-left: 9px;
-  margin-right: 18px;
+  margin: 5px 17px 0px 7px;
   width: 100%;
 }
 

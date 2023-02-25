@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,6 +12,8 @@ const AudioPlayer = () => {
   const progressBar = useRef<HTMLInputElement>(null);
   const volumeBar = useRef<HTMLInputElement>(null);
 
+  const pageInitialized = useRef(false);
+
   const animationRef = useRef(0);
 
   const onLoadedMetadata = () => {
@@ -19,32 +21,6 @@ const AudioPlayer = () => {
       setDuration(audioPlayer.current.duration);
     }
   };
-
-  useEffect(() => {
-    if (audioPlayer.current?.duration) {
-      const seconds = Math.floor(audioPlayer.current.duration);
-
-      setDuration(seconds);
-      progressBar.current!.max = String(seconds);
-    }
-
-    if (
-      Math.ceil(audioPlayer.current!.currentTime) ===
-      Number(progressBar.current!.max)
-    ) {
-      setIsPlaying(false);
-    }
-  }, [
-    audioPlayer?.current?.onloadedmetadata,
-    audioPlayer.current?.readyState,
-    audioPlayer.current?.currentTime,
-  ]);
-
-  useEffect(() => {
-    volumeBar.current!.value = "100";
-    changeRangeOfVolumeBar();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     const volumeBarElem = document.querySelector("span.volume-bar");
@@ -93,9 +69,11 @@ const AudioPlayer = () => {
   };
 
   const whilePlaying = () => {
-    progressBar.current!.value = String(audioPlayer.current?.currentTime);
-    changePlayerCurrentTime();
-    animationRef.current = requestAnimationFrame(whilePlaying);
+    if (audioPlayer.current) {
+      progressBar.current!.value = String(audioPlayer.current.currentTime);
+      changePlayerCurrentTime();
+      animationRef.current = requestAnimationFrame(whilePlaying);
+    }
   };
 
   const changeRangeOfProgressBar = () => {
@@ -103,10 +81,10 @@ const AudioPlayer = () => {
     changePlayerCurrentTime();
   };
 
-  const changeRangeOfVolumeBar = () => {
+  const changeRangeOfVolumeBar = useCallback(() => {
     audioPlayer.current!.volume = Number(volumeBar.current?.value) / 100;
     changePlayerVolume();
-  };
+  }, []);
 
   const changePlayerVolume = () => {
     volumeBar.current?.style.setProperty(
@@ -123,6 +101,33 @@ const AudioPlayer = () => {
     );
     setCurrentTime(Number(progressBar.current!.value));
   };
+
+  useEffect(() => {
+    if (pageInitialized.current === false) {
+      volumeBar.current!.value = "100";
+      changeRangeOfVolumeBar();
+    }
+
+    if (audioPlayer.current?.duration) {
+      const seconds = Math.floor(audioPlayer.current.duration);
+
+      setDuration(seconds);
+      progressBar.current!.max = String(seconds);
+    }
+
+    if (
+      Math.ceil(audioPlayer.current!.currentTime) ===
+      Number(progressBar.current!.max)
+    ) {
+      setIsPlaying(false);
+    }
+    pageInitialized.current = true;
+  }, [
+    audioPlayer?.current?.onloadedmetadata,
+    audioPlayer.current?.readyState,
+    audioPlayer.current?.currentTime,
+    changeRangeOfVolumeBar,
+  ]);
 
   return (
     <div className="audio">
