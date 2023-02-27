@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "redux/store";
 
 import AdminProvider from "@/components/AdminProvider";
-import ThemeProvider from "@/components/ThemeProvider";
+import ThemeProvider from "@/components/MUI/ThemeProvider";
 
 const GA_TRACKING_ID = "G-1JHZSH8YH4";
 
