@@ -20,38 +20,37 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 const Post: NextPage<{
   post: PostDocument;
   latestPosts: PostDocumentWithoutContent[];
-}> = ({ post, latestPosts }) => {
-  const description = getFirstParagraph(post.content);
-
-  return (
-    <>
-      <Head>
-        <title>{post.title}</title>
-        <meta property="og:title" content={post.title} />
-        <meta name="description" content={config.site_description} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={config.host_url} />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={post.featuredImage} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <StandWithUkraine />
-      <Header />
-      <BreadCrumbs title={post.title} />
-      <PageProgress />
-      <section className="blogpost-section">
-        <div className="container">
-          <div className="blogpost-outer">
-            <PostContent post={post} />
-            <LatestPosts latestPosts={latestPosts} />
-          </div>
+}> = ({ post, latestPosts }) => (
+  <>
+    <Head>
+      <title>{post.title}</title>
+      <meta property="og:title" content={post.title} />
+      <meta name="description" content={config.site_description} />
+      <meta
+        property="og:description"
+        content={getFirstParagraph(post.content)}
+      />
+      <meta property="og:url" content={config.host_url} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={config.site_title} />
+      <meta property="og:image" content={post.featuredImage} />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <StandWithUkraine />
+    <Header />
+    <BreadCrumbs title={post.title} />
+    <PageProgress />
+    <section className="blogpost-section">
+      <div className="container">
+        <div className="blogpost-outer">
+          <PostContent post={post} />
+          <LatestPosts latestPosts={latestPosts} />
         </div>
-      </section>
-      <Footer />
-    </>
-  );
-};
+      </div>
+    </section>
+    <Footer />
+  </>
+);
 
 type Params = {
   params: {
