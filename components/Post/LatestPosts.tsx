@@ -21,11 +21,12 @@ const LatestPosts = ({ latestPosts }: Props) => {
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
-              fill
+              width="102"
+              height="102"
               sizes="100vw"
               style={{
                 filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
-
+                
                 objectFit: "cover",
               }}
             />

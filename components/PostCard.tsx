@@ -70,7 +70,8 @@ const PostCard = ({ post }: Props) => {
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(378, 378)
               )}`}
-              fill
+              width="378"
+              height="378"
               sizes="100vw"
               style={{
                 filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",

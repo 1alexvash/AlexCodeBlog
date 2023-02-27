@@ -1,7 +1,9 @@
+import { ThemeProvider as MUIThemeProvider } from "@mui/material";
 import { defaultTheme, setTheme, Theme } from "redux/slices/theme";
-import { useAppDispatch } from "redux/typesHooks";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
-import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
+import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
+import getMUITheme, { ThemeMode } from "./getMUITheme";
 
 interface Props {
   children: JSX.Element;
@@ -11,7 +13,7 @@ const getStorageTheme = (): Theme | undefined => {
   return localStorage.theme;
 };
 
-const getBrowserTheme = (): Theme | undefined => {
+const getBrowserTheme = () => {
   return window.matchMedia &&
     window.matchMedia(`(prefers-color-scheme: dark)`).matches
     ? "dark"
@@ -23,14 +25,16 @@ const getInitialTheme = (): Theme =>
 
 const ThemeProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.theme);
+  const MUITheme = getMUITheme(theme as ThemeMode);
 
   useIsomorphicLayoutEffect(() => {
-    const theme = getInitialTheme();
+    const initialTheme = getInitialTheme();
 
-    dispatch(setTheme(theme));
+    dispatch(setTheme(initialTheme));
   }, [dispatch]);
 
-  return children;
+  return <MUIThemeProvider theme={MUITheme}>{children}</MUIThemeProvider>;
 };
 
 export default ThemeProvider;

@@ -26,7 +26,7 @@ Just, have any code style convention, your team is comfortable with, and stick t
 >
 > The last thing we want to do is add more complexity to the source code by writing it in a jumble of different individual styles.
 >
-> "Clean Code: A Handbook of Agile Software Craftsmanship" by Martin Robert C. -
+> "Clean Code: A Handbook of Agile Software Craftsmanship" by Martin Robert C
 >
 > <!--EndFragment-->
 

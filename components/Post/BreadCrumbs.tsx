@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-const BreadCrumbs = () => (
+interface Props {
+  title: string;
+}
+
+const BreadCrumbs = ({ title }: Props) => (
   <div className="breadcrumbs-outer">
     <div className="container">
       <ul className="breadcrumbs">
@@ -8,7 +12,7 @@ const BreadCrumbs = () => (
           <Link href="/">Home</Link>
         </li>
         <li>
-          <span>How To Build Your Own Comment System Using Firebase</span>
+          <span>{title}</span>
         </li>
       </ul>
     </div>
