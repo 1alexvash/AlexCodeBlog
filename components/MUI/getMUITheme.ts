@@ -32,7 +32,29 @@ const getMUITheme = (themeMode: ThemeMode) => {
   const themeConfig =
     themeMode === "light" ? lightThemeConfig : darkThemeConfig;
 
-  return createTheme(themeConfig, {} as ThemeOptions);
+  return createTheme(themeConfig, {
+    components: {
+      MuiLinearProgress: {
+        styleOverrides: {
+          root: {
+            height: "10px",
+            borderRadius: "1px",
+          },
+          bar: {
+            backgroundColor:
+              themeConfig.palette.mode === "light" ? "#3a3a3a" : "#fe6c0a",
+          },
+          colorPrimary: {
+            backgroundColor:
+              themeConfig.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+          },
+          bar1Determinate: {
+            transition: "200ms",
+          },
+        },
+      },
+    },
+  } as ThemeOptions);
 };
 
 export default getMUITheme;
