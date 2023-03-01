@@ -9,13 +9,10 @@ interface Props {
 
 const UpcomingPosts = ({ posts }: Props) => (
   <Box sx={{ mb: 17.5 }}>
-    <Box
-      sx={(theme) => ({
-        color: theme.palette.mode === "light" ? "#3a3a3a" : "#fff",
-      })}
-    >
+    <Box>
       <Typography
-        sx={{
+        sx={(theme) => ({
+          color: theme.palette.mode === "light" ? "#3a3a3a" : "#fff",
           lineHeight: 1.28,
           fontWeight: 700,
           fontSize: "43px",
@@ -23,7 +20,7 @@ const UpcomingPosts = ({ posts }: Props) => (
           ["@media (max-width: 480px)"]: {
             fontSize: "28px",
           },
-        }}
+        })}
       >
         Upcoming Posts
       </Typography>
