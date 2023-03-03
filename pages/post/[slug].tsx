@@ -33,7 +33,7 @@ const Post: NextPage<{
     </Head>
     <StandWithUkraine />
     <Header />
-    <BreadCrumbs />
+    <BreadCrumbs title={post.title} />
     <PageProgress />
     <section className="blogpost-section">
       <div className="container">
@@ -42,7 +42,6 @@ const Post: NextPage<{
           <LatestPosts latestPosts={latestPosts} />
         </div>
       </div>
-      {/* <CommentsSection /> This feature not used, and needed for the time being */}
     </section>
     <Footer />
   </>
