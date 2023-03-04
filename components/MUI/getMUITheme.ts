@@ -15,7 +15,14 @@ const spacing = 4;
 const lightThemeConfig = createTheme({
   palette: {
     mode: "light",
-    // TODO: We need to add colors from Figma
+    primary: {
+      main: "#FE6C0A",
+      light: "#F2F5F7",
+      dark: "#3A3A3A",
+    },
+    background: {
+      paper: "#fff",
+    },
   },
   spacing,
 });
@@ -23,7 +30,14 @@ const lightThemeConfig = createTheme({
 const darkThemeConfig = createTheme({
   palette: {
     mode: "dark",
-    // TODO: We need to add colors from Figma, and here as well
+    primary: {
+      main: "#FE6C0A",
+      light: "#33393F",
+      dark: "#000000",
+    },
+    background: {
+      paper: "#18191D",
+    },
   },
   spacing,
 });
