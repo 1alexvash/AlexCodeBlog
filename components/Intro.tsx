@@ -11,7 +11,7 @@ const Intro = () => {
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   const handleClick = () => {
-    if (admin === true) {
+    if (admin) {
       dispatch(setAdmin(false));
     } else {
       dispatch(setAdmin(true));
@@ -27,7 +27,8 @@ const Intro = () => {
       editIcon?.setAttribute("admin", "");
       setIsFirstRender(false);
     }
-    if (!admin && isFirstRender === false) {
+
+    if (!admin && !isFirstRender) {
       imageWrapper?.setAttribute("closing", "");
       editIcon?.setAttribute("closing", "");
       imageWrapper?.addEventListener(

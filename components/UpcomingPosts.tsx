@@ -12,7 +12,7 @@ const UpcomingPosts = ({ posts }: Props) => (
     <Box>
       <Typography
         sx={(theme) => ({
-          color: theme.palette.mode === "light" ? "#3a3a3a" : "#fff",
+          color: theme.palette.mode === "light" ? "#3a3a3a" : "white",
           lineHeight: 1.28,
           fontWeight: 700,
           fontSize: "43px",

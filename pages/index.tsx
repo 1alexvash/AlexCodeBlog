@@ -74,7 +74,6 @@ const Home: NextPage<{
       <section className="simple-section">
         <div className="container">
           {admin && <UpcomingPosts posts={upcomingPosts} />}
-          {/* TODO: Implement tags count for the admin user */}
           <Tags
             uniqueTags={uniqueSortedTags}
             countOfPostsInTags={countOfPostsInTags}
