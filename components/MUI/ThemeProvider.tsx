@@ -13,11 +13,16 @@ const getStorageTheme = (): Theme | undefined => {
   return localStorage.theme;
 };
 
-const getBrowserTheme = () => {
-  return window.matchMedia &&
-    window.matchMedia(`(prefers-color-scheme: dark)`).matches
-    ? "dark"
-    : "light";
+const getBrowserTheme = (): Theme | undefined => {
+  if (window.matchMedia === undefined) {
+    return undefined;
+  }
+
+  if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+    return "light";
+  } else {
+    return "dark";
+  }
 };
 
 const getInitialTheme = (): Theme =>

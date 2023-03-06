@@ -4,6 +4,7 @@ import {
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
 import isUpcomingPost from "helpers/isUpcomingPost";
+import getFirstParagraph from "helpers/getFirstParagraph";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
@@ -15,13 +16,6 @@ import { DraftPostMark, FuturePostMark } from "../PostCard";
 interface Props {
   post: PostDocument;
 }
-
-const getFirstParagraph = (string: string) => {
-  const openedElement = string.indexOf("<p>") + 3;
-  const closedElement = string.indexOf("</p>");
-
-  return string.slice(openedElement, closedElement);
-};
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
@@ -36,7 +30,7 @@ const PostContent = ({ post }: Props) => {
       <Head>
         <title>{post.title}</title>
         <meta name="description" content={config.site_description} />
-        <meta property="og:title" content={config.site_keywords[0]} />
+        <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
