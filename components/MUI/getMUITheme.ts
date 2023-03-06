@@ -29,7 +29,7 @@ const lightThemeConfig = createTheme({
       dark: "#3a3a3a",
     },
     secondary: {
-      main: "#3c93bf",
+      ...secondaryMainColor,
     },
     background: {
       paper: "#ffffff",
@@ -47,7 +47,7 @@ const darkThemeConfig = createTheme({
       dark: "#000000",
     },
     secondary: {
-      main: "#3c93bf",
+      ...secondaryMainColor,
     },
     background: {
       paper: "#18191d",
