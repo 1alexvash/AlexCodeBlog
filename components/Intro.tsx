@@ -205,7 +205,6 @@ const Intro = () => {
             </Box>
           </Box>
           <Box
-            className="intro-text"
             sx={(theme) => ({
               pr: 17.5,
               [theme.breakpoints.down(1260)]: {
