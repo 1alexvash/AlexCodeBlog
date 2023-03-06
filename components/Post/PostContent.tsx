@@ -6,14 +6,12 @@ import {
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
-import { remark } from "remark";
-import html from "remark-html";
-import prism from "remark-prism";
+import { useEffect, useRef } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
+
 interface Props {
   post: any | PostDocument;
 }
@@ -32,20 +30,6 @@ const PostContent = ({ post }: Props) => {
   console.log("post:", post);
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    const markdownToHtml = async (markdown: string) => {
-      const result = await remark()
-        .use(html, { sanitize: false })
-        .use(prism)
-        .process(markdown);
-
-      setContent(result.toString());
-    };
-
-    markdownToHtml(post.body).catch(console.error);
-  }, []);
 
   useEffect(() => {
     return renderCopyButtons(document);
