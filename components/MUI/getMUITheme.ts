@@ -12,15 +12,19 @@ export type ThemeMode = Theme["palette"]["mode"];
 const spacing = 4;
 // TODO: I'm not sure whether it should be 4 or 5
 
-const mainColor = {
+const primaryMainColor = {
   main: "#fe6c0a",
+};
+
+const secondaryMainColor = {
+  main: "#3c93bf",
 };
 
 const lightThemeConfig = createTheme({
   palette: {
     mode: "light",
     primary: {
-      ...mainColor,
+      ...primaryMainColor,
       light: "#f2f5f7",
       dark: "#3a3a3a",
     },
@@ -38,7 +42,7 @@ const darkThemeConfig = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      ...mainColor,
+      ...primaryMainColor,
       light: "#33393f",
       dark: "#000000",
     },
