@@ -56,11 +56,7 @@ const PostCard = ({ post }: Props) => {
       {isPostADraft(post) && <DraftPostMark />}
       {isPostInTheFuture(post) && <FuturePostMark />}
 
-      <div
-        className={`posts-list-block ${
-          isUpcomingPost(post) ? "upcoming-posts-list-block" : ""
-        }`}
-      >
+      <div className="posts-list-block">
         <div className="content">
           <Link href={`/post/${post.slug}`} className="post-img">
             <Image

@@ -26,7 +26,6 @@ const LatestPosts = ({ latestPosts }: Props) => {
               sizes="100vw"
               style={{
                 filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
-                
                 objectFit: "cover",
               }}
             />
