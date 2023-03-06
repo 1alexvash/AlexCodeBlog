@@ -35,7 +35,7 @@ const AudioPlayer = () => {
       volumeBarElem?.setAttribute("open", "");
       setIsFirstRender(false);
     }
-    if (!activeVolume && isFirstRender === false) {
+    if (!activeVolume && !isFirstRender) {
       volumeBarElem?.setAttribute("closing", "");
       volumeBarElem?.addEventListener(
         "animationend",
@@ -109,7 +109,7 @@ const AudioPlayer = () => {
   };
 
   useEffect(() => {
-    if (pageInitialized.current === false) {
+    if (!pageInitialized.current) {
       volumeBar.current!.value = "100";
       changeRangeOfVolumeBar();
     }
@@ -145,7 +145,7 @@ const AudioPlayer = () => {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "8px 10px 7px 10px",
-        background: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+        backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
         borderRadius: "4px",
         marginBottom: "18px",
         "& button": {
@@ -167,7 +167,7 @@ const AudioPlayer = () => {
           position: "relative",
           width: "36px",
           height: "33px",
-          background: "white",
+          backgroundColor: "white",
           boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.12)",
           borderRadius: "50%",
           flex: "1 0 33px",
@@ -210,7 +210,8 @@ const AudioPlayer = () => {
             "& input": {
               "--seek-before-width": 0,
               appearance: "none",
-              background: theme.palette.mode === "light" ? "white" : "#18191d",
+              backgroundColor:
+                theme.palette.mode === "light" ? "white" : "#18191d",
               borderRadius: "4px",
               position: "relative",
               width: "100%",
@@ -221,7 +222,7 @@ const AudioPlayer = () => {
                 content: '""',
                 height: "4px",
                 width: "var(--seek-before-width)",
-                background: "#fe6c0a",
+                backgroundColor: "#fe6c0a",
                 borderRadius: "4px",
                 position: "absolute",
                 zIndex: 2,
@@ -327,7 +328,8 @@ const AudioPlayer = () => {
           transform: "rotate(-90deg)",
           bottom: "120px",
           right: "-60px",
-          background: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+          backgroundColor:
+            theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
           borderRadius: "4px",
           justifyContent: "center",
           alignItems: "center",
@@ -343,7 +345,8 @@ const AudioPlayer = () => {
             height: "4px",
             width: "100%",
             "--seek-before-width": 0,
-            background: theme.palette.mode === "light" ? "white" : "#18191d",
+            backgroundColor:
+              theme.palette.mode === "light" ? "white" : "#18191d",
             appearance: "none",
             borderRadius: "4px",
             position: "relative",
@@ -353,7 +356,7 @@ const AudioPlayer = () => {
               content: '""',
               height: "4px",
               width: "var(--seek-before-width)",
-              background:
+              backgroundColor:
                 theme.palette.mode === "light" ? "#000000" : "#f2f5f7",
               borderRadius: "4px",
               position: "absolute",
