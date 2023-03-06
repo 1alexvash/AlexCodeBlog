@@ -29,7 +29,7 @@ const AudioPlayer = () => {
   };
 
   useEffect(() => {
-    const volumeBarElem = document.querySelector("span.volume-bar");
+    const volumeBarElem = volumeBar.current?.parentElement;
 
     if (activeVolume) {
       volumeBarElem?.setAttribute("open", "");
@@ -154,7 +154,6 @@ const AudioPlayer = () => {
           p: 0,
         },
       })}
-      className="audio"
     >
       <audio
         ref={audioPlayer}
@@ -197,17 +196,10 @@ const AudioPlayer = () => {
             height={14}
           />
         ) : (
-          <img
-            className="play-icon"
-            src="/images/play-icon.svg"
-            alt="play"
-            width={16}
-            height={15}
-          />
+          <img src="/images/play-icon.svg" alt="play" width={16} height={15} />
         )}
       </IconButton>
       <Box
-        className="progress-bar"
         sx={{
           margin: "5px 17px 0px 7px",
           width: "100%",
@@ -272,7 +264,6 @@ const AudioPlayer = () => {
           },
         }}
         disableRipple
-        className="volume"
         onMouseEnter={() => {
           if (!isMobile()) {
             setActiveVolume(true);
@@ -293,7 +284,6 @@ const AudioPlayer = () => {
       >
         {Boolean(volume) ? (
           <img
-            className="volume-icon"
             src="/images/volume-icon.svg"
             alt="play"
             width={22}
@@ -309,7 +299,6 @@ const AudioPlayer = () => {
           />
         ) : (
           <img
-            className="volume-icon"
             src="/images/mute-volume-icon.svg"
             alt="play"
             width={22}
@@ -375,7 +364,6 @@ const AudioPlayer = () => {
             },
           },
         })}
-        className="volume-bar"
         onMouseEnter={() => {
           if (!isMobile()) clearTimeout(timeoutRef.current);
         }}
