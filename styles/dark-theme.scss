@@ -223,33 +223,4 @@
       border: 1px solid #f2f5f7;
     }
   }
-
-  .audio {
-    background: #33393f;
-  }
-
-  .audio .progress-bar input {
-    background: #18191d;
-  }
-
-  .audio .volume .volume-icon {
-    filter: invert(66%) sepia(0%) saturate(0%) hue-rotate(22deg) brightness(96%)
-      contrast(88%);
-  }
-
-  .audio .volume-bar {
-    background: #33393f;
-  }
-
-  .audio .volume-bar input {
-    background: #18191d;
-  }
-
-  .audio .volume-bar input::before {
-    background: #f2f5f7;
-  }
-
-  .audio .progress-bar .current-time {
-    color: #9f9f9f;
-  }
 }

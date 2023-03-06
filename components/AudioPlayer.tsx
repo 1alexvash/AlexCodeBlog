@@ -1,3 +1,4 @@
+import { Box, IconButton } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const AudioPlayer = () => {
@@ -15,6 +16,11 @@ const AudioPlayer = () => {
   const pageInitialized = useRef(false);
 
   const animationRef = useRef(0);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const isMobile = () => {
+    return /Mobi|Android/i.test(navigator.userAgent);
+  };
 
   const onLoadedMetadata = () => {
     if (audioPlayer.current) {
@@ -130,17 +136,61 @@ const AudioPlayer = () => {
   ]);
 
   return (
-    <div className="audio">
+    <Box
+      sx={(theme) => ({
+        position: "relative",
+        width: "100%",
+        height: "53px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "8px 10px 7px 10px",
+        background: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+        borderRadius: "4px",
+        marginBottom: "18px",
+        "& button": {
+          border: "none",
+          cursor: "pointer",
+          p: 0,
+        },
+      })}
+      className="audio"
+    >
       <audio
         ref={audioPlayer}
         src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3"
         preload="metadata"
         onLoadedMetadata={onLoadedMetadata}
+        muted={!volume}
       />
-      <button onClick={togglePlayPause} className="play">
+      <IconButton
+        sx={{
+          position: "relative",
+          width: "36px",
+          height: "33px",
+          background: "white",
+          boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.12)",
+          borderRadius: "50%",
+          flex: "1 0 33px",
+          "& img": {
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          },
+          "&:hover": {
+            backgroundColor: "white",
+          },
+        }}
+        onClick={togglePlayPause}
+      >
         {isPlaying ? (
           <img
-            className="pause-icon"
+            style={{
+              filter:
+                "invert(20%) sepia(0%) saturate(87%) hue-rotate(231deg) brightness(95%) contrast(89%)",
+              objectFit: "cover",
+            }}
             src="/images/pause-icon.svg"
             alt="play"
             width={15}
@@ -155,23 +205,92 @@ const AudioPlayer = () => {
             height={15}
           />
         )}
-      </button>
-      <div className="progress-bar">
-        <div>
+      </IconButton>
+      <Box
+        className="progress-bar"
+        sx={{
+          margin: "5px 17px 0px 7px",
+          width: "100%",
+        }}
+      >
+        <Box
+          sx={(theme) => ({
+            "& input": {
+              "--seek-before-width": 0,
+              appearance: "none",
+              background: theme.palette.mode === "light" ? "white" : "#18191d",
+              borderRadius: "4px",
+              position: "relative",
+              width: "100%",
+              height: "4px",
+              outline: "none",
+              cursor: "pointer",
+              "&::before": {
+                content: '""',
+                height: "4px",
+                width: "var(--seek-before-width)",
+                background: "#fe6c0a",
+                borderRadius: "4px",
+                position: "absolute",
+                zIndex: 2,
+              },
+              "&::-webkit-slider-thumb": {
+                opacity: 0,
+              },
+            },
+          })}
+        >
           <input
             type="range"
             defaultValue="0"
             ref={progressBar}
             onChange={changeRangeOfProgressBar}
           />
-        </div>
+        </Box>
 
-        <div className="current-time">
-          <div>{calculateTime(currentTime)}</div>
-          <div>{calculateTime(duration)}</div>
-        </div>
-      </div>
-      <button className="volume">
+        <Box
+          sx={(theme) => ({
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "2px",
+            marginLeft: "2px",
+            color: theme.palette.mode === "light" ? "#797979" : "#9f9f9f",
+            fontSize: "14px",
+          })}
+        >
+          <Box>{calculateTime(currentTime)}</Box>
+          <Box>{calculateTime(duration)}</Box>
+        </Box>
+      </Box>
+      <IconButton
+        sx={{
+          width: "20px",
+          borderColor: "transparent",
+          mr: 0.5,
+          "&:hover": {
+            background: "none",
+          },
+        }}
+        disableRipple
+        className="volume"
+        onMouseEnter={() => {
+          if (!isMobile()) {
+            setActiveVolume(true);
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isMobile()) {
+            timeoutRef.current = setTimeout(() => {
+              setActiveVolume(false);
+            }, 500);
+          }
+        }}
+        onClick={() => {
+          if (isMobile()) {
+            setActiveVolume(!activeVolume);
+          }
+        }}
+      >
         {Boolean(volume) ? (
           <img
             className="volume-icon"
@@ -179,7 +298,6 @@ const AudioPlayer = () => {
             alt="play"
             width={22}
             height={16}
-            onClick={() => setActiveVolume(!activeVolume)}
             style={
               activeVolume
                 ? {
@@ -196,7 +314,6 @@ const AudioPlayer = () => {
             alt="play"
             width={22}
             height={16}
-            onClick={() => setActiveVolume(!activeVolume)}
             style={
               activeVolume
                 ? {
@@ -207,16 +324,73 @@ const AudioPlayer = () => {
             }
           />
         )}
-      </button>
-      <span className="volume-bar">
+      </IconButton>
+      <Box
+        component="span"
+        sx={(theme) => ({
+          opacity: 0,
+          pointerEvents: "none",
+          position: "absolute",
+          display: "flex",
+          width: "157px",
+          height: "38px",
+          padding: "13px",
+          transform: "rotate(-90deg)",
+          bottom: "120px",
+          right: "-60px",
+          background: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+          borderRadius: "4px",
+          justifyContent: "center",
+          alignItems: "center",
+          transition: "opacity 500ms ease-in-out",
+          "&[closing]": {
+            opacity: 0,
+          },
+          "&[open]": {
+            opacity: 1,
+            pointerEvents: "auto",
+          },
+          "& input": {
+            height: "4px",
+            width: "100%",
+            "--seek-before-width": 0,
+            background: theme.palette.mode === "light" ? "white" : "#18191d",
+            appearance: "none",
+            borderRadius: "4px",
+            position: "relative",
+            outline: "none",
+            cursor: "pointer",
+            "&::before": {
+              content: '""',
+              height: "4px",
+              width: "var(--seek-before-width)",
+              background:
+                theme.palette.mode === "light" ? "#000000" : "#f2f5f7",
+              borderRadius: "4px",
+              position: "absolute",
+              zIndex: 2,
+            },
+            "&::-webkit-slider-thumb": {
+              opacity: 0,
+            },
+          },
+        })}
+        className="volume-bar"
+        onMouseEnter={() => {
+          if (!isMobile()) clearTimeout(timeoutRef.current);
+        }}
+        onMouseLeave={() => {
+          if (!isMobile()) setActiveVolume(false);
+        }}
+      >
         <input
           type="range"
           defaultValue="100"
           ref={volumeBar}
           onChange={changeRangeOfVolumeBar}
         />
-      </span>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
