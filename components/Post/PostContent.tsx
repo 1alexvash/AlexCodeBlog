@@ -3,8 +3,8 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import isUpcomingPost from "helpers/isUpcomingPost";
 import getFirstParagraph from "helpers/getFirstParagraph";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
