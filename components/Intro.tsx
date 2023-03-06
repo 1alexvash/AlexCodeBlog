@@ -36,7 +36,7 @@ const Intro = () => {
 
   const [isFirstRender, setIsFirstRender] = useState(true);
 
-  const imageAvaterRef = useRef<HTMLDivElement>(null);
+  const imageAvatarRef = useRef<HTMLDivElement>(null);
   const editorIconRef = useRef<HTMLImageElement>(null);
 
   const handleClick = () => {
@@ -48,7 +48,7 @@ const Intro = () => {
   };
 
   useEffect(() => {
-    const imageWrapper = imageAvaterRef.current;
+    const imageWrapper = imageAvatarRef.current;
     const editIcon = editorIconRef.current;
 
     if (admin) {
@@ -112,7 +112,7 @@ const Intro = () => {
             })}
           >
             <Box
-              ref={imageAvaterRef}
+              ref={imageAvatarRef}
               sx={{
                 position: "relative",
                 width: "90px",
