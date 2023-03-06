@@ -7,6 +7,8 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkPrism from "remark-prism";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
@@ -14,6 +16,7 @@ import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
   post: any | PostDocument;
+  content: any;
 }
 
 const getFirstParagraph = (string: string) => {
@@ -26,7 +29,7 @@ const getFirstParagraph = (string: string) => {
   return string;
 };
 
-const PostContent = ({ post }: Props) => {
+const PostContent = ({ post, content }: Props) => {
   console.log("post:", post);
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
@@ -81,7 +84,7 @@ const PostContent = ({ post }: Props) => {
       {/* <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} /> */}
 
       {/* <Reactions /> This future might be added later */}
-      <TinaMarkdown content={post.body} />
+      <TinaMarkdown content={content} />
     </article>
   );
 };

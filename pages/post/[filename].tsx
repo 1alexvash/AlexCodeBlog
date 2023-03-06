@@ -1,5 +1,10 @@
 import config from "config";
+import fs from "fs";
+import matter from "gray-matter";
+import markdownToHtml from "helpers/markdownToHtml";
+import { PostDocument } from "interfaces";
 import Head from "next/head";
+import { join } from "path";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -27,6 +32,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
+  console.log(data.content);
   return (
     <>
       <Head>
@@ -44,7 +50,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <BreadCrumbs title={data.post.title} />
       <PageProgress />
       <BlogPostSectionWrapper>
-        <PostContent post={data.post} />
+        <PostContent post={data.post} content={data.content} />
         <LatestPosts latestPosts={latestPosts} />
       </BlogPostSectionWrapper>
       <Footer />
@@ -58,8 +64,27 @@ type Params = {
   };
 };
 
+function JSONSerialize<Type>(data: Type): Type {
+  return JSON.parse(JSON.stringify(data));
+}
+
+const documentsDirectory = join(process.cwd(), "content/posts");
+
+export function getPostDocumentBySlug(slug: string) {
+  const realSlug = slug.replace(/\.md$/, "");
+  const fullPath = join(documentsDirectory, `${realSlug}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+
+  return JSONSerialize({ slug: realSlug, ...data, content }) as PostDocument;
+}
+
 export async function getStaticProps({ params }: Params) {
   const relativePath = params.filename + ".md";
+
+  const postDocument = getPostDocumentBySlug(params.filename);
+
+  const content = await markdownToHtml(postDocument.content || "");
 
   const postResponse = await client.queries.post({ relativePath });
 
@@ -77,6 +102,7 @@ export async function getStaticProps({ params }: Params) {
       data: postResponse.data,
       query: postResponse.query,
       variables: postResponse.variables,
+      content,
     },
   };
 }
