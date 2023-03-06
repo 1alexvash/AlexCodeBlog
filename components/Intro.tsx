@@ -159,7 +159,7 @@ const Intro = () => {
                   width: "39px",
                   height: "39px",
                   borderRadius: "50%",
-                  backgroundColor: "#ffffff",
+                  backgroundColor: "white",
                   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                   objectFit: "none",
                   left: "50%",
