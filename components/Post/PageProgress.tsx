@@ -1,8 +1,8 @@
-import { Box, LinearProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useEffect, useRef } from "react";
 
 const PageProgress = () => {
-  const [progress, setProgress] = useState(0);
+  const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
     const calculateScrollProgress = () => {
@@ -13,7 +13,10 @@ const PageProgress = () => {
         scrollHeight;
       const percentage = Math.round(scrollTop * 100);
 
-      setProgress(percentage);
+      progressBarRef.current.style.setProperty(
+        "width",
+        percentage > 100 ? "100%" : percentage + "%"
+      );
     };
 
     document.addEventListener("scroll", calculateScrollProgress);
@@ -25,13 +28,26 @@ const PageProgress = () => {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         position: "sticky",
         top: -0.25, // Fix for gap pixel on Chrome with slight zoom
         zIndex: 29,
-      }}
+        height: "10px",
+        backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+      })}
     >
-      <LinearProgress variant="determinate" value={progress} />
+      <Box
+        ref={progressBarRef}
+        sx={(theme) => ({
+          display: "block",
+          borderRadius: "1px",
+          height: "100%",
+          width: 0,
+          transition: "width 200ms",
+          backgroundColor:
+            theme.palette.mode === "light" ? "#3a3a3a" : "#fe6c0a",
+        })}
+      />
     </Box>
   );
 };
