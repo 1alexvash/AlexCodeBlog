@@ -28,8 +28,8 @@ const getFirstParagraph = (string: string) => {
 };
 
 const components = {
-  code_block: ({ children, language }: any) => {
-    return <Codeblock language={language}>{children}</Codeblock>;
+  code_block: ({ children, lang }: any) => {
+    return <Codeblock language={lang}>{children}</Codeblock>;
   },
 };
 

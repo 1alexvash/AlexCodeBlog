@@ -8,7 +8,7 @@ export interface CodeblockProps {
 }
 
 const Codeblock = ({ children, language }: CodeblockProps) => (
-  <SyntaxHighlighter language={"typescript"} style={atomOneDark}>
+  <SyntaxHighlighter language={language} style={atomOneDark}>
     {children || "const a = 5;"}
   </SyntaxHighlighter>
 );
