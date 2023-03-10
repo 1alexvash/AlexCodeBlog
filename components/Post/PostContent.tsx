@@ -7,9 +7,10 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+import Codeblock, { CodeblockProps } from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
@@ -26,8 +27,13 @@ const getFirstParagraph = (string: string) => {
   return string;
 };
 
+const components = {
+  code_block: ({ children, language }: any) => {
+    return <Codeblock language={language}>{children}</Codeblock>;
+  },
+};
+
 const PostContent = ({ post }: Props) => {
-  console.log("post:", post);
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
 
@@ -81,7 +87,7 @@ const PostContent = ({ post }: Props) => {
       {/* <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} /> */}
 
       {/* <Reactions /> This future might be added later */}
-      <TinaMarkdown content={post.body} />
+      <TinaMarkdown content={post.body} components={components} />
     </article>
   );
 };
