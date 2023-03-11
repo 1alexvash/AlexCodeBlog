@@ -1,4 +1,7 @@
+import { Box } from "@mui/material";
 import { useEffect, useRef } from "react";
+
+const chromeZoomPixelGapBugFix = -0.25;
 
 const PageProgress = () => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -26,22 +29,28 @@ const PageProgress = () => {
   }, []);
 
   return (
-    <div
-      className="page-progress"
-      style={{
+    <Box
+      sx={(theme) => ({
         position: "sticky",
-        top: -0.25, // Fix for gap pixel on Chrome with slight zoom
-      }}
+        top: chromeZoomPixelGapBugFix,
+        zIndex: 29,
+        height: "10px",
+        backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+      })}
     >
-      <div
+      <Box
         ref={progressBarRef}
-        className="progress-bar"
-        style={{
+        sx={(theme) => ({
+          display: "block",
+          borderRadius: "1px",
+          height: "100%",
           width: 0,
           transition: "width 200ms",
-        }}
+          backgroundColor:
+            theme.palette.mode === "light" ? "#3a3a3a" : "#fe6c0a",
+        })}
       />
-    </div>
+    </Box>
   );
 };
 
