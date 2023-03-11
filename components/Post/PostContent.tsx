@@ -10,12 +10,25 @@ import { useEffect, useRef } from "react";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
-import Codeblock, { CodeblockProps } from "../Codeblock";
+import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
   post: any | PostDocument;
 }
+
+interface CodeTinaComponentProps {
+  lang?: string;
+  value: string;
+}
+
+const components: Components<{
+  code_block: CodeTinaComponentProps;
+}> = {
+  code_block: ({ lang, value }: CodeTinaComponentProps) => {
+    return <Codeblock language={lang}>{value}</Codeblock>;
+  },
+};
 
 const getFirstParagraph = (string: string) => {
   // TODO: need to reimplement this function
@@ -25,12 +38,6 @@ const getFirstParagraph = (string: string) => {
   // return string.slice(openedElement, closedElement);
 
   return string;
-};
-
-const components = {
-  code_block: ({ children, lang }: any) => {
-    return <Codeblock language={lang}>{children}</Codeblock>;
-  },
 };
 
 const PostContent = ({ post }: Props) => {
