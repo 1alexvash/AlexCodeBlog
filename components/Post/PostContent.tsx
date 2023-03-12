@@ -18,16 +18,18 @@ interface Props {
 }
 
 interface CodeTinaComponentProps {
-  lang?: string;
+  lang: string;
   value: string;
 }
 
+const CodeBlockASTNodeName = "code_block";
+
 const components: Components<{
-  code_block: CodeTinaComponentProps;
+  [CodeBlockASTNodeName]: CodeTinaComponentProps;
 }> = {
-  code_block: ({ lang, value }: CodeTinaComponentProps) => {
-    return <Codeblock language={lang}>{value}</Codeblock>;
-  },
+  [CodeBlockASTNodeName]: ({ lang, value }: CodeTinaComponentProps) => (
+    <Codeblock language={lang} codeLines={value} />
+  ),
 };
 
 const getFirstParagraph = (string: string) => {

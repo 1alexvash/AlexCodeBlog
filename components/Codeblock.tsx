@@ -1,28 +1,27 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 interface CodeblockProps {
-  children: string | string[];
-  language: string | undefined;
+  codeLines: string;
+  language: string;
 }
 
 interface PreTagProps {
   children: ReactNode;
-  language: string;
 }
 
-interface PreTagElementProps {
-  children: ReactNode;
-}
+const createPreTagByLanguage = (language: string): React.FC<PreTagProps> => {
+  const result: React.FC<PreTagProps> = (props) => {
+    return <pre className={`language-${language}`}>{props.children}</pre>;
+  };
 
-const PreTag = ({ children, language }: PreTagProps) => (
-  <pre className={`language-${language}`}>{children}</pre>
-);
+  result.displayName = `PreTag_${language}`;
 
-const Codeblock = ({ children, language }: CodeblockProps) => {
-  const preTag = ({ children }: PreTagElementProps) => (
-    <PreTag language={language ? language : ""}>{children}</PreTag>
-  );
+  return result;
+};
+
+const Codeblock: React.FC<CodeblockProps> = ({ codeLines, language }) => {
+  const preTag = useMemo(() => createPreTagByLanguage(language), [language]);
 
   return (
     <SyntaxHighlighter
@@ -31,7 +30,7 @@ const Codeblock = ({ children, language }: CodeblockProps) => {
       useInlineStyles={false}
       PreTag={preTag}
     >
-      {children || ""}
+      {codeLines}
     </SyntaxHighlighter>
   );
 };
