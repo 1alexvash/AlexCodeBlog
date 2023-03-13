@@ -5,6 +5,7 @@ featuredImage: /post-images/2022-06-18-my-favorite-extension-for-debugging-code.
 draft: false
 tags:
   - VSCode
+  - Productivity
 ---
 
 [Wrap Console Log](https://marketplace.visualstudio.com/items?itemName=midnightsyntax.vscode-wrap-console-log) is probably the best extension for debugging code.

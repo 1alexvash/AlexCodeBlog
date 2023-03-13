@@ -25,7 +25,7 @@ While practicing on the platform I was exposed to variety concepts like: convert
 
 For example, [Josephus Problem](https://en.wikipedia.org/wiki/Josephus_problem) it's not something you are normally thinking in your day do day life. But, it did give me a couple of funny flashbacks from my childhood, when I was playing with my friends in something similar.
 
-Oh boy, it's such a pity I didn't know about this before! 😅
+Oh boy, it's such a pity I didn't know about this concept before! 😅
 
 ### #3 General intelligence
 
@@ -57,7 +57,7 @@ Just looking at cleaner neater code or different approaches to the same problem 
 
 ### Tip:
 
-Try to mock the solution, to the problem with Quokka, as it is very fast, and it's going to save your time on context switching, and clicking the submit button.
+Try to mock the solution, to the problem with Quokka, as its instant feedback feature will help you break down the problem, and it's going to save you time on context switching, and clicking the submit button.
 
 ![](/post-images/codewars-quokka-mocking.gif)
 

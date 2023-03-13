@@ -3,6 +3,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
+import getFirstParagraph from "helpers/getFirstParagraph";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
@@ -16,6 +17,7 @@ import { DraftPostMark, FuturePostMark } from "../PostCard";
 interface Props {
   post: any | PostDocument;
 }
+
 
 interface CodeTinaComponentProps {
   lang: string;
@@ -32,16 +34,6 @@ const components: Components<{
   ),
 };
 
-const getFirstParagraph = (string: string) => {
-  // TODO: need to reimplement this function
-  // const openedElement = string.indexOf("<p>") + 3;
-  // const closedElement = string.indexOf("</p>");
-
-  // return string.slice(openedElement, closedElement);
-
-  return string;
-};
-
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
@@ -55,7 +47,7 @@ const PostContent = ({ post }: Props) => {
       <Head>
         <title>{post.title}</title>
         <meta name="description" content={config.site_description} />
-        <meta property="og:title" content={config.site_keywords[0]} />
+        <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
