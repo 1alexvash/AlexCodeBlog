@@ -23,14 +23,18 @@ interface CodeTinaComponentProps {
   value: string;
 }
 
-const CodeBlockASTNodeName = "code_block";
+const codeBlockASTNodeName = "code_block";
 
 const components: Components<{
-  [CodeBlockASTNodeName]: CodeTinaComponentProps;
+  [codeBlockASTNodeName]: CodeTinaComponentProps;
 }> = {
-  [CodeBlockASTNodeName]: ({ lang, value }: CodeTinaComponentProps) => (
-    <Codeblock language={lang} codeLines={value} />
-  ),
+  [codeBlockASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return <Codeblock language={props.lang || ""} codeLines={props.value} />;
+  },
 };
 
 const PostContent = ({ post }: Props) => {
