@@ -79,7 +79,15 @@ export default defineConfig({
             readonly: true,
             slugify: (values) => {
               const date = new Date(values.date).toISOString().split("T")[0];
-              const slug = values?.title?.toLowerCase().replace(/ /g, "-");
+
+              const titleWithoutSpecialCharacters = values.title.replace(
+                /[^\w\s]/gi,
+                ""
+              );
+
+              const slug = titleWithoutSpecialCharacters
+                .toLowerCase()
+                .replace(/ /g, "-");
 
               return `${date}-${slug}`;
             },
