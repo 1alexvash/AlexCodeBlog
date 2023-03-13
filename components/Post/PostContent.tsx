@@ -18,7 +18,6 @@ interface Props {
   post: any | PostDocument;
 }
 
-
 interface CodeTinaComponentProps {
   lang: string;
   value: string;
