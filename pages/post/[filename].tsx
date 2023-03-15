@@ -1,6 +1,5 @@
 import config from "config";
-import filterNullElements from "helpers/filterNullElements";
-import { PostDocument } from "interfaces";
+import queryToDocument from "helpers/queryToDocument";
 import Head from "next/head";
 import { FC } from "react";
 import { useTina } from "tinacms/dist/react";
@@ -30,37 +29,6 @@ const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
     variables: props.variables,
     data: props.data,
   });
-
-  const queryToDocument = (data: PostQuery): PostDocument => {
-    const { post } = data;
-    const { date, draft, title, body, featuredImage, tags, _sys, id } = post;
-
-    if (!featuredImage || !tags) {
-      return {
-        date: "",
-        draft: false,
-        title: "",
-        body: [],
-        featuredImage: "",
-        tags: [""],
-        _sys,
-        slug: "",
-      };
-    }
-
-    const filterNullTags = tags.filter(filterNullElements);
-
-    return {
-      date,
-      draft,
-      title,
-      body,
-      featuredImage,
-      tags: filterNullTags,
-      _sys,
-      slug: id,
-    };
-  };
 
   return (
     <>
