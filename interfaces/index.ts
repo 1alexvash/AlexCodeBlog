@@ -22,3 +22,15 @@ export type PostDocument = Readonly<{
 }>;
 
 export type PostDocumentWithoutBody = Omit<PostDocument, "body">;
+
+export type PostFromQuery = Readonly<{
+  __typename?: "Post";
+  id: string;
+  title: string;
+  date: string;
+  featuredImage?: string | null;
+  draft: boolean;
+  body?: any | null;
+  tags?: Array<string | null> | null;
+  _sys: SystemInfo;
+}>;

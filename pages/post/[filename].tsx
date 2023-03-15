@@ -1,5 +1,7 @@
 import config from "config";
+import queriesToArrayOfDocuments from "helpers/QueriesToArrayOfDocuments";
 import queryToDocument from "helpers/queryToDocument";
+import { PostFromQuery } from "interfaces";
 import Head from "next/head";
 import { FC } from "react";
 import { useTina } from "tinacms/dist/react";
@@ -20,7 +22,7 @@ interface Props {
   data: PostQuery;
   query: string;
   variables: PostQueryVariables;
-  latestPosts: any[]; // The interface is broken by graphql
+  latestPosts: PostFromQuery[];
 }
 
 const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
@@ -48,7 +50,7 @@ const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
       <PageProgress />
       <BlogPostSectionWrapper>
         <PostContent post={queryToDocument(data)} />
-        <LatestPosts latestPosts={latestPosts} />
+        <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
       <Footer />
     </>
