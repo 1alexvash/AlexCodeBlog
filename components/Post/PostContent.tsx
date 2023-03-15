@@ -7,17 +7,17 @@ import getFirstParagraph from "helpers/getFirstParagraph";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
-import { useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
-  post: any | PostDocument;
+  post: PostDocument;
 }
 
-const PostContent = ({ post }: Props) => {
+const PostContent: FC<Props> = ({ post }) => {
   console.log("post:", post);
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
@@ -63,7 +63,7 @@ const PostContent = ({ post }: Props) => {
       <h1>{post.title}</h1>
 
       <div className="tags">
-        {post.tags.map((tag: any) => (
+        {post.tags.map((tag) => (
           <a href="" key={tag}>
             #{tag}
           </a>

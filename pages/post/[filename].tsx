@@ -1,5 +1,6 @@
 import config from "config";
 import Head from "next/head";
+import { FC } from "react";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -12,15 +13,16 @@ import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { client } from "../../.tina/__generated__/client";
+import { PostQueryVariables } from ".tina/__generated__/types";
 
 interface Props {
   data: any;
-  query: any;
-  variables: any;
+  query: string;
+  variables: PostQueryVariables;
   latestPosts: any[]; // The interface is broken by graphql
 }
 
-const Post = ({ latestPosts, ...props }: Props) => {
+const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,

@@ -1,11 +1,15 @@
-export type PostDocument = {
+import { Maybe, Scalars, SystemInfo } from "./../.tina/__generated__/types";
+
+export type PostDocument = Readonly<{
   slug: string;
   title: string;
   date: Date | string;
-  featuredImage?: string | undefined; // TODO: think of something more clever, heroImage might do
+  featuredImage?: string; // TODO: think of something more clever, heroImage might do
   draft: boolean;
   tags: string[];
   content: string;
-};
+  _sys: SystemInfo;
+  body?: Maybe<Scalars["JSON"]>;
+}>;
 
 export type PostDocumentWithoutContent = Omit<PostDocument, "content">;

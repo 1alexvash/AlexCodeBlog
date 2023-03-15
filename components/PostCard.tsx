@@ -5,12 +5,13 @@ import {
 import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
+import { FC } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
 
 interface Props {
-  post: any | PostDocumentWithoutContent; // TODO: interface is broken by TinaCMS
+  post: PostDocumentWithoutContent;
 }
 
 export const DraftPostMark = () => (
@@ -47,7 +48,7 @@ const shimmer = (width: number, height: number) => `
 
 const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
-const PostCard = ({ post }: Props) => {
+const PostCard: FC<Props> = ({ post }) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -85,7 +86,7 @@ const PostCard = ({ post }: Props) => {
             />
           </Link>
           <div className="tags">
-            {post.tags.map((tag: any) => (
+            {post.tags.map((tag) => (
               <Link
                 href="/"
                 key={tag}
