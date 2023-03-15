@@ -21,4 +21,4 @@ export type PostDocument = Readonly<{
   body?: Maybe<Scalars["JSON"]>;
 }>;
 
-export type PostDocumentWithoutContent = Omit<PostDocument, "content">;
+export type PostDocumentWithoutBody = Omit<PostDocument, "body">;

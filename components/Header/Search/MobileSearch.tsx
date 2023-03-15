@@ -1,4 +1,4 @@
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
@@ -12,7 +12,7 @@ interface Props {
   search: Search;
   setSearch: Dispatch<SetStateAction<Search>>;
   mobileInputRef: RefObject<HTMLInputElement>;
-  filteredPosts: PostDocumentWithoutContent[];
+  filteredPosts: PostDocumentWithoutBody[];
   setShowMenu: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -61,16 +61,16 @@ const MobileSearch = ({
                   </div>
                   <div className="tags">
                     {post.tags.map((tag) => (
-                      (<Link
+                      <Link
                         href="/"
                         key={tag}
                         onClick={() => {
                           setShowMenu(false);
                           dispatch(setTags([tag]));
-                        }}>
+                        }}
+                      >
                         #{tag}
-
-                      </Link>)
+                      </Link>
                     ))}
                   </div>
                 </div>

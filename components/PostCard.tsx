@@ -2,7 +2,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -11,7 +11,7 @@ import { useAppDispatch } from "redux/typesHooks";
 import { setTags } from "../redux/slices/selectedTags";
 
 interface Props {
-  post: PostDocumentWithoutContent;
+  post: PostDocumentWithoutBody;
 }
 
 export const DraftPostMark = () => (
