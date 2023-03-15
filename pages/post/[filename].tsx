@@ -1,4 +1,6 @@
 import config from "config";
+import filterNullElements from "helpers/filterNullElements";
+import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { FC } from "react";
 import { useTina } from "tinacms/dist/react";
@@ -13,10 +15,10 @@ import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { client } from "../../.tina/__generated__/client";
-import { PostQueryVariables } from ".tina/__generated__/types";
+import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
 
 interface Props {
-  data: any;
+  data: PostQuery;
   query: string;
   variables: PostQueryVariables;
   latestPosts: any[]; // The interface is broken by graphql
@@ -28,6 +30,37 @@ const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
     variables: props.variables,
     data: props.data,
   });
+
+  const queryToDocument = (data: PostQuery): PostDocument => {
+    const { post } = data;
+    const { date, draft, title, body, featuredImage, tags, _sys, id } = post;
+
+    if (!featuredImage || !tags) {
+      return {
+        date: "",
+        draft: false,
+        title: "",
+        body: [],
+        featuredImage: "",
+        tags: [""],
+        _sys,
+        slug: "",
+      };
+    }
+
+    const filterNullTags = tags.filter(filterNullElements);
+
+    return {
+      date,
+      draft,
+      title,
+      body,
+      featuredImage,
+      tags: filterNullTags,
+      _sys,
+      slug: id,
+    };
+  };
 
   return (
     <>
@@ -46,7 +79,7 @@ const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
       <BreadCrumbs title={data.post.title} />
       <PageProgress />
       <BlogPostSectionWrapper>
-        <PostContent post={data.post} />
+        <PostContent post={queryToDocument(data)} />
         <LatestPosts latestPosts={latestPosts} />
       </BlogPostSectionWrapper>
       <Footer />
