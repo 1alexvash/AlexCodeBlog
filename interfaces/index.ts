@@ -17,7 +17,6 @@ export type PostDocument = Readonly<{
   featuredImage?: string; // TODO: think of something more clever, heroImage might do
   draft: boolean;
   tags: string[];
-  content: string;
   _sys: SystemInfo;
   body?: Maybe<Scalars["JSON"]>;
 }>;
