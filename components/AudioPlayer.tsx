@@ -106,7 +106,7 @@ const AudioPlayer = () => {
   useEffect(() => {
     setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
 
-    if (audioPlayer.current?.duration && !duration) {
+    if (audioPlayer.current?.duration) {
       const seconds = Math.ceil(audioPlayer.current.duration);
 
       setDuration(seconds);
