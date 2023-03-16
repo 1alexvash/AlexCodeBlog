@@ -1,5 +1,8 @@
 import { Box, IconButton } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const testAudioSample =
+  "https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3";
 
 const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -8,19 +11,14 @@ const AudioPlayer = () => {
   const [activeVolume, setActiveVolume] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [volume, setVolume] = useState(100);
+  const [isMobile, setIsMobile] = useState(false);
 
   const audioPlayer = useRef<HTMLAudioElement>(null);
   const progressBar = useRef<HTMLInputElement>(null);
   const volumeBar = useRef<HTMLInputElement>(null);
 
-  const pageInitialized = useRef(false);
-
   const animationRef = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout>();
-
-  const isMobile = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
-  };
 
   const onLoadedMetadata = () => {
     if (audioPlayer.current) {
@@ -29,43 +27,40 @@ const AudioPlayer = () => {
   };
 
   useEffect(() => {
-    const volumeBarElem = volumeBar.current?.parentElement;
+    const volumeBarElement = volumeBar.current?.parentElement;
 
     if (activeVolume) {
-      volumeBarElem?.setAttribute("open", "");
+      volumeBarElement?.setAttribute("open", "");
       setIsFirstRender(false);
     }
+
     if (!activeVolume && !isFirstRender) {
-      volumeBarElem?.setAttribute("closing", "");
-      volumeBarElem?.addEventListener(
+      volumeBarElement?.setAttribute("closing", "");
+      volumeBarElement?.addEventListener(
         "animationend",
         () => {
-          volumeBarElem?.removeAttribute("closing");
+          volumeBarElement?.removeAttribute("closing");
         },
         { once: true }
       );
-      volumeBarElem?.removeAttribute("open");
+      volumeBarElement?.removeAttribute("open");
     }
   }, [activeVolume, isFirstRender]);
 
   const calculateTime = (time: number) => {
-    if (time && !isNaN(time)) {
-      const minutes = Math.floor(time / 60);
-      const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-      const seconds = Math.floor(time % 60);
-      const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    if (isNaN(time)) return "00:00";
 
-      return `${returnedMinutes}:${returnedSeconds}`;
-    }
+    const minutes = Math.floor(time / 60);
+    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const seconds = Math.floor(time % 60);
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
 
-    return "00:00";
+    return `${returnedMinutes}:${returnedSeconds}`;
   };
 
   const togglePlayPause = () => {
-    const prevValue = isPlaying;
-
-    setIsPlaying(!prevValue);
-    if (!prevValue) {
+    setIsPlaying(!isPlaying);
+    if (!isPlaying) {
       audioPlayer.current?.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
@@ -87,10 +82,10 @@ const AudioPlayer = () => {
     changePlayerCurrentTime();
   };
 
-  const changeRangeOfVolumeBar = useCallback(() => {
+  const changeRangeOfVolumeBar = () => {
     audioPlayer.current!.volume = Number(volumeBar.current?.value) / 100;
     changePlayerVolume();
-  }, []);
+  };
 
   const changePlayerVolume = () => {
     volumeBar.current?.style.setProperty(
@@ -109,31 +104,20 @@ const AudioPlayer = () => {
   };
 
   useEffect(() => {
-    if (!pageInitialized.current) {
-      volumeBar.current!.value = "100";
-      changeRangeOfVolumeBar();
-    }
+    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
 
-    if (audioPlayer.current?.duration) {
-      const seconds = Math.floor(audioPlayer.current.duration);
+    if (audioPlayer.current?.duration && !duration) {
+      const seconds = Math.ceil(audioPlayer.current.duration);
 
       setDuration(seconds);
       progressBar.current!.max = String(seconds);
     }
 
-    if (
-      Math.ceil(audioPlayer.current!.currentTime) ===
-      Number(progressBar.current!.max)
-    ) {
+    audioPlayer.current?.addEventListener("ended", () => {
       setIsPlaying(false);
-    }
-    pageInitialized.current = true;
-  }, [
-    audioPlayer?.current?.onloadedmetadata,
-    audioPlayer.current?.readyState,
-    audioPlayer.current?.currentTime,
-    changeRangeOfVolumeBar,
-  ]);
+      cancelAnimationFrame(animationRef.current);
+    });
+  }, [audioPlayer, duration]);
 
   return (
     <Box
@@ -144,7 +128,7 @@ const AudioPlayer = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "8px 10px 7px 10px",
+        padding: "8px 10px",
         backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
         borderRadius: "4px",
         marginBottom: "18px",
@@ -157,7 +141,7 @@ const AudioPlayer = () => {
     >
       <audio
         ref={audioPlayer}
-        src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3"
+        src={testAudioSample}
         preload="metadata"
         onLoadedMetadata={onLoadedMetadata}
         muted={!volume}
@@ -165,12 +149,11 @@ const AudioPlayer = () => {
       <IconButton
         sx={{
           position: "relative",
-          width: "36px",
+          width: "33px",
           height: "33px",
           backgroundColor: "white",
           boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.12)",
           borderRadius: "50%",
-          flex: "1 0 33px",
           "& img": {
             position: "absolute",
             left: "50%",
@@ -196,7 +179,7 @@ const AudioPlayer = () => {
             height={14}
           />
         ) : (
-          <img src="/images/play-icon.svg" alt="play" width={16} height={15} />
+          <img src="/images/play-icon.svg" alt="play" width={16} height={16} />
         )}
       </IconButton>
       <Box
@@ -263,22 +246,26 @@ const AudioPlayer = () => {
           "&:hover": {
             background: "none",
           },
+          ...(activeVolume && {
+            filter:
+              "invert(47%) sepia(66%) saturate(2546%) hue-rotate(356deg) brightness(101%) contrast(99%)",
+          }),
         }}
         disableRipple
         onMouseEnter={() => {
-          if (!isMobile()) {
+          if (!isMobile) {
             setActiveVolume(true);
           }
         }}
         onMouseLeave={() => {
-          if (!isMobile()) {
+          if (!isMobile) {
             timeoutRef.current = setTimeout(() => {
               setActiveVolume(false);
             }, 500);
           }
         }}
         onClick={() => {
-          if (isMobile()) {
+          if (isMobile) {
             setActiveVolume(!activeVolume);
           }
         }}
@@ -289,14 +276,6 @@ const AudioPlayer = () => {
             alt="play"
             width={22}
             height={16}
-            style={
-              activeVolume
-                ? {
-                    filter:
-                      "invert(47%) sepia(66%) saturate(2546%) hue-rotate(356deg) brightness(101%) contrast(99%)",
-                  }
-                : {}
-            }
           />
         ) : (
           <img
@@ -304,14 +283,6 @@ const AudioPlayer = () => {
             alt="play"
             width={22}
             height={16}
-            style={
-              activeVolume
-                ? {
-                    filter:
-                      "invert(47%) sepia(66%) saturate(2546%) hue-rotate(356deg) brightness(101%) contrast(99%)",
-                  }
-                : {}
-            }
           />
         )}
       </IconButton>
@@ -344,7 +315,7 @@ const AudioPlayer = () => {
           "& input": {
             height: "4px",
             width: "100%",
-            "--seek-before-width": 0,
+            "--seek-before-width": "100%",
             backgroundColor:
               theme.palette.mode === "light" ? "white" : "#18191d",
             appearance: "none",
@@ -357,7 +328,7 @@ const AudioPlayer = () => {
               height: "4px",
               width: "var(--seek-before-width)",
               backgroundColor:
-                theme.palette.mode === "light" ? "#000000" : "#f2f5f7",
+                theme.palette.mode === "light" ? "black" : "#f2f5f7",
               borderRadius: "4px",
               position: "absolute",
               zIndex: 2,
@@ -368,18 +339,13 @@ const AudioPlayer = () => {
           },
         })}
         onMouseEnter={() => {
-          if (!isMobile()) clearTimeout(timeoutRef.current);
+          if (!isMobile) clearTimeout(timeoutRef.current);
         }}
         onMouseLeave={() => {
-          if (!isMobile()) setActiveVolume(false);
+          if (!isMobile) setActiveVolume(false);
         }}
       >
-        <input
-          type="range"
-          defaultValue="100"
-          ref={volumeBar}
-          onChange={changeRangeOfVolumeBar}
-        />
+        <input type="range" ref={volumeBar} onChange={changeRangeOfVolumeBar} />
       </Box>
     </Box>
   );
