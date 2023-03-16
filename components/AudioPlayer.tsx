@@ -1,4 +1,5 @@
 import { Box, IconButton } from "@mui/material";
+import useClickOutside from "hooks/useClickOutside";
 import { useEffect, useRef, useState } from "react";
 
 const testAudioSample =
@@ -11,14 +12,15 @@ const AudioPlayer = () => {
   const [activeVolume, setActiveVolume] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [volume, setVolume] = useState(100);
-  const [isMobile, setIsMobile] = useState(false);
+  const [justOpenedBar, setJustOpenedBar] = useState(false);
 
   const audioPlayer = useRef<HTMLAudioElement>(null);
   const progressBar = useRef<HTMLInputElement>(null);
   const volumeBar = useRef<HTMLInputElement>(null);
 
   const animationRef = useRef(0);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const volumeBarElement = volumeBar.current?.parentElement;
 
   const onLoadedMetadata = () => {
     if (audioPlayer.current) {
@@ -26,9 +28,25 @@ const AudioPlayer = () => {
     }
   };
 
-  useEffect(() => {
-    const volumeBarElement = volumeBar.current?.parentElement;
+  const close = () => {
+    if (activeVolume && justOpenedBar) {
+      setActiveVolume(false);
+      setJustOpenedBar(false);
 
+      return;
+    }
+
+    if (volumeBarElement?.getAttribute("open") !== null) {
+      setJustOpenedBar((prevValue) => !prevValue);
+
+      return;
+    }
+
+    setJustOpenedBar(false);
+  };
+  useClickOutside(volumeBar, close);
+
+  useEffect(() => {
     if (activeVolume) {
       volumeBarElement?.setAttribute("open", "");
       setIsFirstRender(false);
@@ -45,7 +63,7 @@ const AudioPlayer = () => {
       );
       volumeBarElement?.removeAttribute("open");
     }
-  }, [activeVolume, isFirstRender]);
+  }, [activeVolume, isFirstRender, volumeBarElement]);
 
   const calculateTime = (time: number) => {
     if (isNaN(time)) return "00:00";
@@ -104,8 +122,6 @@ const AudioPlayer = () => {
   };
 
   useEffect(() => {
-    setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
-
     if (audioPlayer.current?.duration) {
       const seconds = Math.ceil(audioPlayer.current.duration);
 
@@ -252,22 +268,8 @@ const AudioPlayer = () => {
           }),
         }}
         disableRipple
-        onMouseEnter={() => {
-          if (!isMobile) {
-            setActiveVolume(true);
-          }
-        }}
-        onMouseLeave={() => {
-          if (!isMobile) {
-            timeoutRef.current = setTimeout(() => {
-              setActiveVolume(false);
-            }, 500);
-          }
-        }}
         onClick={() => {
-          if (isMobile) {
-            setActiveVolume(!activeVolume);
-          }
+          setActiveVolume((prevValue) => !prevValue);
         }}
       >
         {Boolean(volume) ? (
@@ -338,12 +340,6 @@ const AudioPlayer = () => {
             },
           },
         })}
-        onMouseEnter={() => {
-          if (!isMobile) clearTimeout(timeoutRef.current);
-        }}
-        onMouseLeave={() => {
-          if (!isMobile) setActiveVolume(false);
-        }}
       >
         <input type="range" ref={volumeBar} onChange={changeRangeOfVolumeBar} />
       </Box>
