@@ -3,13 +3,23 @@ import { useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 
+const footerHeightOnDesktop = 81;
+const footerHeightOnMobile = 181;
+
 const PageProgress = () => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
+    const { innerWidth } = window;
+
+    const footerHeight =
+      innerWidth > 767 ? footerHeightOnDesktop : footerHeightOnMobile;
+
     const calculateScrollProgress = () => {
       const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+        document.documentElement.scrollHeight -
+        window.innerHeight -
+        footerHeight;
       const scrollTop =
         (document.documentElement.scrollTop || document.body.scrollTop) /
         scrollHeight;
