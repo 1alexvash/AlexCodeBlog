@@ -78,6 +78,7 @@ const AudioPlayer = () => {
 
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
+
     if (!isPlaying) {
       audioPlayer.current?.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
