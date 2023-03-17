@@ -1,5 +1,5 @@
 import config from "config";
-import queriesToArrayOfDocuments from "helpers/QueriesToArrayOfDocuments";
+import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
 import queryToDocument from "helpers/queryToDocument";
 import { PostFromQuery } from "interfaces";
 import Head from "next/head";
