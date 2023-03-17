@@ -11,7 +11,7 @@ type SystemInfo = Readonly<{
 }>;
 
 export type PostDocument = Readonly<{
-  slug: string;
+  id: string;
   title: string;
   date: Date | string;
   featuredImage?: string; // TODO: think of something more clever, heroImage might do

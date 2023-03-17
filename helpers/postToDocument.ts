@@ -14,7 +14,7 @@ const postToDocument = (post: PostFromQuery): PostDocument => {
       featuredImage: "",
       tags: [""],
       _sys,
-      slug: "",
+      id: "",
     };
   }
 
@@ -28,7 +28,7 @@ const postToDocument = (post: PostFromQuery): PostDocument => {
     featuredImage,
     tags: filterNullTags,
     _sys,
-    slug: id,
+    id,
   };
 };
 
