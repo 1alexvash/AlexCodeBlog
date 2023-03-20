@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import config from "config";
 import {
   isPostADraft,
@@ -88,10 +89,10 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
-      {/* <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} /> */}
-
       {/* <Reactions /> This future might be added later */}
-      <TinaMarkdown content={post.body} components={components} />
+      <Box component="div" ref={document}>
+        <TinaMarkdown content={post.body} components={components} />
+      </Box>
     </article>
   );
 };
