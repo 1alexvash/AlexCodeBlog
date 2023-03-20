@@ -1,6 +1,6 @@
 ---
 title: What is polymorphism?
-date: '2023-01-01T15:00:00.000Z'
+date: 2023-01-01T15:00:00.000Z
 featuredImage: /post-images/what-is-polymorphism.jpg
 draft: false
 tags:
@@ -17,8 +17,8 @@ Let's start off with the example, as a picture is worth a thousand of words.
 
 ![](/post-images/what-is-polymorphism-example-1.png)
 
-> A car is a car\
-> A track is car\
+> A car is a car <br>
+> A track is car <br>
 > They are both cars, but they are not entirely the same.
 
 What's common about them? They both take you from point A to point B; hence they are cars, but driving a track makes you money, while driving a car is an expense hence polymorphism.
