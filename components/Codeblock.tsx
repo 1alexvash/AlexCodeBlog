@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import { FC, ReactNode, useMemo } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
@@ -24,14 +25,16 @@ const Codeblock: FC<CodeblockProps> = ({ codeLines, language }) => {
   const preTag = useMemo(() => createPreTagByLanguage(language), [language]);
 
   return (
-    <SyntaxHighlighter
-      language={language}
-      codeTagProps={{ className: `language-${language}`, style: {} }}
-      useInlineStyles={false}
-      PreTag={preTag}
-    >
-      {codeLines}
-    </SyntaxHighlighter>
+    <Box component="div" className="syntax-highlighting">
+      <SyntaxHighlighter
+        language={language}
+        codeTagProps={{ className: `language-${language}` }}
+        useInlineStyles={false}
+        PreTag={preTag}
+      >
+        {codeLines}
+      </SyntaxHighlighter>
+    </Box>
   );
 };
 
