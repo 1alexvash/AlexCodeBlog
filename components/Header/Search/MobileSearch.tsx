@@ -49,9 +49,7 @@ const MobileSearch = ({
                   <div className="inner-flex">
                     <a href={`/post/${post.slug}`} className="image">
                       <img
-                        src={
-                          post.featuredImage ?? "/post-images/placeholder.png"
-                        }
+                        src={post.heroImage ?? "/post-images/placeholder.png"}
                         alt="blog post image"
                       />
                     </a>
@@ -61,16 +59,16 @@ const MobileSearch = ({
                   </div>
                   <div className="tags">
                     {post.tags.map((tag) => (
-                      (<Link
+                      <Link
                         href="/"
                         key={tag}
                         onClick={() => {
                           setShowMenu(false);
                           dispatch(setTags([tag]));
-                        }}>
+                        }}
+                      >
                         #{tag}
-
-                      </Link>)
+                      </Link>
                     ))}
                   </div>
                 </div>

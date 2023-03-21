@@ -61,7 +61,7 @@ const DesktopSearch = ({
                 <div className="related-posts-block" key={index}>
                   <a href={`/post/${post.slug}`} className="image">
                     <img
-                      src={post.featuredImage ?? "/post-images/placeholder.png"}
+                      src={post.heroImage ?? "/post-images/placeholder.png"}
                       alt="blog post image"
                     />
                   </a>
@@ -71,7 +71,7 @@ const DesktopSearch = ({
                     </a>
                     <div className="tags">
                       {post.tags.map((tag) => (
-                        (<Link
+                        <Link
                           href="/"
                           key={tag}
                           onClick={() => {
@@ -81,10 +81,10 @@ const DesktopSearch = ({
                             }));
 
                             dispatch(setTags([tag]));
-                          }}>
+                          }}
+                        >
                           #{tag}
-
-                        </Link>)
+                        </Link>
                       ))}
                     </div>
                   </div>

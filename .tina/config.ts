@@ -24,6 +24,7 @@ export default defineConfig({
         name: "post",
         label: "Posts",
         path: "content/posts",
+        // TODO: Try .mdx
         format: "mdx",
         fields: [
           {
@@ -43,7 +44,7 @@ export default defineConfig({
           {
             type: "image",
             label: "Hero image",
-            name: "featuredImage", // TODO: rename to heroImage
+            name: "heroImage", // TODO: rename to heroImage
             required: false,
           },
           {
@@ -64,6 +65,7 @@ export default defineConfig({
             name: "tags",
             type: "string",
             list: true,
+            // TODO: At least one tag is required
             ui: {
               min: 1,
             },
