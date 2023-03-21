@@ -68,13 +68,13 @@ export default defineConfig({
             // TODO: At least one tag is required
           },
         ],
+        defaultItem: {
+          title: "",
+          date: new Date().toISOString(),
+          draft: false,
+          tags: ["First Tag"],
+        },
         ui: {
-          defaultItem: {
-            title: "",
-            date: new Date().toISOString(),
-            draft: false,
-            tags: ["First Tag"],
-          },
           filename: {
             readonly: true,
             slugify: (values) => {
