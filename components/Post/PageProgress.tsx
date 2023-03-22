@@ -3,23 +3,18 @@ import { useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 
-const footerHeightOnDesktop = 81;
-const footerHeightOnMobile = 181;
+interface PageProgressProp {
+  blogPostSectionRef: React.RefObject<HTMLDivElement>;
+}
 
-const PageProgress = () => {
+const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    const { innerWidth } = window;
-
-    const footerHeight =
-      innerWidth > 767 ? footerHeightOnDesktop : footerHeightOnMobile;
+    const { height, top } = blogPostSectionRef.current!.getBoundingClientRect();
 
     const calculateScrollProgress = () => {
-      const scrollHeight =
-        document.documentElement.scrollHeight -
-        window.innerHeight -
-        footerHeight;
+      const scrollHeight = height + top - window.innerHeight;
       const scrollTop =
         (document.documentElement.scrollTop || document.body.scrollTop) /
         scrollHeight;
@@ -36,7 +31,7 @@ const PageProgress = () => {
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
     };
-  }, []);
+  }, [blogPostSectionRef]);
 
   return (
     <Box
