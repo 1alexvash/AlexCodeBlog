@@ -10,7 +10,6 @@ declare module "@mui/material/styles/createPalette" {
 export type ThemeMode = Theme["palette"]["mode"];
 
 const spacing = 4;
-// TODO: I'm not sure whether it should be 4 or 5
 
 const primaryColors = {
   orange: "#fe6C0a",
