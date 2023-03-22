@@ -1,4 +1,5 @@
 import config from "config";
+import getFirstParagraph from "helpers/getFirstParagraph";
 import {
   getAllPostDocuments,
   getPostDocumentBySlug,
