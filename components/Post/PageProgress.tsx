@@ -13,6 +13,8 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
   useEffect(() => {
     const { height, top } = blogPostSectionRef.current!.getBoundingClientRect();
 
+    console.log(height, top);
+
     const calculateScrollProgress = () => {
       const scrollHeight = height + top - window.innerHeight;
       const scrollTop =
