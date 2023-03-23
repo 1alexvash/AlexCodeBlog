@@ -21,6 +21,44 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "main_page",
+        label: "Main Page",
+        path: "content",
+        format: "md",
+        fields: [
+          {
+            name: "site_title",
+            label: "Site title",
+            type: "string",
+          },
+          {
+            name: "site_description",
+            label: "Site description",
+            type: "string",
+          },
+          {
+            name: "site_keywords",
+            label: "Site keywords",
+            type: "string",
+          },
+          {
+            name: "author_name",
+            label: "Author name",
+            type: "string",
+          },
+          {
+            name: "author_position",
+            label: "Author position",
+            type: "string",
+          },
+          {
+            name: "host_url",
+            label: "Host url",
+            type: "string",
+          },
+        ],
+      },
+      {
         name: "post",
         label: "Posts",
         path: "content/posts",
@@ -68,13 +106,13 @@ export default defineConfig({
             // TODO: At least one tag is required
           },
         ],
+        defaultItem: {
+          title: "",
+          date: new Date().toISOString(),
+          draft: false,
+          tags: ["First Tag"],
+        },
         ui: {
-          defaultItem: {
-            title: "",
-            date: new Date().toISOString(),
-            draft: false,
-            tags: ["First Tag"],
-          },
           filename: {
             readonly: true,
             slugify: (values) => {
