@@ -14,12 +14,13 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
 import client from ".tina/__generated__/client";
+import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutContent[];
-  tinaData: any;
-  query: any;
-  variables: any;
+  tinaData: PostQuery;
+  query: string;
+  variables: PostQueryVariables;
 }> = ({ posts, tinaData, query, variables }) => {
   const { data } = useTina({
     query: query,
@@ -27,6 +28,7 @@ const Home: NextPage<{
     data: tinaData,
   });
 
+  console.log(data);
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -88,7 +90,7 @@ const Home: NextPage<{
 
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
-  const pageResponse = await client.queries.post({
+  const pageResponse = await client.queries.main_page({
     relativePath: "mainPage.md",
   });
 
