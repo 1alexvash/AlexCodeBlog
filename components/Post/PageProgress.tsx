@@ -13,11 +13,11 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
   useEffect(() => {
     const blogPostSection = blogPostSectionRef.current;
 
-    const offsetHeight = blogPostSection!.offsetHeight;
-    const offsetTop = blogPostSection?.offsetTop || 0; // check names of variables
+    const { height } = blogPostSection!.getBoundingClientRect();
+    const offsetTop = blogPostSection?.offsetTop || 0;
 
     const calculateScrollProgress = () => {
-      const scrollHeight = offsetHeight + offsetTop - window.innerHeight;
+      const scrollHeight = height + offsetTop - window.innerHeight;
       const scrollTop =
         (document.documentElement.scrollTop || document.body.scrollTop) /
         scrollHeight;
