@@ -16,6 +16,9 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
     const { height } = blogPostSection!.getBoundingClientRect();
     const offsetTop = blogPostSection?.offsetTop || 0;
 
+    console.log(height);
+    console.log(offsetTop);
+
     const calculateScrollProgress = () => {
       const scrollHeight = height + offsetTop - window.innerHeight;
       const scrollTop =
