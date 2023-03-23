@@ -3,6 +3,7 @@ import { PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
+import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -16,7 +17,16 @@ import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutContent[];
-}> = ({ posts }) => {
+  tinaData: any;
+  query: any;
+  variables: any;
+}> = ({ posts, tinaData, query, variables }) => {
+  const { data } = useTina({
+    query: query,
+    variables: variables,
+    data: tinaData,
+  });
+
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -78,12 +88,18 @@ const Home: NextPage<{
 
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
+  const pageResponse = await client.queries.post({
+    relativePath: "mainPage.md",
+  });
 
   return {
     props: {
       posts: posts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
+      tinaData: pageResponse.data,
+      query: pageResponse.query,
+      variables: pageResponse.variables,
     },
   };
 };
