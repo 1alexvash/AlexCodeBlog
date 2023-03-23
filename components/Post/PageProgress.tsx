@@ -13,13 +13,9 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
   useEffect(() => {
     const blogPostSection = blogPostSectionRef.current;
 
-    const { height } = blogPostSection!.getBoundingClientRect();
-    const offsetTop = blogPostSection?.offsetTop || 0;
-
-    console.log(height);
-    console.log(offsetTop);
-
     const calculateScrollProgress = () => {
+      const { height } = blogPostSection!.getBoundingClientRect();
+      const offsetTop = blogPostSection?.offsetTop || 0;
       const scrollHeight = height + offsetTop - window.innerHeight;
       const scrollTop =
         (document.documentElement.scrollTop || document.body.scrollTop) /
@@ -32,7 +28,10 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
       );
     };
 
-    document.addEventListener("scroll", calculateScrollProgress);
+    if (blogPostSection) {
+      calculateScrollProgress();
+      document.addEventListener("scroll", calculateScrollProgress);
+    }
 
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
