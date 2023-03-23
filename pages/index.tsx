@@ -14,21 +14,25 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
 import client from ".tina/__generated__/client";
-import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
+import {
+  MainPageQuery,
+  MainPageQueryVariables,
+} from ".tina/__generated__/types";
 
-const Home: NextPage<{
+interface HomeProps {
   posts: PostDocumentWithoutContent[];
-  tinaData: PostQuery;
+  tinaData: MainPageQuery;
   query: string;
-  variables: PostQueryVariables;
-}> = ({ posts, tinaData, query, variables }) => {
+  variables: MainPageQueryVariables;
+}
+
+const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
   const { data } = useTina({
     query: query,
     variables: variables,
     data: tinaData,
   });
 
-  console.log(data);
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -64,17 +68,24 @@ const Home: NextPage<{
     <>
       <Head>
         <title>{config.site_title}</title>
-        <meta property="og:title" content={config.site_keywords[1]} />
-        <meta property="og:description" content={config.site_description} />
+        <meta property="og:title" content={config.site_title} />
+        <meta
+          property="og:description"
+          content={data.mainPage.site_description}
+        />
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.site_title} />
-        <meta name="description" content={config.site_description} />
+        <meta name="description" content={data.mainPage.site_description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />
       <Header />
-      <Intro />
+      <Intro
+        author_name={data.mainPage.author_name}
+        author_position={data.mainPage.author_position}
+        site_description={data.mainPage.site_description}
+      />
       <section className="simple-section">
         <div className="container">
           {/* TODO: Implement tags count for the admin user */}
@@ -90,7 +101,7 @@ const Home: NextPage<{
 
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
-  const pageResponse = await client.queries.main_page({
+  const pageResponse = await client.queries.mainPage({
     relativePath: "mainPage.md",
   });
 

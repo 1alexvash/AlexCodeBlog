@@ -21,40 +21,28 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "main_page",
+        name: "mainPage",
         label: "Main Page",
         path: "content",
         format: "md",
         fields: [
           {
-            name: "site_title",
-            label: "Site title",
-            type: "string",
-          },
-          {
             name: "site_description",
             label: "Site description",
             type: "string",
-          },
-          {
-            name: "site_keywords",
-            label: "Site keywords",
-            type: "string",
+            required: true,
           },
           {
             name: "author_name",
             label: "Author name",
             type: "string",
+            required: true,
           },
           {
             name: "author_position",
             label: "Author position",
             type: "string",
-          },
-          {
-            name: "host_url",
-            label: "Host url",
-            type: "string",
+            required: true,
           },
         ],
       },
