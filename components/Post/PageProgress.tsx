@@ -11,18 +11,19 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    const { height, top } = blogPostSectionRef.current!.getBoundingClientRect();
+    const blogPostSection = blogPostSectionRef.current;
 
-    console.log(height, top);
+    const offsetHeight = blogPostSection!.offsetHeight;
+    const offsetTop = blogPostSection?.offsetTop || 0; // check names of variables
 
     const calculateScrollProgress = () => {
-      const scrollHeight = height + top - window.innerHeight;
+      const scrollHeight = offsetHeight + offsetTop - window.innerHeight;
       const scrollTop =
         (document.documentElement.scrollTop || document.body.scrollTop) /
         scrollHeight;
       const percentage = Math.round(scrollTop * 100);
 
-      progressBarRef.current.style.setProperty(
+      progressBarRef.current?.style.setProperty(
         "width",
         percentage > 100 ? "100%" : percentage + "%"
       );
