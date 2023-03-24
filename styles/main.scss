@@ -53,6 +53,8 @@ hr {
   height: 1px;
   border: none;
   background: #e8e8e8;
+  margin-top: 0;
+  margin-bottom: 27px;
 }
 
 .page {
@@ -1158,20 +1160,6 @@ blockquote p:last-child {
   height: 262px;
   line-height: 1.2;
   padding: 18px 19px;
-}
-
-.page-progress {
-  position: relative;
-  z-index: 29;
-  background: #f2f5f7;
-  height: 10px;
-}
-
-.page-progress .progress-bar {
-  display: block;
-  background: #3a3a3a;
-  border-radius: 1px;
-  height: 100%;
 }
 
 .content-404 {
