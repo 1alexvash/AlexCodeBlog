@@ -30,7 +30,6 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
       );
     };
 
-    calculateScrollProgress();
     document.addEventListener("scroll", calculateScrollProgress);
 
     return () => {
