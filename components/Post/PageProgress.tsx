@@ -14,24 +14,24 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
     const blogPostSection = blogPostSectionRef.current;
 
     const calculateScrollProgress = () => {
-      const { height } = blogPostSection!.getBoundingClientRect();
-      const offsetTop = blogPostSection?.offsetTop || 0;
-      const scrollHeight = height + offsetTop - window.innerHeight;
+      if (!blogPostSection) return;
+
+      const height = blogPostSection.offsetHeight || 0;
+      const offsetTop = blogPostSection.offsetTop || 0;
+      const scrollHeight = height - window.innerHeight;
       const scrollTop =
-        (document.documentElement.scrollTop || document.body.scrollTop) /
-        scrollHeight;
-      const percentage = Math.round(scrollTop * 100);
+        (document.documentElement.scrollTop || document.body.scrollTop) -
+        offsetTop;
+      const percentage = Math.round((scrollTop / scrollHeight) * 100);
 
       progressBarRef.current?.style.setProperty(
         "width",
-        percentage > 100 ? "100%" : percentage + "%"
+        percentage > 100 ? "100%" : percentage < 0 ? "0%" : percentage + "%"
       );
     };
 
-    if (blogPostSection) {
-      calculateScrollProgress();
-      document.addEventListener("scroll", calculateScrollProgress);
-    }
+    calculateScrollProgress();
+    document.addEventListener("scroll", calculateScrollProgress);
 
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
