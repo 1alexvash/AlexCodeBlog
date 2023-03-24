@@ -3,11 +3,11 @@ import { useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 
-interface PageProgressProp {
+interface PageProgressProps {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
 }
 
-const PageProgress = ({ blogPostSectionRef }: PageProgressProp) => {
+const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
