@@ -47,7 +47,7 @@ const MobileSearch = ({
               {filteredPosts.map((post, index) => (
                 <div className="mobile-posts-block" key={index}>
                   <div className="inner-flex">
-                    <a href={`/post/${post.slug}`} className="image">
+                    <a href={`/post/${post._sys.filename}`} className="image">
                       <img
                         src={
                           post.featuredImage ?? "/post-images/placeholder.png"
@@ -55,7 +55,7 @@ const MobileSearch = ({
                         alt="blog post image"
                       />
                     </a>
-                    <a href={`/post/${post.slug}`} className="name">
+                    <a href={`/post/${post._sys.filename}`} className="name">
                       {post.title}
                     </a>
                   </div>

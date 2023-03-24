@@ -5,7 +5,6 @@ import {
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
@@ -48,7 +47,7 @@ const shimmer = (width: number, height: number) => `
 
 const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
-const PostCard: FC<Props> = ({ post }) => {
+const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -99,7 +98,7 @@ const PostCard: FC<Props> = ({ post }) => {
               </Link>
             ))}
           </div>
-          <Link href={`/post/${post.slug}`} className="link">
+          <Link href={`/post/${post._sys.filename}`} className="link">
             {post.title}
           </Link>
         </div>

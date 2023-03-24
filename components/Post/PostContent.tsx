@@ -7,7 +7,7 @@ import getFirstParagraph from "helpers/getFirstParagraph";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
-import { FC, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
@@ -17,7 +17,7 @@ interface Props {
   post: PostDocument;
 }
 
-const PostContent: FC<Props> = ({ post }) => {
+const PostContent = ({ post }: Props) => {
   console.log("post:", post);
   const description = getFirstParagraph("");
   const document = useRef<HTMLDivElement>(null);

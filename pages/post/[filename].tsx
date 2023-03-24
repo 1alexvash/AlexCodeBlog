@@ -3,7 +3,6 @@ import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
 import queryToDocument from "helpers/queryToDocument";
 import { PostFromQuery } from "interfaces";
 import Head from "next/head";
-import { FC } from "react";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -25,13 +24,13 @@ interface Props {
   latestPosts: PostFromQuery[];
 }
 
-const Post: FC<Props> = ({ latestPosts, ...props }: Props) => {
+const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
   });
-
+  console.log("post", data.post);
   return (
     <>
       <Head>
