@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { FC, ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 interface CodeblockProps {
@@ -11,17 +11,15 @@ interface PreTagProps {
   children: ReactNode;
 }
 
-const createPreTagByLanguage = (language: string): FC<PreTagProps> => {
-  const result: FC<PreTagProps> = (props) => {
+const createPreTagByLanguage = (language: string) => {
+  const result = (props: PreTagProps) => {
     return <pre className={`language-${language}`}>{props.children}</pre>;
   };
-
-  result.displayName = `PreTag_${language}`;
 
   return result;
 };
 
-const Codeblock: FC<CodeblockProps> = ({ codeLines, language }) => {
+const Codeblock = ({ codeLines, language }: CodeblockProps) => {
   const preTag = useMemo(() => createPreTagByLanguage(language), [language]);
 
   return (
