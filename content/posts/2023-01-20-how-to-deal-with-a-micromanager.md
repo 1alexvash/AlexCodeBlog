@@ -35,7 +35,7 @@ The good part you can totally reverse it, so let's dive into the solution.
 
 ### Solution
 
-<u>Overreporting.</u>
+Overreporting.
 
 It's totally out of the blue, out of the script, as it is traditionally her job to get to you and collect the important information, and that's why it is effective.
 
