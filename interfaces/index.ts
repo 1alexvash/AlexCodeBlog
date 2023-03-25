@@ -31,6 +31,6 @@ export type PostFromQuery = Readonly<{
   featuredImage?: string | null;
   draft: boolean;
   body?: any | null;
-  tags?: Array<string | null> | null;
+  tags?: Array<string>;
   _sys: SystemInfo;
 }>;
