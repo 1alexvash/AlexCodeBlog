@@ -3,7 +3,7 @@ import { PostDocument, PostFromQuery } from "interfaces";
 const postToDocument = (post: PostFromQuery): PostDocument => {
   const { date, draft, title, body, featuredImage, tags, _sys, id } = post;
 
-  if (!featuredImage || !tags) {
+  if (!featuredImage) {
     return {
       date: "",
       draft: false,
