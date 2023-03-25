@@ -5,7 +5,7 @@ import filterNullElements from "./filterNullElements";
 const postToDocument = (post: PostFromQuery): PostDocument => {
   const { date, draft, title, body, featuredImage, tags, _sys, id } = post;
 
-  if (!featuredImage) {
+  if (!featuredImage || !tags) {
     return {
       date: "",
       draft: false,
