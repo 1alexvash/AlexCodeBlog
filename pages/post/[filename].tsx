@@ -30,7 +30,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
     variables: props.variables,
     data: props.data,
   });
-
+  console.log("post", data.post);
   return (
     <>
       <Head>
