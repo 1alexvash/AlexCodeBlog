@@ -25,19 +25,17 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
         (offsetTop - heightOfProgressBar);
       const percentage = Math.round((scrollTop / scrollHeight) * 100);
 
-      if (percentage > 100) {
-        progressBarRef.current?.style.setProperty("width", "100%");
+      let width = percentage + "%";
 
-        return;
+      if (percentage > 100) {
+        width = "100%";
       }
 
       if (percentage < 0) {
-        progressBarRef.current?.style.setProperty("width", "0%");
-
-        return;
+        width = "0%";
       }
 
-      progressBarRef.current?.style.setProperty("width", percentage + "%");
+      progressBarRef.current?.style.setProperty("width", width);
     };
 
     document.addEventListener("scroll", calculateScrollProgress);
