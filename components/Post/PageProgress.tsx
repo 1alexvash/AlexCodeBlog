@@ -2,12 +2,13 @@ import { Box } from "@mui/material";
 import { useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
+const heightOfProgressBar = 10;
 
-interface PageProgressProps {
+interface Props {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
 }
 
-const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
+const PageProgress = ({ blogPostSectionRef }: Props) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
@@ -21,13 +22,22 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
       const scrollHeight = height - window.innerHeight;
       const scrollTop =
         (document.documentElement.scrollTop || document.body.scrollTop) -
-        offsetTop;
+        (offsetTop - heightOfProgressBar);
       const percentage = Math.round((scrollTop / scrollHeight) * 100);
 
-      progressBarRef.current?.style.setProperty(
-        "width",
-        percentage > 100 ? "100%" : percentage < 0 ? "0%" : percentage + "%"
-      );
+      if (percentage > 100) {
+        progressBarRef.current?.style.setProperty("width", "100%");
+
+        return;
+      }
+
+      if (percentage < 0) {
+        progressBarRef.current?.style.setProperty("width", "0%");
+
+        return;
+      }
+
+      progressBarRef.current?.style.setProperty("width", percentage + "%");
     };
 
     document.addEventListener("scroll", calculateScrollProgress);
@@ -43,7 +53,7 @@ const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
         position: "sticky",
         top: chromeZoomPixelGapBugFix,
         zIndex: 29,
-        height: "10px",
+        height: heightOfProgressBar,
         backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
       })}
     >
