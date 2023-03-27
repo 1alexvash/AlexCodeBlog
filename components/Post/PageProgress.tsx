@@ -39,9 +39,11 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
     };
 
     document.addEventListener("scroll", calculateScrollProgress);
+    window.addEventListener("resize", calculateScrollProgress);
 
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
+      window.removeEventListener("resize", calculateScrollProgress);
     };
   }, [blogPostSectionRef]);
 
