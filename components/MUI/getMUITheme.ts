@@ -9,8 +9,6 @@ declare module "@mui/material/styles/createPalette" {
 
 export type ThemeMode = Theme["palette"]["mode"];
 
-const spacing = 4;
-
 const primaryColors = {
   orange: "#fe6C0a",
   darkGrey: "#3a3a3a",
@@ -37,7 +35,6 @@ const lightThemeConfig = createTheme({
       paper: primaryColors.white,
     },
   },
-  spacing,
 });
 
 const darkThemeConfig = createTheme({
@@ -55,7 +52,6 @@ const darkThemeConfig = createTheme({
       paper: primaryColors.darkBlack,
     },
   },
-  spacing,
 });
 
 const getMUITheme = (themeMode: ThemeMode) => {
