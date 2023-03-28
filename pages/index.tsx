@@ -102,7 +102,7 @@ const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
   const pageResponse = await client.queries.mainPage({
-    relativePath: "mainPage.md",
+    relativePath: "mainPage.json",
   });
 
   return {

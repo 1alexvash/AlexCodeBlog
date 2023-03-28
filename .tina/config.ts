@@ -24,11 +24,24 @@ export default defineConfig({
         name: "mainPage",
         label: "Main Page",
         path: "content",
-        format: "md",
+        format: "json",
         fields: [
+          {
+            name: "site_title",
+            label: "Site title",
+            type: "string",
+            required: true,
+          },
           {
             name: "site_description",
             label: "Site description",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "site_keywords",
+            label: "Site keywords",
+            list: true,
             type: "string",
             required: true,
           },
@@ -42,6 +55,52 @@ export default defineConfig({
             name: "author_position",
             label: "Author position",
             type: "string",
+            required: true,
+          },
+          {
+            name: "social_links",
+            label: "Social links",
+            type: "object",
+            list: true,
+            fields: [
+              {
+                name: "link",
+                label: "Link",
+                type: "string",
+              },
+              {
+                name: "image",
+                label: "Image",
+                type: "string",
+              },
+              {
+                name: "width",
+                label: "Width",
+                type: "string",
+              },
+              {
+                name: "class",
+                label: "Class",
+                type: "string",
+              },
+            ],
+          },
+          {
+            name: "host_url",
+            label: "Host url",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "posts_per_page",
+            label: "Posts per page",
+            type: "number",
+            required: true,
+          },
+          {
+            name: "latest_posts_per_page",
+            label: "Latest posts per page",
+            type: "number",
             required: true,
           },
         ],
