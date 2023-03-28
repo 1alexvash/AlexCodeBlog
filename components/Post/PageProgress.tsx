@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
-import { useEffect, useRef } from "react";
+import useWindowDimensions from "helpers/useWindowDimensions";
+import { useCallback, useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 const heightOfProgressBar = 10;
@@ -11,41 +12,41 @@ interface Props {
 const PageProgress = ({ blogPostSectionRef }: Props) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  useEffect(() => {
+  const calculateScrollProgress = useCallback(() => {
     const blogPostSection = blogPostSectionRef.current;
 
-    const calculateScrollProgress = () => {
-      if (!blogPostSection) return;
+    if (!blogPostSection) return;
 
-      const height = blogPostSection.offsetHeight || 0;
-      const offsetTop = blogPostSection.offsetTop || 0;
-      const scrollHeight = height - window.innerHeight;
-      const scrollTop =
-        (document.documentElement.scrollTop || document.body.scrollTop) -
-        (offsetTop - heightOfProgressBar);
-      const percentage = Math.round((scrollTop / scrollHeight) * 100);
+    const offsetHeight = blogPostSection.offsetHeight || 0;
+    const offsetTop = blogPostSection.offsetTop || 0;
+    const scrollHeight = offsetHeight - window.innerHeight;
+    const scrollTop =
+      (document.documentElement.scrollTop || document.body.scrollTop) -
+      (offsetTop - heightOfProgressBar);
+    const percentage = Math.round((scrollTop / scrollHeight) * 100);
 
-      let width = percentage + "%";
+    let width = percentage + "%";
 
-      if (percentage > 100) {
-        width = "100%";
-      }
+    if (percentage > 100) {
+      width = "100%";
+    }
 
-      if (percentage < 0) {
-        width = "0%";
-      }
+    if (percentage < 0) {
+      width = "0%";
+    }
 
-      progressBarRef.current?.style.setProperty("width", width);
-    };
+    progressBarRef.current?.style.setProperty("width", width);
+  }, [blogPostSectionRef]);
 
+  useEffect(() => {
     document.addEventListener("scroll", calculateScrollProgress);
-    window.addEventListener("resize", calculateScrollProgress);
 
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
-      window.removeEventListener("resize", calculateScrollProgress);
     };
-  }, [blogPostSectionRef]);
+  }, [calculateScrollProgress]);
+
+  useWindowDimensions(calculateScrollProgress);
 
   return (
     <Box
