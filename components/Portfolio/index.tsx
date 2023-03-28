@@ -70,7 +70,6 @@ const PortfolioPage = () => {
       <Box sx={{ display: "flex", columnGap: "30px" }}>
         <Box
           sx={{
-            flex: "1 0 auto",
             maxWidth: "863px",
             fontStyle: "normal",
             fontWeight: 400,
@@ -129,6 +128,7 @@ const PortfolioPage = () => {
             top: "50px",
             height: "100%",
             mt: -12,
+            boxShadow: "0px 4px 41px rgba(0, 0, 0, 0.06)",
             "& > div": {
               width: "277px",
               height: "73px",
@@ -145,7 +145,6 @@ const PortfolioPage = () => {
                 fontWeight: "700",
                 fontSize: "18px",
                 lineHeight: "129.4%",
-                transition: "background-color 0.5s ease",
               },
             },
             "& .active-project": {
