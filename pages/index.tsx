@@ -1,8 +1,8 @@
-import config from "config";
 import { PostDocumentWithoutContent } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useAppSelector } from "redux/typesHooks";
+import { setTinaData } from "redux/slices/tinaData";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -12,6 +12,7 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
+import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
 import {
@@ -27,6 +28,8 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
+  const dispatch = useAppDispatch();
+
   const { data } = useTina({
     query: query,
     variables: variables,
@@ -57,25 +60,31 @@ const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
     return selectedTags.some((tag) => post.tags.includes(tag));
   });
 
-  const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
+  const pagesCount = Math.ceil(
+    filteredPosts.length / data.mainPage.posts_per_page
+  );
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
   const postsToRender = filteredPosts.slice(
-    currentPage * config.posts_per_page,
-    (currentPage + 1) * config.posts_per_page
+    currentPage * data.mainPage.posts_per_page,
+    (currentPage + 1) * data.mainPage.posts_per_page
   );
+
+  useIsomorphicLayoutEffect(() => {
+    dispatch(setTinaData(data));
+  }, []);
 
   return (
     <>
       <Head>
-        <title>{config.site_title}</title>
-        <meta property="og:title" content={config.site_title} />
+        <title>{data.mainPage.site_title}</title>
+        <meta property="og:title" content={data.mainPage.site_title} />
         <meta
           property="og:description"
           content={data.mainPage.site_description}
         />
-        <meta property="og:url" content={config.host_url} />
+        <meta property="og:url" content={data.mainPage.host_url} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:site_name" content={data.mainPage.site_title} />
         <meta name="description" content={data.mainPage.site_description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -102,7 +111,7 @@ const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
   const pageResponse = await client.queries.mainPage({
-    relativePath: "mainPage.json",
+    relativePath: "mainConfig.json",
   });
 
   return {

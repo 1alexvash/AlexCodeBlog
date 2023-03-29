@@ -1,5 +1,5 @@
-import config from "config";
 import Head from "next/head";
+import { useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -27,6 +27,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
+  const config = useAppSelector((state) => state.tinaData.mainPage);
+
   return (
     <>
       <Head>
@@ -36,7 +38,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={config.defaultImage} />
+        <meta property="og:image" content={config.default_image} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />
@@ -64,7 +66,7 @@ export async function getStaticProps({ params }: Params) {
   const postResponse = await client.queries.post({ relativePath });
 
   const latestPosts = await client.queries.postConnection({
-    last: config.latest_posts_per_page,
+    last: 15,
   });
 
   return {

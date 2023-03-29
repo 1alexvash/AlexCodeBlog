@@ -62,21 +62,31 @@ export default defineConfig({
             label: "Social links",
             type: "object",
             list: true,
+            required: true,
             fields: [
               {
                 name: "link",
                 label: "Link",
                 type: "string",
+                required: true,
               },
               {
                 name: "image",
                 label: "Image",
                 type: "string",
+                required: true,
               },
               {
                 name: "width",
                 label: "Width",
-                type: "string",
+                type: "number",
+                required: true,
+              },
+              {
+                name: "height",
+                label: "Height",
+                type: "number",
+                required: true,
               },
               {
                 name: "class",
@@ -101,6 +111,12 @@ export default defineConfig({
             name: "latest_posts_per_page",
             label: "Latest posts per page",
             type: "number",
+            required: true,
+          },
+          {
+            name: "default_image",
+            label: "Default image",
+            type: "string",
             required: true,
           },
         ],

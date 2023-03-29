@@ -1,4 +1,3 @@
-import config from "config";
 import {
   isPostADraft,
   isPostInTheFuture,
@@ -30,12 +29,12 @@ const PostContent = ({ post }: Props) => {
     <article className="blogpost-content">
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={config.site_description} />
+        <meta name="description" content={data.mainPage.site_description} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={config.host_url} />
+        <meta property="og:url" content={data.mainPage.host_url} />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:site_name" content={data.mainPage.site_title} />
         <meta property="og:image" content={post.featuredImage} />
       </Head>
 
