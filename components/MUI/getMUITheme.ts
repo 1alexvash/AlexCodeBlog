@@ -1,29 +1,16 @@
 import { createTheme, Theme, ThemeOptions } from "@mui/material/styles";
 
-declare module "@mui/material/styles/createPalette" {
-  interface ExtraPalette {}
-
-  interface Palette extends ExtraPalette {}
-  interface PaletteOptions extends ExtraPalette {}
-}
-
-export type ThemeMode = Theme["palette"]["mode"];
-
-// TODO: I'm not sure whether it should be 4 or 5
+import { mainColors } from "./colors";
 
 const lightThemeConfig = createTheme({
-  palette: {
-    mode: "light",
-    // TODO: We need to add colors from Figma
-  },
+  palette: { mode: "light", main: mainColors },
 });
 
 const darkThemeConfig = createTheme({
-  palette: {
-    mode: "dark",
-    // TODO: We need to add colors from Figma, and here as well
-  },
+  palette: { mode: "dark", main: mainColors },
 });
+
+export type ThemeMode = Theme["palette"]["mode"];
 
 const getMUITheme = (themeMode: ThemeMode) => {
   const themeConfig =
