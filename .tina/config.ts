@@ -14,7 +14,7 @@ export default defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: "",
+      mediaRoot: "/post-images",
       publicFolder: "public",
     },
   },
@@ -71,13 +71,13 @@ export default defineConfig({
             },
           },
         ],
+        defaultItem: {
+          title: "",
+          date: new Date().toISOString(),
+          draft: false,
+          tags: ["First Tag"],
+        },
         ui: {
-          defaultItem: {
-            title: "",
-            date: new Date().toISOString(),
-            draft: false,
-            tags: ["First Tag"],
-          },
           filename: {
             readonly: true,
             slugify: (values) => {

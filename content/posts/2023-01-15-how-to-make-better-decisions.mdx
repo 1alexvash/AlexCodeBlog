@@ -11,7 +11,7 @@ Why wouldn't you want to make better decisions? I mean your success in life lite
 
 If you are anything like me, there's one particular type of decisions which tends to get you stuck in your head. It's when you have both equally compelling options to chose from, and you don't know which.
 
-For <u>that particular type of situation</u> I have developed a system, and a simple heuristic rule you can apply.
+For that particular type of situation I have developed a system, and a simple heuristic rule you can apply.
 
 But, let's start off from an example.
 

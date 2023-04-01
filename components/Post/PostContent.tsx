@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import config from "config";
 import {
   isPostADraft,
@@ -8,17 +9,36 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
   post: any | PostDocument;
 }
 
+interface CodeTinaComponentProps {
+  lang: string;
+  value: string;
+}
+
+const codeBlockASTNodeName = "code_block";
+
+const components = {
+  [codeBlockASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return <Codeblock language={props.lang || ""} codeLines={props.value} />;
+  },
+} as Components<{
+  [codeBlockASTNodeName]: CodeTinaComponentProps;
+}>;
+
 const PostContent = ({ post }: Props) => {
-  console.log("post:", post);
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
 
@@ -69,10 +89,10 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
-      {/* <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} /> */}
-
       {/* <Reactions /> This future might be added later */}
-      <TinaMarkdown content={post.body} />
+      <Box component="div" ref={document}>
+        <TinaMarkdown content={post.body} components={components} />
+      </Box>
     </article>
   );
 };
