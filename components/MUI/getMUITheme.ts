@@ -9,7 +9,6 @@ declare module "@mui/material/styles/createPalette" {
 
 export type ThemeMode = Theme["palette"]["mode"];
 
-const spacing = 4;
 // TODO: I'm not sure whether it should be 4 or 5
 
 const lightThemeConfig = createTheme({
@@ -17,7 +16,6 @@ const lightThemeConfig = createTheme({
     mode: "light",
     // TODO: We need to add colors from Figma
   },
-  spacing,
 });
 
 const darkThemeConfig = createTheme({
@@ -25,7 +23,6 @@ const darkThemeConfig = createTheme({
     mode: "dark",
     // TODO: We need to add colors from Figma, and here as well
   },
-  spacing,
 });
 
 const getMUITheme = (themeMode: ThemeMode) => {
