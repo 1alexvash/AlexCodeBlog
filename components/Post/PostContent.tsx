@@ -8,6 +8,7 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
+import { useAppSelector } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
@@ -40,6 +41,7 @@ const components = {
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
+  const config = useAppSelector((state) => state.tinaData.mainPage);
 
   useEffect(() => {
     return renderCopyButtons(document);
@@ -49,12 +51,12 @@ const PostContent = ({ post }: Props) => {
     <article className="blogpost-content">
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={data.mainPage.site_description} />
+        <meta name="description" content={config.site_description} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={data.mainPage.host_url} />
+        <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content={data.mainPage.site_title} />
+        <meta property="og:site_name" content={config.site_title} />
         <meta property="og:image" content={post.featuredImage} />
       </Head>
 

@@ -2,9 +2,33 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { MainPageQuery } from "./../../.tina/__generated__/types";
 
+const initialState: MainPageQuery = {
+  mainPage: {
+    site_title: "",
+    id: "",
+    site_description: "",
+    site_keywords: [],
+    author_name: "",
+    author_position: "",
+    social_links: [],
+    host_url: "",
+    default_image: "",
+    posts_per_page: 0,
+    latest_posts_per_page: 0,
+    _sys: {
+      filename: "",
+      basename: "",
+      breadcrumbs: [],
+      path: "",
+      relativePath: "",
+      extension: "",
+    },
+  },
+};
+
 export const tinaDataSlice = createSlice({
   name: "tinaData",
-  initialState: {} as MainPageQuery,
+  initialState,
   reducers: {
     setTinaData: (state, action) => {
       return (state = action.payload);

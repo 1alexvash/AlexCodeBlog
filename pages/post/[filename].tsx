@@ -66,7 +66,7 @@ export async function getStaticProps({ params }: Params) {
   const postResponse = await client.queries.post({ relativePath });
 
   const latestPosts = await client.queries.postConnection({
-    last: 15,
+    last: 15, //TODO: search about this one
   });
 
   return {
