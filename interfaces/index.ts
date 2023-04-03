@@ -14,7 +14,7 @@ export type PostDocument = Readonly<{
   id: string;
   title: string;
   date: Date | string;
-  featuredImage?: string; // TODO: think of something more clever, heroImage might do
+  heroImage?: string | undefined;
   draft: boolean;
   tags: string[];
   _sys: SystemInfo;
