@@ -76,7 +76,7 @@ const renderCopyButtons = (
   document: RefObject<HTMLDivElement>
 ): (() => void) => {
   const codeSnippets =
-    document.current?.querySelectorAll("div.remark-highlight") ?? [];
+    document.current?.querySelectorAll("div.syntax-highlighting") ?? [];
 
   codeSnippets.forEach((codeSnippet) => {
     if (

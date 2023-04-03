@@ -59,19 +59,19 @@ const DesktopSearch = ({
             <div className="desktop-search-results">
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
-                  <a href={`/post/${post.slug}`} className="image">
+                  <a href={`/post/${post._sys.filename}`} className="image">
                     <img
                       src={post.featuredImage ?? "/post-images/placeholder.png"}
                       alt="blog post image"
                     />
                   </a>
                   <div className="inner">
-                    <a href={`/post/${post.slug}`} className="name">
+                    <a href={`/post/${post._sys.filename}`} className="name">
                       {post.title}
                     </a>
                     <div className="tags">
                       {post.tags.map((tag) => (
-                        (<Link
+                        <Link
                           href="/"
                           key={tag}
                           onClick={() => {
@@ -81,10 +81,10 @@ const DesktopSearch = ({
                             }));
 
                             dispatch(setTags([tag]));
-                          }}>
+                          }}
+                        >
                           #{tag}
-
-                        </Link>)
+                        </Link>
                       ))}
                     </div>
                   </div>
