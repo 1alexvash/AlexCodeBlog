@@ -72,11 +72,9 @@ const createCopyButton = (): HTMLButtonElement => {
   return button;
 };
 
-const renderCopyButtons = (
-  document: RefObject<HTMLDivElement>
-): (() => void) => {
+const renderCopyButtons = (document: RefObject<HTMLDivElement>) => {
   const codeSnippets =
-    document.current?.querySelectorAll("div.syntax-highlighting") ?? [];
+    document.current?.querySelectorAll(".syntax-highlighting") ?? [];
 
   codeSnippets.forEach((codeSnippet) => {
     if (
@@ -111,7 +109,7 @@ const renderCopyButtons = (
     });
   });
 
-  return (): void => {
+  return () => {
     codeSnippets.forEach((codeSnippet) => {
       codeSnippet
         .querySelector("button.btn-copy")

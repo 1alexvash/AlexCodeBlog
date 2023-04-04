@@ -57,7 +57,7 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={post.featuredImage} />
+        <meta property="og:image" content={post.heroImage} />
       </Head>
 
       <div className="blogpost-image">
@@ -65,7 +65,7 @@ const PostContent = ({ post }: Props) => {
         {isPostInTheFuture(post) && <FuturePostMark />}
 
         <img
-          src={post.featuredImage ?? "/post-images/draft.webp"}
+          src={post.heroImage ?? "/post-images/draft.webp"}
           alt="blog post image"
           width={790}
           height={394}
