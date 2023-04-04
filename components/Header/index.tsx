@@ -7,6 +7,7 @@ import Logo from "./Logo";
 import DesktopSearch from "./Search/DesktopSearch";
 import MobileSearch from "./Search/MobileSearch";
 import ThemeSwitcher from "./ThemeSwitcher";
+import client from ".tina/__generated__/client";
 
 export type Search = {
   value: string;
