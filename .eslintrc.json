@@ -17,6 +17,7 @@
   ],
   "rules": {
     "quotes": ["error", "double"],
+    "linebreak-style": "off",
     "@typescript-eslint/quotes": "off",
     "react/function-component-definition": [
       2,
