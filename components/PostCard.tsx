@@ -64,7 +64,6 @@ const PostCard = ({ post }: Props) => {
       >
         <div className="content">
           <Link href={`/post/${post.slug}`} className="post-img">
-
             <Image
               src={post.featuredImage ?? "/post-images/draft.webp"}
               alt="blog post image"
@@ -72,7 +71,8 @@ const PostCard = ({ post }: Props) => {
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(378, 378)
               )}`}
-              fill
+              width="378"
+              height="378"
               sizes="100vw"
               style={{
                 filter:
@@ -80,22 +80,22 @@ const PostCard = ({ post }: Props) => {
                     ? "grayscale(50%)"
                     : "none",
 
-                objectFit: "cover"
-              }} />
-
+                objectFit: "cover",
+              }}
+            />
           </Link>
           <div className="tags">
             {post.tags.map((tag) => (
-              (<Link
+              <Link
                 href="/"
                 key={tag}
                 onClick={(event) => {
                   event.preventDefault();
                   dispatch(setTags([tag]));
-                }}>
+                }}
+              >
                 #{tag}
-
-              </Link>)
+              </Link>
             ))}
           </div>
           <Link href={`/post/${post.slug}`} className="link">

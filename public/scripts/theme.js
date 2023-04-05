@@ -2,17 +2,22 @@
 // https://github.com/vercel/next.js/discussions/12533
 
 (() => {
-  const defaultTheme = "light";
+  const defaultTheme = "dark";
 
   const getStorageTheme = () => {
-    return localStorage.getItem("theme");
+    return localStorage.theme;
   };
 
   const getBrowserTheme = () => {
-    return window.matchMedia &&
-      window.matchMedia(`(prefers-color-scheme: dark)`).matches
-      ? "dark"
-      : "light";
+    if (window.matchMedia === undefined) {
+      return undefined;
+    }
+
+    if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+      return "light";
+    } else {
+      return "dark";
+    }
   };
 
   const getInitialTheme = () =>

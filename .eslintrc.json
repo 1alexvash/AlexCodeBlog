@@ -1,8 +1,15 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript","plugin:no-switch-statements/recommended"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "plugins": [
+    "react",
+    "simple-import-sort",
+    "@typescript-eslint",
+    "no-switch-statements",
+    "@typescript-eslint"
+  ],
   "rules": {
     "quotes": ["error", "double"],
     "@typescript-eslint/quotes": "off",
@@ -12,6 +19,12 @@
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
       }
-    ]
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "@next/next/no-img-element": "off",
+    "react/self-closing-comp": ["error", { "component": true, "html": true }],
+    "no-switch-statements/no-switch": "error",
+    "eqeqeq": ["error", "always"]
   }
 }
