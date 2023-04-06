@@ -1,4 +1,4 @@
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
@@ -12,7 +12,7 @@ interface Props {
   search: Search;
   setSearch: Dispatch<SetStateAction<Search>>;
   desktopInputRef: RefObject<HTMLInputElement>;
-  filteredPosts: PostDocumentWithoutContent[];
+  filteredPosts: PostDocumentWithoutBody[];
 }
 
 const DesktopSearch = ({

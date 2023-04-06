@@ -1,5 +1,5 @@
 import config from "config";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
@@ -15,7 +15,7 @@ import Tags from "@/components/Tags";
 import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
-  posts: PostDocumentWithoutContent[];
+  posts: PostDocumentWithoutBody[];
 }> = ({ posts }) => {
   const tags = posts.map((post) => post.tags).flat();
 

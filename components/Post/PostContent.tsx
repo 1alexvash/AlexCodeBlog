@@ -16,7 +16,7 @@ import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
-  post: any | PostDocument;
+  post: PostDocument;
 }
 
 interface CodeTinaComponentProps {
@@ -39,12 +39,12 @@ const components = {
 }>;
 
 const PostContent = ({ post }: Props) => {
-  const description = getFirstParagraph(post.content);
+  const description = getFirstParagraph("");
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return renderCopyButtons(document);
-  }, [post.content]);
+  }, [post.body]);
 
   return (
     <article className="blogpost-content">
@@ -83,7 +83,7 @@ const PostContent = ({ post }: Props) => {
       <h1>{post.title}</h1>
 
       <div className="tags">
-        {post.tags.map((tag: any) => (
+        {post.tags.map((tag) => (
           <a href="" key={tag}>
             #{tag}
           </a>

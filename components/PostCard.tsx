@@ -2,7 +2,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
@@ -10,7 +10,7 @@ import { useAppDispatch } from "redux/typesHooks";
 import { setTags } from "../redux/slices/selectedTags";
 
 interface Props {
-  post: any | PostDocumentWithoutContent; // TODO: interface is broken by TinaCMS
+  post: PostDocumentWithoutBody;
 }
 
 export const DraftPostMark = () => (
@@ -85,7 +85,7 @@ const PostCard = ({ post }: Props) => {
             />
           </Link>
           <div className="tags">
-            {post.tags.map((tag: any) => (
+            {post.tags.map((tag) => (
               <Link
                 href="/"
                 key={tag}
@@ -98,7 +98,7 @@ const PostCard = ({ post }: Props) => {
               </Link>
             ))}
           </div>
-          <Link href={`/post/${post.slug}`} className="link">
+          <Link href={`/post/${post._sys.filename}`} className="link">
             {post.title}
           </Link>
         </div>
