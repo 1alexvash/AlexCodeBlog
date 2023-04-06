@@ -6,9 +6,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const posts = await client.queries.postConnection({});
+  const postsQuery = await client.queries.postConnection({});
+  const posts = postsQuery.data.postConnection.edges
+    ?.map((edge) => edge?.node)
+    .reverse();
 
-  res
-    .status(200)
-    .json(posts.data.postConnection.edges?.map((edge) => edge?.node).reverse());
+  res.status(200).json(posts);
 }
