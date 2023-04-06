@@ -69,12 +69,12 @@ export default defineConfig({
             },
           },
         ],
-        defaultItem: {
+        defaultItem: () => ({
           title: "",
           date: new Date().toISOString(),
           draft: false,
           tags: ["First Tag"],
-        },
+        }),
         ui: {
           filename: {
             readonly: true,
