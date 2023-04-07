@@ -93,7 +93,6 @@ export default defineConfig({
               return `${date}-${slug}`;
             },
           },
-          // This is an DEMO router. You can remove this to fit your site
           router: ({ document }) => `/post/${document._sys.filename}`,
         },
       },
