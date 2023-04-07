@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import config from "config";
 import {
   isPostADraft,
@@ -8,21 +9,42 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
+import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
 interface Props {
   post: PostDocument;
 }
 
+interface CodeTinaComponentProps {
+  lang: string;
+  value: string;
+}
+
+const codeBlockASTNodeName = "code_block";
+
+const components = {
+  [codeBlockASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return <Codeblock language={props.lang || ""} codeLines={props.value} />;
+  },
+} as Components<{
+  [codeBlockASTNodeName]: CodeTinaComponentProps;
+}>;
+
 const PostContent = ({ post }: Props) => {
-  const description = getFirstParagraph(post.content);
+  const description = getFirstParagraph("");
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return renderCopyButtons(document);
-  }, [post.content]);
+  }, [post.body]);
 
   return (
     <article className="blogpost-content">
@@ -34,7 +56,7 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={post.featuredImage} />
+        <meta property="og:image" content={post.heroImage} />
       </Head>
 
       <div className="blogpost-image">
@@ -42,7 +64,7 @@ const PostContent = ({ post }: Props) => {
         {isPostInTheFuture(post) && <FuturePostMark />}
 
         <img
-          src={post.featuredImage ?? "/post-images/draft.webp"}
+          src={post.heroImage ?? "/post-images/draft.webp"}
           alt="blog post image"
           width={790}
           height={394}
@@ -67,9 +89,10 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
-      <div ref={document} dangerouslySetInnerHTML={{ __html: post.content }} />
-
       {/* <Reactions /> This future might be added later */}
+      <Box component="div" ref={document}>
+        <TinaMarkdown content={post.body} components={components} />
+      </Box>
     </article>
   );
 };

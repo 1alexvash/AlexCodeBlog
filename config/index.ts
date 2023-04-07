@@ -30,6 +30,7 @@ const config = {
   defaultImage:
     "https://alex-code.com/post-images/2022-08-05-book-review-so-good-they-cant-ignore-you.webp",
   posts_per_page: 15,
+  latest_posts_per_page: 10,
 };
 
 export default config;

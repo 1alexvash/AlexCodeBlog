@@ -1130,6 +1130,7 @@ blockquote {
   margin-bottom: 27px;
   border-left: 4px solid #fe6c0a;
   padding: 30px 26px;
+  line-height: 169%;
 }
 
 blockquote p:last-child {
@@ -1211,7 +1212,7 @@ blockquote p:last-child {
   }
 }
 
-.remark-highlight {
+.syntax-highlighting {
   overflow: auto;
   max-width: calc(100vw - 30px);
   position: relative;

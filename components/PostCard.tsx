@@ -2,7 +2,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
@@ -10,7 +10,7 @@ import { useAppDispatch } from "redux/typesHooks";
 import { setTags } from "../redux/slices/selectedTags";
 
 interface Props {
-  post: PostDocumentWithoutContent;
+  post: PostDocumentWithoutBody;
 }
 
 export const DraftPostMark = () => (
@@ -63,9 +63,9 @@ const PostCard = ({ post }: Props) => {
         }`}
       >
         <div className="content">
-          <Link href={`/post/${post.slug}`} className="post-img">
+          <Link href={`/post/${post._sys.filename}`} className="post-img">
             <Image
-              src={post.featuredImage ?? "/post-images/draft.webp"}
+              src={post.heroImage ?? "/post-images/draft.webp"}
               alt="blog post image"
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
@@ -98,7 +98,7 @@ const PostCard = ({ post }: Props) => {
               </Link>
             ))}
           </div>
-          <Link href={`/post/${post.slug}`} className="link">
+          <Link href={`/post/${post._sys.filename}`} className="link">
             {post.title}
           </Link>
         </div>

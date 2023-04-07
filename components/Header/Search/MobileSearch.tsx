@@ -1,4 +1,4 @@
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
@@ -12,7 +12,7 @@ interface Props {
   search: Search;
   setSearch: Dispatch<SetStateAction<Search>>;
   mobileInputRef: RefObject<HTMLInputElement>;
-  filteredPosts: PostDocumentWithoutContent[];
+  filteredPosts: PostDocumentWithoutBody[];
   setShowMenu: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -47,30 +47,28 @@ const MobileSearch = ({
               {filteredPosts.map((post, index) => (
                 <div className="mobile-posts-block" key={index}>
                   <div className="inner-flex">
-                    <a href={`/post/${post.slug}`} className="image">
+                    <a href={`/post/${post._sys.filename}`} className="image">
                       <img
-                        src={
-                          post.featuredImage ?? "/post-images/placeholder.png"
-                        }
+                        src={post.heroImage ?? "/post-images/placeholder.png"}
                         alt="blog post image"
                       />
                     </a>
-                    <a href={`/post/${post.slug}`} className="name">
+                    <a href={`/post/${post._sys.filename}`} className="name">
                       {post.title}
                     </a>
                   </div>
                   <div className="tags">
                     {post.tags.map((tag) => (
-                      (<Link
+                      <Link
                         href="/"
                         key={tag}
                         onClick={() => {
                           setShowMenu(false);
                           dispatch(setTags([tag]));
-                        }}>
+                        }}
+                      >
                         #{tag}
-
-                      </Link>)
+                      </Link>
                     ))}
                   </div>
                 </div>
