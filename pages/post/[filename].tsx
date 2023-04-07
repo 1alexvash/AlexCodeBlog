@@ -1,7 +1,6 @@
 import config from "config";
-import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
-import queryToDocument from "helpers/queryToDocument";
-import { PostFromQuery } from "interfaces";
+import postToDocument from "helpers/postToDocument";
+import { PostDocument, PostFromQuery } from "interfaces";
 import Head from "next/head";
 import { useTina } from "tinacms/dist/react";
 
@@ -30,6 +29,18 @@ const Post = ({ latestPosts, ...props }: Props) => {
     variables: props.variables,
     data: props.data,
   });
+
+  const queryToDocument = (data: PostQuery): PostDocument => {
+    const { post } = data;
+
+    return postToDocument(post);
+  };
+
+  const queriesToArrayOfDocuments = (
+    posts: PostFromQuery[]
+  ): PostDocument[] => {
+    return posts.map((post) => postToDocument(post));
+  };
 
   return (
     <>
