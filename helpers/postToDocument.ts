@@ -3,15 +3,15 @@ import { PostDocument, PostFromQuery } from "interfaces";
 import filterNullElements from "./filterNullElements";
 
 const postToDocument = (post: PostFromQuery): PostDocument => {
-  const { date, draft, title, body, featuredImage, tags, _sys, id } = post;
+  const { date, draft, title, body, heroImage, tags, _sys, id } = post;
 
-  if (!featuredImage || !tags) {
+  if (!heroImage || !tags) {
     return {
       date: "",
       draft: false,
       title: "",
       body: [],
-      featuredImage: "",
+      heroImage: "",
       tags: [""],
       _sys,
       id: "",
@@ -25,7 +25,7 @@ const postToDocument = (post: PostFromQuery): PostDocument => {
     draft,
     title,
     body,
-    featuredImage,
+    heroImage,
     tags: filterNullTags,
     _sys,
     id,
