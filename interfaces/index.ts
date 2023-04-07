@@ -28,7 +28,7 @@ export type PostFromQuery = Readonly<{
   id: string;
   title: string;
   date: string;
-  featuredImage?: string | null;
+  heroImage?: string | null;
   draft: boolean;
   body?: any | null;
   tags?: Array<string | null> | null;
