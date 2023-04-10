@@ -9,7 +9,7 @@ import { useAppDispatch } from "redux/typesHooks";
 
 import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
-  latestPosts: PostDocumentWithoutBody[];
+  latestPosts: readonly PostDocumentWithoutBody[];
 }
 
 const LatestPosts = ({ latestPosts }: Props) => {

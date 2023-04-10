@@ -29,7 +29,9 @@ const queryToDocument = (data: PostQuery): PostDocument => {
   return postToDocument(post);
 };
 
-const queriesToArrayOfDocuments = (posts: PostFromQuery[]): PostDocument[] => {
+const queriesToArrayOfDocuments = (
+  posts: PostFromQuery[]
+): readonly PostDocument[] => {
   return posts.map((post) => postToDocument(post));
 };
 
