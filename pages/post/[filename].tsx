@@ -23,24 +23,22 @@ interface Props {
   latestPosts: PostFromQuery[];
 }
 
+const queryToDocument = (data: PostQuery): PostDocument => {
+  const { post } = data;
+
+  return postToDocument(post);
+};
+
+const queriesToArrayOfDocuments = (posts: PostFromQuery[]): PostDocument[] => {
+  return posts.map((post) => postToDocument(post));
+};
+
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
   });
-
-  const queryToDocument = (data: PostQuery): PostDocument => {
-    const { post } = data;
-
-    return postToDocument(post);
-  };
-
-  const queriesToArrayOfDocuments = (
-    posts: PostFromQuery[]
-  ): PostDocument[] => {
-    return posts.map((post) => postToDocument(post));
-  };
 
   return (
     <>
