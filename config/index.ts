@@ -27,8 +27,7 @@ const config = {
     },
   ],
   host_url: "https://alex-code.com/",
-  defaultImage:
-    "https://alex-code.com/post-images/2022-08-05-book-review-so-good-they-cant-ignore-you.webp",
+  defaultImage: "/images/social-logo.png",
   posts_per_page: 15,
   latest_posts_per_page: 10,
 };
