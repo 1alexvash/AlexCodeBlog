@@ -2,15 +2,20 @@ import React from "react";
 
 interface Props {
   children: React.ReactNode;
-  ref: React.RefObject<HTMLDivElement>;
 }
 
-const BlogPostSectionWrapper = ({ children, ref }: Props) => (
-  <section className="blogpost-section" ref={ref}>
-    <div className="container">
-      <div className="blogpost-outer">{children}</div>
-    </div>
-  </section>
+const BlogPostSectionWrapper = React.forwardRef<HTMLDivElement, Props>(
+  function BlogPostSectionWrapper({ children }, ref) {
+    return (
+      <section className="blogpost-section" ref={ref}>
+        <div className="container">
+          <div className="blogpost-outer">{children}</div>
+        </div>
+      </section>
+    );
+  }
 );
+
+BlogPostSectionWrapper.displayName = "BlogPostSectionWrapper";
 
 export default BlogPostSectionWrapper;

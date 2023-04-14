@@ -12,6 +12,4 @@ export default function useWindowDimensions(callback: Function) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [callback, width]);
-
-  return { width };
 }
