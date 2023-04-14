@@ -50,7 +50,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <Header />
       <BreadCrumbs title={data.post.title} />
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
-      <BlogPostSectionWrapper>
+      <BlogPostSectionWrapper ref={blogPostSectionRef}>
         <PostContent post={queryToDocument(data)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
