@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const BlogPostSectionWrapper = React.forwardRef<HTMLDivElement, Props>(
+const BlogPostSectionWrapper = forwardRef<HTMLDivElement, Props>(
   function BlogPostSectionWrapper({ children }, ref) {
     return (
       <section className="blogpost-section" ref={ref}>
