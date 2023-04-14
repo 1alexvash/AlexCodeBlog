@@ -3,6 +3,7 @@ import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
 import queryToDocument from "helpers/queryToDocument";
 import { PostFromQuery } from "interfaces";
 import Head from "next/head";
+import { useRef } from "react";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -31,6 +32,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
+  const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
   return (
     <>
       <Head>
@@ -46,7 +49,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <StandWithUkraine />
       <Header />
       <BreadCrumbs title={data.post.title} />
-      <PageProgress />
+      <PageProgress blogPostSectionRef={blogPostSectionRef} />
       <BlogPostSectionWrapper>
         <PostContent post={queryToDocument(data)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
