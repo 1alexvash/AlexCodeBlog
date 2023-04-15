@@ -90,6 +90,7 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
+      <AudioPlayer />
       {/* <Reactions /> This future might be added later */}
       <Box component="div" ref={document}>
         <TinaMarkdown content={post.body} components={components} />
