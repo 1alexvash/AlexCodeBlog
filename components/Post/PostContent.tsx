@@ -12,7 +12,6 @@ import { useEffect, useRef } from "react";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
-import AudioPlayer from "../AudioPlayer";
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
@@ -90,7 +89,6 @@ const PostContent = ({ post }: Props) => {
           </a>
         ))}
       </div>
-      <AudioPlayer />
       {/* <Reactions /> This future might be added later */}
       <Box component="div" ref={document}>
         <TinaMarkdown content={post.body} components={components} />
