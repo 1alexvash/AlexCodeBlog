@@ -53,6 +53,8 @@ hr {
   height: 1px;
   border: none;
   background: #e8e8e8;
+  margin-top: 0;
+  margin-bottom: 27px;
 }
 
 .page {
@@ -1128,6 +1130,7 @@ blockquote {
   margin-bottom: 27px;
   border-left: 4px solid #fe6c0a;
   padding: 30px 26px;
+  line-height: 169%;
 }
 
 blockquote p:last-child {
@@ -1157,20 +1160,6 @@ blockquote p:last-child {
   height: 262px;
   line-height: 1.2;
   padding: 18px 19px;
-}
-
-.page-progress {
-  position: relative;
-  z-index: 29;
-  background: #f2f5f7;
-  height: 10px;
-}
-
-.page-progress .progress-bar {
-  display: block;
-  background: #3a3a3a;
-  border-radius: 1px;
-  height: 100%;
 }
 
 .content-404 {
@@ -1223,7 +1212,7 @@ blockquote p:last-child {
   }
 }
 
-.remark-highlight {
+.syntax-highlighting {
   overflow: auto;
   max-width: calc(100vw - 30px);
   position: relative;

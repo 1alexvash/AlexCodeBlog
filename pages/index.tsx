@@ -1,6 +1,5 @@
 import config from "config";
-import { getAllPostDocuments } from "helpers/markdownDocumentsReader";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
@@ -13,7 +12,11 @@ import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
-const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
+import client from ".tina/__generated__/client";
+
+const Home: NextPage<{
+  posts: PostDocumentWithoutBody[];
+}> = ({ posts }) => {
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -75,11 +78,13 @@ const Home: NextPage<{ posts: PostDocumentWithoutContent[] }> = ({ posts }) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = getAllPostDocuments();
+  const posts = await client.queries.postConnection({});
 
   return {
     props: {
-      posts,
+      posts: posts.data.postConnection.edges
+        ?.map((edge) => edge?.node)
+        .reverse(),
     },
   };
 };

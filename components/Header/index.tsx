@@ -1,5 +1,5 @@
 import config from "config";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -12,7 +12,7 @@ export type Search = {
   value: string;
   showSearch: boolean;
   isLoaded: boolean;
-  posts: PostDocumentWithoutContent[];
+  posts: PostDocumentWithoutBody[];
 };
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
     value: "",
     showSearch: false,
     isLoaded: false,
-    posts: [] as PostDocumentWithoutContent[],
+    posts: [] as PostDocumentWithoutBody[],
   });
 
   const [showMenu, setShowMenu] = useState(false);
