@@ -20,6 +20,8 @@ interface Props {
   latestPosts: any[]; // The interface is broken by graphql
 }
 
+const latest_posts_per_page = 10;
+
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
@@ -66,7 +68,7 @@ export async function getStaticProps({ params }: Params) {
   const postResponse = await client.queries.post({ relativePath });
 
   const latestPosts = await client.queries.postConnection({
-    last: 15, // TODO: search about this one
+    last: latest_posts_per_page, // TODO: search about this one
   });
 
   return {

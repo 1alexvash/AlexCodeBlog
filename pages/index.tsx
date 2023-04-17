@@ -111,7 +111,7 @@ const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
   const pageResponse = await client.queries.mainPage({
-    relativePath: "mainConfig.json",
+    relativePath: "main-config.json",
   });
 
   return {
