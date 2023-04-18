@@ -1,4 +1,8 @@
 import config from "config";
+import {
+  isPostADraft,
+  isPostInTheFuture,
+} from "helpers/checkOfDraftOrFuturePost";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -13,6 +17,8 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
 import client from ".tina/__generated__/client";
+
+const isDev = process.env.NODE_ENV === "development";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
@@ -33,13 +39,25 @@ const Home: NextPage<{
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
-  const filteredPosts = posts.filter((post) => {
-    if (selectedTags.length === 0) {
-      return true;
-    }
+  const filteredPosts = posts
+    .filter((post) => {
+      if (isDev) {
+        return true;
+      }
 
-    return selectedTags.some((tag) => post.tags.includes(tag));
-  });
+      if (isPostADraft(post) || isPostInTheFuture(post)) {
+        return false;
+      }
+
+      return true;
+    })
+    .filter((post) => {
+      if (selectedTags.length === 0) {
+        return true;
+      }
+
+      return selectedTags.some((tag) => post.tags.includes(tag));
+    });
 
   const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
