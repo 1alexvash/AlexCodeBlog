@@ -85,6 +85,7 @@ const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
         <meta property="og:url" content={data.mainPage.host_url} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={data.mainPage.site_title} />
+        <meta property="og:image" content={data.mainPage.defaultImage} />
         <meta name="description" content={data.mainPage.site_description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
