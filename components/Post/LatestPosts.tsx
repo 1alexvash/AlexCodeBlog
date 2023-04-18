@@ -2,14 +2,14 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { PostDocumentWithoutBody } from "interfaces";
+import { PostDocumentWithoutContent } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
-  latestPosts: PostDocumentWithoutBody[];
+  latestPosts: any | PostDocumentWithoutContent[]; // TODO: interface is broken by graphql
 }
 
 const LatestPosts = ({ latestPosts }: Props) => {

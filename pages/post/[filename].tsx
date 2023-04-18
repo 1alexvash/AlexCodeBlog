@@ -1,6 +1,3 @@
-import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
-import queryToDocument from "helpers/queryToDocument";
-import { PostFromQuery } from "interfaces";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
@@ -15,16 +12,15 @@ import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { client } from "../../.tina/__generated__/client";
-import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
-
-const latest_posts_per_page = 10;
 
 interface Props {
-  data: PostQuery;
-  query: string;
-  variables: PostQueryVariables;
-  latestPosts: PostFromQuery[];
+  data: any;
+  query: any;
+  variables: any;
+  latestPosts: any[]; // The interface is broken by graphql
 }
+
+const latest_posts_per_page = 10;
 
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
@@ -52,8 +48,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <BreadCrumbs title={data.post.title} />
       <PageProgress />
       <BlogPostSectionWrapper>
-        <PostContent post={queryToDocument(data)} />
-        <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
+        <PostContent post={data.post} />
+        <LatestPosts latestPosts={latestPosts} />
       </BlogPostSectionWrapper>
       <Footer />
     </>

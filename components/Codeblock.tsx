@@ -23,7 +23,7 @@ const Codeblock = ({ codeLines, language }: CodeblockProps) => {
   const preTag = useMemo(() => createPreTagByLanguage(language), [language]);
 
   return (
-    <Box className="syntax-highlighting">
+    <Box component="div" className="syntax-highlighting">
       <SyntaxHighlighter
         language={language}
         codeTagProps={{ className: `language-${language}` }}

@@ -1,4 +1,4 @@
-import { PostDocumentWithoutBody } from "interfaces";
+import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
@@ -12,7 +12,7 @@ interface Props {
   search: Search;
   setSearch: Dispatch<SetStateAction<Search>>;
   mobileInputRef: RefObject<HTMLInputElement>;
-  filteredPosts: PostDocumentWithoutBody[];
+  filteredPosts: PostDocumentWithoutContent[];
   setShowMenu: Dispatch<SetStateAction<boolean>>;
 }
 

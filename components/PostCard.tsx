@@ -2,15 +2,15 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
-import { PostDocumentWithoutBody } from "interfaces";
-// import Image from "next/image";
+import { PostDocumentWithoutContent } from "interfaces";
+import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
 
 interface Props {
-  post: PostDocumentWithoutBody;
+  post: any | PostDocumentWithoutContent; // TODO: interface is broken by TinaCMS
 }
 
 export const DraftPostMark = () => (
@@ -30,22 +30,22 @@ export const FuturePostMark = () => (
   </div>
 );
 
-// const shimmer = (width: number, height: number) => `
-//   <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-//     <defs>
-//       <linearGradient id="g">
-//         <stop stop-color="#444" offset="20%" />
-//         <stop stop-color="#333" offset="50%" />
-//         <stop stop-color="#444" offset="70%" />
-//       </linearGradient>
-//     </defs>
-//     <rect width="${width}" height="${height}" fill="#444" />
-//     <rect id="r" width="${width}" height="${height}" fill="url(#g)" />
-//     <animate xlink:href="#r" attributeName="x" from="-${width}" to="${width}" dur="3s" repeatCount="indefinite"  />
-//   </svg>
-// `;
+const shimmer = (width: number, height: number) => `
+  <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+      <linearGradient id="g">
+        <stop stop-color="#444" offset="20%" />
+        <stop stop-color="#333" offset="50%" />
+        <stop stop-color="#444" offset="70%" />
+      </linearGradient>
+    </defs>
+    <rect width="${width}" height="${height}" fill="#444" />
+    <rect id="r" width="${width}" height="${height}" fill="url(#g)" />
+    <animate xlink:href="#r" attributeName="x" from="-${width}" to="${width}" dur="3s" repeatCount="indefinite"  />
+  </svg>
+`;
 
-// const toBase64 = (str: string) => Buffer.from(str).toString("base64");
+const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
 const PostCard = ({ post }: Props) => {
   const dispatch = useAppDispatch();
@@ -64,13 +64,13 @@ const PostCard = ({ post }: Props) => {
       >
         <div className="content">
           <Link href={`/post/${post._sys.filename}`} className="post-img">
-            <img
+            <Image
               src={post.heroImage ?? "/post-images/draft.webp"}
               alt="blog post image"
               placeholder="blur"
-              // blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              //   shimmer(378, 378)
-              // )}`}
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                shimmer(378, 378)
+              )}`}
               width="378"
               height="378"
               sizes="100vw"
@@ -98,7 +98,7 @@ const PostCard = ({ post }: Props) => {
               </Link>
             ))}
           </div>
-          <Link href={`/post/${post._sys.filename}`} className="link">
+          <Link href={`/post/${post.slug}`} className="link">
             {post.title}
           </Link>
         </div>

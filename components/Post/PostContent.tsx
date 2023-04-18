@@ -39,13 +39,13 @@ const components = {
 }>;
 
 const PostContent = ({ post }: Props) => {
-  const description = getFirstParagraph("");
+  const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
   const config = useAppSelector((state) => state.tinaData.mainPage);
 
   useEffect(() => {
     return renderCopyButtons(document);
-  }, [post.body]);
+  }, [post.content]);
 
   return (
     <article className="blogpost-content">

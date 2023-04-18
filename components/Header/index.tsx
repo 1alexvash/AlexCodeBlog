@@ -1,4 +1,4 @@
-import { PostDocumentWithoutBody } from "interfaces";
+import { PostDocumentWithoutContent } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/typesHooks";
@@ -12,7 +12,7 @@ export type Search = {
   value: string;
   showSearch: boolean;
   isLoaded: boolean;
-  posts: PostDocumentWithoutBody[];
+  posts: PostDocumentWithoutContent[];
 };
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
     value: "",
     showSearch: false,
     isLoaded: false,
-    posts: [] as PostDocumentWithoutBody[],
+    posts: [] as PostDocumentWithoutContent[],
   });
 
   const config = useAppSelector((state) => state.tinaData.mainPage);
