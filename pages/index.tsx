@@ -1,4 +1,4 @@
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { setTinaData } from "redux/slices/tinaData";
@@ -21,7 +21,7 @@ import {
 } from ".tina/__generated__/types";
 
 interface HomeProps {
-  posts: PostDocumentWithoutContent[];
+  posts: PostDocumentWithoutBody[];
   tinaData: MainPageQuery;
   query: string;
   variables: MainPageQueryVariables;
@@ -110,6 +110,7 @@ const Home: NextPage<HomeProps> = ({ posts, tinaData, query, variables }) => {
 
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
+
   const pageResponse = await client.queries.mainPage({
     relativePath: "main-config.json",
   });
