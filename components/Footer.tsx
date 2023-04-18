@@ -3,7 +3,7 @@ import { useAppSelector } from "redux/typesHooks";
 const currentYear = new Date().getFullYear();
 
 const Footer = () => {
-  const config = useAppSelector((state) => state.tinaData.mainPage);
+  const config = useAppSelector((state) => state.tinaData.main_config);
 
   return (
     <footer>

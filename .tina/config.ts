@@ -21,8 +21,8 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "mainPage",
-        label: "Main Page",
+        name: "main_config",
+        label: "Main config",
         path: "content",
         format: "json",
         fields: [

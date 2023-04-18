@@ -29,7 +29,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
-  const config = useAppSelector((state) => state.tinaData.mainPage);
+  const config = useAppSelector((state) => state.tinaData.main_config);
 
   return (
     <>

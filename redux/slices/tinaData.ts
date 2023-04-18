@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { MainPageQuery } from "./../../.tina/__generated__/types";
+import { Main_ConfigQuery } from "./../../.tina/__generated__/types";
 
-const initialState: MainPageQuery = {
-  mainPage: {
+const initialState: Main_ConfigQuery = {
+  main_config: {
     site_title: "",
     id: "",
     site_description: "",

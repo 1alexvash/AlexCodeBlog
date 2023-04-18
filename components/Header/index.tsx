@@ -23,7 +23,7 @@ const Header = () => {
     posts: [] as PostDocumentWithoutContent[],
   });
 
-  const config = useAppSelector((state) => state.tinaData.mainPage);
+  const config = useAppSelector((state) => state.tinaData.main_config);
 
   const [showMenu, setShowMenu] = useState(false);
 

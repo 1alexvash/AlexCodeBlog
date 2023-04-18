@@ -41,7 +41,7 @@ const components = {
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.content);
   const document = useRef<HTMLDivElement>(null);
-  const config = useAppSelector((state) => state.tinaData.mainPage);
+  const config = useAppSelector((state) => state.tinaData.main_config);
 
   useEffect(() => {
     return renderCopyButtons(document);
