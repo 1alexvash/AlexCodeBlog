@@ -1,8 +1,8 @@
-import config from "config";
 import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
 import queryToDocument from "helpers/queryToDocument";
 import { PostFromQuery } from "interfaces";
 import Head from "next/head";
+import { useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -16,6 +16,8 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 
 import { client } from "../../.tina/__generated__/client";
 import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
+
+const latest_posts_per_page = 10;
 
 interface Props {
   data: PostQuery;
@@ -31,6 +33,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
+  const config = useAppSelector((state) => state.tinaData.main_config);
+
   return (
     <>
       <Head>
@@ -40,7 +44,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <meta property="og:url" content={config.host_url} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={config.defaultImage} />
+        <meta property="og:image" content={config.default_image} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />
@@ -68,7 +72,7 @@ export async function getStaticProps({ params }: Params) {
   const postResponse = await client.queries.post({ relativePath });
 
   const latestPosts = await client.queries.postConnection({
-    last: config.latest_posts_per_page,
+    last: latest_posts_per_page, // TODO: search about this one
   });
 
   return {

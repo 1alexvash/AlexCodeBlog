@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import config from "config";
 import {
   isPostADraft,
   isPostInTheFuture,
@@ -9,6 +8,7 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
+import { useAppSelector } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
@@ -40,6 +40,7 @@ const components = {
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph("");
+  const config = useAppSelector((state) => state.tinaData.main_config);
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

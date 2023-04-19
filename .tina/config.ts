@@ -20,6 +20,107 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "main_config",
+        label: "Main config",
+        path: "content",
+        format: "json",
+        fields: [
+          {
+            name: "site_title",
+            label: "Site title",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "site_description",
+            label: "Site description",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "site_keywords",
+            label: "Site keywords",
+            list: true,
+            type: "string",
+            required: true,
+          },
+          {
+            name: "author_name",
+            label: "Author name",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "author_position",
+            label: "Author position",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "social_links",
+            label: "Social links",
+            type: "object",
+            list: true,
+            required: true,
+            fields: [
+              {
+                name: "link",
+                label: "Link",
+                type: "string",
+                required: true,
+              },
+              {
+                name: "image",
+                label: "Image",
+                type: "string",
+                required: true,
+              },
+              {
+                name: "width",
+                label: "Width",
+                type: "number",
+                required: true,
+              },
+              {
+                name: "height",
+                label: "Height",
+                type: "number",
+                required: true,
+              },
+              {
+                name: "class",
+                label: "Class",
+                type: "string",
+              },
+            ],
+          },
+          {
+            name: "host_url",
+            label: "Host url",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "posts_per_page",
+            label: "Posts per page",
+            type: "number",
+            required: true,
+          },
+          {
+            name: "latest_posts_per_page",
+            label: "Latest posts per page",
+            type: "number",
+            required: true,
+          },
+          {
+            name: "default_image",
+            label: "Default image",
+            type: "string",
+            required: true,
+          },
+        ],
+      },
+      {
         name: "post",
         label: "Posts",
         path: "content/posts",

@@ -1,7 +1,7 @@
-import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useAppSelector } from "redux/typesHooks";
 
 import Logo from "./Logo";
 import DesktopSearch from "./Search/DesktopSearch";
@@ -22,6 +22,8 @@ const Header = () => {
     isLoaded: false,
     posts: [] as PostDocumentWithoutBody[],
   });
+
+  const config = useAppSelector((state) => state.tinaData.main_config);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -139,7 +141,7 @@ const Header = () => {
       <ul className="header-socials">
         {config.social_links.map((link) => (
           <li key={link.link}>
-            <a href={link.link} className={link.className ?? ""}>
+            <a href={link.link} className={link.class ?? ""}>
               <img
                 src={link.image}
                 alt="image"
