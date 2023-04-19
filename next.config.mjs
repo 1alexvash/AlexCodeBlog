@@ -13,6 +13,14 @@ const nextConfig = {
       destination: "/admin/index.html",
     },
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
 };
 
 if (isDev) {
