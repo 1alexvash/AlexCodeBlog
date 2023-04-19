@@ -14,12 +14,7 @@ const nextConfig = {
     },
   ],
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
+    domains: ["assets.tina.io"],
   },
 };
 
