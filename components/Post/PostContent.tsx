@@ -39,7 +39,7 @@ const components = {
 }>;
 
 const PostContent = ({ post }: Props) => {
-  const description = getFirstParagraph("");
+  const description = getFirstParagraph(post.body);
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
