@@ -13,6 +13,9 @@ const nextConfig = {
       destination: "/admin/index.html",
     },
   ],
+  images: {
+    domains: ["assets.tina.io"],
+  },
 };
 
 if (isDev) {

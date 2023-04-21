@@ -1,6 +1,8 @@
 import config from "config";
-import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
-import queryToDocument from "helpers/queryToDocument";
+import {
+  queriesToArrayOfDocuments,
+  queryToDocument,
+} from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
 import Head from "next/head";
 import { useTina } from "tinacms/dist/react";
