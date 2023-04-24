@@ -4,6 +4,7 @@
     "airbnb",
     "airbnb-typescript",
     "plugin:no-switch-statements/recommended"
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
@@ -13,7 +14,7 @@
     "simple-import-sort",
     "@typescript-eslint",
     "no-switch-statements",
-    "@typescript-eslint"
+    "prettier"
   ],
   "rules": {
     "quotes": ["error", "double"],

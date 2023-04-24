@@ -16,7 +16,7 @@ declare module "@mui/material/styles/createPalette" {
   interface PaletteOptions extends CustomColorsPalette {}
 }
 
-export const mainColors = {
+const colors = {
   orange: "#FE6C0A",
   white: "#FFFFFF",
   black: "#000000",
@@ -26,3 +26,5 @@ export const mainColors = {
   midnight: "#18191D",
   blue: "#3C93BF",
 } as CustomColorsPalette["main"];
+
+export default colors;
