@@ -3,7 +3,7 @@
     "next/core-web-vitals",
     "airbnb",
     "airbnb-typescript",
-    "plugin:no-switch-statements/recommended"
+    "plugin:no-switch-statements/recommended",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
