@@ -107,12 +107,6 @@ export default defineConfig({
             required: true,
           },
           {
-            name: "latest_posts_per_page",
-            label: "Latest posts per page",
-            type: "number",
-            required: true,
-          },
-          {
             name: "default_image",
             label: "Default image",
             type: "string",
