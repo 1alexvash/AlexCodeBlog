@@ -26,7 +26,9 @@ interface CodeTinaComponentProps {
 
 const codeBlockASTNodeName = "code_block";
 
-const components = {
+const components: Components<{
+  [codeBlockASTNodeName]: CodeTinaComponentProps;
+}> = {
   [codeBlockASTNodeName]: (props) => {
     if (!props) {
       return <></>;
@@ -34,13 +36,13 @@ const components = {
 
     return <Codeblock language={props.lang || ""} codeLines={props.value} />;
   },
-} as Components<{
-  [codeBlockASTNodeName]: CodeTinaComponentProps;
-}>;
+};
 
 const PostContent = ({ post }: Props) => {
-  const description = getFirstParagraph("");
+
+  const description = getFirstParagraph(post.body);
   const config = useAppSelector((state) => state.tinaData.main_config);
+  
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

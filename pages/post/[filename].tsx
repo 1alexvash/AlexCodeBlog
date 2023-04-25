@@ -1,5 +1,7 @@
-import queriesToArrayOfDocuments from "helpers/queriesToArrayOfDocuments";
-import queryToDocument from "helpers/queryToDocument";
+import {
+  queriesToArrayOfDocuments,
+  queryToDocument,
+} from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
