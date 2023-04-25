@@ -14,7 +14,6 @@ const initialState: Main_ConfigQuery = {
     host_url: "",
     default_image: "",
     posts_per_page: 0,
-    latest_posts_per_page: 0,
     _sys: {
       filename: "",
       basename: "",
