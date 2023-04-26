@@ -39,10 +39,9 @@ const components: Components<{
 };
 
 const PostContent = ({ post }: Props) => {
-
   const description = getFirstParagraph(post.body);
   const config = useAppSelector((state) => state.tinaData.main_config);
-  
+
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
