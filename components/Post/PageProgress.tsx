@@ -3,7 +3,7 @@ import useWindowDimensions from "helpers/useWindowDimensions";
 import { useCallback, useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
-const heightOfProgressBar = 10;
+const progressBarHeight = 10;
 
 interface Props {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
@@ -11,6 +11,8 @@ interface Props {
 
 const PageProgress = ({ blogPostSectionRef }: Props) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  const dimensions = useWindowDimensions();
 
   const calculateScrollProgress = useCallback(() => {
     const blogPostSection = blogPostSectionRef.current;
@@ -22,7 +24,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
     const scrollHeight = offsetHeight - window.innerHeight;
     const scrollTop =
       (document.documentElement.scrollTop || document.body.scrollTop) -
-      (offsetTop - heightOfProgressBar);
+      (offsetTop - progressBarHeight);
     const percentage = Math.round((scrollTop / scrollHeight) * 100);
 
     let width = percentage + "%";
@@ -44,9 +46,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
     };
-  }, [calculateScrollProgress]);
-
-  useWindowDimensions(calculateScrollProgress);
+  }, [calculateScrollProgress, dimensions?.width]);
 
   return (
     <Box
@@ -54,7 +54,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
         position: "sticky",
         top: chromeZoomPixelGapBugFix,
         zIndex: 29,
-        height: heightOfProgressBar,
+        height: progressBarHeight,
         backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
       })}
     >
