@@ -78,7 +78,10 @@ const Home: NextPage<{
 };
 
 export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+  const isDev = process.env.NODE_ENV === "development";
+  const postConnectionArgs = isDev ? {} : { filter: { draft: { eq: false } } };
+
+  const posts = await client.queries.postConnection(postConnectionArgs);
 
   return {
     props: {
