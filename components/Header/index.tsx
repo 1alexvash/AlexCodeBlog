@@ -1,8 +1,9 @@
 import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+
 import Logo from "./Logo";
 import DesktopSearch from "./Search/DesktopSearch";
 import MobileSearch from "./Search/MobileSearch";

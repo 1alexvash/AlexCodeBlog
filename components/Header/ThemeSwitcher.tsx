@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { setTheme } from "redux/slices/theme";
 import { useAppDispatch } from "redux/typesHooks";
-import Image from "next/image";
 
 const ThemeSwitcher = () => {
   const dispatch = useAppDispatch();

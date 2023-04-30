@@ -8,13 +8,13 @@ import getFirstParagraph from "helpers/getFirstParagraph";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
-import Image from "next/image";
 
 interface Props {
   post: PostDocument;
