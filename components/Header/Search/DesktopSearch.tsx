@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
-
+import Image from "next/image";
 import { Search } from "..";
 import DesktopSkeletons from "./DesktopSkeletons";
 import NotFound from "./NotFound";
@@ -60,7 +60,7 @@ const DesktopSearch = ({
               {filteredPosts.map((post, index) => (
                 <div className="related-posts-block" key={index}>
                   <a href={`/post/${post._sys.filename}`} className="image">
-                    <img
+                    <Image
                       src={post.heroImage ?? "/post-images/placeholder.png"}
                       alt="blog post image"
                     />
@@ -99,7 +99,7 @@ const DesktopSearch = ({
         )}
       </div>
       <div className="close-search" onClick={closeSearch}>
-        <img src="/images/close-search.svg" alt="search" />
+        <Image src="/images/close-search.svg" alt="search" />
       </div>
     </div>
   );

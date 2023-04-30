@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useAppSelector } from "redux/typesHooks";
@@ -9,7 +10,7 @@ const NotFoundPage = () => {
     <section className="content-404">
       <div className="image">
         {theme === "light" ? (
-          <img
+          <Image
             className="light-404"
             width="683"
             height="346"
@@ -17,7 +18,7 @@ const NotFoundPage = () => {
             alt="404_light"
           />
         ) : (
-          <img
+          <Image
             className="dark-404"
             width="683"
             height="346"

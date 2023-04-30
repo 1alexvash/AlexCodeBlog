@@ -2,7 +2,7 @@ import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-
+import Image from "next/image";
 import Logo from "./Logo";
 import DesktopSearch from "./Search/DesktopSearch";
 import MobileSearch from "./Search/MobileSearch";
@@ -82,7 +82,7 @@ const Header = () => {
     <div className="header-content-mobile">
       <Logo />
       <div className="header-hamburger" onClick={() => setShowMenu(true)}>
-        <img
+        <Image
           src="/images/hamburger.svg"
           alt="hamburger"
           width={34}
@@ -103,7 +103,7 @@ const Header = () => {
         <Logo />
 
         <div className="header-close" onClick={() => setShowMenu(false)}>
-          <img src="/images/close.svg" alt="close" />
+          <Image src="/images/close.svg" alt="close" />
         </div>
       </div>
       <MobileSearch
@@ -122,7 +122,7 @@ const Header = () => {
           </li>
         </ul>
         <div className="header-search-desktop">
-          <img
+          <Image
             src="/images/search.svg"
             alt="search"
             onClick={() => {
@@ -140,7 +140,7 @@ const Header = () => {
         {config.social_links.map((link) => (
           <li key={link.link}>
             <a href={link.link} className={link.className ?? ""}>
-              <img
+              <Image
                 src={link.image}
                 alt="image"
                 width={link.width}

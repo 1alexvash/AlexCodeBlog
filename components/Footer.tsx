@@ -1,5 +1,5 @@
 import config from "config";
-
+import Image from "next/image";
 const currentYear = new Date().getFullYear();
 
 const Footer = () => (
@@ -7,7 +7,7 @@ const Footer = () => (
     <div className="container">
       <div className="footer-content">
         <div className="footer-logo">
-          <img
+          <Image
             src="/images/footer-logo.svg"
             alt="footer-logo"
             width={180}
@@ -18,7 +18,7 @@ const Footer = () => (
           {config.social_links.map((link) => (
             <li key={link.link}>
               <a href={link.link}>
-                <img
+                <Image
                   src={link.image}
                   alt="image-link"
                   width={link.width}

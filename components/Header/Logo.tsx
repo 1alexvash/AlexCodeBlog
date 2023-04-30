@@ -1,18 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import Image from "next/image";
 
 const Logo = () => {
   const logo = (
     <span className="main-logo">
-      <img
+      <Image
         className="light"
         src="/images/main-logo.svg"
         alt="light-theme"
         width={180}
         height={60}
       />
-      <img
+      <Image
         className="dark"
         src="/images/main-logo-dark.svg"
         alt="dark-theme"

@@ -14,6 +14,7 @@ import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 import renderCopyButtons from "../../helpers/renderCopyButtons";
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
+import Image from "next/image";
 
 interface Props {
   post: PostDocument;
@@ -63,7 +64,7 @@ const PostContent = ({ post }: Props) => {
         {isPostADraft(post) && <DraftPostMark />}
         {isPostInTheFuture(post) && <FuturePostMark />}
 
-        <img
+        <Image
           src={post.heroImage ?? "/post-images/draft.webp"}
           alt="blog post image"
           width={790}

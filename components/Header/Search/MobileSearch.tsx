@@ -7,6 +7,7 @@ import { useAppDispatch } from "redux/typesHooks";
 import { Search } from "..";
 import MobileSkeletons from "./MobileSkeletons";
 import NotFound from "./NotFound";
+import Image from "next/image";
 
 interface Props {
   search: Search;
@@ -48,7 +49,7 @@ const MobileSearch = ({
                 <div className="mobile-posts-block" key={index}>
                   <div className="inner-flex">
                     <a href={`/post/${post._sys.filename}`} className="image">
-                      <img
+                      <Image
                         src={post.heroImage ?? "/post-images/placeholder.png"}
                         alt="blog post image"
                       />
@@ -101,7 +102,7 @@ const MobileSearch = ({
               }));
             }}
           >
-            <img src="/images/close-search.svg" alt="search" />
+            <Image src="/images/close-search.svg" alt="search" />
           </div>
         </div>
       )}

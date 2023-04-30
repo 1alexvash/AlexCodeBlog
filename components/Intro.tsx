@@ -1,12 +1,12 @@
 import config from "config";
-
+import Image from "next/image";
 const Intro = () => (
   <section className="intro-section">
     <div className="container">
       <div className="intro-content">
         <div className="intro-avatar">
           <div className="image">
-            <img
+            <Image
               src="/images/author-avatar.jpg"
               alt="author-avatar"
               width={90}
