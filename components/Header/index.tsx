@@ -145,8 +145,8 @@ const Header = () => {
               <img
                 src={link.image}
                 alt="image"
-                // width={link.width}
-                // height={link.height}
+                width={link.width}
+                height={link.height}
               />
             </a>
           </li>
