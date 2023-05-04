@@ -104,7 +104,7 @@ const Header = () => {
         <Logo />
 
         <div className="header-close" onClick={() => setShowMenu(false)}>
-          <Image src="/images/close.svg" alt="close" />
+          <Image src="/images/close.svg" alt="close" width="28" height="26" />
         </div>
       </div>
       <MobileSearch

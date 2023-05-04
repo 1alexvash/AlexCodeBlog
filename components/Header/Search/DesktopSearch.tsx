@@ -64,6 +64,8 @@ const DesktopSearch = ({
                     <Image
                       src={post.heroImage ?? "/post-images/placeholder.png"}
                       alt="blog post image"
+                      width="102"
+                      height="102"
                     />
                   </a>
                   <div className="inner">
@@ -100,7 +102,12 @@ const DesktopSearch = ({
         )}
       </div>
       <div className="close-search" onClick={closeSearch}>
-        <Image src="/images/close-search.svg" alt="search" />
+        <Image
+          src="/images/close-search.svg"
+          alt="search"
+          width="28"
+          height="26"
+        />
       </div>
     </div>
   );

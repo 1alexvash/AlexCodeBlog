@@ -7,7 +7,7 @@ const Intro = () => (
         <div className="intro-avatar">
           <div className="image">
             <Image
-              src="/images/author-avatar.jpg"
+              src="/images/author-avatar.webp"
               alt="author-avatar"
               width={90}
               height={90}

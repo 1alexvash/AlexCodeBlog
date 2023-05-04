@@ -52,6 +52,8 @@ const MobileSearch = ({
                       <Image
                         src={post.heroImage ?? "/post-images/placeholder.png"}
                         alt="blog post image"
+                        width="51"
+                        height="51"
                       />
                     </a>
                     <a href={`/post/${post._sys.filename}`} className="name">
