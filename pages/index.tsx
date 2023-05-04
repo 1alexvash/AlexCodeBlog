@@ -1,7 +1,13 @@
 import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { NextPage } from "next";
+import type {
+  GetStaticProps,
+  GetStaticPropsContext,
+  NextApiRequest,
+  NextPage,
+} from "next";
 import Head from "next/head";
+import { ParsedUrlQuery } from "querystring";
 import { useAppSelector } from "redux/typesHooks";
 
 import Footer from "@/components/Footer";
@@ -77,11 +83,12 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps = async () => {
-  const isDev = process.env.NODE_ENV === "development";
-  const postConnectionArgs = isDev ? {} : { filter: { draft: { eq: false } } };
+export const getStaticProps: GetStaticProps = async () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const homeUrl = `${baseUrl}/`;
 
-  const posts = await client.queries.postConnection(postConnectionArgs);
+  console.log(homeUrl);
+  const posts = await client.queries.postConnection({});
 
   return {
     props: {
