@@ -1,13 +1,7 @@
 import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
-import type {
-  GetStaticProps,
-  GetStaticPropsContext,
-  NextApiRequest,
-  NextPage,
-} from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { ParsedUrlQuery } from "querystring";
 import { useAppSelector } from "redux/typesHooks";
 
 import Footer from "@/components/Footer";
@@ -22,9 +16,10 @@ import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
-}> = ({ posts }) => {
+  homeUrl: string;
+}> = ({ posts, homeUrl }) => {
   const tags = posts.map((post) => post.tags).flat();
-
+  console.log(homeUrl);
   const tagsFrequency = tags.reduce((acc, tag) => {
     if (acc[tag]) {
       acc[tag] += 1;
@@ -87,7 +82,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const homeUrl = `${baseUrl}/`;
 
-  console.log(homeUrl);
   const posts = await client.queries.postConnection({});
 
   return {
@@ -95,6 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
       posts: posts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
+      homeUrl,
     },
   };
 };
