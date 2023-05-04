@@ -16,8 +16,7 @@ import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
-  currentUrl: string;
-}> = ({ posts, currentUrl }) => {
+}> = ({ posts }) => {
   const tags = posts.map((post) => post.tags).flat();
   const tagsFrequency = tags.reduce((acc, tag) => {
     if (acc[tag]) {
@@ -27,7 +26,7 @@ const Home: NextPage<{
     }
     return acc;
   }, {} as Record<string, number>);
-  console.log({ currentUrl });
+
   const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
 
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
@@ -79,14 +78,19 @@ const Home: NextPage<{
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const currentUrl = req.headers.host;
-  const posts = await client.queries.postConnection({});
+
+  const postConnectionArgs =
+    currentUrl && currentUrl.includes("/admin")
+      ? { filter: { draft: { eq: false } } }
+      : {};
+
+  const posts = await client.queries.postConnection(postConnectionArgs);
 
   return {
     props: {
       posts: posts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
-      currentUrl,
     },
   };
 };
