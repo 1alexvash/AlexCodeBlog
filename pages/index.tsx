@@ -1,6 +1,6 @@
 import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
 
@@ -16,10 +16,9 @@ import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
-  homeUrl: string;
-}> = ({ posts, homeUrl }) => {
+  currentUrl: string;
+}> = ({ posts, currentUrl }) => {
   const tags = posts.map((post) => post.tags).flat();
-  console.log(homeUrl);
   const tagsFrequency = tags.reduce((acc, tag) => {
     if (acc[tag]) {
       acc[tag] += 1;
@@ -28,7 +27,7 @@ const Home: NextPage<{
     }
     return acc;
   }, {} as Record<string, number>);
-
+  console.log({ currentUrl });
   const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
 
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
@@ -78,10 +77,8 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const homeUrl = `${baseUrl}/`;
-
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const currentUrl = req.headers.host;
   const posts = await client.queries.postConnection({});
 
   return {
@@ -89,7 +86,7 @@ export const getStaticProps: GetStaticProps = async () => {
       posts: posts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
-      homeUrl,
+      currentUrl,
     },
   };
 };
