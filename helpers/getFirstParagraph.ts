@@ -6,7 +6,7 @@ const getFirstParagraph = (content: any) => {
       element.type === "p" && element.children[0].type === "text"
   );
 
-  const text = firstParagraph.children[0].text;
+  const text = firstParagraph?.children[0].text;
 
   return text;
 };
