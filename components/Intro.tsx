@@ -7,10 +7,11 @@ const Intro = () => (
         <div className="intro-avatar">
           <div className="image">
             <Image
-              src="/images/author-avatar.webp"
+              src="/images/author-avatar.jpg"
               alt="author-avatar"
               width={90}
               height={90}
+              priority
             />
           </div>
           <div className="name">{config.author_name}</div>

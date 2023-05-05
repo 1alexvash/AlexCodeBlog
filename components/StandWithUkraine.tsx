@@ -7,8 +7,9 @@ const StandWithUkraine = () => (
         <Image
           width="20"
           height="20"
-          src="/images/ua-flag.webp"
+          src="/images/ua-flag.png"
           alt="ua-flag"
+          priority
         />
         <a
           href="https://war.ukraine.ua/support-ukraine/"
