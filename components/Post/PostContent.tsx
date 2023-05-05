@@ -77,6 +77,7 @@ const PostContent = ({ post }: Props) => {
                 : "none",
             borderRadius: "3px",
           }}
+          loading="eager"
         />
       </div>
       <div className="blogpost-date">
