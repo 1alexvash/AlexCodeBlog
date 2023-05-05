@@ -66,6 +66,7 @@ const DesktopSearch = ({
                       alt="blog post image"
                       width="102"
                       height="102"
+                      sizes="100vw"
                     />
                   </a>
                   <div className="inner">
