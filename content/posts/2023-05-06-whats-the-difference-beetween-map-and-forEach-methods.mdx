@@ -1,13 +1,11 @@
 ---
 title: What's the difference beetween map and forEach methods
-date: '2023-05-06T08:38:27.932Z'
+date: "2023-05-06T08:38:27.932Z"
 heroImage: /post-images/map-function-vs-forEach-function.png
 draft: false
 tags:
   - JavaScript
-  - CodeReview
 ---
-
 
 Sometimes people do not distinguish those methods and write code like this:
 
@@ -40,7 +38,6 @@ Let's say you want to create a copy of doubled numbers.
 const numbers = [5, 10, 10];
 const doubledNumbers = numbers.forEach((number) => number * 2);
 console.log("doubledNumbers:", doubledNumbers); // undefined
-
 ```
 
 Huh, then for this case forEach method won't cut it.
@@ -50,7 +47,7 @@ Let's try again with map method.
 ```javascript
 const numbers = [5, 10, 10];
 const doubledNumbers = numbers.map((number) => number * 2);
-console.log("doubledNumbers:", doubledNumbers); // [ 10, 20, 20 ] 
+console.log("doubledNumbers:", doubledNumbers); // [ 10, 20, 20 ]
 ```
 
 It did the job!
@@ -69,9 +66,9 @@ function sendPresent(user) {
 }
 
 const users = [
-  { name: 'Tom', age: 17 },
-  { name: 'Bob', age: 23 },
-  { name: 'Alice', age: 18 },
+  { name: "Tom", age: 17 },
+  { name: "Bob", age: 23 },
+  { name: "Alice", age: 18 },
 ];
 ```
 
