@@ -74,8 +74,8 @@ export default defineConfig({
           {
             name: "site_description",
             label: "Site description",
-            type: "string",
-            required: true,
+            type: "rich-text",
+            isBody: true,
           },
           {
             name: "default_image",
@@ -94,6 +94,7 @@ export default defineConfig({
             name: "site_title",
             label: "Site title",
             type: "string",
+            isTitle: true,
             required: true,
           },
           {

@@ -72,6 +72,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   useIsomorphicLayoutEffect(() => {
     dispatch(setTinaData(data));
   }, []);
+
   return (
     <>
       <Head>
