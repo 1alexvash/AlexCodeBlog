@@ -1,5 +1,5 @@
 const getFirstParagraph = (content: any) => {
-  const children = content.children ?? "Empty post";
+  const children = content.children;
 
   const firstParagraph = children.find(
     (element: any) =>
