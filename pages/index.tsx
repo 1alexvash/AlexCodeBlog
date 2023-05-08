@@ -1,7 +1,8 @@
 import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useAppSelector } from "redux/typesHooks";
 
 import Footer from "@/components/Footer";
@@ -16,7 +17,8 @@ import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
-}> = ({ posts }) => {
+  isEditorMode: boolean;
+}> = ({ posts, isEditorMode }) => {
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -50,6 +52,12 @@ const Home: NextPage<{
 
   return (
     <>
+      {isEditorMode && (
+        <div>
+          You are in Draft mode{" "}
+          <Link href="/api/preview/exit">click here to exit</Link>
+        </div>
+      )}
       <Head>
         <title>{config.site_title}</title>
         <meta property="og:title" content={config.site_keywords[1]} />
@@ -77,14 +85,19 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+export const getStaticProps: GetStaticProps = async (context) => {
+  const isEditorMode = context.draftMode || false;
+
+  const posts = await client.queries.postConnection(
+    isEditorMode ? {} : { filter: { draft: { eq: false } } }
+  );
 
   return {
     props: {
       posts: posts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
+      isEditorMode,
     },
   };
 };
