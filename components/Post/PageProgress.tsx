@@ -12,7 +12,7 @@ interface Props {
 const PageProgress = ({ blogPostSectionRef }: Props) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  const dimensions = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const calculateScrollProgress = useCallback(() => {
     const blogPostSection = blogPostSectionRef.current;
@@ -41,12 +41,16 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
   }, [blogPostSectionRef]);
 
   useEffect(() => {
+    calculateScrollProgress();
+  }, [calculateScrollProgress, width, height]);
+
+  useEffect(() => {
     document.addEventListener("scroll", calculateScrollProgress);
 
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
     };
-  }, [calculateScrollProgress, dimensions?.width]);
+  }, [calculateScrollProgress]);
 
   return (
     <Box

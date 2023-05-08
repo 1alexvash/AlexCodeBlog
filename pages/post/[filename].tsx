@@ -14,6 +14,7 @@ import LatestPosts from "@/components/Post/LatestPosts";
 import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
+import WindowCheckProvider from "@/components/WindowCheckProvider";
 
 import { client } from "../../.tina/__generated__/client";
 import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
@@ -48,12 +49,14 @@ const Post = ({ latestPosts, ...props }: Props) => {
       </Head>
       <StandWithUkraine />
       <Header />
-      <BreadCrumbs title={data.post.title} />
-      <PageProgress blogPostSectionRef={blogPostSectionRef} />
-      <BlogPostSectionWrapper ref={blogPostSectionRef}>
-        <PostContent post={queryToDocument(data)} />
-        <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
-      </BlogPostSectionWrapper>
+      <WindowCheckProvider>
+        <BreadCrumbs title={data.post.title} />
+        <PageProgress blogPostSectionRef={blogPostSectionRef} />
+        <BlogPostSectionWrapper ref={blogPostSectionRef}>
+          <PostContent post={queryToDocument(data)} />
+          <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
+        </BlogPostSectionWrapper>
+      </WindowCheckProvider>
       <Footer />
     </>
   );
