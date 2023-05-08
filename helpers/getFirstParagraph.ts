@@ -1,11 +1,18 @@
-function getFirstParagraph(string: string) {
-  // TOOD: fix it, as it is broken on the Tina CMS branch
-  // const openedElement = string.indexOf("<p>") + 3;
-  // const closedElement = string.indexOf("</p>");
+const getFirstParagraph = (content: any) => {
+  if (content.children.length === 0) {
+    return null;
+  }
 
-  // return string.slice(openedElement, closedElement);
+  const { children } = content;
 
-  return "Article Description";
-}
+  const firstParagraph = children.find(
+    (element: any) =>
+      element.type === "p" && element.children[0].type === "text"
+  );
+
+  const text = firstParagraph.children[0].text;
+
+  return text;
+};
 
 export default getFirstParagraph;

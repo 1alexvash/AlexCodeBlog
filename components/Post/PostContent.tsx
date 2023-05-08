@@ -24,9 +24,17 @@ interface CodeTinaComponentProps {
   value: string;
 }
 
-const codeBlockASTNodeName = "code_block";
+interface listItemTinaProps {
+  children: JSX.Element;
+}
 
-const components = {
+const codeBlockASTNodeName = "code_block";
+const listItemASTNodeName = "li";
+
+const components: Components<{
+  [codeBlockASTNodeName]: CodeTinaComponentProps;
+  [listItemASTNodeName]: listItemTinaProps;
+}> = {
   [codeBlockASTNodeName]: (props) => {
     if (!props) {
       return <></>;
@@ -34,12 +42,17 @@ const components = {
 
     return <Codeblock language={props.lang || ""} codeLines={props.value} />;
   },
-} as Components<{
-  [codeBlockASTNodeName]: CodeTinaComponentProps;
-}>;
+  [listItemASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return <li className="tina-list-item">{props.children}</li>;
+  },
+};
 
 const PostContent = ({ post }: Props) => {
-  const description = getFirstParagraph("");
+  const description = getFirstParagraph(post.body);
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
