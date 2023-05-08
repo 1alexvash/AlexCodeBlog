@@ -24,10 +24,16 @@ interface CodeTinaComponentProps {
   value: string;
 }
 
+interface listItemTinaProps {
+  children: JSX.Element;
+}
+
 const codeBlockASTNodeName = "code_block";
+const listItemASTNodeName = "li";
 
 const components: Components<{
   [codeBlockASTNodeName]: CodeTinaComponentProps;
+  [listItemASTNodeName]: listItemTinaProps;
 }> = {
   [codeBlockASTNodeName]: (props) => {
     if (!props) {
@@ -35,6 +41,13 @@ const components: Components<{
     }
 
     return <Codeblock language={props.lang || ""} codeLines={props.value} />;
+  },
+  [listItemASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return <li className="tina-list-item">{props.children}</li>;
   },
 };
 

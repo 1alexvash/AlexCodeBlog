@@ -1,0 +1,75 @@
+---
+title: What's the difference beetween map and forEach methods
+date: "2023-05-07T21:00:00.000Z"
+heroImage: /post-images/map-function-vs-forEach-function.png
+draft: false
+tags:
+  - JavaScript
+---
+
+Sometimes people do not distinguish those methods and write code like this:
+
+```javascript
+const numbers = [5, 10, 10];
+
+numbers.forEach((number) => console.log("number:", number));
+
+// Instead of this:
+
+numbers.map((number) => console.log("number:", number));
+
+// The output for both methods:
+// number: 5
+// number: 10
+// number: 10
+```
+
+They think hence the output is the same. They must do the same thing. But there's a nuance to it.
+
+> **forEach** method is used for iteration
+
+> While **map** method is used for modifing an and returning new updated array
+
+### Example
+
+Let's say you want to create a copy of doubled numbers.
+
+```javascript
+const numbers = [5, 10, 10];
+const doubledNumbers = numbers.forEach((number) => number * 2);
+console.log("doubledNumbers:", doubledNumbers); // undefined
+```
+
+Huh, then for this case forEach method won't cut it.
+
+Let's try again with map method.
+
+```javascript
+const numbers = [5, 10, 10];
+const doubledNumbers = numbers.map((number) => number * 2);
+console.log("doubledNumbers:", doubledNumbers); // [ 10, 20, 20 ]
+```
+
+It did the job!
+
+### Why this is important
+
+Code reflecting clear intent is crucial for scalability and collaboration. Neglecting this aspect can make it harder to scale the app and work with the codebase.
+
+### Test
+
+Let's say we have a base of users, and we want to send them a present.
+
+```javascript
+function sendPresent(user) {
+  // ...
+}
+
+const users = [
+  { name: "Tom", age: 17 },
+  { name: "Bob", age: 23 },
+  { name: "Alice", age: 18 },
+];
+```
+
+Now, we need to iterate to through the list of users. Which method will you choose?
