@@ -17,7 +17,7 @@ const PageProgress = () => {
 
       progressBarRef.current.style.setProperty(
         "width",
-        percentage > 100 ? "100%" : percentage + "%"
+        percentage > 100 ? "100%" : `${percentage}%`
       );
     };
 

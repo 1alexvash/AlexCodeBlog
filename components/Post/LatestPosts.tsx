@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAppDispatch } from "redux/typesHooks";
 
 import { resetTags, setTags } from "../../redux/slices/selectedTags";
+
 interface Props {
   latestPosts: PostDocumentWithoutBody[];
 }

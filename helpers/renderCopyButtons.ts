@@ -1,7 +1,7 @@
 import { RefObject } from "react";
 
 const onClickCheck = (event: MouseEvent): void => {
-  const target = event.target;
+  const { target } = event;
 
   const copyText = (text: string): void => {
     navigator.clipboard.writeText(text);

@@ -65,7 +65,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const relativePath = params.filename + ".mdx";
+  const relativePath = `${params.filename}.mdx`;
 
   const postResponse = await client.queries.post({ relativePath });
 

@@ -20,9 +20,8 @@ const getBrowserTheme = (): Theme | undefined => {
 
   if (window.matchMedia("(prefers-color-scheme: light)").matches) {
     return "light";
-  } else {
-    return "dark";
   }
+  return "dark";
 };
 
 const getInitialTheme = (): Theme =>

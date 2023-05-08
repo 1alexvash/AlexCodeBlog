@@ -1,4 +1,4 @@
-import { Maybe, Scalars } from "./../.tina/__generated__/types";
+import { Maybe, Scalars } from "../.tina/__generated__/types";
 
 type SystemInfo = Readonly<{
   __typename?: "SystemInfo";

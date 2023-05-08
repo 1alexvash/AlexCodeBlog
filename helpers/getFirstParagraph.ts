@@ -1,12 +1,12 @@
 const getFirstParagraph = (content: any) => {
-  const children = content.children;
+  const { children } = content;
 
   const firstParagraph = children.find(
     (element: any) =>
       element.type === "p" && element.children[0].type === "text"
   );
 
-  const text = firstParagraph.children[0].text;
+  const { text } = firstParagraph.children[0];
 
   return text;
 };
