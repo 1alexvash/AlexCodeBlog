@@ -71,6 +71,10 @@ export async function getStaticProps({ params }: Params) {
 
   const latestPosts = await client.queries.postConnection({
     last: config.latest_posts_per_page,
+    filter: {
+      draft: { eq: false },
+      date: { before: new Date(Date.now()).toString() },
+    },
   });
 
   return {

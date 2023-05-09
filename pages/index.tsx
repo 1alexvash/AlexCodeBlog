@@ -60,7 +60,8 @@ const Home: NextPage<{
     currentPage * config.posts_per_page,
     (currentPage + 1) * config.posts_per_page
   );
-  const upcomingPosts = Array.prototype
+
+  const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
     .concat(upcomingDraftPosts, upcomingFuturePosts)
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
