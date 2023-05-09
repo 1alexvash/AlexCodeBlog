@@ -12,6 +12,8 @@ import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 
+import client from ".tina/__generated__/client";
+
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
 }> = ({ posts }) => {
@@ -76,18 +78,13 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const url =
-    process.env.NODE_ENV !== "production"
-      ? `${process.env.LOCAL}/api/getAllPostsWithoutBody`
-      : `${process.env.PRODUCTION}/api/getAllPostsWithoutBody`;
-
-  const posts: PostDocumentWithoutBody[] = await fetch(url).then((data) =>
-    data.json()
-  );
+  const posts = await client.queries.postConnection({});
 
   return {
     props: {
-      posts,
+      posts: posts.data.postConnection.edges
+        ?.map((edge) => edge?.node)
+        .reverse(),
     },
   };
 };
