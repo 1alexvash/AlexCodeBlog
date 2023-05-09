@@ -1,6 +1,7 @@
 import config from "config";
 import { isPostADraft } from "helpers/checkOfDraftOrFuturePost";
 import { isPostInTheFuture } from "helpers/checkOfDraftOrFuturePost";
+import getEdgeNodes from "helpers/getEdgeNodes";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
@@ -20,9 +21,15 @@ import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   mainPagePosts: PostDocumentWithoutBody[];
-  upcomingPosts: PostDocumentWithoutBody[];
+  upcomingDraftPosts: PostDocumentWithoutBody[];
+  upcomingFuturePosts: PostDocumentWithoutBody[];
   isEditorMode: boolean;
-}> = ({ mainPagePosts, upcomingPosts, isEditorMode }) => {
+}> = ({
+  mainPagePosts,
+  upcomingFuturePosts,
+  upcomingDraftPosts,
+  isEditorMode,
+}) => {
   const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -53,9 +60,9 @@ const Home: NextPage<{
     currentPage * config.posts_per_page,
     (currentPage + 1) * config.posts_per_page
   );
-  {
-    isEditorMode && <UpcomingPosts posts={upcomingPosts} />;
-  }
+  const upcomingPosts = Array.prototype
+    .concat(upcomingDraftPosts, upcomingFuturePosts)
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   return (
     <>
@@ -94,26 +101,29 @@ export const getStaticProps: GetStaticProps = async (context) => {
     filter: { draft: { eq: false } },
   });
 
-  const upcomingPosts = isEditorMode
+  const upcomingDraftPosts = isEditorMode
     ? await client.queries.postConnection({
         filter: {
           draft: { eq: true },
-          date: { before: new Date(Date.now()).toString() },
         },
       })
-    : null;
+    : [];
+
+  const upcomingFuturePosts = isEditorMode
+    ? await client.queries.postConnection({
+        filter: {
+          date: { after: new Date(Date.now()).toString() },
+          draft: { eq: false },
+        },
+      })
+    : [];
 
   return {
     props: {
-      mainPagePosts: mainPagePosts.data.postConnection.edges
-        ?.map((edge) => edge?.node)
-        .reverse(),
+      mainPagePosts: getEdgeNodes(mainPagePosts),
       isEditorMode,
-      upcomingPosts:
-        upcomingPosts &&
-        upcomingPosts.data.postConnection.edges
-          ?.map((edge) => edge?.node)
-          .reverse(),
+      upcomingDraftPosts: getEdgeNodes(upcomingDraftPosts),
+      upcomingFuturePosts: getEdgeNodes(upcomingFuturePosts),
     },
   };
 };
