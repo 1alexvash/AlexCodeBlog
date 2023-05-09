@@ -1,0 +1,22 @@
+query postsWithoutBody {
+  postConnection {
+    edges {
+      node {
+        id
+        title
+        date
+        heroImage
+        draft
+        tags
+        _sys {
+          filename
+          basename
+          breadcrumbs
+          path
+          relativePath
+          extension
+        }
+      }
+    }
+  }
+}
