@@ -1,6 +1,6 @@
 import config from "config";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
 
@@ -11,8 +11,6 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
-
-import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
@@ -77,14 +75,19 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+export const getStaticProps: GetStaticProps = async () => {
+  const url =
+    process.env.NODE_ENV !== "production"
+      ? `${process.env.LOCAL}/api/getAllPostsWithoutBody`
+      : `${process.env.PRODUCTION}/api/getAllPostsWithoutBody`;
+
+  const posts: PostDocumentWithoutBody[] = await fetch(url).then((data) =>
+    data.json()
+  );
 
   return {
     props: {
-      posts: posts.data.postConnection.edges
-        ?.map((edge) => edge?.node)
-        .reverse(),
+      posts,
     },
   };
 };
