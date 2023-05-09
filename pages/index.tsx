@@ -1,4 +1,6 @@
 import config from "config";
+import { isPostADraft } from "helpers/checkOfDraftOrFuturePost";
+import { isPostInTheFuture } from "helpers/checkOfDraftOrFuturePost";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
@@ -12,14 +14,16 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
+import UpcomingPosts from "@/components/UpcomingPosts";
 
 import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
-  posts: PostDocumentWithoutBody[];
+  mainPagePosts: PostDocumentWithoutBody[];
+  upcomingPosts: PostDocumentWithoutBody[];
   isEditorMode: boolean;
-}> = ({ posts, isEditorMode }) => {
-  const tags = posts.map((post) => post.tags).flat();
+}> = ({ mainPagePosts, upcomingPosts, isEditorMode }) => {
+  const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
     if (acc[tag]) {
@@ -35,12 +39,12 @@ const Home: NextPage<{
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
-  const filteredPosts = posts.filter((post) => {
+  const filteredPosts = mainPagePosts.filter((mainPagePost) => {
     if (selectedTags.length === 0) {
       return true;
     }
 
-    return selectedTags.some((tag) => post.tags.includes(tag));
+    return selectedTags.some((tag) => mainPagePost.tags.includes(tag));
   });
 
   const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
@@ -49,15 +53,12 @@ const Home: NextPage<{
     currentPage * config.posts_per_page,
     (currentPage + 1) * config.posts_per_page
   );
+  {
+    isEditorMode && <UpcomingPosts posts={upcomingPosts} />;
+  }
 
   return (
     <>
-      {isEditorMode && (
-        <div>
-          You are in Draft mode{" "}
-          <Link href="/api/preview/exit">click here to exit</Link>
-        </div>
-      )}
       <Head>
         <title>{config.site_title}</title>
         <meta property="og:title" content={config.site_keywords[1]} />
@@ -74,6 +75,7 @@ const Home: NextPage<{
       <Intro />
       <section className="simple-section">
         <div className="container">
+          {isEditorMode && <UpcomingPosts posts={upcomingPosts} />}
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
@@ -88,16 +90,30 @@ const Home: NextPage<{
 export const getStaticProps: GetStaticProps = async (context) => {
   const isEditorMode = context.draftMode || false;
 
-  const posts = await client.queries.postConnection(
-    isEditorMode ? {} : { filter: { draft: { eq: false } } }
-  );
+  const mainPagePosts = await client.queries.postConnection({
+    filter: { draft: { eq: false } },
+  });
+
+  const upcomingPosts = isEditorMode
+    ? await client.queries.postConnection({
+        filter: {
+          draft: { eq: true },
+          date: { before: new Date(Date.now()).toString() },
+        },
+      })
+    : null;
 
   return {
     props: {
-      posts: posts.data.postConnection.edges
+      mainPagePosts: mainPagePosts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
       isEditorMode,
+      upcomingPosts:
+        upcomingPosts &&
+        upcomingPosts.data.postConnection.edges
+          ?.map((edge) => edge?.node)
+          .reverse(),
     },
   };
 };
