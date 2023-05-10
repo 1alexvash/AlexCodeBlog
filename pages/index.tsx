@@ -93,6 +93,10 @@ const Home: NextPage<{
   );
 };
 
+const convertTypesAndGetEdges = (tinaData: any): PostDocumentWithoutBody[] => {
+  return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData));
+};
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const isEditorMode = context.draftMode || false;
 
@@ -121,14 +125,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      mainPagePosts: postsQueryToPostsWithoutBody(getEdgeNodes(mainPagePosts)),
+      mainPagePosts: convertTypesAndGetEdges(mainPagePosts),
       isEditorMode,
-      upcomingDraftPosts: postsQueryToPostsWithoutBody(
-        getEdgeNodes(upcomingDraftPosts)
-      ),
-      upcomingFuturePosts: postsQueryToPostsWithoutBody(
-        getEdgeNodes(upcomingFuturePosts)
-      ),
+      upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
+      upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
     },
   };
 };

@@ -1,3 +1,4 @@
+import getEdgeNodes from "helpers/getEdgeNodes";
 import { postsQueryToPostsWithoutBody } from "helpers/tinaHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -9,9 +10,7 @@ export default async function handler(
   res: NextApiResponse<PostDocumentWithoutBody[]>
 ) {
   const postsQuery = await client.queries.postsWithoutBody({});
-  const posts = postsQuery.data.postConnection.edges
-    ?.map((edge) => edge?.node)
-    .reverse();
+  const posts = getEdgeNodes(postsQuery);
 
   return res.status(200).json(postsQueryToPostsWithoutBody(posts));
 }
