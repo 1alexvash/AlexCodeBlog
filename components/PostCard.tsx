@@ -82,7 +82,6 @@ const PostCard = ({ post }: Props) => {
 
                 objectFit: "cover",
               }}
-              loading="eager"
             />
           </Link>
           <div className="tags">
