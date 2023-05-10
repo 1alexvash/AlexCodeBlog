@@ -69,7 +69,6 @@ const PostContent = ({ post }: Props) => {
           alt="blog post image"
           width={790}
           height={394}
-          quality={100}
           style={{
             filter:
               isPostADraft(post) || isPostInTheFuture(post)

@@ -104,13 +104,7 @@ const MobileSearch = ({
               }));
             }}
           >
-            <Image
-              src="/images/close-search.svg"
-              alt="search"
-              width="28"
-              height="26"
-              sizes="100vw"
-            />
+            <Image src="/images/close-search.svg" alt="search" />
           </div>
         </div>
       )}
