@@ -45,7 +45,7 @@ type PostFromQueryWithoutBody = {
   _sys: SystemInfo;
 };
 
-type PostsFromQueryWithoutBody =
+export type PostsFromQueryWithoutBody =
   | (PostFromQueryWithoutBody | null | undefined)[]
   | undefined;
 

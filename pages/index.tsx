@@ -1,6 +1,5 @@
 import config from "config";
-import getEdgeNodes from "helpers/getEdgeNodes";
-import { postsQueryToPostsWithoutBody } from "helpers/tinaHelpers";
+import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
@@ -91,10 +90,6 @@ const Home: NextPage<{
       <Footer />
     </>
   );
-};
-
-const convertTypesAndGetEdges = (tinaData: any): PostDocumentWithoutBody[] => {
-  return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData));
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {

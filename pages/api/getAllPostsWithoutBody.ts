@@ -1,4 +1,4 @@
-import getEdgeNodes from "helpers/getEdgeNodes";
+import { getEdgeNodes } from "helpers/getEdgeNodesHelpers";
 import { postsQueryToPostsWithoutBody } from "helpers/tinaHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextApiRequest, NextApiResponse } from "next";

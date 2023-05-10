@@ -1,9 +1,11 @@
 import config from "config";
+import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
 import {
   queriesToArrayOfDocuments,
   queryToDocument,
 } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { useTina } from "tinacms/dist/react";
 
@@ -59,12 +61,15 @@ const Post = ({ latestPosts, ...props }: Props) => {
 };
 
 type Params = {
-  params: {
-    filename: string;
+  params?: {
+    filename?: string;
   };
 };
 
-export async function getStaticProps({ params }: Params) {
+export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
+  if (!params) {
+    return { props: {} };
+  }
   const relativePath = params.filename + ".mdx";
 
   const postResponse = await client.queries.post({ relativePath });
@@ -80,30 +85,29 @@ export async function getStaticProps({ params }: Params) {
   return {
     props: {
       post: postResponse.data.post,
-      latestPosts: latestPosts.data.postConnection.edges?.map(
-        (edge) => edge?.node
-      ),
+      latestPosts: convertTypesAndGetEdges(latestPosts),
 
       data: postResponse.data,
       query: postResponse.query,
       variables: postResponse.variables,
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const postListResponse = await client.queries.postConnection();
 
-  const paths = postListResponse.data.postConnection.edges?.map((page) => ({
-    params: {
-      filename: page?.node?._sys.filename.toString(),
-    },
-  }));
+  const paths =
+    postListResponse.data.postConnection.edges?.map((page) => ({
+      params: {
+        filename: page?.node?._sys.filename.toString(),
+      },
+    })) ?? [];
 
   return {
     paths,
     fallback: "blocking",
   };
-}
+};
 
 export default Post;
