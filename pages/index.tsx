@@ -1,11 +1,9 @@
 import config from "config";
-import { isPostADraft } from "helpers/checkOfDraftOrFuturePost";
-import { isPostInTheFuture } from "helpers/checkOfDraftOrFuturePost";
 import getEdgeNodes from "helpers/getEdgeNodes";
+import { postsQueryToPostsWithoutBody } from "helpers/tinaHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useAppSelector } from "redux/typesHooks";
 
 import Footer from "@/components/Footer";
@@ -98,12 +96,14 @@ const Home: NextPage<{
 export const getStaticProps: GetStaticProps = async (context) => {
   const isEditorMode = context.draftMode || false;
 
-  const mainPagePosts = await client.queries.postConnection({
-    filter: { draft: { eq: false } },
+  const mainPagePosts = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: false },
+    },
   });
 
   const upcomingDraftPosts = isEditorMode
-    ? await client.queries.postConnection({
+    ? await client.queries.postsWithoutBody({
         filter: {
           draft: { eq: true },
         },
@@ -111,7 +111,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     : [];
 
   const upcomingFuturePosts = isEditorMode
-    ? await client.queries.postConnection({
+    ? await client.queries.postsWithoutBody({
         filter: {
           date: { after: new Date(Date.now()).toString() },
           draft: { eq: false },
@@ -121,10 +121,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
-      mainPagePosts: getEdgeNodes(mainPagePosts),
+      mainPagePosts: postsQueryToPostsWithoutBody(getEdgeNodes(mainPagePosts)),
       isEditorMode,
-      upcomingDraftPosts: getEdgeNodes(upcomingDraftPosts),
-      upcomingFuturePosts: getEdgeNodes(upcomingFuturePosts),
+      upcomingDraftPosts: postsQueryToPostsWithoutBody(
+        getEdgeNodes(upcomingDraftPosts)
+      ),
+      upcomingFuturePosts: postsQueryToPostsWithoutBody(
+        getEdgeNodes(upcomingFuturePosts)
+      ),
     },
   };
 };

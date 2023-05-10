@@ -69,7 +69,7 @@ export async function getStaticProps({ params }: Params) {
 
   const postResponse = await client.queries.post({ relativePath });
 
-  const latestPosts = await client.queries.postConnection({
+  const latestPosts = await client.queries.postsWithoutBody({
     last: config.latest_posts_per_page,
     filter: {
       draft: { eq: false },
