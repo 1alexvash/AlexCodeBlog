@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import config from "config";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -8,6 +9,22 @@ import PortfolioPage from "@/components/Portfolio";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import PageProgress from "@/components/Post/PageProgress";
 import StandWithUkraine from "@/components/StandWithUkraine";
+
+const containterStyles = {
+  mr: "auto",
+  ml: "auto",
+  pl: "15px",
+  pr: "15px",
+  ["@media(min-width: 768px)"]: {
+    width: "750px",
+  },
+  ["@media(min-width: 1020px)"]: {
+    width: "1000px",
+  },
+  ["@media(min-width: 1260px)"]: {
+    width: "1230px",
+  },
+};
 
 const Home: NextPage = () => (
   <>
@@ -25,11 +42,11 @@ const Home: NextPage = () => (
     <Header />
     <BreadCrumbs title="Projects" />
     <PageProgress />
-    <section className="simple-section">
-      <div className="container">
+    <Box sx={{ p: "36px 0" }}>
+      <Box sx={containterStyles}>
         <PortfolioPage />
-      </div>
-    </section>
+      </Box>
+    </Box>
     <Footer />
   </>
 );
