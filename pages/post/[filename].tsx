@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
   return {
     props: {
       post: postResponse.data.post,
-      latestPosts: convertTypesAndGetEdges(latestPosts),
+      latestPosts: convertTypesAndGetEdges(latestPosts).reverse(),
 
       data: postResponse.data,
       query: postResponse.query,
