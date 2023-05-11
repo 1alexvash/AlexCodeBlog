@@ -1,5 +1,4 @@
-import { getEdgeNodes } from "helpers/getEdgeNodesHelpers";
-import { postsQueryToPostsWithoutBody } from "helpers/tinaHelpers";
+import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -10,7 +9,7 @@ export default async function handler(
   res: NextApiResponse<PostDocumentWithoutBody[]>
 ) {
   const postsQuery = await client.queries.postsWithoutBody({});
-  const posts = getEdgeNodes(postsQuery);
+  const posts = convertTypesAndGetEdges(postsQuery);
 
-  return res.status(200).json(postsQueryToPostsWithoutBody(posts));
+  return res.status(200).json(posts);
 }
