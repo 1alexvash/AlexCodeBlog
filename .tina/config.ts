@@ -101,13 +101,16 @@ export default defineConfig({
   },
   admin: {
     auth: {
-      onLogin: async () => {
+      onLogin: async ({ token }) => {
         //  When the user logs in enter preview mode
-        location.href = `/api/preview/enter`;
+        console.log("login");
+        location.href =
+          `/api/preview/enter?token=${token.id_token}&slug=` + location;
       },
       onLogout: async () => {
         // When the user logs out exit preview mode
-        location.href = `/api/preview/exit`;
+        console.log("logout");
+        location.href = `/api/preview/exit?slug=` + location;
       },
     },
   },
