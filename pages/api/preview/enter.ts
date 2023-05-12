@@ -2,7 +2,7 @@ import { isUserAuthorized } from "@tinacms/auth";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.query.slug === undefined) {
+  if (typeof req.query.slug !== "string") {
     return res.status(400).json({ message: "Invalid slug" });
   }
 
@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Check tina cloud token
   const isAuthorizedRes = await isUserAuthorized({
     token: `Bearer ${req.query.token}`,
-    clientID: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+    clientID: process.env.NEXT_PUBLIC_TINA_CLIENT_ID ?? "",
   });
 
   if (isAuthorizedRes) {
