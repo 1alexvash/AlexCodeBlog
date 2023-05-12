@@ -4,6 +4,7 @@ import {
   queryToDocument,
 } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRef } from "react";
 import { useTina } from "tinacms/dist/react";
@@ -13,10 +14,8 @@ import Header from "@/components/Header";
 import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
-import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
-import WindowCheckProvider from "@/components/WindowCheckProvider";
 
 import { client } from "../../.tina/__generated__/client";
 import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
@@ -27,6 +26,10 @@ interface Props {
   variables: PostQueryVariables;
   latestPosts: PostFromQuery[];
 }
+
+const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
+  ssr: false,
+});
 
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
@@ -51,14 +54,12 @@ const Post = ({ latestPosts, ...props }: Props) => {
       </Head>
       <StandWithUkraine />
       <Header />
-      <WindowCheckProvider>
-        <BreadCrumbs title={data.post.title} />
-        <PageProgress blogPostSectionRef={blogPostSectionRef} />
-        <BlogPostSectionWrapper ref={blogPostSectionRef}>
-          <PostContent post={queryToDocument(data)} />
-          <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
-        </BlogPostSectionWrapper>
-      </WindowCheckProvider>
+      <BreadCrumbs title={data.post.title} />
+      <PageProgress blogPostSectionRef={blogPostSectionRef} />
+      <BlogPostSectionWrapper ref={blogPostSectionRef}>
+        <PostContent post={queryToDocument(data)} />
+        <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
+      </BlogPostSectionWrapper>
       <Footer />
     </>
   );
