@@ -5,6 +5,7 @@ import {
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
 import getFirstParagraph from "helpers/getFirstParagraph";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
@@ -82,10 +83,7 @@ const PostContent = ({ post }: Props) => {
           width={790}
           height={394}
           style={{
-            filter:
-              isPostADraft(post) || isPostInTheFuture(post)
-                ? "grayscale(50%)"
-                : "none",
+            filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
             borderRadius: "3px",
           }}
         />

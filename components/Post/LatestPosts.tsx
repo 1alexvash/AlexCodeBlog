@@ -1,7 +1,4 @@
-import {
-  isPostADraft,
-  isPostInTheFuture,
-} from "helpers/checkOfDraftOrFuturePost";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,11 +25,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
               height="102"
               sizes="100vw"
               style={{
-                filter:
-                  isPostADraft(post) || isPostInTheFuture(post)
-                    ? "grayscale(50%)"
-                    : "none",
-
+                filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
                 objectFit: "cover",
               }}
             />
