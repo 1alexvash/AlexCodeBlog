@@ -1,11 +1,13 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export const config = {
   matcher: "/admin",
 };
 
-export default function middleware(req: NextApiRequest, res: NextApiResponse) {
-  //   console.log("widdleware");
-  //   return NextResponse.rewrite(new URL("/api/preview/enter", req.url));
-}
+export const middleware = (request: NextRequest) => {
+  const url = request.nextUrl.clone();
+  url.pathname = "/api/preview/enter";
+
+  return NextResponse.redirect(url);
+};
