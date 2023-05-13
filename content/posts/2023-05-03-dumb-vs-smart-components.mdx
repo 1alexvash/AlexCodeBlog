@@ -1,9 +1,38 @@
 ---
 title: Dumb vs Smart components
-date: '2023-05-03T13:19:30.222Z'
+date: '2023-05-12T21:00:00.000Z'
 heroImage: /post-images/dumb-vs-smart components.png
-draft: true
+draft: false
 tags:
   - React
 ---
 
+If you want to become a great React developer, then this is essential to distinguish those two concepts.
+
+> Dumb components – are used for rendering UI.\
+> Examples: 👉 Icon / Button / Footer.
+
+> Smart components – are used for components with logic.\
+> Examples: 👉 CheckoutCart / LoginForm /  PaymentForm.
+
+***
+
+This is how it might look in code:
+
+```typescript
+const DumbComponent = () => <div>...</div>;
+
+// Versus
+
+const SmartComponent = () => {
+  // some useState logic...
+  // function to handle some event...
+  // some useEffect logic...
+
+  return <div>...</div>;
+};
+```
+
+Basically, the main difference between them is that a dumb component does not need to use a **return** statement, as it can just use implicit arrow return. While a smart component has to have it, as it needs some place to put its logic inside.
+
+This small thing can make your code 10 times easier to work and collaborate with, as once bugs will arise you are going to know right away whether this is an issue with code or UI, and where to look at to fix those bugs.
