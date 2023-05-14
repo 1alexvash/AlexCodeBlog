@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 const progressBarHeight = 10;
+const minDocumentHeight = 1030;
 
 interface Props {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
@@ -21,10 +22,19 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
 
     const offsetHeight = blogPostSection.offsetHeight || 0;
     const offsetTop = blogPostSection.offsetTop || 0;
-    const scrollHeight = offsetHeight - window.innerHeight;
+    const scrollHeight =
+      offsetHeight - window.innerHeight < 0
+        ? 1
+        : offsetHeight - window.innerHeight;
+
+    const minHeightThreshold =
+      document.documentElement.offsetHeight > minDocumentHeight
+        ? offsetTop - progressBarHeight
+        : 0;
+
     const scrollTop =
       (document.documentElement.scrollTop || document.body.scrollTop) -
-      (offsetTop - progressBarHeight);
+      minHeightThreshold;
     const percentage = Math.round((scrollTop / scrollHeight) * 100);
 
     let width = percentage + "%";
