@@ -4,7 +4,9 @@ import {
   queryToDocument,
 } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import { useRef } from "react";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -12,7 +14,6 @@ import Header from "@/components/Header";
 import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
-import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
@@ -26,12 +27,18 @@ interface Props {
   latestPosts: PostFromQuery[];
 }
 
+const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
+  ssr: false,
+});
+
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
   });
+
+  const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   return (
     <>
@@ -48,8 +55,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <StandWithUkraine />
       <Header />
       <BreadCrumbs title={data.post.title} />
-      <PageProgress />
-      <BlogPostSectionWrapper>
+      <PageProgress blogPostSectionRef={blogPostSectionRef} />
+      <BlogPostSectionWrapper ref={blogPostSectionRef}>
         <PostContent post={queryToDocument(data)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
