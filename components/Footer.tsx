@@ -12,7 +12,6 @@ const Footer = () => (
             alt="footer-logo"
             width={180}
             height={51}
-            priority
           />
         </div>
         <ul className="footer-socials">

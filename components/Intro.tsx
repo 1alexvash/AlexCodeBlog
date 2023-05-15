@@ -11,7 +11,6 @@ const Intro = () => (
               alt="author-avatar"
               width={90}
               height={90}
-              priority
             />
           </div>
           <div className="name">{config.author_name}</div>

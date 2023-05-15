@@ -4,13 +4,7 @@ const StandWithUkraine = () => (
   <div className="ukraine-support">
     <div className="container">
       <div className="ukraine-flex">
-        <Image
-          width="20"
-          height="20"
-          src="/images/ua-flag.png"
-          alt="ua-flag"
-          priority
-        />
+        <Image width="20" height="20" src="/images/ua-flag.png" alt="ua-flag" />
         <a
           href="https://war.ukraine.ua/support-ukraine/"
           target="_blank"

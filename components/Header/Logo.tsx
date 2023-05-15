@@ -12,7 +12,6 @@ const Logo = () => {
         alt="light-theme"
         width={180}
         height={60}
-        priority
       />
       <Image
         className="dark"
@@ -20,7 +19,6 @@ const Logo = () => {
         alt="dark-theme"
         width={180}
         height={60}
-        priority
       />
     </span>
   );

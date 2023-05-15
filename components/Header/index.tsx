@@ -88,7 +88,6 @@ const Header = () => {
           alt="hamburger"
           width={34}
           height={22}
-          priority
         />
       </div>
     </div>
@@ -135,7 +134,6 @@ const Header = () => {
             }}
             width={19}
             height={19}
-            priority
           />
         </div>
       </div>

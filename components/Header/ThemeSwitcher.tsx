@@ -8,22 +8,10 @@ const ThemeSwitcher = () => {
   return (
     <ul className="theme-switcher">
       <li className="light" onClick={() => dispatch(setTheme("light"))}>
-        <Image
-          src="/images/sun.svg"
-          alt="sun"
-          width={20}
-          height={20}
-          priority
-        />
+        <Image src="/images/sun.svg" alt="sun" width={20} height={20} />
       </li>
       <li className="dark" onClick={() => dispatch(setTheme("dark"))}>
-        <Image
-          src="/images/moon.svg"
-          alt="moon"
-          width={19}
-          height={18}
-          priority
-        />
+        <Image src="/images/moon.svg" alt="moon" width={19} height={18} />
       </li>
     </ul>
   );
