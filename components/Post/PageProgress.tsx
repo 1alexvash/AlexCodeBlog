@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef } from "react";
 const chromeZoomPixelGapBugFix = -0.25;
 const progressBarHeight = 10;
 const minDocumentHeight = 1030;
+const minScrollHeightValue = 1;
 
 interface Props {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
@@ -24,7 +25,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
     const offsetTop = blogPostSection.offsetTop || 0;
     const scrollHeight =
       offsetHeight - window.innerHeight < 0
-        ? 1
+        ? minScrollHeightValue
         : offsetHeight - window.innerHeight;
 
     const minHeightThreshold =
