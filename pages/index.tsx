@@ -1,6 +1,8 @@
 import config from "config";
+import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
+import { getPosts } from "helpers/getPosts";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
 
@@ -11,13 +13,12 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
-
-import client from ".tina/__generated__/client";
+import UpcomingPosts from "@/components/UpcomingPosts";
 
 const Home: NextPage<{
-  posts: PostDocumentWithoutBody[];
-}> = ({ posts }) => {
-  const tags = posts.map((post) => post.tags).flat();
+  mainPagePosts: PostDocumentWithoutBody[];
+}> = ({ mainPagePosts }) => {
+  const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
     if (acc[tag]) {
@@ -33,12 +34,12 @@ const Home: NextPage<{
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
-  const filteredPosts = posts.filter((post) => {
+  const filteredPosts = mainPagePosts.filter((mainPagePost) => {
     if (selectedTags.length === 0) {
       return true;
     }
 
-    return selectedTags.some((tag) => post.tags.includes(tag));
+    return selectedTags.some((tag) => mainPagePost.tags.includes(tag));
   });
 
   const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
@@ -47,6 +48,10 @@ const Home: NextPage<{
     currentPage * config.posts_per_page,
     (currentPage + 1) * config.posts_per_page
   );
+
+  //   const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
+  //     .concat(upcomingDraftPosts, upcomingFuturePosts)
+  //     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   return (
     <>
@@ -66,6 +71,7 @@ const Home: NextPage<{
       <Intro />
       <section className="simple-section">
         <div className="container">
+          {/* {isEditorMode && <UpcomingPosts posts={upcomingPosts} />} */}
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
@@ -77,14 +83,34 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+export const getStaticProps: GetStaticProps = async (context) => {
+  const isEditorMode = context.preview || false;
+  console.log({ isEditorMode });
+  const mainPagePosts = await getPosts({ preview: isEditorMode });
+
+  //   const upcomingDraftPosts = isEditorMode
+  //     ? await client.queries.postsWithoutBody({
+  //         filter: {
+  //           draft: { eq: true },
+  //         },
+  //       })
+  //     : [];
+
+  //   const upcomingFuturePosts = isEditorMode
+  //     ? await client.queries.postsWithoutBody({
+  //         filter: {
+  //           date: { after: new Date(Date.now()).toString() },
+  //           draft: { eq: false },
+  //         },
+  //       })
+  //     : [];
 
   return {
     props: {
-      posts: posts.data.postConnection.edges
-        ?.map((edge) => edge?.node)
-        .reverse(),
+      mainPagePosts: convertTypesAndGetEdges(mainPagePosts),
+      //   isEditorMode,
+      //   upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
+      //   upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
     },
   };
 };

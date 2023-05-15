@@ -1,9 +1,11 @@
 import config from "config";
+import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
 import {
   queriesToArrayOfDocuments,
   queryToDocument,
 } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
+import { GetStaticPaths, GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRef } from "react";
@@ -66,47 +68,53 @@ const Post = ({ latestPosts, ...props }: Props) => {
 };
 
 type Params = {
-  params: {
-    filename: string;
+  params?: {
+    filename?: string;
   };
 };
 
-export async function getStaticProps({ params }: Params) {
+export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
+  if (!params) {
+    return { props: {} };
+  }
   const relativePath = params.filename + ".mdx";
 
   const postResponse = await client.queries.post({ relativePath });
 
-  const latestPosts = await client.queries.postConnection({
+  const latestPosts = await client.queries.postsWithoutBody({
     last: config.latest_posts_per_page,
+    filter: {
+      draft: { eq: false },
+      date: { before: new Date(Date.now()).toString() },
+    },
   });
 
   return {
     props: {
       post: postResponse.data.post,
-      latestPosts: latestPosts.data.postConnection.edges?.map(
-        (edge) => edge?.node
-      ),
+      latestPosts: convertTypesAndGetEdges(latestPosts).reverse(),
 
       data: postResponse.data,
       query: postResponse.query,
       variables: postResponse.variables,
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const postListResponse = await client.queries.postConnection();
 
-  const paths = postListResponse.data.postConnection.edges?.map((page) => ({
-    params: {
-      filename: page?.node?._sys.filename.toString(),
-    },
-  }));
+  const paths =
+    postListResponse.data.postConnection.edges?.map((page) => ({
+      params: {
+        filename: page?.node?._sys.filename.toString(),
+      },
+    })) ?? [];
 
   return {
     paths,
     fallback: "blocking",
   };
-}
+};
 
 export default Post;
