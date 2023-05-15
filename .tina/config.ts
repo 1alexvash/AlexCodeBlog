@@ -99,4 +99,16 @@ export default defineConfig({
       },
     ],
   },
+  admin: {
+    auth: {
+      onLogin: async () => {
+        //  When the user logs in enter preview mode
+        location.href = `/api/preview/enter`;
+      },
+      onLogout: async () => {
+        // When the user logs out exit preview mode
+        location.href = `/api/preview/exit`;
+      },
+    },
+  },
 });
