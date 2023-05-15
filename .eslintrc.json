@@ -18,6 +18,9 @@
   ],
   "rules": {
     "quotes": ["error", "double"],
+    "import/no-named-as-default": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
     "linebreak-style": "off",
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-one-expression-per-line": "off",
