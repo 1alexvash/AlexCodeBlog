@@ -6,7 +6,7 @@ import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
 import getMUITheme from "./getMUITheme";
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element[];
 }
 
 const getStorageTheme = (): Theme | undefined => {
