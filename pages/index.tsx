@@ -1,6 +1,5 @@
 import config from "config";
 import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
-import { getPosts } from "helpers/getPosts";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
@@ -15,9 +14,19 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 import UpcomingPosts from "@/components/UpcomingPosts";
 
+import client from ".tina/__generated__/client";
+
 const Home: NextPage<{
   mainPagePosts: PostDocumentWithoutBody[];
-}> = ({ mainPagePosts }) => {
+  upcomingDraftPosts: PostDocumentWithoutBody[];
+  upcomingFuturePosts: PostDocumentWithoutBody[];
+  isEditorMode: boolean;
+}> = ({
+  mainPagePosts,
+  upcomingFuturePosts,
+  upcomingDraftPosts,
+  isEditorMode,
+}) => {
   const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -49,9 +58,9 @@ const Home: NextPage<{
     (currentPage + 1) * config.posts_per_page
   );
 
-  //   const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
-  //     .concat(upcomingDraftPosts, upcomingFuturePosts)
-  //     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+  const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
+    .concat(upcomingDraftPosts, upcomingFuturePosts)
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   return (
     <>
@@ -71,7 +80,7 @@ const Home: NextPage<{
       <Intro />
       <section className="simple-section">
         <div className="container">
-          {/* {isEditorMode && <UpcomingPosts posts={upcomingPosts} />} */}
+          {isEditorMode && <UpcomingPosts posts={upcomingPosts} />}
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
@@ -84,33 +93,37 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const isEditorMode = context.preview || false;
-  console.log({ isEditorMode });
-  const mainPagePosts = await getPosts({ preview: isEditorMode });
+  const isEditorMode = context.draftMode || false;
 
-  //   const upcomingDraftPosts = isEditorMode
-  //     ? await client.queries.postsWithoutBody({
-  //         filter: {
-  //           draft: { eq: true },
-  //         },
-  //       })
-  //     : [];
+  const mainPagePosts = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: false },
+    },
+  });
 
-  //   const upcomingFuturePosts = isEditorMode
-  //     ? await client.queries.postsWithoutBody({
-  //         filter: {
-  //           date: { after: new Date(Date.now()).toString() },
-  //           draft: { eq: false },
-  //         },
-  //       })
-  //     : [];
+  const upcomingDraftPosts = isEditorMode
+    ? await client.queries.postsWithoutBody({
+        filter: {
+          draft: { eq: true },
+        },
+      })
+    : [];
+
+  const upcomingFuturePosts = isEditorMode
+    ? await client.queries.postsWithoutBody({
+        filter: {
+          date: { after: new Date(Date.now()).toString() },
+          draft: { eq: false },
+        },
+      })
+    : [];
 
   return {
     props: {
       mainPagePosts: convertTypesAndGetEdges(mainPagePosts),
-      //   isEditorMode,
-      //   upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
-      //   upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
+      isEditorMode,
+      upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
+      upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
     },
   };
 };
