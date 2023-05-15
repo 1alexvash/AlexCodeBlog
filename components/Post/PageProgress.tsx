@@ -1,32 +1,56 @@
 import { Box } from "@mui/material";
-import { useEffect, useRef } from "react";
+import useWindowDimensions from "helpers/useWindowDimensions";
+import { useCallback, useEffect, useRef } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
+const progressBarHeight = 10;
 
-const PageProgress = () => {
+interface Props {
+  blogPostSectionRef: React.RefObject<HTMLDivElement>;
+}
+
+const PageProgress = ({ blogPostSectionRef }: Props) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
+  const { width, height } = useWindowDimensions();
+
+  const calculateScrollProgress = useCallback(() => {
+    const blogPostSection = blogPostSectionRef.current;
+
+    if (!blogPostSection) return;
+
+    const offsetHeight = blogPostSection.offsetHeight || 0;
+    const offsetTop = blogPostSection.offsetTop || 0;
+    const scrollHeight = offsetHeight - window.innerHeight;
+    const scrollTop =
+      (document.documentElement.scrollTop || document.body.scrollTop) -
+      (offsetTop - progressBarHeight);
+    const percentage = Math.round((scrollTop / scrollHeight) * 100);
+
+    let width = percentage + "%";
+
+    if (percentage > 100) {
+      width = "100%";
+    }
+
+    if (percentage < 0) {
+      width = "0%";
+    }
+
+    progressBarRef.current?.style.setProperty("width", width);
+  }, [blogPostSectionRef]);
+
   useEffect(() => {
-    const calculateScrollProgress = () => {
-      const scrollHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollTop =
-        (document.documentElement.scrollTop || document.body.scrollTop) /
-        scrollHeight;
-      const percentage = Math.round(scrollTop * 100);
+    calculateScrollProgress();
+  }, [calculateScrollProgress, width, height]);
 
-      progressBarRef.current.style.setProperty(
-        "width",
-        percentage > 100 ? "100%" : percentage + "%"
-      );
-    };
-
+  useEffect(() => {
     document.addEventListener("scroll", calculateScrollProgress);
 
     return () => {
       document.removeEventListener("scroll", calculateScrollProgress);
     };
-  }, []);
+  }, [calculateScrollProgress]);
 
   return (
     <Box
@@ -34,7 +58,7 @@ const PageProgress = () => {
         position: "sticky",
         top: chromeZoomPixelGapBugFix,
         zIndex: 29,
-        height: "10px",
+        height: progressBarHeight,
         backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
       })}
     >
