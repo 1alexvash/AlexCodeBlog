@@ -37,7 +37,6 @@ const Intro = () => {
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   const imageAvatarRef = useRef<HTMLDivElement>(null);
-  const editorIconRef = useRef<HTMLImageElement>(null);
 
   const handleClick = () => {
     if (admin) {
@@ -49,27 +48,22 @@ const Intro = () => {
 
   useEffect(() => {
     const imageWrapper = imageAvatarRef.current;
-    const editIcon = editorIconRef.current;
 
     if (admin) {
       imageWrapper?.setAttribute("admin", "");
-      editIcon?.setAttribute("admin", "");
       setIsFirstRender(false);
     }
 
     if (!admin && !isFirstRender) {
       imageWrapper?.setAttribute("closing", "");
-      editIcon?.setAttribute("closing", "");
       imageWrapper?.addEventListener(
         "animationend",
         () => {
-          editIcon?.removeAttribute("closing");
           imageWrapper?.removeAttribute("closing");
         },
         { once: true }
       );
       imageWrapper?.removeAttribute("admin");
-      editIcon?.removeAttribute("admin");
     }
   }, [admin, isFirstRender]);
 
@@ -150,38 +144,6 @@ const Intro = () => {
                 alt="author-avatar"
                 width="90"
                 height="90"
-              />
-            </Box>
-            <Box
-              sx={(theme) => ({
-                "& img": {
-                  position: "absolute",
-                  width: "39px",
-                  height: "39px",
-                  borderRadius: "50%",
-                  backgroundColor: "white",
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                  objectFit: "none",
-                  left: "50%",
-                  top: "50%",
-                  transform: "translate(-50%, -50%)",
-                  pointerEvents: "none",
-                  zIndex: 2,
-                  opacity: 0,
-                  [theme.breakpoints.down(768)]: {
-                    top: "55%",
-                  },
-                  "&[admin]": animate(fadeIn),
-                  "&[closing]": animate(fadeOut),
-                },
-              })}
-            >
-              <img
-                ref={editorIconRef}
-                src="/images/editor-icon.svg"
-                alt="edit"
-                width="19"
-                height="19"
               />
             </Box>
             <Box
