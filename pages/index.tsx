@@ -81,8 +81,8 @@ const Home: NextPage<{
       <section className="simple-section">
         <div className="container">
           {/* TODO: Implement tags count for the admin user */}
-          <Tags uniqueTags={uniqueSortedTags} />
           {isEditorMode && <UpcomingPosts posts={upcomingPosts} />}
+          <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>

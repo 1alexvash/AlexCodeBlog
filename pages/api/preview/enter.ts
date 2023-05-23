@@ -5,7 +5,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: "Invalid slug" });
   }
 
-  console.log("enter api handler");
   res.setPreviewData({});
   return res.redirect(req.query.slug);
 };
