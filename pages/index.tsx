@@ -1,6 +1,7 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
@@ -29,6 +30,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
+  const hostUrl = useAppSelector((state) => state.hostUrl.link);
 
   const { data } = useTina({
     query: query,
@@ -82,7 +84,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
           property="og:description"
           content={data.main_config.site_description}
         />
-        <meta property="og:url" content={data.main_config.host_url} />
+        <meta property="og:url" content={hostUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={data.main_config.site_title} />
         <meta property="og:image" content={data.main_config.default_image} />

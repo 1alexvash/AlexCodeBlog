@@ -104,12 +104,7 @@ export default defineConfig({
             type: "string",
             required: true,
           },
-          {
-            name: "host_url",
-            label: "Host url",
-            type: "string",
-            required: true,
-          },
+
           {
             name: "posts_per_page",
             label: "Posts per page",

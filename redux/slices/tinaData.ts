@@ -11,7 +11,6 @@ const initialState: Main_ConfigQuery = {
     author_name: "",
     author_position: "",
     social_links: [],
-    host_url: "",
     default_image: "",
     posts_per_page: 0,
     _sys: {

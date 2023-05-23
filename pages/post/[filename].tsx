@@ -19,14 +19,14 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 import { client } from "../../.tina/__generated__/client";
 import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
 
-const latest_posts_per_page = 10;
-
 interface Props {
   data: PostQuery;
   query: string;
   variables: PostQueryVariables;
   latestPosts: PostFromQuery[];
 }
+
+const latest_posts_per_page = 10;
 
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
@@ -36,6 +36,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
   });
 
   const config = useAppSelector((state) => state.tinaData.main_config);
+  const hostUrl = useAppSelector((state) => state.hostUrl.link);
 
   return (
     <>
@@ -43,7 +44,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <title>{data.post.title}</title>
         <meta name="description" content={config.site_description} />
         <meta property="og:description" content={config.site_description} />
-        <meta property="og:url" content={config.host_url} />
+        <meta property="og:url" content={hostUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.site_title} />
         <meta property="og:image" content={config.default_image} />
