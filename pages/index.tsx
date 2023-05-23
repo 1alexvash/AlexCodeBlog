@@ -2,6 +2,7 @@ import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
+import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
@@ -30,7 +31,6 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
-  const hostUrl = useAppSelector((state) => state.hostUrl.link);
 
   const { data } = useTina({
     query: query,
@@ -72,9 +72,11 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   );
 
   useIsomorphicLayoutEffect(() => {
+    dispatch(setHostUrl(window.location.origin));
     dispatch(setTinaData(data));
   }, []);
 
+  const hostUrl = useAppSelector((state) => state.hostUrl.link);
   return (
     <>
       <Head>
