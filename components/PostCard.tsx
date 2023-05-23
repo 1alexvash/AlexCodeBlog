@@ -2,6 +2,7 @@ import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,9 +58,7 @@ const PostCard = ({ post }: Props) => {
 
       <div
         className={`posts-list-block ${
-          isPostADraft(post) || isPostInTheFuture(post)
-            ? "posts-list-block-draft-or-future"
-            : ""
+          isUpcomingPost(post) ? "posts-list-block-draft-or-future" : ""
         }`}
       >
         <div className="content">
@@ -75,10 +74,7 @@ const PostCard = ({ post }: Props) => {
               height="378"
               sizes="100vw"
               style={{
-                filter:
-                  isPostADraft(post) || isPostInTheFuture(post)
-                    ? "grayscale(50%)"
-                    : "none",
+                filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
 
                 objectFit: "cover",
               }}
