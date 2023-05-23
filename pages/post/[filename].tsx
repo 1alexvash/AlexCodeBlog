@@ -3,7 +3,9 @@ import {
   queryToDocument,
 } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import { useRef } from "react";
 import { useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
 
@@ -12,7 +14,6 @@ import Header from "@/components/Header";
 import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
-import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
@@ -28,6 +29,10 @@ interface Props {
 
 const latest_posts_per_page = 10;
 
+const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
+  ssr: false,
+});
+
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
@@ -37,6 +42,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
 
   const config = useAppSelector((state) => state.tinaData.main_config);
   const hostUrl = useAppSelector((state) => state.hostUrl.link);
+
+  const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   return (
     <>
@@ -53,8 +60,8 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <StandWithUkraine />
       <Header />
       <BreadCrumbs title={data.post.title} />
-      <PageProgress />
-      <BlogPostSectionWrapper>
+      <PageProgress blogPostSectionRef={blogPostSectionRef} />
+      <BlogPostSectionWrapper ref={blogPostSectionRef}>
         <PostContent post={queryToDocument(data)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
