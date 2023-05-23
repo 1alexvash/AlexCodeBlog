@@ -17,16 +17,15 @@ import UpcomingPosts from "@/components/UpcomingPosts";
 import client from ".tina/__generated__/client";
 
 const Home: NextPage<{
-  posts: PostDocumentWithoutBody[];
   mainPagePosts: PostDocumentWithoutBody[];
   upcomingDraftPosts: PostDocumentWithoutBody[];
   upcomingFuturePosts: PostDocumentWithoutBody[];
   isEditorMode: boolean;
 }> = ({
   mainPagePosts,
-  upcomingFuturePosts,
-  upcomingDraftPosts,
   isEditorMode,
+  upcomingDraftPosts,
+  upcomingFuturePosts,
 }) => {
   const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
 
@@ -81,8 +80,8 @@ const Home: NextPage<{
       <section className="simple-section">
         <div className="container">
           {/* TODO: Implement tags count for the admin user */}
-          <Tags uniqueTags={uniqueSortedTags} />
           {isEditorMode && <UpcomingPosts posts={upcomingPosts} />}
+          <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
@@ -93,7 +92,7 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const isEditorMode = context.draftMode || false;
+  const isEditorMode = context.preview || false;
 
   const mainPagePosts = await client.queries.postsWithoutBody({
     filter: {

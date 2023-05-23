@@ -8,7 +8,7 @@ interface Props {
 }
 
 const UpcomingPosts = ({ posts }: Props) => (
-  <Box sx={{ mb: 17.5 }}>
+  <Box sx={{ mb: "50px" }}>
     <Box>
       <Typography
         sx={(theme) => ({
