@@ -5,7 +5,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: "Invalid slug" });
   }
 
-  res.clearPreviewData();
+  res.setDraftMode({ enable: false });
   res.redirect(req.query.slug);
 };
 

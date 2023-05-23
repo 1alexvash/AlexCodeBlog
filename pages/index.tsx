@@ -92,7 +92,7 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const isEditorMode = context.preview || false;
+  const isEditorMode = context.draftMode || false;
 
   const mainPagePosts = await client.queries.postsWithoutBody({
     filter: {
