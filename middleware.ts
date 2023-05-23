@@ -38,3 +38,4 @@
 // export const config = {
 //   matcher: ["/admin", "/"],
 // };
+export {};
