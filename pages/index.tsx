@@ -1,6 +1,5 @@
 import config from "config";
 import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
-import { getPosts } from "helpers/getPosts";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
