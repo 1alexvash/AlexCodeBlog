@@ -1,51 +1,40 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-let pageInitializedAdmin = false;
-let pageInitializedClient = false;
-
 let previousValue: string;
+let initializedPage: { [key: string]: boolean } = {
+  admin: false,
+  client: false,
+};
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname;
 
-  if (url === "/admin" && !pageInitializedAdmin) {
-    pageInitializedAdmin = true;
-
-    return NextResponse.redirect(
-      new URL("/api/preview/enter?slug=/admin", request.url)
-    );
-  }
-
-  if (url === "/" && !pageInitializedClient && previousValue === "client") {
-    pageInitializedClient = true;
-
-    return NextResponse.redirect(
-      new URL("/api/preview/exit?slug=/", request.url)
-    );
-  }
-
   if (url === "/admin") {
+    if (!initializedPage.admin) {
+      initializedPage.admin = true;
+      return NextResponse.redirect(
+        new URL("/api/preview/enter?slug=/admin", request.url)
+      );
+    }
     previousValue = "admin";
-  } else {
-    previousValue = "client";
-  }
-
-  if (url === "/admin" && pageInitializedAdmin) {
-    pageInitializedClient = false;
-
+    initializedPage.client = false;
     return NextResponse.next();
   }
 
-  if (url === "/" && pageInitializedClient) {
-    pageInitializedAdmin = false;
-
+  if (url === "/") {
+    if (!initializedPage.client && previousValue === "client") {
+      initializedPage.client = true;
+      return NextResponse.redirect(
+        new URL("/api/preview/exit?slug=/", request.url)
+      );
+    }
+    previousValue = "client";
+    initializedPage.admin = false;
     return NextResponse.next();
   }
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: ["/admin", "/"],
 };
