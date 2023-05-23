@@ -15,10 +15,19 @@ import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
 import UpcomingPosts from "@/components/UpcomingPosts";
 
+import client from ".tina/__generated__/client";
+
 const Home: NextPage<{
-  posts: PostDocumentWithoutBody[];
   mainPagePosts: PostDocumentWithoutBody[];
-}> = ({ mainPagePosts }) => {
+  upcomingDraftPosts: PostDocumentWithoutBody[];
+  upcomingFuturePosts: PostDocumentWithoutBody[];
+  isEditorMode: boolean;
+}> = ({
+  mainPagePosts,
+  isEditorMode,
+  upcomingDraftPosts,
+  upcomingFuturePosts,
+}) => {
   const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -49,9 +58,9 @@ const Home: NextPage<{
     currentPage * config.posts_per_page,
     (currentPage + 1) * config.posts_per_page
   );
-  //   const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
-  //     .concat(upcomingDraftPosts, upcomingFuturePosts)
-  //     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+  const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
+    .concat(upcomingDraftPosts, upcomingFuturePosts)
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   return (
     <>
@@ -73,7 +82,7 @@ const Home: NextPage<{
         <div className="container">
           {/* TODO: Implement tags count for the admin user */}
           <Tags uniqueTags={uniqueSortedTags} />
-          {/* {isEditorMode && <UpcomingPosts posts={upcomingPosts} />} */}
+          {isEditorMode && <UpcomingPosts posts={upcomingPosts} />}
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
@@ -86,31 +95,35 @@ const Home: NextPage<{
 export const getStaticProps: GetStaticProps = async (context) => {
   const isEditorMode = context.preview || false;
 
-  const mainPagePosts = await getPosts({ preview: isEditorMode });
+  const mainPagePosts = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: false },
+    },
+  });
 
-  //   const upcomingDraftPosts = isEditorMode
-  //     ? await client.queries.postsWithoutBody({
-  //         filter: {
-  //           draft: { eq: true },
-  //         },
-  //       })
-  //     : [];
+  const upcomingDraftPosts = isEditorMode
+    ? await client.queries.postsWithoutBody({
+        filter: {
+          draft: { eq: true },
+        },
+      })
+    : [];
 
-  //   const upcomingFuturePosts = isEditorMode
-  //     ? await client.queries.postsWithoutBody({
-  //         filter: {
-  //           date: { after: new Date(Date.now()).toString() },
-  //           draft: { eq: false },
-  //         },
-  //       })
-  //     : [];
+  const upcomingFuturePosts = isEditorMode
+    ? await client.queries.postsWithoutBody({
+        filter: {
+          date: { after: new Date(Date.now()).toString() },
+          draft: { eq: false },
+        },
+      })
+    : [];
 
   return {
     props: {
       mainPagePosts: convertTypesAndGetEdges(mainPagePosts),
-      //   isEditorMode,
-      //   upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
-      //   upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
+      isEditorMode,
+      upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
+      upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
     },
   };
 };
