@@ -1,7 +1,6 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import React from "react";
 
-import { PostsByMonthType } from ".";
 import { counterMarginBottom } from "./pageHelpers";
 import styles from "./pageStyles";
 
@@ -19,6 +18,8 @@ const seasonData = [
   { month: "November", season: "autumn" },
   { month: "December", season: "winter" },
 ];
+
+type PostsByMonthType = { [month: string]: number };
 
 interface Props {
   postsByMonth: PostsByMonthType;
