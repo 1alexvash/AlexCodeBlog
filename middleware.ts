@@ -13,12 +13,7 @@ export function middleware(request: NextRequest) {
   if (url === "/admin") {
     if (!initializedPage.admin) {
       initializedPage.admin = true;
-      const token = `?token=${process.env.TINA_CLOUD_TOKEN}`;
-      const redirectUrl = `/api/preview/enter${
-        process.env.NODE_ENV === "development" ? "" : token
-      }`;
-
-      return NextResponse.redirect(new URL(redirectUrl, request.url));
+      return NextResponse.redirect(new URL("/api/preview/enter", request.url));
     }
     previousValue = "admin";
     initializedPage.client = false;

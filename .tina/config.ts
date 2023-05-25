@@ -101,12 +101,11 @@ export default defineConfig({
   },
   admin: {
     auth: {
-      onLogin: async ({ token }) => {
-        console.log(token.id_token);
-        location.href = `/api/preview/enter?token=${token.id_token}`;
+      onLogin: async () => {
+        location.href = `/api/preview/enter?slug=/admin`;
       },
       onLogout: async () => {
-        location.href = `/api/preview/exit`;
+        location.href = `/api/preview/exit?slug=/`;
       },
     },
   },
