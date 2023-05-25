@@ -5,10 +5,9 @@ import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 interface Props {
   uniqueTags: string[];
-  countOfPostsInTags: number[];
 }
 
-const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
+const Tags = ({ uniqueTags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
 
   const dispatch = useAppDispatch();
@@ -28,27 +27,25 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
       >
         ALL
       </li>
-      {uniqueTags.map((uniqueTag, index) =>
-        countOfPostsInTags[index] === 1 ? null : (
-          <li
-            key={uniqueTag}
-            className={selectedTags.includes(uniqueTag) ? "active" : ""}
-            onClick={() => {
-              if (selectedTags.includes(uniqueTag)) {
-                const updatedTags = selectedTags.filter(
-                  (tag) => tag !== uniqueTag
-                );
+      {uniqueTags.map((uniqueTag) => (
+        <li
+          key={uniqueTag}
+          className={selectedTags.includes(uniqueTag) ? "active" : ""}
+          onClick={() => {
+            if (selectedTags.includes(uniqueTag)) {
+              const updatedTags = selectedTags.filter(
+                (tag) => tag !== uniqueTag
+              );
 
-                dispatch(setTags(updatedTags));
-              } else {
-                dispatch(setTags([...selectedTags, uniqueTag]));
-              }
-            }}
-          >
-            {uniqueTag}
-          </li>
-        )
-      )}
+              dispatch(setTags(updatedTags));
+            } else {
+              dispatch(setTags([...selectedTags, uniqueTag]));
+            }
+          }}
+        >
+          {uniqueTag}
+        </li>
+      ))}
     </ul>
   );
 };
