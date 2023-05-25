@@ -7,22 +7,16 @@
   "social_links": [
     {
       "link": "https://t.me/HeWorksSoHard",
-      "image": "/images/telegram.svg",
-      "width": 21,
-      "height": 17
+      "image": "/images/telegram.svg"
     },
     {
       "link": "https://github.com/1alexvash",
       "image": "/images/github.svg",
-      "width": 19,
-      "height": 19,
       "class": "git"
     },
     {
       "link": "mailto:1alexvash@gmail.com",
-      "image": "/images/mail.svg",
-      "width": 24,
-      "height": 16
+      "image": "/images/mail.svg"
     }
   ],
   "default_image": "/images/social-logo.png",

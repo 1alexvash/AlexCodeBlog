@@ -24,8 +24,8 @@ const Footer = () => {
                   <img
                     src={link.image}
                     alt="image-link"
-                    width={link.width}
-                    height={link.height}
+                    width="24"
+                    height="24"
                   />
                 </a>
               </li>

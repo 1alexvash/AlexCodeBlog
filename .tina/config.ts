@@ -47,18 +47,6 @@ export default defineConfig({
                 required: true,
               },
               {
-                name: "width",
-                label: "Width",
-                type: "number",
-                required: true,
-              },
-              {
-                name: "height",
-                label: "Height",
-                type: "number",
-                required: true,
-              },
-              {
                 name: "class",
                 label: "Class",
                 type: "string",

@@ -142,12 +142,7 @@ const Header = () => {
         {config.social_links.map((link) => (
           <li key={link.link}>
             <a href={link.link} className={link.class ?? ""}>
-              <img
-                src={link.image}
-                alt="image"
-                width={link.width}
-                height={link.height}
-              />
+              <img src={link.image} alt="image" width="24" height="24" />
             </a>
           </li>
         ))}
