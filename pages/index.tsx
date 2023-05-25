@@ -52,6 +52,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
 
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
+  const countOfPostsInTags = sortedTags.map((tag) => tag[1]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
   const filteredPosts = posts.filter((post) => {
@@ -103,7 +104,10 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
       <section className="simple-section">
         <div className="container">
           {/* TODO: Implement tags count for the admin user */}
-          <Tags uniqueTags={uniqueSortedTags} />
+          <Tags
+            uniqueTags={uniqueSortedTags}
+            countOfPostsInTags={countOfPostsInTags}
+          />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
