@@ -10,15 +10,15 @@ let initializedPage: { [key: string]: boolean } = {
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname;
 
-  if (url === "/admin") {
-    if (!initializedPage.admin) {
-      initializedPage.admin = true;
-      return NextResponse.redirect(new URL("/api/preview/enter", request.url));
-    }
-    previousValue = "admin";
-    initializedPage.client = false;
-    return NextResponse.next();
-  }
+  //   if (url === "/admin") {
+  //     if (!initializedPage.admin) {
+  //       initializedPage.admin = true;
+  //       return NextResponse.redirect(new URL("/api/preview/enter", request.url));
+  //     }
+  //     previousValue = "admin";
+  //     initializedPage.client = false;
+  //     return NextResponse.next();
+  //   }
 
   if (url === "/") {
     if (!initializedPage.client && previousValue === "client") {
