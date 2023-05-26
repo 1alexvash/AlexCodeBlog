@@ -5,13 +5,7 @@ import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useAppSelector } from "redux/typesHooks";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Intro from "@/components/Intro";
-import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
-import StandWithUkraine from "@/components/StandWithUkraine";
-import Tags from "@/components/Tags";
 import UpcomingPosts from "@/components/UpcomingPosts";
 
 import client from ".tina/__generated__/client";
@@ -74,19 +68,14 @@ const Home: NextPage<{
         <meta name="description" content={config.site_description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StandWithUkraine />
-      <Header />
-      <Intro />
+
       <section className="simple-section">
         <div className="container">
           {/* TODO: Implement tags count for the admin user */}
           {isEditorMode && <UpcomingPosts posts={upcomingPosts} />}
-          <Tags uniqueTags={uniqueSortedTags} />
           <Posts posts={postsToRender} />
-          <Pagination pagesCount={pagesCount} />
         </div>
       </section>
-      <Footer />
     </>
   );
 };

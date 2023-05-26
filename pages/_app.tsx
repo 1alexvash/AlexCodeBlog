@@ -5,15 +5,12 @@ import { Provider } from "react-redux";
 import store from "redux/store";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import ThemeProvider from "@/components/MUI/ThemeProvider";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Provider store={store}>
     <GoogleAnalytics />
 
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <Component {...pageProps} />
   </Provider>
 );
 
