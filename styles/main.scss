@@ -1351,3 +1351,33 @@ blockquote p:last-child {
   display: flex;
   gap: 4px;
 }
+
+.animation-appear {
+  animation: appear 0.5s ease-in-out;
+}
+
+.animation-disappear {
+  animation: disappear 0.5s ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

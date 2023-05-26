@@ -15,6 +15,13 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
 
   const noneTagSelected = selectedTags.length === 0;
   const allTagsSelected = uniqueTags.length === selectedTags.length;
+  const filteredUniqueTags = uniqueTags.filter(
+    (_, index) => countOfPostsInTags[index] !== 1
+  );
+
+  const tagsWithOnePosts = uniqueTags.filter(
+    (_, index) => countOfPostsInTags[index] === 1
+  );
 
   useEffect(() => {
     dispatch(resetPaginationPage());
@@ -28,8 +35,8 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
       >
         ALL
       </li>
-      {uniqueTags.map((uniqueTag, index) =>
-        countOfPostsInTags[index] === 1 ? null : (
+      {Array.prototype.concat(
+        filteredUniqueTags.map((uniqueTag) => (
           <li
             key={uniqueTag}
             className={selectedTags.includes(uniqueTag) ? "active" : ""}
@@ -47,6 +54,17 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
           >
             {uniqueTag}
           </li>
+        )),
+        tagsWithOnePosts.map((tag) =>
+          selectedTags.includes(tag) ? (
+            <li
+              key={tag}
+              className="active animation-appear"
+              onClick={() => dispatch(resetTags())}
+            >
+              {tag}
+            </li>
+          ) : null
         )
       )}
     </ul>
