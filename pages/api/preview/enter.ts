@@ -5,4 +5,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.redirect("/admin/");
 };
 
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
+
 export default handler;
