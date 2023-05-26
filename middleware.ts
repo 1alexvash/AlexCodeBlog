@@ -13,11 +13,11 @@ export function middleware(request: NextRequest) {
   if (url === "/admin") {
     if (!initializedPage.admin) {
       initializedPage.admin = true;
-      const redirectUrl = new URL("/api/preview/enter", request.url).toString();
-      return NextResponse.redirect(redirectUrl);
+      return NextResponse.redirect(new URL("/api/preview/enter", request.url));
     }
     previousValue = "admin";
     initializedPage.client = false;
+    return NextResponse.next();
   }
 
   if (url === "/") {
@@ -29,8 +29,6 @@ export function middleware(request: NextRequest) {
     initializedPage.admin = false;
     return NextResponse.next();
   }
-
-  return NextResponse.next();
 }
 
 export const config = {
