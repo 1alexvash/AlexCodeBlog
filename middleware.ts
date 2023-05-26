@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 let previousValue: string;
 let initializedPage: { [key: string]: boolean } = {
@@ -31,7 +32,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  api: {
-    externalResolver: true,
-  },
+  matcher: ["/admin", "/"],
 };

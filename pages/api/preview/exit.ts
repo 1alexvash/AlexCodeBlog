@@ -5,10 +5,4 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
   res.redirect("/");
 };
 
-export const config = {
-  api: {
-    externalResolver: true,
-  },
-};
-
 export default handler;
