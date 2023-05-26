@@ -9,7 +9,7 @@ let initializedPage: { [key: string]: boolean } = {
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.pathname;
 
-  if (url === "/adminTest") {
+  if (url === "/admin") {
     if (!initializedPage.admin) {
       initializedPage.admin = true;
       return NextResponse.redirect(new URL("/api/preview/enter", request.url));
