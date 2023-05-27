@@ -16,7 +16,7 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
   const noneTagSelected = selectedTags.length === 0;
   const allTagsSelected = uniqueTags.length === selectedTags.length;
   const filteredUniqueTags = uniqueTags.filter(
-    (_, index) => countOfPostsInTags[index] !== 1
+    (_, index) => countOfPostsInTags[index] >= 2
   );
 
   const tagsWithOnePosts = uniqueTags.filter(
