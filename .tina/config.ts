@@ -102,10 +102,10 @@ export default defineConfig({
   admin: {
     auth: {
       onLogin: async () => {
-        location.href = `/api/preview/enter`;
+        location.href = `/api/preview/enter?next=/admin`;
       },
       onLogout: async () => {
-        location.href = `/api/preview/exit`;
+        location.href = `/api/preview/exit?next=/`;
       },
     },
   },
