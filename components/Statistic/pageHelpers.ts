@@ -1,6 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 
-type PostsByMonthType = { [month: string]: number };
+import { PostsByMonthType } from ".";
 
 export const counterMarginBottom = (count: number | undefined) => {
   if (!count) {
