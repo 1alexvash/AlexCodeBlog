@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { useCallback, useEffect, useMemo } from "react";
 import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
+import { useEditState } from "tinacms/dist/react";
 interface Props {
   uniqueTags: string[];
   countOfPostsInTags: number[];
@@ -10,6 +10,8 @@ interface Props {
 
 const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
+
+  const { edit } = useEditState();
 
   const dispatch = useAppDispatch();
 
@@ -42,16 +44,16 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
 
   const basicTags = useMemo(
     () =>
-      filteredUniqueTags.map((uniqueTag) => (
+      filteredUniqueTags.map((uniqueTag, index) => (
         <li
           key={uniqueTag}
           className={selectedTags.includes(uniqueTag) ? "active" : ""}
           onClick={() => tagSelect(uniqueTag)}
         >
-          {uniqueTag}
+          {edit ? `${uniqueTag} [${countOfPostsInTags[index]}]` : uniqueTag}
         </li>
       )),
-    [filteredUniqueTags, selectedTags, tagSelect]
+    [filteredUniqueTags, selectedTags, tagSelect, edit, countOfPostsInTags]
   );
 
   const additionalTags = useMemo(() => {
