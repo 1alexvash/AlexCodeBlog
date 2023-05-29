@@ -1,5 +1,3 @@
-import config from "config";
-
 const getFirstParagraph = (content: any) => {
   if (content.children.length === 0) {
     return null;
@@ -12,9 +10,7 @@ const getFirstParagraph = (content: any) => {
       element.type === "p" && element.children[0].type === "text"
   );
 
-  const text = firstParagraph
-    ? firstParagraph.children[0].text
-    : config.site_description;
+  const text = firstParagraph ? firstParagraph.children[0].text : null;
 
   return text;
 };
