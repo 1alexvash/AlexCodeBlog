@@ -1352,12 +1352,12 @@ blockquote p:last-child {
   gap: 4px;
 }
 
-.animation-appear {
+.animation-enter {
   animation: appear 0.5s ease-in-out;
 }
 
-.animation-disappear {
-  animation: disappear 0.5s ease-in-out;
+.animation-exit {
+  animation: exit 0.5s ease-in-out;
 }
 
 @keyframes appear {
@@ -1371,7 +1371,7 @@ blockquote p:last-child {
   }
 }
 
-@keyframes disappear {
+@keyframes exit {
   0% {
     opacity: 1;
     transform: translateY(0);

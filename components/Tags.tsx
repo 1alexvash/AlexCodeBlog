@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
-
 interface Props {
   uniqueTags: string[];
   countOfPostsInTags: number[];
@@ -27,6 +27,51 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
     dispatch(resetPaginationPage());
   }, [dispatch, selectedTags]);
 
+  const tagSelect = useCallback(
+    (uniqueTag: string): void => {
+      if (selectedTags.includes(uniqueTag)) {
+        const updatedTags = selectedTags.filter((tag) => tag !== uniqueTag);
+
+        dispatch(setTags(updatedTags));
+      } else {
+        dispatch(setTags([...selectedTags, uniqueTag]));
+      }
+    },
+    [dispatch, selectedTags]
+  );
+
+  const basicTags = useMemo(
+    () =>
+      filteredUniqueTags.map((uniqueTag) => (
+        <li
+          key={uniqueTag}
+          className={selectedTags.includes(uniqueTag) ? "active" : ""}
+          onClick={() => tagSelect(uniqueTag)}
+        >
+          {uniqueTag}
+        </li>
+      )),
+    [filteredUniqueTags, selectedTags, tagSelect]
+  );
+
+  const additionalTags = useMemo(() => {
+    return tagsWithOnePosts.map((uniqueTag) =>
+      selectedTags.includes(uniqueTag) ? (
+        <li
+          key={uniqueTag}
+          className="active"
+          onClick={() => tagSelect(uniqueTag)}
+        >
+          {uniqueTag}
+        </li>
+      ) : null
+    );
+  }, [tagsWithOnePosts, selectedTags, tagSelect]);
+
+  const renderTags: JSX.Element[] = Array.prototype
+    .concat(basicTags, additionalTags)
+    .filter((tag) => tag !== null);
+
   return (
     <ul className="filter-tags-list">
       <li
@@ -35,38 +80,7 @@ const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
       >
         ALL
       </li>
-      {Array.prototype.concat(
-        filteredUniqueTags.map((uniqueTag) => (
-          <li
-            key={uniqueTag}
-            className={selectedTags.includes(uniqueTag) ? "active" : ""}
-            onClick={() => {
-              if (selectedTags.includes(uniqueTag)) {
-                const updatedTags = selectedTags.filter(
-                  (tag) => tag !== uniqueTag
-                );
-
-                dispatch(setTags(updatedTags));
-              } else {
-                dispatch(setTags([...selectedTags, uniqueTag]));
-              }
-            }}
-          >
-            {uniqueTag}
-          </li>
-        )),
-        tagsWithOnePosts.map((tag) =>
-          selectedTags.includes(tag) ? (
-            <li
-              key={tag}
-              className="active animation-appear"
-              onClick={() => dispatch(resetTags())}
-            >
-              {tag}
-            </li>
-          ) : null
-        )
-      )}
+      {renderTags}
     </ul>
   );
 };
