@@ -27,7 +27,7 @@ interface Props {
   latestPosts: PostFromQuery[];
 }
 
-const latest_posts_per_page = 10;
+const latestPostsPerPage = 10;
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
@@ -41,7 +41,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
   });
 
   const config = useAppSelector((state) => state.tinaData.main_config);
-  const hostUrl = useAppSelector((state) => state.hostUrl.link);
+  const hostURL = useAppSelector((state) => state.hostUrl.link);
 
   const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
@@ -51,7 +51,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <title>{data.post.title}</title>
         <meta name="description" content={config.site_description} />
         <meta property="og:description" content={config.site_description} />
-        <meta property="og:url" content={hostUrl} />
+        <meta property="og:url" content={hostURL} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.site_title} />
         <meta property="og:image" content={config.default_image} />
@@ -82,7 +82,7 @@ export async function getStaticProps({ params }: Params) {
   const postResponse = await client.queries.post({ relativePath });
 
   const latestPosts = await client.queries.postConnection({
-    last: latest_posts_per_page, // TODO: search about this one
+    last: latestPostsPerPage,
   });
 
   return {

@@ -66,9 +66,11 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
     filteredPosts.length / data.main_config.posts_per_page
   );
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
+  const nextPage = currentPage + 1;
+
   const postsToRender = filteredPosts.slice(
     currentPage * data.main_config.posts_per_page,
-    (currentPage + 1) * data.main_config.posts_per_page
+    nextPage * data.main_config.posts_per_page
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -76,7 +78,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
     dispatch(setTinaData(data));
   }, []);
 
-  const hostUrl = useAppSelector((state) => state.hostUrl.link);
+  const hostURL = useAppSelector((state) => state.hostUrl.link);
   return (
     <>
       <Head>
@@ -86,7 +88,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
           property="og:description"
           content={data.main_config.site_description}
         />
-        <meta property="og:url" content={hostUrl} />
+        <meta property="og:url" content={hostURL} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={data.main_config.site_title} />
         <meta property="og:image" content={data.main_config.default_image} />
@@ -117,7 +119,7 @@ export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
 
   const pageResponse = await client.queries.main_config({
-    relativePath: "main-config.json",
+    relativePath: "mainConfig.json",
   });
 
   return {

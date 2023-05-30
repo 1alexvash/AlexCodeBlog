@@ -28,6 +28,30 @@ export default defineConfig({
         format: "json",
         fields: [
           {
+            name: "site_description",
+            label: "Site description",
+            type: "rich-text",
+            isBody: true,
+          },
+          {
+            name: "default_image",
+            label: "Default image",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "author_name",
+            label: "Author name",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "author_position",
+            label: "Author position",
+            type: "string",
+            required: true,
+          },
+          {
             name: "social_links",
             label: "Social links",
             type: "object",
@@ -53,31 +77,6 @@ export default defineConfig({
               },
             ],
           },
-          {
-            name: "author_name",
-            label: "Author name",
-            type: "string",
-            required: true,
-          },
-          {
-            name: "site_description",
-            label: "Site description",
-            type: "rich-text",
-            isBody: true,
-          },
-          {
-            name: "default_image",
-            label: "Default image",
-            type: "string",
-            required: true,
-          },
-          {
-            name: "author_position",
-            label: "Author position",
-            type: "string",
-            required: true,
-          },
-
           {
             name: "site_title",
             label: "Site title",

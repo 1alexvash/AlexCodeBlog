@@ -5,6 +5,7 @@ import paginationSlice from "./slices/pagination";
 import selectedTagsSlice from "./slices/selectedTags";
 import themeSlice from "./slices/theme";
 import tinaData from "./slices/tinaData";
+
 const store = configureStore({
   reducer: {
     selectedTags: selectedTagsSlice,

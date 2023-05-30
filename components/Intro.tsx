@@ -25,7 +25,7 @@ const Intro = ({ author_name, author_position, site_description }: Props) => (
         <div className="intro-text">
           <h1>Hello, I am {author_name}</h1>
           <span style={{ whiteSpace: "break-spaces" }}>
-            <TinaMarkdown content={site_description} />{" "}
+            <TinaMarkdown content={site_description} />
           </span>
         </div>
       </div>
