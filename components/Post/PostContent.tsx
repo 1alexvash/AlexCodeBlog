@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import config from "config";
 import {
   isPostADraft,
@@ -56,7 +56,19 @@ const components: Components<{
       return <></>;
     }
 
-    return <img src={props.url} className="tina-image-style" alt={props.alt} />;
+    return (
+      <Box>
+        <img src={props.url} alt={props.alt} />
+        <Typography
+          sx={(theme) => ({
+            textAlign: "center",
+            color: theme.palette.main.lightGrey,
+          })}
+        >
+          {props.caption}
+        </Typography>
+      </Box>
+    );
   },
 };
 
