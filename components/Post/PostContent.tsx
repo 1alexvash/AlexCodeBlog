@@ -31,6 +31,7 @@ interface listItemTinaProps {
 
 const codeBlockASTNodeName = "code_block";
 const listItemASTNodeName = "li";
+const imgASTNodeName = "img";
 
 const components: Components<{
   [codeBlockASTNodeName]: CodeTinaComponentProps;
@@ -49,6 +50,13 @@ const components: Components<{
     }
 
     return <li className="tina-list-item">{props.children}</li>;
+  },
+  [imgASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return <img src={props.url} className="tina-image-style" alt={props.alt} />;
   },
 };
 
