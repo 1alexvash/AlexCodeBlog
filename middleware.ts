@@ -5,6 +5,8 @@ type PreviousValueType = "admin" | "client";
 type InitializedPageType = { [key: string]: boolean };
 
 let previousValue: PreviousValueType = "admin";
+let prevURL = "";
+
 let initializedPage: InitializedPageType = {
   admin: false,
   client: false,
@@ -29,7 +31,11 @@ export function middleware(request: NextRequest) {
   }
 
   if (!isAdmin) {
-    if (!initializedPage.client && previousValue === "client") {
+    if (
+      !initializedPage.client &&
+      previousValue === "client" &&
+      !prevURL.includes("_next/static/css")
+    ) {
       initializedPage.client = true;
       return NextResponse.redirect(new URL("/api/preview/exit", request.url));
     }
@@ -37,4 +43,6 @@ export function middleware(request: NextRequest) {
     initializedPage.admin = false;
     return NextResponse.next();
   }
+
+  prevURL = url;
 }
