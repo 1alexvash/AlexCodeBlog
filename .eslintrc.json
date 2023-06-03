@@ -26,6 +26,7 @@
     "@next/next/no-img-element": "off",
     "react/self-closing-comp": ["error", { "component": true, "html": true }],
     "no-switch-statements/no-switch": "error",
+    "object-shorthand": ["error", "always"],
     "eqeqeq": ["error", "always"]
   }
 }
