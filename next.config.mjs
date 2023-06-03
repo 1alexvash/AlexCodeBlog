@@ -18,12 +18,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
-  rewrites: () => [
-    {
-      source: "/admin",
-      destination: "/admin/index.html",
-    },
-  ],
   images: {
     domains: ["assets.tina.io"],
   },
