@@ -1,40 +1,21 @@
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-type PreviousValueType = "admin" | "client";
-type InitializedPageType = { [key: string]: boolean };
-
-let previousValue: PreviousValueType = "admin";
-let initializedPage: InitializedPageType = {
-  admin: false,
-  client: false,
-};
-let isAdmin = false;
-
 export function middleware(request: NextRequest) {
-  const url = request.url;
+  const url = request.nextUrl.pathname;
 
-  if (url.includes("/admin")) {
-    isAdmin = true;
+  const isDraftMode = request.cookies.has("__prerender_bypass");
+  const isAdminRoot = url === "/admin";
+  const isRoot =
+    url === "/" && request.headers.get("Sec-Fetch-Dest") !== "iframe";
 
-    if (!initializedPage.admin) {
-      initializedPage.admin = true;
-      return NextResponse.redirect(new URL("/api/preview/enter", request.url));
-    }
-    previousValue = "admin";
-    initializedPage.client = false;
-    isAdmin = false;
-
-    return NextResponse.next();
+  if (isAdminRoot && !isDraftMode) {
+    return NextResponse.redirect(new URL("/api/preview/enter", request.url));
   }
 
-  if (!isAdmin) {
-    if (!initializedPage.client && previousValue === "client") {
-      initializedPage.client = true;
-      return NextResponse.redirect(new URL("/api/preview/exit", request.url));
-    }
-    previousValue = "client";
-    initializedPage.admin = false;
-    return NextResponse.next();
+  if (isRoot && isDraftMode) {
+    return NextResponse.redirect(new URL("/api/preview/exit", request.url));
   }
+
+  return NextResponse.next();
 }
