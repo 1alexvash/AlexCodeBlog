@@ -57,25 +57,21 @@ const components: Components<{
     }
 
     return (
-      <>
-        {props.caption ? (
-          <>
-            <img src={props.url} alt={props.alt} />
-            <Typography
-              sx={(theme) => ({
-                color:
-                  theme.palette.mode === "dark"
-                    ? theme.palette.main.lightGrey
-                    : theme.palette.main.darkGrey,
-              })}
-            >
-              {props.caption}
-            </Typography>
-          </>
-        ) : (
-          <img src={props.url} alt={props.alt} className="tina-image" />
-        )}
-      </>
+      <Box>
+        <img src={props.url} alt={props.alt} />
+        <Typography
+          variant="caption"
+          component="p"
+          sx={(theme) => ({
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.main.lightGrey
+                : theme.palette.main.darkGrey,
+          })}
+        >
+          {props.caption}
+        </Typography>
+      </Box>
     );
   },
 };
