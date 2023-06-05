@@ -4,16 +4,18 @@ import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useEditState } from "tinacms/dist/react";
 interface Props {
-  uniqueTags: string[];
-  countOfPostsInTags: number[];
+  tags: [string, number][];
 }
 
-const Tags = ({ uniqueTags, countOfPostsInTags }: Props) => {
+const Tags = ({ tags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
 
   const { edit } = useEditState();
 
   const dispatch = useAppDispatch();
+
+  const uniqueTags = tags.map((tag) => tag[0]);
+  const countOfPostsInTags = tags.map((tag) => tag[1]);
 
   const noneTagSelected = selectedTags.length === 0;
   const allTagsSelected = uniqueTags.length === selectedTags.length;
