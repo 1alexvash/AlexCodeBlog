@@ -4,28 +4,18 @@ import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useEditState } from "tinacms/dist/react";
 interface Props {
-  tags: [string, number][];
+  sortedTags: [string, number][];
 }
 
-const Tags = ({ tags }: Props) => {
+const Tags = ({ sortedTags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
 
   const { edit } = useEditState();
 
   const dispatch = useAppDispatch();
 
-  const uniqueTags = tags.map((tag) => tag[0]);
-  const countOfPostsInTags = tags.map((tag) => tag[1]);
-
   const noneTagSelected = selectedTags.length === 0;
-  const allTagsSelected = uniqueTags.length === selectedTags.length;
-  const filteredUniqueTags = uniqueTags.filter(
-    (_, index) => countOfPostsInTags[index] >= 2
-  );
-
-  const tagsWithOnePosts = uniqueTags.filter(
-    (_, index) => countOfPostsInTags[index] === 1
-  );
+  const allTagsSelected = sortedTags.length === selectedTags.length;
 
   useEffect(() => {
     dispatch(resetPaginationPage());
@@ -44,37 +34,58 @@ const Tags = ({ tags }: Props) => {
     [dispatch, selectedTags]
   );
 
-  const basicTags = useMemo(
+  const tags = useMemo(
     () =>
-      filteredUniqueTags.map((uniqueTag, index) => (
-        <li
-          key={uniqueTag}
-          className={selectedTags.includes(uniqueTag) ? "active" : ""}
-          onClick={() => tagSelect(uniqueTag)}
-        >
-          {edit ? `${uniqueTag} [${countOfPostsInTags[index]}]` : uniqueTag}
-        </li>
-      )),
-    [filteredUniqueTags, selectedTags, tagSelect, edit, countOfPostsInTags]
+      sortedTags
+        .map((tag) => {
+          const tagName = tag[0];
+          const tagCount = tag[1];
+
+          if (edit) {
+            return (
+              <li
+                key={tagName}
+                className={selectedTags.includes(tagName) ? "active" : ""}
+                onClick={() => tagSelect(tagName)}
+              >
+                {`${tagName} [${tagCount}]`}
+              </li>
+            );
+          }
+
+          const isBasicTag = tagCount >= 2;
+          const isAdditionalTag =
+            tagCount === 1 && selectedTags.includes(tagName);
+
+          if (isBasicTag) {
+            return (
+              <li
+                key={tagName}
+                className={selectedTags.includes(tagName) ? "active" : ""}
+                onClick={() => tagSelect(tagName)}
+              >
+                {tagName}
+              </li>
+            );
+          }
+
+          if (isAdditionalTag) {
+            return (
+              <li
+                key={tagName}
+                className="active"
+                onClick={() => tagSelect(tagName)}
+              >
+                {tagName}
+              </li>
+            );
+          }
+
+          return null;
+        })
+        .filter((tag) => tag),
+    [sortedTags, edit, selectedTags, tagSelect]
   );
-
-  const additionalTags = useMemo(() => {
-    return tagsWithOnePosts.map((uniqueTag) =>
-      selectedTags.includes(uniqueTag) ? (
-        <li
-          key={uniqueTag}
-          className="active"
-          onClick={() => tagSelect(uniqueTag)}
-        >
-          {uniqueTag}
-        </li>
-      ) : null
-    );
-  }, [tagsWithOnePosts, selectedTags, tagSelect]);
-
-  const renderTags: JSX.Element[] = Array.prototype
-    .concat(basicTags, additionalTags)
-    .filter((tag) => tag !== null);
 
   return (
     <ul className="filter-tags-list">
@@ -84,7 +95,7 @@ const Tags = ({ tags }: Props) => {
       >
         ALL
       </li>
-      {renderTags}
+      {tags}
     </ul>
   );
 };

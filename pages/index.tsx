@@ -64,8 +64,7 @@ const Home: NextPage<{
       <Intro />
       <section className="simple-section">
         <div className="container">
-          {/* TODO: Implement tags count for the admin user */}
-          <Tags tags={sortedTags} />
+          <Tags sortedTags={sortedTags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
