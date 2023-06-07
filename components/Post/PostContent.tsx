@@ -67,6 +67,8 @@ const components: Components<{
               theme.palette.mode === "dark"
                 ? theme.palette.main.lightGrey
                 : theme.palette.main.darkGrey,
+
+            textAlign: "center",
           })}
         >
           {props.caption}
