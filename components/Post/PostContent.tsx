@@ -63,10 +63,7 @@ const components: Components<{
           variant="caption"
           component="p"
           sx={(theme) => ({
-            color:
-              theme.palette.mode === "dark"
-                ? theme.palette.main.lightGrey
-                : theme.palette.main.darkGrey,
+            color: theme.palette.mode === "dark" ? "#dadada" : "#999999",
 
             textAlign: "center",
           })}
