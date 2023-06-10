@@ -1,5 +1,8 @@
 import { Theme } from "@mui/material";
 
+const monthlyDiagramWidth = 1210;
+const monthColumnWidth = 90;
+
 const styles = (theme: Theme) => ({
   pageTitle: {
     fontSize: "50px",
@@ -33,7 +36,7 @@ const styles = (theme: Theme) => ({
     display: "flex",
     alignItems: "end",
     gap: "10px",
-    width: "1210px",
+    width: monthlyDiagramWidth + "px",
     height: "385px",
     px: "10px",
     backgroundColor:
@@ -53,7 +56,7 @@ const styles = (theme: Theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "end",
-      width: "90px",
+      width: monthColumnWidth + "px",
       background: theme.palette.main.orange,
       "& img": {
         mb: "3px",
@@ -65,10 +68,15 @@ const styles = (theme: Theme) => ({
     justifyContent: "space-between",
     px: "10px",
     gap: "10px",
-    width: "1210px",
+    width: monthlyDiagramWidth + "px",
     mt: "10px",
     "& .MuiBox-root": {
-      width: "90px",
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.main.black
+          : theme.palette.main.white,
+      fontSize: "14px",
+      width: monthColumnWidth + "px",
       textAlign: "center",
     },
   },
