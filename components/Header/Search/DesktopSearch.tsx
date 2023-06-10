@@ -1,6 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
-import React, { Dispatch, RefObject, SetStateAction } from "react";
+import React, { Dispatch, RefObject, SetStateAction, useMemo } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 
@@ -30,6 +30,52 @@ const DesktopSearch = ({
     }));
   };
 
+  const loading = useMemo(() => {
+    if (!search.isLoaded) {
+      return <DesktopSkeletons />;
+    }
+
+    if (filteredPosts.length > 0) {
+      return (
+        <div className="desktop-search-results">
+          {filteredPosts.map((post, index) => (
+            <div className="related-posts-block" key={index}>
+              <a href={`/post/${post._sys.filename}`} className="image">
+                <img
+                  src={post.heroImage ?? "/post-images/placeholder.png"}
+                  alt="blog post image"
+                />
+              </a>
+              <div className="inner">
+                <a href={`/post/${post._sys.filename}`} className="name">
+                  {post.title}
+                </a>
+                <div className="tags">
+                  {post.tags.map((tag) => (
+                    <Link
+                      href="/"
+                      key={tag}
+                      onClick={() => {
+                        setSearch((search) => ({
+                          ...search,
+                          showSearch: false,
+                        }));
+                        dispatch(setTags([tag]));
+                      }}
+                    >
+                      #{tag}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    return <NotFound />;
+  }, [dispatch, filteredPosts, search.isLoaded, setSearch]);
   return (
     <div className="search-overlay-desktop" onClick={closeSearch}>
       <div
@@ -54,49 +100,7 @@ const DesktopSearch = ({
           ref={desktopInputRef}
         />
 
-        {search.isLoaded ? (
-          filteredPosts.length > 0 ? (
-            <div className="desktop-search-results">
-              {filteredPosts.map((post, index) => (
-                <div className="related-posts-block" key={index}>
-                  <a href={`/post/${post._sys.filename}`} className="image">
-                    <img
-                      src={post.heroImage ?? "/post-images/placeholder.png"}
-                      alt="blog post image"
-                    />
-                  </a>
-                  <div className="inner">
-                    <a href={`/post/${post._sys.filename}`} className="name">
-                      {post.title}
-                    </a>
-                    <div className="tags">
-                      {post.tags.map((tag) => (
-                        <Link
-                          href="/"
-                          key={tag}
-                          onClick={() => {
-                            setSearch((search) => ({
-                              ...search,
-                              showSearch: false,
-                            }));
-
-                            dispatch(setTags([tag]));
-                          }}
-                        >
-                          #{tag}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <NotFound />
-          )
-        ) : (
-          <DesktopSkeletons />
-        )}
+        {loading}
       </div>
       <div className="close-search" onClick={closeSearch}>
         <img src="/images/close-search.svg" alt="search" />
