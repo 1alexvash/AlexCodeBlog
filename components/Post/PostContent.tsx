@@ -9,13 +9,15 @@ import isUpcomingPost from "helpers/isUpcomingPost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { useAppDispatch } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+import { setTags } from "../../redux/slices/selectedTags";
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
-
 interface Props {
   post: PostDocument;
 }
@@ -53,6 +55,7 @@ const components: Components<{
 };
 
 const PostContent = ({ post }: Props) => {
+  const dispatch = useAppDispatch();
   const description = getFirstParagraph(post.body);
   const document = useRef<HTMLDivElement>(null);
 
@@ -95,9 +98,9 @@ const PostContent = ({ post }: Props) => {
 
       <div className="tags">
         {post.tags.map((tag) => (
-          <a href="" key={tag}>
+          <Link href="/" key={tag} onClick={() => dispatch(setTags([tag]))}>
             #{tag}
-          </a>
+          </Link>
         ))}
       </div>
       {/* <Reactions /> This future might be added later */}
