@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Main_ConfigQuery } from "./../../.tina/__generated__/types";
+import { MainConfigQuery } from "./../../.tina/__generated__/types";
 
-const initialState: Main_ConfigQuery = {
-  main_config: {
-    site_title: "",
+const initialState: MainConfigQuery = {
+  mainConfig: {
+    siteTitle: "",
     id: "",
-    site_description: "",
-    site_keywords: [],
-    author_name: "",
-    author_position: "",
-    social_links: [],
-    default_image: "",
-    posts_per_page: 0,
+    siteDescription: "",
+    siteKeywords: [],
+    authorName: "",
+    authorPosition: "",
+    socialLinks: [],
+    defaultImage: "",
+    postsPerPage: 0,
     _sys: {
       filename: "",
       basename: "",

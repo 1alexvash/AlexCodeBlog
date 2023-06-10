@@ -22,37 +22,37 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "main_config",
+        name: "mainConfig",
         label: "Main config",
         path: "content",
         format: "json",
         fields: [
           {
-            name: "site_description",
+            name: "siteDescription",
             label: "Site description",
             type: "rich-text",
             isBody: true,
           },
           {
-            name: "default_image",
+            name: "defaultImage",
             label: "Default image",
             type: "string",
             required: true,
           },
           {
-            name: "author_name",
+            name: "authorName",
             label: "Author name",
             type: "string",
             required: true,
           },
           {
-            name: "author_position",
+            name: "authorPosition",
             label: "Author position",
             type: "string",
             required: true,
           },
           {
-            name: "social_links",
+            name: "socialLinks",
             label: "Social links",
             type: "object",
             list: true,
@@ -78,22 +78,25 @@ export default defineConfig({
             ],
           },
           {
-            name: "site_title",
+            name: "siteTitle",
             label: "Site title",
             type: "string",
             isTitle: true,
             required: true,
           },
           {
-            name: "site_keywords",
+            name: "siteKeywords",
             label: "Site keywords",
             list: true,
             type: "string",
             required: true,
+            ui: {
+              min: 1,
+            },
           },
 
           {
-            name: "posts_per_page",
+            name: "postsPerPage",
             label: "Posts per page",
             type: "number",
             required: true,

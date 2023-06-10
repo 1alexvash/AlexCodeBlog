@@ -23,7 +23,7 @@ const Header = () => {
     posts: [] as PostDocumentWithoutBody[],
   });
 
-  const config = useAppSelector((state) => state.tinaData.main_config);
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -139,7 +139,7 @@ const Header = () => {
         </div>
       </div>
       <ul className="header-socials">
-        {config.social_links.map((link) => (
+        {config.socialLinks.map((link) => (
           <li key={link.link}>
             <a href={link.link} className={link.class ?? ""}>
               <img src={link.image} alt="image" width="24" height="24" />

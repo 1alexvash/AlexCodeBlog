@@ -18,15 +18,15 @@ import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
 import {
-  Main_ConfigQuery,
-  Main_ConfigQueryVariables,
+  MainConfigQuery,
+  MainConfigQueryVariables,
 } from ".tina/__generated__/types";
 
 interface HomeProps {
   posts: PostDocumentWithoutBody[];
-  tinaData: Main_ConfigQuery;
+  tinaData: MainConfigQuery;
   query: string;
-  variables: Main_ConfigQueryVariables;
+  variables: MainConfigQueryVariables;
 }
 
 const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
@@ -63,14 +63,14 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   });
 
   const pagesCount = Math.ceil(
-    filteredPosts.length / data.main_config.posts_per_page
+    filteredPosts.length / data.mainConfig.postsPerPage
   );
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
   const nextPage = currentPage + 1;
 
   const postsToRender = filteredPosts.slice(
-    currentPage * data.main_config.posts_per_page,
-    nextPage * data.main_config.posts_per_page
+    currentPage * data.mainConfig.postsPerPage,
+    nextPage * data.mainConfig.postsPerPage
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -82,25 +82,25 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   return (
     <>
       <Head>
-        <title>{data.main_config.site_title}</title>
-        <meta property="og:title" content={data.main_config.site_keywords[1]} />
+        <title>{data.mainConfig.siteTitle}</title>
+        <meta property="og:title" content={data.mainConfig.siteKeywords[1]} />
         <meta
           property="og:description"
-          content={data.main_config.site_description}
+          content={data.mainConfig.siteDescription}
         />
         <meta property="og:url" content={hostURL} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={data.main_config.site_title} />
-        <meta property="og:image" content={data.main_config.default_image} />
-        <meta name="description" content={data.main_config.site_description} />
+        <meta property="og:site_name" content={data.mainConfig.siteTitle} />
+        <meta property="og:image" content={data.mainConfig.defaultImage} />
+        <meta name="description" content={data.mainConfig.siteDescription} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />
       <Header />
       <Intro
-        author_name={data.main_config.author_name}
-        author_position={data.main_config.author_position}
-        site_description={data.main_config.site_description}
+        author_name={data.mainConfig.authorName}
+        author_position={data.mainConfig.authorPosition}
+        site_description={data.mainConfig.siteDescription}
       />
       <section className="simple-section">
         <div className="container">
@@ -118,7 +118,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
 
-  const pageResponse = await client.queries.main_config({
+  const pageResponse = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
   });
 

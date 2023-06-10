@@ -40,7 +40,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
-  const config = useAppSelector((state) => state.tinaData.main_config);
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
   const hostURL = useAppSelector((state) => state.hostUrl.link);
 
   const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -49,12 +49,12 @@ const Post = ({ latestPosts, ...props }: Props) => {
     <>
       <Head>
         <title>{data.post.title}</title>
-        <meta name="description" content={config.site_description} />
-        <meta property="og:description" content={config.site_description} />
+        <meta name="description" content={config.siteDescription} />
+        <meta property="og:description" content={config.siteDescription} />
         <meta property="og:url" content={hostURL} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={config.site_title} />
-        <meta property="og:image" content={config.default_image} />
+        <meta property="og:site_name" content={config.siteTitle} />
+        <meta property="og:image" content={config.defaultImage} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />

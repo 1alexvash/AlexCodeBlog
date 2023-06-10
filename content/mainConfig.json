@@ -1,13 +1,10 @@
 {
-  "site_title": "AlexCode",
-  "site_description": "Technologies suck, they won't be if you read my blog 💪\nOn my blog I'm sharing tips to increase your productivity and developer happiness\n",
-  "site_keywords": [
-    "Programming post",
-    "Blog about programming"
-  ],
-  "author_name": "Alex",
-  "author_position": "Full Stack JavaScript Developer",
-  "social_links": [
+  "siteTitle": "AlexCode",
+  "siteDescription": "Technologies suck, they won't be if you read my blog 💪\nOn my blog I'm sharing tips to increase your productivity and developer happiness\n",
+  "siteKeywords": ["Blog about programming"],
+  "authorName": "Alex",
+  "authorPosition": "Full Stack JavaScript Developer",
+  "socialLinks": [
     {
       "link": "https://t.me/HeWorksSoHard",
       "image": "/images/telegram.svg"
@@ -22,6 +19,6 @@
       "image": "/images/mail.svg"
     }
   ],
-  "default_image": "/images/social-logo.png",
-  "posts_per_page": 15
+  "defaultImage": "/images/social-logo.png",
+  "postsPerPage": 15
 }

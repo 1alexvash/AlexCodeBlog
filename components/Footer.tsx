@@ -3,7 +3,7 @@ import { useAppSelector } from "redux/typesHooks";
 const currentYear = new Date().getFullYear();
 
 const Footer = () => {
-  const config = useAppSelector((state) => state.tinaData.main_config);
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
 
   return (
     <footer>
@@ -18,7 +18,7 @@ const Footer = () => {
             />
           </div>
           <ul className="footer-socials">
-            {config.social_links.map((link) => (
+            {config.socialLinks.map((link) => (
               <li key={link.link}>
                 <a href={link.link}>
                   <img
