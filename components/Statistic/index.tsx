@@ -20,8 +20,7 @@ const StatisticPage = ({ posts }: Props) => {
   );
   const [selectedYear, setSelectedYear] = useState(2023);
 
-  const { pageTitle, pageControlsAlign, yearButtonWidth, monthButtonWidth } =
-    styles(theme);
+  const { pageTitle, pageControlsAlign, yearButtonWidth } = styles(theme);
 
   const handleYearClick = (year: number) => {
     setPostsByMonth(getPostsByYearAndMonth(year, posts));
@@ -30,18 +29,34 @@ const StatisticPage = ({ posts }: Props) => {
 
   const isTodayYearActive = selectedYear === 2023;
 
-  const yearActiveStyles = (condition: boolean) => ({
-    backgroundColor: condition
-      ? theme.palette.main.orange
-      : theme.palette.mode === "light"
-      ? theme.palette.main.lightGrey
-      : theme.palette.main.grey,
-    color: condition
-      ? theme.palette.main.white
-      : theme.palette.mode === "light"
-      ? theme.palette.main.black
-      : theme.palette.main.white,
-  });
+  const yearActiveStyles = (condition: boolean) => {
+    let backgroundColor, color;
+
+    if (condition) {
+      backgroundColor = theme.palette.main.orange;
+      color = theme.palette.main.white;
+
+      return {
+        backgroundColor,
+        color,
+      };
+    }
+
+    if (theme.palette.mode === "light") {
+      backgroundColor = theme.palette.main.lightGrey;
+      color = theme.palette.main.black;
+    }
+
+    if (theme.palette.mode === "dark") {
+      backgroundColor = theme.palette.main.grey;
+      color = theme.palette.main.white;
+    }
+
+    return {
+      backgroundColor,
+      color,
+    };
+  };
 
   const pageControls = (
     <Box>
@@ -49,9 +64,7 @@ const StatisticPage = ({ posts }: Props) => {
         sx={[
           pageControlsAlign,
           {
-            "& div": {
-              ...yearButtonWidth,
-            },
+            "& div": yearButtonWidth,
           },
         ]}
       >
@@ -67,21 +80,6 @@ const StatisticPage = ({ posts }: Props) => {
         >
           2023
         </Box>
-      </Box>
-      <Box
-        sx={[
-          pageControlsAlign,
-          {
-            "& div": {
-              ...monthButtonWidth,
-              backgroundColor: "#FE6C0A",
-              color: "white",
-            },
-          },
-        ]}
-      >
-        <Box>Monthly</Box>
-        <Box>Weekly</Box>
       </Box>
     </Box>
   );

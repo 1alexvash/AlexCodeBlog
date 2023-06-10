@@ -14,7 +14,7 @@ const styles = (theme: Theme) => ({
   pageControlsAlign: {
     display: "flex",
     gap: "5px",
-    mb: "12px",
+    mb: "36px",
     "& div": {
       display: "flex",
       height: "27px",
@@ -58,6 +58,18 @@ const styles = (theme: Theme) => ({
       "& img": {
         mb: "3px",
       },
+    },
+  },
+  monthNameStyle: {
+    display: "flex",
+    justifyContent: "space-between",
+    px: "10px",
+    gap: "10px",
+    width: "1210px",
+    mt: "10px",
+    "& .MuiBox-root": {
+      width: "90px",
+      textAlign: "center",
     },
   },
 });

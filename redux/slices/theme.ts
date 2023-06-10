@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type Theme = "light" | "dark";
 
-export const defaultTheme = "dark";
+export const defaultTheme = "light";
 
 const initialState = defaultTheme;
 

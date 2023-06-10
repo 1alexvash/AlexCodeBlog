@@ -16,10 +16,8 @@ interface Props {
 }
 
 const containterStyles = {
-  mr: "auto",
-  ml: "auto",
-  pl: "15px",
-  pr: "15px",
+  mx: "auto",
+  px: "15px",
   ["@media(min-width: 768px)"]: {
     width: "750px",
   },
@@ -35,12 +33,6 @@ const Statistics = ({ posts }: Props) => (
   <>
     <Head>
       <title>{config.site_title}</title>
-      <meta property="og:title" content={config.site_keywords[1]} />
-      <meta property="og:description" content={config.site_description} />
-      <meta property="og:url" content={config.host_url} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={config.site_title} />
-      <meta name="description" content={config.site_description} />{" "}
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <StandWithUkraine />

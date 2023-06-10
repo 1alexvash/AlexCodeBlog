@@ -27,38 +27,42 @@ interface Props {
 const MonthlyDiagram = ({ postsByMonth }: Props) => {
   const theme = useTheme();
 
-  const { monthlyDiagramWrapper, monthlyDiagramColumn } = styles(theme);
+  const { monthlyDiagramWrapper, monthlyDiagramColumn, monthNameStyle } =
+    styles(theme);
 
   return (
-    <Box sx={monthlyDiagramWrapper}>
-      {seasonData.map((column) => (
-        <Box sx={monthlyDiagramColumn} key={column.month}>
-          <Typography
-            sx={{
-              ...counterMarginBottom(postsByMonth[column.month]),
-            }}
-          >
-            {postsByMonth[column.month] ?? 0}
-          </Typography>
-          <Paper
-            sx={{
-              height: `${
-                postsByMonth[column.month] > 0
-                  ? postsByMonth[column.month] * 30
-                  : 1
-              }px`,
-            }}
-            square
-          >
-            <img
-              src={`/images/${column.season}.svg`}
-              alt={`${column.season}`}
-              height={50}
-              width={50}
-            />
-          </Paper>
-        </Box>
-      ))}
+    <Box>
+      <Box sx={monthlyDiagramWrapper}>
+        {seasonData.map((column) => (
+          <Box sx={monthlyDiagramColumn} key={column.month}>
+            <Typography sx={counterMarginBottom(postsByMonth[column.month])}>
+              {postsByMonth[column.month] ?? 0}
+            </Typography>
+            <Paper
+              sx={{
+                height: `${
+                  postsByMonth[column.month] > 0
+                    ? postsByMonth[column.month] * 30
+                    : 1
+                }px`,
+              }}
+              square
+            >
+              <img
+                src={`/images/${column.season}.svg`}
+                alt={`${column.season}`}
+                height={50}
+                width={50}
+              />
+            </Paper>
+          </Box>
+        ))}
+      </Box>
+      <Box sx={monthNameStyle}>
+        {seasonData.map((currentMonth) => (
+          <Box key={currentMonth.month}>{currentMonth.month}</Box>
+        ))}
+      </Box>
     </Box>
   );
 };
