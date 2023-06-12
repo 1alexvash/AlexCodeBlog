@@ -69,6 +69,7 @@ const components: Components<{
                 : theme.palette.main.darkGrey,
             fontSize: "14px",
             textAlign: "center",
+            mt: "5px",
           })}
         >
           {props.caption}
