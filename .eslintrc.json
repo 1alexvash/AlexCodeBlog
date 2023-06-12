@@ -28,6 +28,12 @@
     "no-switch-statements/no-switch": "error",
     "object-shorthand": ["error", "always"],
     "eqeqeq": ["error", "always"],
-    "spaced-comment": ["error", "always"]
+    "spaced-comment": ["error", "always"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
