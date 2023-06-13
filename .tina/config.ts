@@ -40,6 +40,9 @@ export default defineConfig({
             name: "date",
             label: "Date",
             required: true,
+            ui: {
+              parse: (value) => value && value.format("YYYY-MM-DD"),
+            },
           },
           {
             type: "image",
