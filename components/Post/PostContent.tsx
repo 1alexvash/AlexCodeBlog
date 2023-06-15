@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import config from "config";
 import {
   isPostADraft,
@@ -31,6 +31,7 @@ interface listItemTinaProps {
 
 const codeBlockASTNodeName = "code_block";
 const listItemASTNodeName = "li";
+const imgASTNodeName = "img";
 
 const components: Components<{
   [codeBlockASTNodeName]: CodeTinaComponentProps;
@@ -49,6 +50,28 @@ const components: Components<{
     }
 
     return <li className="tina-list-item">{props.children}</li>;
+  },
+  [imgASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return (
+      <Box>
+        <img src={props.url} alt={props.alt} />
+        <Typography
+          variant="caption"
+          component="p"
+          sx={(theme) => ({
+            color: theme.palette.mode === "dark" ? "#dadada" : "#999999",
+
+            textAlign: "center",
+          })}
+        >
+          {props.caption}
+        </Typography>
+      </Box>
+    );
   },
 };
 
