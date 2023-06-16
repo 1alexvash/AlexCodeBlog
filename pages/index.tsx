@@ -1,5 +1,4 @@
 import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
-
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
@@ -15,9 +14,8 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
-import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
-
 import UpcomingPosts from "@/components/UpcomingPosts";
+import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
 import {
@@ -161,10 +159,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   const { data, query, variables } = await client.queries.mainConfig({
-    relativePath: "mainConfig.json",
-  });
-
-  const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
   });
 

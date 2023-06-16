@@ -1,5 +1,4 @@
 import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
-
 import {
   queriesToArrayOfDocuments,
   queryToDocument,

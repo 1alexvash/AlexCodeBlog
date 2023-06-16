@@ -100,7 +100,7 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.siteTitle} />
-        <meta property="og:image" content={post.heroImage} />
+        <meta property="og:image" content={post.heroImage ?? ""} />
       </Head>
 
       <div className="blogpost-image">
