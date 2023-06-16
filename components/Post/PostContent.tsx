@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import config from "config";
 import {
   isPostADraft,
   isPostInTheFuture,
@@ -10,6 +9,7 @@ import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
+import { useAppSelector } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
@@ -81,6 +81,9 @@ const components: Components<{
 
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.body);
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
+
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -91,12 +94,12 @@ const PostContent = ({ post }: Props) => {
     <article className="blogpost-content">
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={config.site_description} />
+        <meta name="description" content={config.siteDescription} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={config.host_url} />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:image" content={post.heroImage} />
       </Head>
 
