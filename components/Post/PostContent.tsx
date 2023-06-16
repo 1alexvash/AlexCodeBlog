@@ -1,9 +1,10 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import {
   isPostADraft,
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
 import getFirstParagraph from "helpers/getFirstParagraph";
+import isUpcomingPost from "helpers/isUpcomingPost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
@@ -30,6 +31,7 @@ interface listItemTinaProps {
 
 const codeBlockASTNodeName = "code_block";
 const listItemASTNodeName = "li";
+const imgASTNodeName = "img";
 
 const components: Components<{
   [codeBlockASTNodeName]: CodeTinaComponentProps;
@@ -48,6 +50,28 @@ const components: Components<{
     }
 
     return <li className="tina-list-item">{props.children}</li>;
+  },
+  [imgASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return (
+      <Box>
+        <img src={props.url} alt={props.alt} />
+        <Typography
+          variant="caption"
+          component="p"
+          sx={(theme) => ({
+            color: theme.palette.mode === "dark" ? "#dadada" : "#999999",
+
+            textAlign: "center",
+          })}
+        >
+          {props.caption}
+        </Typography>
+      </Box>
+    );
   },
 };
 
@@ -85,10 +109,7 @@ const PostContent = ({ post }: Props) => {
           width={790}
           height={394}
           style={{
-            filter:
-              isPostADraft(post) || isPostInTheFuture(post)
-                ? "grayscale(50%)"
-                : "none",
+            filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
             borderRadius: "3px",
           }}
         />
