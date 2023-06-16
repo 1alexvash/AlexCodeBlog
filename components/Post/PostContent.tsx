@@ -78,7 +78,7 @@ const components: Components<{
 const PostContent = ({ post }: Props) => {
   const description = getFirstParagraph(post.body);
   const config = useAppSelector((state) => state.tinaData.mainConfig);
-  const hostURL = useAppSelector((state) => state.hostUrl.link);
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
 
   const document = useRef<HTMLDivElement>(null);
 
@@ -93,7 +93,7 @@ const PostContent = ({ post }: Props) => {
         <meta name="description" content={config.siteDescription} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={hostURL} />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:image" content={post.heroImage} />

@@ -41,7 +41,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
   });
 
   const config = useAppSelector((state) => state.tinaData.mainConfig);
-  const hostURL = useAppSelector((state) => state.hostUrl.link);
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
 
   const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
@@ -51,7 +51,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <title>{data.post.title}</title>
         <meta name="description" content={config.siteDescription} />
         <meta property="og:description" content={config.siteDescription} />
-        <meta property="og:url" content={hostURL} />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:image" content={config.defaultImage} />

@@ -21,14 +21,14 @@ import {
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
 
-interface HomeProps {
+interface Props {
   posts: PostDocumentWithoutBody[];
   tinaData: MainConfigQuery;
   query: string;
   variables: MainConfigQueryVariables;
 }
 
-const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
+const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
 
   const { data } = useTina({
@@ -77,7 +77,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
     dispatch(setTinaData(data));
   }, []);
 
-  const hostURL = useAppSelector((state) => state.hostUrl.link);
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
 
   return (
     <>
@@ -88,7 +88,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
           property="og:description"
           content={data.mainConfig.siteDescription}
         />
-        <meta property="og:url" content={hostURL} />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={data.mainConfig.siteTitle} />
         <meta property="og:image" content={data.mainConfig.defaultImage} />
@@ -118,7 +118,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
 export const getStaticProps = async () => {
   const posts = await client.queries.postConnection({});
 
-  const pageResponse = await client.queries.mainConfig({
+  const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
   });
 
@@ -127,9 +127,9 @@ export const getStaticProps = async () => {
       posts: posts.data.postConnection.edges
         ?.map((edge) => edge?.node)
         .reverse(),
-      tinaData: pageResponse.data,
-      query: pageResponse.query,
-      variables: pageResponse.variables,
+      tinaData: mainConfig.data,
+      query: mainConfig.query,
+      variables: mainConfig.variables,
     },
   };
 };
