@@ -28,6 +28,9 @@
     "no-switch-statements/no-switch": "error",
     "object-shorthand": ["error", "always"],
     "eqeqeq": ["error", "always"],
-    "id-length": ["error", { "exceptions": ["x", "y", "_", "id"], "min": 3 }]
+    "id-length": [
+      "error",
+      { "exceptions": ["x", "y", "a", "b", "_"], "min": 2 }
+    ]
   }
 }

@@ -28,9 +28,7 @@ const Home: NextPage<{
     return acc;
   }, {} as Record<string, number>);
 
-  const sortedTags = Object.entries(tagsFrequency).sort(
-    (currentValue, previousValue) => previousValue[1] - currentValue[1]
-  );
+  const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
 
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
 
