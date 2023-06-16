@@ -21,17 +21,25 @@ import UpcomingPosts from "@/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
+import {
+  MainConfigQuery,
+  MainConfigQueryVariables,
+} from ".tina/__generated__/types";
 
 const Home: NextPage<{
-  mainPagePosts: PostDocumentWithoutBody[];
-  upcomingDraftPosts: PostDocumentWithoutBody[];
-  upcomingFuturePosts: PostDocumentWithoutBody[];
+  homePagePosts: PostDocumentWithoutBody[];
+  upcomingPosts: PostDocumentWithoutBody[];
   isEditorMode: boolean;
+  tinaData: MainConfigQuery;
+  query: string;
+  variables: MainConfigQueryVariables;
 }> = ({
-  mainPagePosts,
+  homePagePosts,
   isEditorMode,
-  upcomingDraftPosts,
-  upcomingFuturePosts,
+  upcomingPosts,
+  tinaData,
+  query,
+  variables,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -40,7 +48,8 @@ const Home: NextPage<{
     variables,
     data: tinaData,
   });
-  const tags = mainPagePosts.map((mainPagePost) => mainPagePost.tags).flat();
+
+  const tags = homePagePosts.map((homePagePost) => homePagePost.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
     if (acc[tag]) {
@@ -56,12 +65,12 @@ const Home: NextPage<{
   const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
-  const filteredPosts = mainPagePosts.filter((mainPagePost) => {
+  const filteredPosts = homePagePosts.filter((homePagePost) => {
     if (selectedTags.length === 0) {
       return true;
     }
 
-    return selectedTags.some((tag) => mainPagePost.tags.includes(tag));
+    return selectedTags.some((tag) => homePagePost.tags.includes(tag));
   });
 
   const pagesCount = Math.ceil(
@@ -74,9 +83,6 @@ const Home: NextPage<{
     currentPage * data.mainConfig.postsPerPage,
     nextPage * data.mainConfig.postsPerPage
   );
-  const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
-    .concat(upcomingDraftPosts, upcomingFuturePosts)
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
   useIsomorphicLayoutEffect(() => {
     dispatch(setHostUrl(window.location.origin));
@@ -125,7 +131,7 @@ const Home: NextPage<{
 export const getStaticProps: GetStaticProps = async (context) => {
   const isEditorMode = context.draftMode || false;
 
-  const mainPagePosts = await client.queries.postsWithoutBody({
+  const homePagePosts = await client.queries.postsWithoutBody({
     filter: {
       draft: { eq: false },
     },
@@ -148,16 +154,25 @@ export const getStaticProps: GetStaticProps = async (context) => {
       })
     : [];
 
-  const mainConfig = await client.queries.mainConfig({
+  const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype
+    .concat(
+      convertTypesAndGetEdges(upcomingDraftPosts),
+      convertTypesAndGetEdges(upcomingFuturePosts)
+    )
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+
+  const { data, query, variables } = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
   });
 
   return {
     props: {
-      mainPagePosts: convertTypesAndGetEdges(mainPagePosts),
+      homePagePosts: convertTypesAndGetEdges(homePagePosts),
       isEditorMode,
-      upcomingDraftPosts: convertTypesAndGetEdges(upcomingDraftPosts),
-      upcomingFuturePosts: convertTypesAndGetEdges(upcomingFuturePosts),
+      upcomingPosts,
+      tinaData: data,
+      query,
+      variables,
     },
   };
 };
