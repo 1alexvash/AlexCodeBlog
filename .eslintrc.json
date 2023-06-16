@@ -29,6 +29,7 @@
     "object-shorthand": ["error", "always"],
     "eqeqeq": ["error", "always"],
     "spaced-comment": ["error", "always"],
-    "jsx-a11y/anchor-is-valid": "error"
+    "jsx-a11y/anchor-is-valid": "error",
+    "no-nested-ternary": "error"
   }
 }

@@ -1,6 +1,12 @@
-import config from "config";
+import { TinaMarkdown, TinaMarkdownContent } from "tinacms/dist/rich-text";
 
-const Intro = () => (
+interface Props {
+  authorName: string;
+  authorPosition: string;
+  siteDescription: TinaMarkdownContent | TinaMarkdownContent[];
+}
+
+const Intro = ({ authorName, authorPosition, siteDescription }: Props) => (
   <section className="intro-section">
     <div className="container">
       <div className="intro-content">
@@ -13,14 +19,14 @@ const Intro = () => (
               height={90}
             />
           </div>
-          <div className="name">{config.author_name}</div>
-          <div className="job">{config.author_position}</div>
+          <div className="name">{authorName}</div>
+          <div className="job">{authorPosition}</div>
         </div>
         <div className="intro-text">
-          <h1>Hello, I am {config.author_name}</h1>
-          <p style={{ whiteSpace: "break-spaces" }}>
-            {config.site_description}
-          </p>
+          <h1>Hello, I am {authorName}</h1>
+          <span style={{ whiteSpace: "break-spaces" }}>
+            <TinaMarkdown content={siteDescription} />
+          </span>
         </div>
       </div>
     </div>
