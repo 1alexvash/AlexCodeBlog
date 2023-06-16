@@ -1,7 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
 import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
@@ -33,8 +32,8 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
 
   const { data } = useTina({
-    query: query,
-    variables: variables,
+    query,
+    variables,
     data: tinaData,
   });
 
@@ -99,9 +98,9 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
       <StandWithUkraine />
       <Header />
       <Intro
-        author_name={data.mainConfig.authorName}
-        author_position={data.mainConfig.authorPosition}
-        site_description={data.mainConfig.siteDescription}
+        authorName={data.mainConfig.authorName}
+        authorPosition={data.mainConfig.authorPosition}
+        siteDescription={data.mainConfig.siteDescription}
       />
       <section className="simple-section">
         <div className="container">
