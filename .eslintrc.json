@@ -28,6 +28,10 @@
     "no-switch-statements/no-switch": "error",
     "object-shorthand": ["error", "always"],
     "eqeqeq": ["error", "always"],
+    "id-length": [
+      "error",
+      { "exceptions": ["x", "y", "a", "b", "_"], "min": 2 }
+    ],
     "spaced-comment": ["error", "always"],
     "jsx-a11y/anchor-is-valid": "error",
     "no-nested-ternary": "error"
