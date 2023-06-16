@@ -1,6 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
-import React, { Dispatch, RefObject, SetStateAction, useMemo } from "react";
+import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 
