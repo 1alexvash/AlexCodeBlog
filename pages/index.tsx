@@ -79,6 +79,7 @@ const Home: NextPage<HomeProps> = ({ posts, query, tinaData, variables }) => {
   }, []);
 
   const hostURL = useAppSelector((state) => state.hostUrl.link);
+
   return (
     <>
       <Head>
