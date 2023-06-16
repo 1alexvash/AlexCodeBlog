@@ -64,7 +64,7 @@ export const postsQueryToPostsWithoutBody = (
     id: postQuery.id,
     title: postQuery.title,
     date: postQuery.date,
-    heroImage: postQuery.heroImage ?? "",
+    heroImage: postQuery.heroImage ?? null,
     draft: postQuery.draft,
     tags: postQuery.tags
       ? postQuery.tags.filter((tag): tag is string => tag !== null)
