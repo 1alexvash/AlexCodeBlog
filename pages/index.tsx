@@ -31,8 +31,6 @@ interface Props {
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
 
-  console.log("Hello");
-
   const { data } = useTina({
     query,
     variables,
