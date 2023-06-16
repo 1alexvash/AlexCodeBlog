@@ -8,7 +8,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PostDocumentWithoutBody[]>
 ) {
-  const postsQuery = await client.queries.postsWithoutBody({});
+  const postsQuery = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: false },
+      date: { before: new Date(Date.now()).toString() },
+    },
+  });
   const posts = convertTypesAndGetEdges(postsQuery);
 
   return res.status(200).json(posts);
