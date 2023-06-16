@@ -20,22 +20,35 @@ interface Props {
   post: PostDocument;
 }
 
-interface CodeTinaComponentProps {
+interface CodeBlockTinaProps {
   lang: string;
   value: string;
 }
 
-interface listItemTinaProps {
+interface ListItemTinaProps {
+  children: JSX.Element;
+}
+
+interface ImgTinaProps {
+  url: string;
+  caption?: string;
+  alt?: string;
+}
+
+interface CodeTinaProps {
   children: JSX.Element;
 }
 
 const codeBlockASTNodeName = "code_block";
 const listItemASTNodeName = "li";
 const imgASTNodeName = "img";
+const codeASTNodeName = "code";
 
 const components: Components<{
-  [codeBlockASTNodeName]: CodeTinaComponentProps;
-  [listItemASTNodeName]: listItemTinaProps;
+  [codeBlockASTNodeName]: CodeBlockTinaProps;
+  [listItemASTNodeName]: ListItemTinaProps;
+  [imgASTNodeName]: ImgTinaProps;
+  [codeASTNodeName]: CodeTinaProps;
 }> = {
   [codeBlockASTNodeName]: (props) => {
     if (!props) {
@@ -74,6 +87,30 @@ const components: Components<{
         >
           {props.caption}
         </Typography>
+      </Box>
+    );
+  },
+  [codeASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return (
+      <Box
+        component="code"
+        sx={(theme) => ({
+          fontFamily: "monospace",
+          backgroundColor:
+            theme.palette.mode === "light"
+              ? "rgba(9, 30, 66, 0.08)"
+              : "rgba(161, 189, 217, 0.08)",
+          borderRadius: "3px",
+          padding: "4px",
+          overflowWrap: "break-word",
+          whiteSpace: "pre-wrap",
+        })}
+      >
+        {props.children}
       </Box>
     );
   },
