@@ -22,6 +22,88 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "mainConfig",
+        label: "Main config",
+        path: "content",
+        format: "json",
+        fields: [
+          {
+            name: "siteDescription",
+            label: "Site description",
+            type: "rich-text",
+            isBody: true,
+          },
+          {
+            name: "defaultImage",
+            label: "Default image",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "authorName",
+            label: "Author name",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "authorPosition",
+            label: "Author position",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "socialLinks",
+            label: "Social links",
+            type: "object",
+            list: true,
+            required: true,
+            fields: [
+              {
+                name: "link",
+                label: "Link",
+                type: "string",
+                required: true,
+              },
+              {
+                name: "image",
+                label: "Image",
+                type: "string",
+                required: true,
+              },
+              {
+                name: "class",
+                label: "Class",
+                type: "string",
+              },
+            ],
+          },
+          {
+            name: "siteTitle",
+            label: "Site title",
+            type: "string",
+            isTitle: true,
+            required: true,
+          },
+          {
+            name: "siteKeywords",
+            label: "Site keywords",
+            list: true,
+            type: "string",
+            required: true,
+            ui: {
+              min: 1,
+            },
+          },
+
+          {
+            name: "postsPerPage",
+            label: "Posts per page",
+            type: "number",
+            required: true,
+          },
+        ],
+      },
+      {
         name: "post",
         label: "Posts",
         path: "content/posts",
