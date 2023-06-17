@@ -10,27 +10,39 @@ import Intro from "@/components/Intro";
 import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
-import Tags from "@/components/Tags";
+import Tags, { TagData } from "@/components/Tags";
 
 import client from ".tina/__generated__/client";
+
+const initialTagsFrequency: Readonly<Record<string, number>> = {};
+
+const calculateSortedTags = (
+  posts: PostDocumentWithoutBody[]
+): readonly TagData[] => {
+  const tagsFrequency = posts
+    .map((post) => post.tags)
+    .flat()
+    .reduce((acc, tag) => {
+      if (acc[tag]) {
+        return { ...acc, [tag]: acc[tag] + 1 };
+      }
+
+      return { ...acc, [tag]: 1 };
+    }, initialTagsFrequency);
+
+  return Object.entries(tagsFrequency)
+    .sort((a, b) => b[1] - a[1])
+    .map(([tagName, postsCount]) => ({ tagName, postsCount }));
+};
 
 const Home: NextPage<{
   posts: PostDocumentWithoutBody[];
 }> = ({ posts }) => {
-  const tags = posts.map((post) => post.tags).flat();
-
-  const tagsFrequency = tags.reduce((acc, tag) => {
-    if (acc[tag]) {
-      acc[tag] += 1;
-    } else {
-      acc[tag] = 1;
-    }
-    return acc;
-  }, {} as Record<string, number>);
-
-  const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
-
   const selectedTags = useAppSelector((state) => state.selectedTags);
+  const currentPage = useAppSelector((state) => state.pagination.currentPage);
+
+  const sortedTags = calculateSortedTags(posts);
+
   const filteredPosts = posts.filter((post) => {
     if (selectedTags.length === 0) {
       return true;
@@ -40,7 +52,6 @@ const Home: NextPage<{
   });
 
   const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
-  const currentPage = useAppSelector((state) => state.pagination.currentPage);
   const postsToRender = filteredPosts.slice(
     currentPage * config.posts_per_page,
     (currentPage + 1) * config.posts_per_page

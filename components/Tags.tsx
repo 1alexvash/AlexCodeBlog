@@ -1,11 +1,51 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { isDefined } from "helpers/tinaHelpers";
+import { ReactElement, useCallback, useEffect, useMemo } from "react";
 import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useEditState } from "tinacms/dist/react";
-interface Props {
-  sortedTags: [string, number][];
+
+export interface TagData {
+  readonly tagName: string;
+  readonly postsCount: number;
 }
+
+interface Props {
+  readonly sortedTags: readonly TagData[];
+}
+interface TagItemProps {
+  readonly isActive: boolean;
+  readonly onClick: () => void;
+  readonly tagName: string;
+  readonly tagCount?: number;
+}
+
+interface TagsListProps {
+  readonly tagsData: readonly TagItemProps[];
+}
+
+const TagItem = ({
+  isActive,
+  onClick,
+  tagName,
+  tagCount,
+}: TagItemProps): ReactElement => {
+  return (
+    <li className={isActive ? "active" : ""} onClick={onClick}>
+      {tagCount ? `${tagName} [${tagCount}]` : tagName}
+    </li>
+  );
+};
+
+const TagsList = ({ tagsData }: TagsListProps): ReactElement => {
+  return (
+    <ul className="filter-tags-list">
+      {tagsData.map((tagData) => (
+        <TagItem key={tagData.tagName} {...tagData} />
+      ))}
+    </ul>
+  );
+};
 
 const Tags = ({ sortedTags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
@@ -14,90 +54,45 @@ const Tags = ({ sortedTags }: Props) => {
 
   const dispatch = useAppDispatch();
 
-  const noneTagSelected = selectedTags.length === 0;
-  const allTagsSelected = sortedTags.length === selectedTags.length;
-
   useEffect(() => {
     dispatch(resetPaginationPage());
   }, [dispatch, selectedTags]);
 
-  const tagSelect = useCallback(
-    (uniqueTag: string): void => {
-      if (selectedTags.includes(uniqueTag)) {
-        const updatedTags = selectedTags.filter((tag) => tag !== uniqueTag);
+  const tagSelect = (uniqueTag: string): void => {
+    if (selectedTags.includes(uniqueTag)) {
+      const updatedTags = selectedTags.filter((tag) => tag !== uniqueTag);
 
-        dispatch(setTags(updatedTags));
-      } else {
-        dispatch(setTags([...selectedTags, uniqueTag]));
-      }
-    },
-    [dispatch, selectedTags]
-  );
+      dispatch(setTags(updatedTags));
+    } else {
+      dispatch(setTags([...selectedTags, uniqueTag]));
+    }
+  };
 
-  const tags = useMemo(
-    () =>
-      sortedTags
-        .map((tag) => {
-          const tagName = tag[0];
-          const tagCount = tag[1];
+  const tagsData: readonly TagItemProps[] = sortedTags
+    .map(({ tagName, postsCount }) => {
+      const isBasicTag = postsCount >= 2;
+      const isAdditionalTag =
+        postsCount === 1 && selectedTags.includes(tagName);
 
-          if (edit) {
-            return (
-              <li
-                key={tagName}
-                className={selectedTags.includes(tagName) ? "active" : ""}
-                onClick={() => tagSelect(tagName)}
-              >
-                {`${tagName} [${tagCount}]`}
-              </li>
-            );
+      return edit || isAdditionalTag || isBasicTag
+        ? {
+            isActive: selectedTags.includes(tagName) || isAdditionalTag,
+            tagName,
+            tagCount: edit ? postsCount : undefined,
+            onClick: () => tagSelect(tagName),
           }
+        : undefined;
+    })
+    .filter(isDefined);
 
-          const isBasicTag = tagCount >= 2;
-          const isAdditionalTag =
-            tagCount === 1 && selectedTags.includes(tagName);
+  const allTagData: TagItemProps = {
+    tagName: "ALL",
+    onClick: () => dispatch(resetTags()),
+    isActive:
+      selectedTags.length === 0 || sortedTags.length === selectedTags.length,
+  };
 
-          if (isBasicTag) {
-            return (
-              <li
-                key={tagName}
-                className={selectedTags.includes(tagName) ? "active" : ""}
-                onClick={() => tagSelect(tagName)}
-              >
-                {tagName}
-              </li>
-            );
-          }
-
-          if (isAdditionalTag) {
-            return (
-              <li
-                key={tagName}
-                className="active"
-                onClick={() => tagSelect(tagName)}
-              >
-                {tagName}
-              </li>
-            );
-          }
-
-          return null;
-        })
-        .filter((tag) => tag),
-    [sortedTags, edit, selectedTags, tagSelect]
-  );
-
-  return (
-    <ul className="filter-tags-list">
-      <li
-        className={noneTagSelected || allTagsSelected ? "active" : ""}
-        onClick={() => dispatch(resetTags())}
-      >
-        ALL
-      </li>
-      {tags}
-    </ul>
-  );
+  return <TagsList tagsData={[allTagData, ...tagsData]} />;
 };
 
 export default Tags;
