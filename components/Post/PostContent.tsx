@@ -172,6 +172,11 @@ const PostContent = ({ post }: Props) => {
       </div>
       {/* <Reactions /> This future might be added later */}
       <Box component="div" ref={document}>
+        {post.audioVersion ? (
+          <Box component="p">
+            <Link href={post.audioVersion}>Audio Version:</Link>
+          </Box>
+        ) : null}
         <TinaMarkdown content={post.body} components={components} />
       </Box>
     </article>

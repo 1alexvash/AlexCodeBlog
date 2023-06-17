@@ -116,7 +116,11 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
-          // TODO: audio file
+          {
+            type: "string",
+            name: "audioVersion",
+            label: "Audio version",
+          },
           {
             type: "datetime",
             name: "date",

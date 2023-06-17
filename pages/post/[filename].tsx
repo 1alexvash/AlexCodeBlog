@@ -1,7 +1,4 @@
-import {
-  queriesToArrayOfDocuments,
-  queryToDocument,
-} from "helpers/tinaHelpers";
+import { postToDocument, queriesToArrayOfDocuments } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -62,7 +59,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <BreadCrumbs title={data.post.title} />
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
       <BlogPostSectionWrapper ref={blogPostSectionRef}>
-        <PostContent post={queryToDocument(data)} />
+        <PostContent post={postToDocument(data.post)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
       <Footer />

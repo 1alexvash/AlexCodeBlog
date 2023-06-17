@@ -1,11 +1,11 @@
 import { PostDocument, PostFromQuery } from "interfaces";
 
-import { PostQuery } from ".tina/__generated__/types";
-
-const postToDocument = (post: PostFromQuery): PostDocument => {
-  const { date, draft, title, body, heroImage, tags, _sys, id } = post;
+export const postToDocument = (post: PostFromQuery): PostDocument => {
+  const { date, draft, title, body, heroImage, tags, _sys, id, audioVersion } =
+    post;
 
   return {
+    audioVersion: audioVersion ?? "",
     date,
     draft,
     title,
@@ -15,12 +15,6 @@ const postToDocument = (post: PostFromQuery): PostDocument => {
     _sys,
     id,
   };
-};
-
-export const queryToDocument = (data: PostQuery): PostDocument => {
-  const { post } = data;
-
-  return postToDocument(post);
 };
 
 export const queriesToArrayOfDocuments = (
