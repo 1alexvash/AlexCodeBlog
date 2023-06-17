@@ -12,9 +12,7 @@ import Intro from "@/components/Intro";
 import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
-
 import Tags, { TagData } from "@/components/Tags";
-
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";

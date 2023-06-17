@@ -1,5 +1,5 @@
 import { isDefined } from "helpers/tinaHelpers";
-import { ReactElement, useCallback, useEffect, useMemo } from "react";
+import { ReactElement, useEffect } from "react";
 import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
