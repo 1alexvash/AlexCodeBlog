@@ -25,6 +25,7 @@ const horse = {
 };
 
 const centaur = Object.assign(person, horse);
+console.log('centaur:', centaur)
 /*
   {
     name: 'Spirit',
@@ -38,4 +39,4 @@ const centaur = Object.assign(person, horse);
 
 As you can see, the new centaur object got the properties from `person` and `horse` objects.
 
-However something interesting...
+However, something interesting to watch out for is that `person`'s properties "name" and "age" were overwritten by the exact `horse`'s properties as they had higher precedence in this method call.
