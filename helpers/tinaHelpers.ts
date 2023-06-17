@@ -18,7 +18,7 @@ const postToDocument = (post: PostFromQuery): PostDocument => {
     draft,
     title,
     body,
-    heroImage: heroImage ?? "",
+    heroImage: heroImage ?? undefined,
     tags: tags ? tags.filter(isNotNull) : [],
     _sys,
     id,

@@ -25,6 +25,56 @@ const MobileSearch = ({
 }: Props) => {
   const dispatch = useAppDispatch();
 
+  const MobileSearchResults = () => (
+    <div className="mobile-search-results">
+      {filteredPosts.map((post, index) => (
+        <div className="mobile-posts-block" key={index}>
+          <div className="inner-flex">
+            <a href={`/post/${post._sys.filename}`} className="image">
+              <img
+                src={post.heroImage ?? "/post-images/draft.webp"}
+                alt="blog post image"
+              />
+            </a>
+            <a href={`/post/${post._sys.filename}`} className="name">
+              {post.title}
+            </a>
+          </div>
+          <div className="tags">
+            {post.tags.map((tag) => (
+              <Link
+                href="/"
+                key={tag}
+                onClick={() => {
+                  setShowMenu(false);
+                  dispatch(setTags([tag]));
+                }}
+              >
+                #{tag}
+              </Link>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const MobileSearchContent = () => {
+    if (search.value.trim().length === 0) {
+      return null;
+    }
+
+    if (!search.isLoaded) {
+      return <MobileSkeletons />;
+    }
+
+    if (filteredPosts.length > 0) {
+      return <MobileSearchResults />;
+    }
+
+    return <NotFound />;
+  };
+
   return (
     <div className="mobile-search search-block">
       <input
@@ -39,49 +89,7 @@ const MobileSearch = ({
         }}
         ref={mobileInputRef}
       />
-
-      {search.value.trim().length > 0 ? (
-        search.isLoaded ? (
-          filteredPosts.length > 0 ? (
-            <div className="mobile-search-results">
-              {filteredPosts.map((post, index) => (
-                <div className="mobile-posts-block" key={index}>
-                  <div className="inner-flex">
-                    <a href={`/post/${post._sys.filename}`} className="image">
-                      <img
-                        src={post.heroImage ?? "/post-images/placeholder.png"}
-                        alt="blog post image"
-                      />
-                    </a>
-                    <a href={`/post/${post._sys.filename}`} className="name">
-                      {post.title}
-                    </a>
-                  </div>
-                  <div className="tags">
-                    {post.tags.map((tag) => (
-                      <Link
-                        href="/"
-                        key={tag}
-                        onClick={() => {
-                          setShowMenu(false);
-                          dispatch(setTags([tag]));
-                        }}
-                      >
-                        #{tag}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <NotFound />
-          )
-        ) : (
-          <MobileSkeletons />
-        )
-      ) : null}
-
+      <MobileSearchContent />
       {search.value.trim().length > 0 && (
         <div
           className="mobile-search-overlay"
