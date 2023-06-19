@@ -5,16 +5,18 @@ const branch =
 
 const tokenForEveryBranch = "351c04276ed1059a64f12ee7ade4c2fab8e11562";
 
-const isValidVocaroURL = (link: string): boolean => {
+const isValidVocaroURL = (link: string | undefined): boolean => {
+  if (!link) {
+    return true;
+  }
+
   try {
     const newUrl = new URL(link);
-
     return (
-      ((newUrl.protocol === "http:" || newUrl.protocol === "https:") &&
-        link.includes("voca.ro")) ||
-      link.includes("vocaro")
+      (newUrl.protocol === "http:" || newUrl.protocol === "https:") &&
+      (link.includes("voca.ro") || link.includes("vocaro"))
     );
-  } catch (err) {
+  } catch (error) {
     return false;
   }
 };
