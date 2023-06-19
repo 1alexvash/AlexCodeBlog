@@ -1,3 +1,4 @@
+import getFirstParagraph from "helpers/getFirstParagraph";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -36,6 +37,9 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
     variables,
     data: tinaData,
   });
+
+  const siteDescription =
+    getFirstParagraph(data.mainConfig.siteDescription) ?? "";
 
   const tags = posts.map((post) => post.tags).flat();
 
@@ -84,15 +88,12 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       <Head>
         <title>{data.mainConfig.siteTitle}</title>
         <meta property="og:title" content={data.mainConfig.siteKeywords[0]} />
-        <meta
-          property="og:description"
-          content={data.mainConfig.siteDescription}
-        />
+        <meta property="og:description" content={siteDescription} />
         <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content={data.mainConfig.siteTitle} />
         <meta property="og:image" content={data.mainConfig.defaultImage} />
-        <meta name="description" content={data.mainConfig.siteDescription} />
+        <meta name="description" content={siteDescription} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />

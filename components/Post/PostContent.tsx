@@ -120,7 +120,7 @@ const components: Components<{
 
 const PostContent = ({ post }: Props) => {
   const dispatch = useAppDispatch();
-  const description = getFirstParagraph(post.body);
+  const description = getFirstParagraph(post.body) ?? "";
   const config = useAppSelector((state) => state.tinaData.mainConfig);
   const hostURLLink = useAppSelector((state) => state.hostUrl);
 
