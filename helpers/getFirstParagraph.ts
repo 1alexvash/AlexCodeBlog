@@ -1,4 +1,4 @@
-const getFirstParagraph = (content: any) => {
+const getFirstParagraph = (content: any): string | null => {
   if (content.children.length === 0) {
     return null;
   }
