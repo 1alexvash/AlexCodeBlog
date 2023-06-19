@@ -5,6 +5,20 @@ const branch =
 
 const tokenForEveryBranch = "351c04276ed1059a64f12ee7ade4c2fab8e11562";
 
+const isValidVocaroURL = (link: string): boolean => {
+  try {
+    const newUrl = new URL(link);
+
+    return (
+      ((newUrl.protocol === "http:" || newUrl.protocol === "https:") &&
+        link.includes("voca.ro")) ||
+      link.includes("vocaro")
+    );
+  } catch (err) {
+    return false;
+  }
+};
+
 export default defineConfig({
   branch,
   clientId: "c3e7b224-ca52-46a7-9bd6-c7f8c3777c7a",
@@ -120,6 +134,13 @@ export default defineConfig({
             type: "string",
             name: "audioVersion",
             label: "Audio version",
+            ui: {
+              validate: (value) => {
+                if (!isValidVocaroURL(value)) {
+                  return "Link is not valid!";
+                }
+              },
+            },
           },
           {
             type: "datetime",
