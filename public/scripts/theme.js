@@ -1,7 +1,7 @@
 // Code duplicate to prevent the following error:
 // https://github.com/vercel/next.js/discussions/12533
 
-(() => {
+document.addEventListener("DOMContentLoaded", () => {
   const defaultTheme = "dark";
 
   const getStorageTheme = () => {
@@ -34,4 +34,4 @@
   } else {
     body?.classList.remove("dark-theme");
   }
-})();
+});
