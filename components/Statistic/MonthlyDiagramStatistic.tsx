@@ -2,10 +2,13 @@ import { Box, Paper, Typography, useTheme } from "@mui/material";
 import React from "react";
 
 import { PostsByMonthType } from ".";
-import { counterMarginBottom } from "./pageHelpers";
+import { marginBottomCounter } from "./pageHelpers";
 import styles from "./pageStyles";
 
-const seasonData = [
+const minColumnHeight = 1;
+const heightByCount = 30;
+
+const monthlySeasons = [
   { month: "January", season: "winter" },
   { month: "February", season: "winter" },
   { month: "March", season: "spring" },
@@ -24,26 +27,26 @@ interface Props {
   postsByMonth: PostsByMonthType;
 }
 
-const MonthlyDiagram = ({ postsByMonth }: Props) => {
+const MonthlyDiagramStatistic = ({ postsByMonth }: Props) => {
   const theme = useTheme();
 
-  const { monthlyDiagramWrapper, monthlyDiagramColumn, monthNameStyle } =
+  const { monthlyDiagramWrapper, monthlyDiagramColumn, monthTitlesStyle } =
     styles(theme);
 
   return (
     <Box>
       <Box sx={monthlyDiagramWrapper}>
-        {seasonData.map((column) => (
+        {monthlySeasons.map((column) => (
           <Box sx={monthlyDiagramColumn} key={column.month}>
-            <Typography sx={counterMarginBottom(postsByMonth[column.month])}>
+            <Typography sx={marginBottomCounter(postsByMonth[column.month])}>
               {postsByMonth[column.month] ?? 0}
             </Typography>
             <Paper
               sx={{
                 height: `${
                   postsByMonth[column.month] > 0
-                    ? postsByMonth[column.month] * 30
-                    : 1
+                    ? postsByMonth[column.month] * heightByCount
+                    : minColumnHeight
                 }px`,
               }}
               square
@@ -58,8 +61,8 @@ const MonthlyDiagram = ({ postsByMonth }: Props) => {
           </Box>
         ))}
       </Box>
-      <Box sx={monthNameStyle}>
-        {seasonData.map((currentMonth) => (
+      <Box sx={monthTitlesStyle}>
+        {monthlySeasons.map((currentMonth) => (
           <Box key={currentMonth.month}>{currentMonth.month}</Box>
         ))}
       </Box>
@@ -67,4 +70,4 @@ const MonthlyDiagram = ({ postsByMonth }: Props) => {
   );
 };
 
-export default MonthlyDiagram;
+export default MonthlyDiagramStatistic;

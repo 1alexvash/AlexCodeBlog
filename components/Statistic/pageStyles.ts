@@ -1,8 +1,5 @@
 import { Theme } from "@mui/material";
 
-const monthlyDiagramWidth = 1210;
-const monthColumnWidth = 90;
-
 const styles = (theme: Theme) => ({
   pageTitle: {
     fontSize: "50px",
@@ -26,17 +23,17 @@ const styles = (theme: Theme) => ({
       cursor: "pointer",
     },
   },
-  yearButtonWidth: {
+  yearButton: {
     width: "57px",
   },
-  monthButtonWidth: {
+  monthButton: {
     width: "80px",
   },
   monthlyDiagramWrapper: {
     display: "flex",
     alignItems: "end",
     gap: "10px",
-    width: monthlyDiagramWidth + "px",
+    width: "100%",
     height: "385px",
     px: "10px",
     backgroundColor:
@@ -45,6 +42,8 @@ const styles = (theme: Theme) => ({
         : theme.palette.main.grey,
   },
   monthlyDiagramColumn: {
+    width: "100%",
+    maxWidth: "90px",
     textAlign: "center",
     "& .MuiTypography-root": {
       color:
@@ -56,19 +55,25 @@ const styles = (theme: Theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "end",
-      width: monthColumnWidth + "px",
+      width: "100%",
       background: theme.palette.main.orange,
       "& img": {
         mb: "3px",
+        "@media (max-width: 1019px)": {
+          width: "100%",
+          height: "100%",
+          maxHeight: "30px",
+          minHeight: "30px",
+        },
       },
     },
   },
-  monthNameStyle: {
+  monthTitlesStyle: {
     display: "flex",
+    width: "100%",
     justifyContent: "space-between",
     px: "10px",
     gap: "10px",
-    width: monthlyDiagramWidth + "px",
     mt: "10px",
     "& .MuiBox-root": {
       color:
@@ -76,8 +81,12 @@ const styles = (theme: Theme) => ({
           ? theme.palette.main.black
           : theme.palette.main.white,
       fontSize: "14px",
-      width: monthColumnWidth + "px",
+      width: "100%",
+      maxWidth: "90px",
       textAlign: "center",
+      "@media (max-width: 1200px)": {
+        overflow: "hidden",
+      },
     },
   },
 });

@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { PostDocumentWithoutBody } from "interfaces";
 import { useState } from "react";
 
-import MonthlyDiagram from "./MonthlyDiagram";
+import MonthlyDiagramStatistic from "./MonthlyDiagramStatistic";
 import { getPostsByYearAndMonth } from "./pageHelpers";
 import styles from "./pageStyles";
 
@@ -12,29 +12,38 @@ interface Props {
   posts: PostDocumentWithoutBody[];
 }
 
+const currentYear = new Date().getUTCFullYear();
+const previousYear = currentYear - 1;
+
 const StatisticPage = ({ posts }: Props) => {
   const theme = useTheme();
 
   const [postsByMonth, setPostsByMonth] = useState<PostsByMonthType>(
-    getPostsByYearAndMonth(new Date().getFullYear(), posts)
+    getPostsByYearAndMonth(currentYear, posts)
   );
-  const [selectedYear, setSelectedYear] = useState(2023);
+  const [selectedYear, setSelectedYear] = useState(currentYear);
 
-  const { pageTitle, pageControlsAlign, yearButtonWidth } = styles(theme);
+  const {
+    pageTitle,
+    pageControlsAlign,
+    yearButton: yearButtonWidth,
+  } = styles(theme);
 
   const handleYearClick = (year: number) => {
     setPostsByMonth(getPostsByYearAndMonth(year, posts));
     setSelectedYear(year);
   };
 
-  const isTodayYearActive = selectedYear === 2023;
+  const isCurrentYearActive = selectedYear === currentYear;
 
-  const yearActiveStyles = (condition: boolean) => {
+  const yearActiveStyles = (isActiveYear: boolean) => {
+    const colorsPalette = theme.palette.main;
+
     let backgroundColor, color;
 
-    if (condition) {
-      backgroundColor = theme.palette.main.orange;
-      color = theme.palette.main.white;
+    if (isActiveYear) {
+      backgroundColor = colorsPalette.orange;
+      color = colorsPalette.white;
 
       return {
         backgroundColor,
@@ -43,13 +52,13 @@ const StatisticPage = ({ posts }: Props) => {
     }
 
     if (theme.palette.mode === "light") {
-      backgroundColor = theme.palette.main.lightGrey;
-      color = theme.palette.main.black;
+      backgroundColor = colorsPalette.lightGrey;
+      color = colorsPalette.black;
     }
 
     if (theme.palette.mode === "dark") {
-      backgroundColor = theme.palette.main.grey;
-      color = theme.palette.main.white;
+      backgroundColor = colorsPalette.grey;
+      color = colorsPalette.white;
     }
 
     return {
@@ -59,27 +68,25 @@ const StatisticPage = ({ posts }: Props) => {
   };
 
   const pageControls = (
-    <Box>
+    <Box
+      sx={[
+        pageControlsAlign,
+        {
+          "& div": yearButtonWidth,
+        },
+      ]}
+    >
       <Box
-        sx={[
-          pageControlsAlign,
-          {
-            "& div": yearButtonWidth,
-          },
-        ]}
+        sx={yearActiveStyles(!isCurrentYearActive)}
+        onClick={() => handleYearClick(previousYear)}
       >
-        <Box
-          sx={yearActiveStyles(!isTodayYearActive)}
-          onClick={() => handleYearClick(2022)}
-        >
-          2022
-        </Box>
-        <Box
-          sx={yearActiveStyles(isTodayYearActive)}
-          onClick={() => handleYearClick(2023)}
-        >
-          2023
-        </Box>
+        {previousYear}
+      </Box>
+      <Box
+        sx={yearActiveStyles(isCurrentYearActive)}
+        onClick={() => handleYearClick(currentYear)}
+      >
+        {currentYear}
       </Box>
     </Box>
   );
@@ -89,7 +96,7 @@ const StatisticPage = ({ posts }: Props) => {
       <Typography sx={pageTitle}>Statistics</Typography>
       {pageControls}
 
-      <MonthlyDiagram postsByMonth={postsByMonth} />
+      <MonthlyDiagramStatistic postsByMonth={postsByMonth} />
     </Box>
   );
 };

@@ -2,12 +2,12 @@ import { PostDocumentWithoutBody } from "interfaces";
 
 import { PostsByMonthType } from ".";
 
-export const counterMarginBottom = (count: number | undefined) => {
-  if (!count) {
+export const marginBottomCounter = (postsCount: number | undefined) => {
+  if (!postsCount) {
     return { mb: "55px" };
   }
 
-  if (count === 1) {
+  if (postsCount === 1) {
     return { mb: "26px" };
   }
 
@@ -34,14 +34,14 @@ export const getPostsByYearAndMonth = (
   });
 
   const sortedMonths = Object.keys(postsByMonth).sort((a, b) => {
-    const monthA = new Date(`2000 ${a}`).getMonth();
-    const monthB = new Date(`2000 ${b}`).getMonth();
+    const monthA = new Date(`${new Date().getUTCFullYear()} ${a}`).getMonth();
+    const monthB = new Date(`${new Date().getUTCFullYear()} ${b}`).getMonth();
 
     return monthA - monthB;
   });
 
   const sortedPostsByMonth: { [month: string]: number } = {};
-  sortedMonths.forEach((month) => {
+  sortedMonths.map((month) => {
     sortedPostsByMonth[month] = postsByMonth[month];
   });
 
