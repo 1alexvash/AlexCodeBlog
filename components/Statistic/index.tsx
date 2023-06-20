@@ -23,11 +23,7 @@ const StatisticPage = ({ posts }: Props) => {
   );
   const [selectedYear, setSelectedYear] = useState(currentYear);
 
-  const {
-    pageTitle,
-    pageControlsAlign,
-    yearButton: yearButtonWidth,
-  } = styles(theme);
+  const { pageTitle, pageControlsAlign, yearButton } = styles(theme);
 
   const handleYearClick = (year: number) => {
     setPostsByMonth(getPostsByYearAndMonth(year, posts));
@@ -72,7 +68,7 @@ const StatisticPage = ({ posts }: Props) => {
       sx={[
         pageControlsAlign,
         {
-          "& div": yearButtonWidth,
+          "& div": yearButton,
         },
       ]}
     >
