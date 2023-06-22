@@ -21,6 +21,12 @@ const nextConfig = {
   images: {
     domains: ["assets.tina.io"],
   },
+  rewrites: async () => [
+    {
+      source: "/admin",
+      destination: "/admin/index.html",
+    },
+  ],
 };
 
 if (isDev) {
