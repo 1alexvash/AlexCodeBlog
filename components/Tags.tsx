@@ -1,18 +1,19 @@
 import { isDefined } from "helpers/tinaHelpers";
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useEditState } from "tinacms/dist/react";
 
-export interface TagData {
-  readonly tagName: string;
+export interface Tag {
+  readonly name: string;
   readonly postsCount: number;
 }
 
 interface Props {
-  readonly sortedTags: readonly TagData[];
+  readonly tags: readonly Tag[];
 }
+
 interface TagItemProps {
   readonly isActive: boolean;
   readonly onClick: () => void;
@@ -21,33 +22,32 @@ interface TagItemProps {
 }
 
 interface TagsListProps {
-  readonly tagsData: readonly TagItemProps[];
+  readonly tags: readonly TagItemProps[];
 }
+
+const MINIMUM_VISIBLE_COUNT = 2;
+const SINGLE_POST_COUNT = 1;
 
 const TagItem = ({
   isActive,
   onClick,
   tagName,
   tagCount,
-}: TagItemProps): ReactElement => {
-  return (
-    <li className={isActive ? "active" : ""} onClick={onClick}>
-      {tagCount ? `${tagName} [${tagCount}]` : tagName}
-    </li>
-  );
-};
+}: TagItemProps): JSX.Element => (
+  <li className={isActive ? "active" : ""} onClick={onClick}>
+    {tagCount ? `${tagName} [${tagCount}]` : tagName}
+  </li>
+);
 
-const TagsList = ({ tagsData }: TagsListProps): ReactElement => {
-  return (
-    <ul className="filter-tags-list">
-      {tagsData.map((tagData) => (
-        <TagItem key={tagData.tagName} {...tagData} />
-      ))}
-    </ul>
-  );
-};
+const TagsList = ({ tags }: TagsListProps): JSX.Element => (
+  <ul className="filter-tags-list">
+    {tags.map((tag) => (
+      <TagItem key={tag.tagName} {...tag} />
+    ))}
+  </ul>
+);
 
-const Tags = ({ sortedTags }: Props) => {
+const Tags = ({ tags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
 
   const { edit } = useEditState();
@@ -68,31 +68,30 @@ const Tags = ({ sortedTags }: Props) => {
     }
   };
 
-  const tagsData: readonly TagItemProps[] = sortedTags
-    .map(({ tagName, postsCount }) => {
-      const isBasicTag = postsCount >= 2;
-      const isAdditionalTag =
-        postsCount === 1 && selectedTags.includes(tagName);
+  const otherTagItems: readonly TagItemProps[] = tags
+    .map(({ name, postsCount }) => {
+      const isDefaultVisibleTag = postsCount >= MINIMUM_VISIBLE_COUNT;
+      const isTemporaryVisibleTag =
+        postsCount === SINGLE_POST_COUNT && selectedTags.includes(name);
 
-      return edit || isAdditionalTag || isBasicTag
+      return edit || isTemporaryVisibleTag || isDefaultVisibleTag
         ? {
-            isActive: selectedTags.includes(tagName) || isAdditionalTag,
-            tagName,
+            isActive: selectedTags.includes(name) || isTemporaryVisibleTag,
+            tagName: name,
             tagCount: edit ? postsCount : undefined,
-            onClick: () => tagSelect(tagName),
+            onClick: () => tagSelect(name),
           }
         : undefined;
     })
     .filter(isDefined);
 
-  const allTagData: TagItemProps = {
+  const allTagItem: TagItemProps = {
     tagName: "ALL",
     onClick: () => dispatch(resetTags()),
-    isActive:
-      selectedTags.length === 0 || sortedTags.length === selectedTags.length,
+    isActive: selectedTags.length === 0 || tags.length === selectedTags.length,
   };
 
-  return <TagsList tagsData={[allTagData, ...tagsData]} />;
+  return <TagsList tags={[allTagItem, ...otherTagItems]} />;
 };
 
 export default Tags;

@@ -12,7 +12,7 @@ import Intro from "@/components/Intro";
 import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
-import Tags, { TagData } from "@/components/Tags";
+import Tags, { Tag } from "@/components/Tags";
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
@@ -28,25 +28,24 @@ interface Props {
   variables: MainConfigQueryVariables;
 }
 
-const initialTagsFrequency: Readonly<Record<string, number>> = {};
+const initialTagCount: Readonly<Record<string, number>> = {};
 
 const calculateSortedTags = (
   posts: PostDocumentWithoutBody[]
-): readonly TagData[] => {
-  const tagsFrequency = posts
-    .map((post) => post.tags)
-    .flat()
-    .reduce((acc, tag) => {
-      if (acc[tag]) {
-        return { ...acc, [tag]: acc[tag] + 1 };
-      }
+): readonly Tag[] => {
+  const tags = posts.map((post) => post.tags).flat();
 
-      return { ...acc, [tag]: 1 };
-    }, initialTagsFrequency);
+  const tagsFrequency = tags.reduce((acc, tag) => {
+    if (acc[tag]) {
+      return { ...acc, [tag]: acc[tag] + 1 };
+    }
+
+    return { ...acc, [tag]: 1 };
+  }, initialTagCount);
 
   return Object.entries(tagsFrequency)
     .sort((a, b) => b[1] - a[1])
-    .map(([tagName, postsCount]) => ({ tagName, postsCount }));
+    .map(([name, postsCount]) => ({ name, postsCount }));
 };
 
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
@@ -62,7 +61,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
   const nextPage = currentPage + 1;
 
-  const sortedTags = calculateSortedTags(posts);
+  const tags = calculateSortedTags(posts);
 
   const filteredPosts = posts.filter((post) => {
     if (selectedTags.length === 0) {
@@ -113,7 +112,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          <Tags sortedTags={sortedTags} />
+          <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
