@@ -11,9 +11,10 @@ const isValidVocaroURL = (link: string | undefined): boolean => {
   }
 
   try {
-    const newUrl = new URL(link);
+    const newURL = new URL(link);
+
     return (
-      (newUrl.protocol === "http:" || newUrl.protocol === "https:") &&
+      (newURL.protocol === "http:" || newURL.protocol === "https:") &&
       (link.includes("voca.ro") || link.includes("vocaro"))
     );
   } catch (error) {
@@ -133,18 +134,6 @@ export default defineConfig({
             required: true,
           },
           {
-            type: "string",
-            name: "audioVersion",
-            label: "Audio version",
-            ui: {
-              validate: (value) => {
-                if (!isValidVocaroURL(value)) {
-                  return "Link is not valid!";
-                }
-              },
-            },
-          },
-          {
             type: "datetime",
             name: "date",
             label: "Date",
@@ -165,6 +154,18 @@ export default defineConfig({
             type: "boolean",
             required: true,
             description: "If this is checked the post will not be published",
+          },
+          {
+            type: "string",
+            name: "audioVersion",
+            label: "Audio version",
+            ui: {
+              validate: (value) => {
+                if (!isValidVocaroURL(value)) {
+                  return "Invalid link, use vocaro link instead!";
+                }
+              },
+            },
           },
           {
             type: "rich-text",

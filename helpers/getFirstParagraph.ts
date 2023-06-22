@@ -1,6 +1,6 @@
-const getFirstParagraph = (content: any): string | null => {
+const getFirstParagraph = (content: any): string => {
   if (content.children.length === 0) {
-    return null;
+    return "";
   }
 
   const { children } = content;
@@ -10,7 +10,7 @@ const getFirstParagraph = (content: any): string | null => {
       element.type === "p" && element.children[0].type === "text"
   );
 
-  const text = firstParagraph ? firstParagraph.children[0].text : null;
+  const text = firstParagraph ? firstParagraph.children[0].text : "";
 
   return text;
 };

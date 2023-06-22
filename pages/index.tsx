@@ -38,8 +38,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
     data: tinaData,
   });
 
-  const siteDescription =
-    getFirstParagraph(data.mainConfig.siteDescription) ?? "";
+  const siteDescription = getFirstParagraph(data.mainConfig.siteDescription);
 
   const tags = posts.map((post) => post.tags).flat();
 

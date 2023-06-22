@@ -120,7 +120,7 @@ const components: Components<{
 
 const PostContent = ({ post }: Props) => {
   const dispatch = useAppDispatch();
-  const description = getFirstParagraph(post.body) ?? "";
+  const description = getFirstParagraph(post.body);
   const config = useAppSelector((state) => state.tinaData.mainConfig);
   const hostURLLink = useAppSelector((state) => state.hostUrl);
 
@@ -170,13 +170,12 @@ const PostContent = ({ post }: Props) => {
           </Link>
         ))}
       </div>
-      {/* <Reactions /> This future might be added later */}
       <Box component="div" ref={document}>
-        {post.audioVersion ? (
+        {post.audioVersion && (
           <Box component="p">
             <Link href={post.audioVersion}>Audio Version:</Link>
           </Box>
-        ) : null}
+        )}
         <TinaMarkdown content={post.body} components={components} />
       </Box>
     </article>
