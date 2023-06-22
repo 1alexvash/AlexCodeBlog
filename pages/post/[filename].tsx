@@ -1,10 +1,12 @@
-import config from "config";
 import {
   queriesToArrayOfDocuments,
   queryToDocument,
 } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import { useRef } from "react";
+import { useAppSelector } from "redux/typesHooks";
 import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
@@ -12,7 +14,6 @@ import Header from "@/components/Header";
 import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
-import PageProgress from "@/components/Post/PageProgress";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
@@ -26,6 +27,12 @@ interface Props {
   latestPosts: PostFromQuery[];
 }
 
+const latestPostsPerPage = 10;
+
+const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
+  ssr: false,
+});
+
 const Post = ({ latestPosts, ...props }: Props) => {
   const { data } = useTina({
     query: props.query,
@@ -33,23 +40,28 @@ const Post = ({ latestPosts, ...props }: Props) => {
     data: props.data,
   });
 
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
+
+  const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
   return (
     <>
       <Head>
         <title>{data.post.title}</title>
-        <meta name="description" content={config.site_description} />
-        <meta property="og:description" content={config.site_description} />
-        <meta property="og:url" content={config.host_url} />
+        <meta name="description" content={config.siteDescription} />
+        <meta property="og:description" content={config.siteDescription} />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:image" content={config.defaultImage} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />
       <Header />
       <BreadCrumbs title={data.post.title} />
-      <PageProgress />
-      <BlogPostSectionWrapper>
+      <PageProgress blogPostSectionRef={blogPostSectionRef} />
+      <BlogPostSectionWrapper ref={blogPostSectionRef}>
         <PostContent post={queryToDocument(data)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
@@ -70,7 +82,7 @@ export async function getStaticProps({ params }: Params) {
   const postResponse = await client.queries.post({ relativePath });
 
   const latestPosts = await client.queries.postConnection({
-    last: config.latest_posts_per_page,
+    last: latestPostsPerPage,
   });
 
   return {

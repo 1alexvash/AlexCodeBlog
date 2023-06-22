@@ -1,0 +1,24 @@
+{
+  "siteTitle": "AlexCode",
+  "siteDescription": "Technologies suck, they won't be if you read my blog 💪\nOn my blog I'm sharing tips to increase your productivity and developer happiness\n",
+  "siteKeywords": ["Blog about programming"],
+  "authorName": "Alex",
+  "authorPosition": "Full Stack JavaScript Developer",
+  "socialLinks": [
+    {
+      "link": "https://t.me/HeWorksSoHard",
+      "image": "/images/telegram.svg"
+    },
+    {
+      "link": "https://github.com/1alexvash",
+      "image": "/images/github.svg",
+      "class": "git"
+    },
+    {
+      "link": "mailto:1alexvash@gmail.com",
+      "image": "/images/mail.svg"
+    }
+  ],
+  "defaultImage": "/images/social-logo.png",
+  "postsPerPage": 15
+}

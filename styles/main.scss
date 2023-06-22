@@ -963,6 +963,8 @@ h2 {
 }
 
 .blogpost-content img {
+  display: block;
+  margin: 0 auto;
   max-width: 100%;
 }
 
@@ -1345,4 +1347,9 @@ blockquote p:last-child {
 
 .posts-list-block:hover .post-img:after {
   height: 100%;
+}
+
+.tina-list-item {
+  display: flex;
+  gap: 4px;
 }
