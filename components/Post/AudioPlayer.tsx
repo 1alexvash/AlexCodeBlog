@@ -149,7 +149,7 @@ const AudioPlayer = () => {
         "& button": {
           border: "none",
           cursor: "pointer",
-          p: 0,
+          padding: 0,
         },
       })}
     >
