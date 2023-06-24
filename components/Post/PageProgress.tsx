@@ -2,16 +2,34 @@ import { Box } from "@mui/material";
 import useWindowDimensions from "helpers/useWindowDimensions";
 import { useCallback, useEffect, useRef } from "react";
 
-const chromeZoomPixelGapBugFix = -0.25;
-const progressBarHeight = 10;
+export const chromeZoomPixelGapBugFix = -0.25;
+export const progressBarHeight = 10;
 const minDocumentHeight = 1030;
 const minScrollHeightValue = 1;
 
-interface Props {
+interface PageProgressWrapperProps {
+  children?: React.ReactNode;
+}
+
+interface PageProgressProps {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
 }
 
-const PageProgress = ({ blogPostSectionRef }: Props) => {
+export const PageProgressWrapper = ({ children }: PageProgressWrapperProps) => (
+  <Box
+    sx={(theme) => ({
+      position: "sticky",
+      top: chromeZoomPixelGapBugFix,
+      zIndex: 29,
+      height: progressBarHeight,
+      backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
+    })}
+  >
+    {children}
+  </Box>
+);
+
+const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const { width, height } = useWindowDimensions();
@@ -64,15 +82,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
   }, [calculateScrollProgress]);
 
   return (
-    <Box
-      sx={(theme) => ({
-        position: "sticky",
-        top: chromeZoomPixelGapBugFix,
-        zIndex: 29,
-        height: progressBarHeight,
-        backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
-      })}
-    >
+    <PageProgressWrapper>
       <Box
         ref={progressBarRef}
         sx={(theme) => ({
@@ -85,7 +95,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
             theme.palette.mode === "light" ? "#3a3a3a" : "#fe6c0a",
         })}
       />
-    </Box>
+    </PageProgressWrapper>
   );
 };
 
