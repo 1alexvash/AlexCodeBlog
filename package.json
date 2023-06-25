@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tinacms dev -c \"start http://localhost:3000/ &next dev\"",
-    "build": "tinacms build && next build",
+    "build": "tinacms build && next build && next start",
     "start": "tinacms build && next start",
     "lint": "next lint --fix"
   },
