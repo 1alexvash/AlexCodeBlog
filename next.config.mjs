@@ -21,6 +21,13 @@ const nextConfig = {
   images: {
     domains: ["assets.tina.io"],
   },
+  redirects: () => [
+    {
+      source: "/admin",
+      destination: "/admin/index.html#/~/adminHome/",
+      permanent: true,
+    },
+  ],
 };
 
 if (isDev) {
