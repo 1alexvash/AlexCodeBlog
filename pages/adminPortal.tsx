@@ -63,7 +63,11 @@ export const getStaticProps: GetStaticProps = async () => {
     )
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 
-  const { data, query, variables } = await client.queries.mainConfig({
+  const {
+    data: tinaData,
+    query,
+    variables,
+  } = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
   });
 
@@ -71,7 +75,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       homePagePosts: convertTypesAndGetEdges(homePagePosts),
       upcomingPosts,
-      tinaData: data,
+      tinaData,
       query,
       variables,
     },
