@@ -20,7 +20,7 @@ import {
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
 
-interface HomeProps {
+interface Props {
   homePagePosts: PostDocumentWithoutBody[];
   tinaData: MainConfigQuery;
   query: string;
@@ -36,7 +36,7 @@ const HomePage = ({
   variables,
   upcomingPosts,
   isEditorMode,
-}: HomeProps) => {
+}: Props) => {
   const dispatch = useAppDispatch();
 
   const { data } = useTina({
