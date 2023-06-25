@@ -187,10 +187,10 @@ export default defineConfig({
   admin: {
     auth: {
       onLogin: async () => {
-        location.href = `/api/preview/enter`;
+        location.href = "/admin/index.html#/~/adminPortal/";
       },
       onLogout: async () => {
-        location.href = `/api/preview/exit`;
+        location.href = "/";
       },
     },
   },

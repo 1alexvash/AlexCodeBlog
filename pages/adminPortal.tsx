@@ -18,7 +18,7 @@ interface Props {
   upcomingPosts: PostDocumentWithoutBody[];
 }
 
-const AdminHome: NextPage<Props> = ({
+const AdminPortal: NextPage<Props> = ({
   homePagePosts,
   query,
   tinaData,
@@ -78,4 +78,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default AdminHome;
+export default AdminPortal;

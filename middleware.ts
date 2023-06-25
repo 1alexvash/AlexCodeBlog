@@ -1,7 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware() {
-  return NextResponse.redirect("/admin/index.html#/~/adminPortal/");
+export async function middleware(request: NextRequest) {
+  return NextResponse.rewrite(
+    new URL("/admin/index.html#/~/adminPortal/", request.url)
+  );
 }
 
 export const config = {

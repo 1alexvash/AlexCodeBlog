@@ -13,7 +13,7 @@ const BreadCrumbs = ({ title }: Props) => {
       <div className="container">
         <ul className="breadcrumbs">
           <li>
-            <Link href={edit ? "/adminHome" : "/"}>Home</Link>
+            <Link href={edit ? "/AdminPortal" : "/"}>Home</Link>
           </li>
           <li>
             <span>{title}</span>
