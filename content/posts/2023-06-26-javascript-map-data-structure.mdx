@@ -8,9 +8,10 @@ tags:
   - TypeScript
 ---
 
-A picture worth a thousand words, so let's start off with an example. 
+A picture worth a thousand words, so let's start off with a code example.
 
 ```typescript
+// An example of JS Map Data Structure
 const currencyCountryMap: Map<string, string> = new Map([
   ['USD', 'United States'],
   ['EUR', 'European Union'],
@@ -20,15 +21,13 @@ const currencyCountryMap: Map<string, string> = new Map([
 ]);
 ```
 
-This might look like some mix of \`object\` / \`array\` type, but it is actually is something unique, as this type provides some rigidity, as can be seen by this TypeScript notation Map\<string, string>.
+This might look like some mix of `object` / `array` type, but it is actually is something unique, as this type provides some rigidity, as can be seen by this TypeScript notation `Map<string, string>`.
 
-So, you know for every currency like an USD there's a corresponding country => United States
+So, you know for every currency like an `USD` there's a corresponding country => `United States`
 
 This is beneficial because this data structure provides a very clear and reliable key to pair structure, and also because it comes with slightly different methods to work with it.
 
- 
-
-```javascript
+```typescript
 // Remove a key-value pair from the map
 currencyCountryMap.delete('USD');
 
