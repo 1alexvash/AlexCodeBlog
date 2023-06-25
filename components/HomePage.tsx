@@ -1,6 +1,4 @@
-import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
@@ -17,7 +15,6 @@ import Tags from "@/components/Tags";
 import UpcomingPosts from "@/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
-import client from ".tina/__generated__/client";
 import {
   MainConfigQuery,
   MainConfigQueryVariables,

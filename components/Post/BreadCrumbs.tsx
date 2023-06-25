@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useCMS } from "tinacms";
 import { useEditState } from "tinacms/dist/react";
 
 interface Props {

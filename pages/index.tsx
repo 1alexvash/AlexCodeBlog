@@ -2,12 +2,13 @@ import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { GetStaticProps, NextPage } from "next";
 
+import HomePage from "@/components/HomePage";
+
 import client from ".tina/__generated__/client";
 import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
-import HomePage from "@/components/HomePage";
 
 const Home: NextPage<{
   homePagePosts: PostDocumentWithoutBody[];
@@ -25,7 +26,7 @@ const Home: NextPage<{
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const homePagePosts = await client.queries.postsWithoutBody({
     filter: {
       draft: { eq: false },
