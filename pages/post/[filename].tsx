@@ -32,9 +32,7 @@ const latestPostsPerPage = 10;
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
-  loading: () => {
-    return <PageProgressWrapper />;
-  },
+  loading: () => <PageProgressWrapper />,
 });
 
 const Post = ({ latestPosts, ...props }: Props) => {

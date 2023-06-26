@@ -22,8 +22,8 @@ export const PageProgressWrapper = ({ children }: PageProgressWrapperProps) => (
       top: chromeZoomPixelGapBugFix,
       zIndex: 29,
       height: progressBarHeight,
-      backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
     })}
+    className="pageProgressWrapper"
   >
     {children}
   </Box>
