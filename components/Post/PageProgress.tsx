@@ -2,34 +2,16 @@ import { Box } from "@mui/material";
 import useWindowDimensions from "helpers/useWindowDimensions";
 import { useCallback, useEffect, useRef } from "react";
 
-const chromeZoomPixelGapBugFix = -0.25;
-const progressBarHeight = 10;
+import PageProgressWrapper, { progressBarHeight } from "./PageProgressWrapper";
+
 const minDocumentHeight = 1030;
 const minScrollHeightValue = 1;
 
-interface PageProgressWrapperProps {
-  children?: React.ReactNode;
-}
-
-interface PageProgressProps {
+interface Props {
   blogPostSectionRef: React.RefObject<HTMLDivElement>;
 }
 
-export const PageProgressWrapper = ({ children }: PageProgressWrapperProps) => (
-  <Box
-    sx={(theme) => ({
-      position: "sticky",
-      top: chromeZoomPixelGapBugFix,
-      zIndex: 29,
-      height: progressBarHeight,
-    })}
-    className="pageProgressWrapper"
-  >
-    {children}
-  </Box>
-);
-
-const PageProgress = ({ blogPostSectionRef }: PageProgressProps) => {
+const PageProgress = ({ blogPostSectionRef }: Props) => {
   const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const { width, height } = useWindowDimensions();
