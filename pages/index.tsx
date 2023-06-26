@@ -11,14 +11,14 @@ import {
 } from ".tina/__generated__/types";
 
 const Home: NextPage<{
-  homePagePosts: PostDocumentWithoutBody[];
+  posts: PostDocumentWithoutBody[];
   tinaData: MainConfigQuery;
   query: string;
   variables: MainConfigQueryVariables;
-}> = ({ homePagePosts, tinaData, query, variables }) => {
+}> = ({ posts, tinaData, query, variables }) => {
   return (
     <HomePage
-      homePagePosts={homePagePosts}
+      homePagePosts={posts}
       tinaData={tinaData}
       query={query}
       variables={variables}
@@ -27,7 +27,7 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const homePagePosts = await client.queries.postsWithoutBody({
+  const posts = await client.queries.postsWithoutBody({
     filter: {
       draft: { eq: false },
       date: { before: new Date(Date.now()).toString() },
@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      homePagePosts: convertTypesAndGetEdges(homePagePosts),
+      posts: convertTypesAndGetEdges(posts),
       tinaData: data,
       query,
       variables,

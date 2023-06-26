@@ -179,10 +179,7 @@ export default defineConfig({
               return `${date}-${slug}`;
             },
           },
-          router: ({ document }) => {
-            console.log(document._sys.path);
-            return `/post/${document._sys.filename}`;
-          },
+          router: ({ document }) => `/post/${document._sys.filename}`,
         },
       },
     ],
