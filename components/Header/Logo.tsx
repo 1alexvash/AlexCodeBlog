@@ -32,7 +32,7 @@ const Logo = () => {
   return onTheMainPage ? (
     logo
   ) : (
-    <Link href={edit ? "/AdminPortal" : "/"}>{logo}</Link>
+    <Link href={edit ? "/adminPortal/" : "/"}>{logo}</Link>
   );
 };
 
