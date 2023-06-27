@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import adminSlice from "./slices/admin";
+import hostUrl from "./slices/hostUrl";
 import paginationSlice from "./slices/pagination";
 import selectedTagsSlice from "./slices/selectedTags";
 import themeSlice from "./slices/theme";
+import tinaData from "./slices/tinaData";
 
 const store = configureStore({
   reducer: {
     selectedTags: selectedTagsSlice,
     pagination: paginationSlice,
     theme: themeSlice,
-    admin: adminSlice,
+    tinaData,
+    hostUrl,
   },
 });
 

@@ -1,8 +1,8 @@
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 
 const today = new Date();
 
-export function isPostADraft(post: PostDocumentWithoutContent) {
+export function isPostADraft(post: PostDocumentWithoutBody) {
   if (post.draft) {
     return true;
   } else {

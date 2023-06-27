@@ -1,12 +1,10 @@
-import config from "config";
-import {
-  getAllPostDocuments,
-  getUpcomingPosts,
-} from "helpers/markdownDocumentsReader";
-import { PostDocumentWithoutContent } from "interfaces";
+import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useAppSelector } from "redux/typesHooks";
+import { setHostUrl } from "redux/slices/hostUrl";
+import { setTinaData } from "redux/slices/tinaData";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
+import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -15,12 +13,30 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags from "@/components/Tags";
-import UpcomingPosts from "@/components/UpcomingPosts";
+import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
-const Home: NextPage<{
-  posts: PostDocumentWithoutContent[];
-  upcomingPosts: PostDocumentWithoutContent[];
-}> = ({ posts, upcomingPosts }) => {
+import client from ".tina/__generated__/client";
+import {
+  MainConfigQuery,
+  MainConfigQueryVariables,
+} from ".tina/__generated__/types";
+
+interface Props {
+  posts: PostDocumentWithoutBody[];
+  tinaData: MainConfigQuery;
+  query: string;
+  variables: MainConfigQueryVariables;
+}
+
+const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
+  const dispatch = useAppDispatch();
+
+  const { data } = useTina({
+    query,
+    variables,
+    data: tinaData,
+  });
+
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -46,30 +62,49 @@ const Home: NextPage<{
     return selectedTags.some((tag) => post.tags.includes(tag));
   });
 
-  const pagesCount = Math.ceil(filteredPosts.length / config.posts_per_page);
-  const currentPage = useAppSelector((state) => state.pagination.currentPage);
-  const postsToRender = filteredPosts.slice(
-    currentPage * config.posts_per_page,
-    (currentPage + 1) * config.posts_per_page
+  const pagesCount = Math.ceil(
+    filteredPosts.length / data.mainConfig.postsPerPage
   );
+  const currentPage = useAppSelector((state) => state.pagination.currentPage);
+  const nextPage = currentPage + 1;
+
+  const postsToRender = filteredPosts.slice(
+    currentPage * data.mainConfig.postsPerPage,
+    nextPage * data.mainConfig.postsPerPage
+  );
+
+  useIsomorphicLayoutEffect(() => {
+    dispatch(setHostUrl(window.location.origin));
+    dispatch(setTinaData(data));
+  }, []);
+
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
 
   const admin = useAppSelector((state) => state.admin);
 
   return (
     <>
       <Head>
-        <title>{config.site_title}</title>
-        <meta property="og:title" content={config.site_keywords[1]} />
-        <meta property="og:description" content={config.site_description} />
-        <meta property="og:url" content={config.host_url} />
+        <title>{data.mainConfig.siteTitle}</title>
+        <meta property="og:title" content={data.mainConfig.siteKeywords[0]} />
+        <meta
+          property="og:description"
+          content={data.mainConfig.siteDescription}
+        />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content={config.site_title} />
-        <meta name="description" content={config.site_description} />
+        <meta property="og:site_name" content={data.mainConfig.siteTitle} />
+        <meta property="og:image" content={data.mainConfig.defaultImage} />
+        <meta name="description" content={data.mainConfig.siteDescription} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StandWithUkraine />
       <Header />
-      <Intro />
+      <Intro
+        authorName={data.mainConfig.authorName}
+        authorPosition={data.mainConfig.authorPosition}
+        siteDescription={data.mainConfig.siteDescription}
+      />
       <section className="simple-section">
         <div className="container">
           {admin && <UpcomingPosts posts={upcomingPosts} />}
@@ -87,13 +122,20 @@ const Home: NextPage<{
 };
 
 export const getStaticProps = async () => {
-  const posts = getAllPostDocuments();
-  const upcomingPosts = getUpcomingPosts();
+  const posts = await client.queries.postConnection({});
+
+  const mainConfig = await client.queries.mainConfig({
+    relativePath: "mainConfig.json",
+  });
 
   return {
     props: {
-      posts,
-      upcomingPosts,
+      posts: posts.data.postConnection.edges
+        ?.map((edge) => edge?.node)
+        .reverse(),
+      tinaData: mainConfig.data,
+      query: mainConfig.query,
+      variables: mainConfig.variables,
     },
   };
 };
