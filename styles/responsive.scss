@@ -26,6 +26,10 @@
 }
 
 @media (max-width: 1259px) {
+  .intro-text {
+    padding-right: 40px;
+  }
+
   .posts-list-block .content {
     padding: 25px 20px;
   }
@@ -79,6 +83,14 @@
 
   .main-logo img {
     max-width: 150px;
+  }
+
+  .intro-text {
+    padding-right: 35px;
+  }
+
+  .intro-text h1 {
+    font-size: 40px;
   }
 
   .filter-tags-list {
@@ -211,8 +223,23 @@
     width: 6px;
   }
 
+  .intro-content {
+    text-align: center;
+    display: block;
+  }
+
+  .intro-avatar {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
   .posts-list li {
     width: calc(50% - 10px);
+  }
+
+  .intro-text {
+    padding-right: 0;
   }
 
   .filter-tags-list {
@@ -541,6 +568,11 @@
 }
 
 @media (max-width: 480px) {
+  .intro-text h1 {
+    font-size: 30px;
+    margin-bottom: 13px;
+  }
+
   .filter-tags-list {
     margin: 0 -4px 15px;
     font-size: 13px;

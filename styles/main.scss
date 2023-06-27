@@ -430,6 +430,75 @@ header {
   background: #fe6c0a;
 }
 
+/*intro-section =================================================*/
+
+.intro-section {
+  background: #f8fafc;
+  padding: 35px 0;
+  color: #707070;
+}
+
+.intro-content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.intro-avatar {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin-left: auto;
+  text-align: center;
+  max-width: 136px;
+  -ms-flex-order: 2;
+  order: 2;
+}
+
+.intro-avatar .image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+}
+
+.intro-avatar .image img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.intro-avatar .name {
+  color: #3a3a3a;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.intro-avatar .job {
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.intro-text {
+  padding-right: 70px;
+}
+
+.intro-text h1 {
+  color: #3a3a3a;
+  line-height: 1.28;
+  font-weight: bold;
+  font-size: 50px;
+  margin-bottom: 17px;
+}
+
+.intro-text p {
+  line-height: 1.69;
+}
+
 /*simple-section =================================================*/
 
 .simple-section {
@@ -1271,7 +1340,7 @@ blockquote p:last-child {
   top: -43px;
 }
 
-.post-img:after {
+.posts-list-block-draft-or-future .post-img:after {
   border: none;
   height: 50%;
 }

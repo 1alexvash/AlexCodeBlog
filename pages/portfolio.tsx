@@ -1,20 +1,21 @@
 import { Box } from "@mui/material";
-import config from "config";
 import type { NextPage } from "next";
-import Head from "next/head";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import PortfolioPage from "@/components/Portfolio";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
-import PageProgress from "@/components/Post/PageProgress";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
+const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
+  ssr: false,
+});
+
 const containterStyles = {
-  mr: "auto",
-  ml: "auto",
-  pl: "15px",
-  pr: "15px",
+  mx: "auto",
+  px: "15px",
   ["@media(min-width: 768px)"]: {
     width: "750px",
   },
@@ -26,29 +27,23 @@ const containterStyles = {
   },
 };
 
-const Home: NextPage = () => (
-  <>
-    <Head>
-      <title>{config.site_title}</title>
-      <meta property="og:title" content={config.site_keywords[1]} />
-      <meta property="og:description" content={config.site_description} />
-      <meta property="og:url" content={config.host_url} />
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content={config.site_title} />
-      <meta name="description" content={config.site_description} />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <StandWithUkraine />
-    <Header />
-    <BreadCrumbs title="Projects" />
-    <PageProgress />
-    <Box sx={{ p: "36px 0" }}>
-      <Box sx={containterStyles}>
-        <PortfolioPage />
+const Home: NextPage = () => {
+  const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  return (
+    <>
+      <StandWithUkraine />
+      <Header />
+      <BreadCrumbs title="Projects" />
+      <PageProgress blogPostSectionRef={blogPostSectionRef} />
+      <Box ref={blogPostSectionRef} sx={{ padding: "36px 0" }}>
+        <Box sx={containterStyles}>
+          <PortfolioPage />
+        </Box>
       </Box>
-    </Box>
-    <Footer />
-  </>
-);
+      <Footer />
+    </>
+  );
+};
 
 export default Home;
