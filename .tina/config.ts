@@ -85,14 +85,10 @@ export default defineConfig({
             required: true,
           },
           {
-            name: "siteKeywords",
-            label: "Site keywords",
-            list: true,
+            name: "ogTitle",
+            label: "OG Title",
             type: "string",
             required: true,
-            ui: {
-              min: 1,
-            },
           },
 
           {
