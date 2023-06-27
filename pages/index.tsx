@@ -15,16 +15,14 @@ const Home: NextPage<{
   tinaData: MainConfigQuery;
   query: string;
   variables: MainConfigQueryVariables;
-}> = ({ posts, tinaData, query, variables }) => {
-  return (
-    <HomePage
-      homePagePosts={posts}
-      tinaData={tinaData}
-      query={query}
-      variables={variables}
-    />
-  );
-};
+}> = ({ posts, tinaData, query, variables }) => (
+  <HomePage
+    homePagePosts={posts}
+    tinaData={tinaData}
+    query={query}
+    variables={variables}
+  />
+);
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await client.queries.postsWithoutBody({
