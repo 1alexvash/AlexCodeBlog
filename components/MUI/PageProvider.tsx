@@ -6,7 +6,7 @@ import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
 import getMUITheme from "./getMUITheme";
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element[];
 }
 
 const getStorageTheme = (): Theme | undefined => {
@@ -28,7 +28,7 @@ const getBrowserTheme = (): Theme | undefined => {
 const getInitialTheme = (): Theme =>
   getStorageTheme() || getBrowserTheme() || defaultTheme;
 
-const ThemeProvider = ({ children }: Props) => {
+const PageProvider = ({ children }: Props) => {
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.theme);
   const MUITheme = getMUITheme(theme as PaletteMode);
@@ -42,4 +42,4 @@ const ThemeProvider = ({ children }: Props) => {
   return <MUIThemeProvider theme={MUITheme}>{children}</MUIThemeProvider>;
 };
 
-export default ThemeProvider;
+export default PageProvider;

@@ -5,16 +5,37 @@ import { Provider } from "react-redux";
 import store from "redux/store";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import ThemeProvider from "@/components/MUI/ThemeProvider";
+import PageProvider from "@/components/MUI/PageProvider";
+import { ThemeProvider } from "next-themes";
+import { CssBaseline, GlobalStyles, css } from "@mui/material";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <Provider store={store}>
-    <GoogleAnalytics />
+  <ThemeProvider>
+    <Provider store={store}>
+      <GoogleAnalytics />
 
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
-  </Provider>
+      <PageProvider>
+        <CssBaseline />
+        <GlobalStyles
+          styles={css`
+            :root {
+              body {
+                color: #616161;
+                background: #fff;
+              }
+            }
+            [data-theme="dark"] {
+              body {
+                background: #18191d;
+                color: #f2f5f7;
+              }
+            }
+          `}
+        />
+        <Component {...pageProps} />
+      </PageProvider>
+    </Provider>
+  </ThemeProvider>
 );
 
 export default MyApp;
