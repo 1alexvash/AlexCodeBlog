@@ -1,0 +1,38 @@
+{
+  "project": [
+    {
+      "lightIcon": "/images/aiscout-dark-logo.svg",
+      "darkIcon": "/images/aiscout-logo.svg",
+      "projectName": "AiScout",
+      "client": "",
+      "project": "",
+      "result": "",
+      "description": ""
+    },
+    {
+      "lightIcon": "/images/gaffer-logo.svg",
+      "projectName": "Gaffer",
+      "client": "",
+      "project": "",
+      "result": "",
+      "description": ""
+    },
+    {
+      "lightIcon": "/images/woodland-dark-logo.svg",
+      "darkIcon": "/images/woodland-logo.svg",
+      "projectName": "Woodland (NDA)",
+      "client": "",
+      "project": "",
+      "result": "",
+      "description": ""
+    },
+    {
+      "lightIcon": "/images/goVirtual-logo.svg",
+      "projectName": "GoVirtual (NDA)",
+      "client": "",
+      "project": "",
+      "result": "",
+      "description": ""
+    }
+  ]
+}

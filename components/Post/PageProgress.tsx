@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PageProgress = ({ blogPostSectionRef }: Props) => {
-  const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   const { width, height } = useWindowDimensions();
 

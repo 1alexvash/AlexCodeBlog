@@ -4,29 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./pageStyles";
 import ProjectInfo from "./ProjectInfo";
 import ProjectItem from "./ProjectItem";
+import { PortfolioConnectionQuery } from ".tina/__generated__/types";
 
-const projectsData = [
-  {
-    title: "AiScout",
-    lightImage: "/images/aiscout-dark-logo.svg",
-    darkImage: "/images/aiscout-logo.svg",
-  },
-  {
-    title: "Gaffer",
-    lightImage: "/images/gaffer-logo.svg",
-  },
-  {
-    title: "Woodland (NDA)",
-    lightImage: "/images/woodland-dark-logo.svg",
-    darkImage: "/images/woodland-logo.svg",
-  },
-  {
-    title: "GoVirtual (NDA)",
-    lightImage: "/images/goVirtual-logo.svg",
-  },
-];
+interface Props {
+  projectsData: PortfolioConnectionQuery;
+}
 
-const PortfolioPage = () => {
+const PortfolioPage = ({ projectsData }: Props) => {
   const [activeProject, setActiveProject] = useState("AiScout");
 
   const theme = useTheme();
@@ -61,38 +45,38 @@ const PortfolioPage = () => {
     setActiveProject(ref.current.id);
   };
 
-  const projectsInfo = projectsData.map((project, index) => {
-    let pathToImageLogo = project.lightImage;
+  //   const projectsInfo = projectsData.map((project, index) => {
+  //     let pathToImageLogo = project.lightImage;
 
-    if (project.darkImage && theme.palette.mode === "light") {
-      pathToImageLogo = project.lightImage;
-    }
+  //     if (project.darkImage && theme.palette.mode === "light") {
+  //       pathToImageLogo = project.lightImage;
+  //     }
 
-    if (project.darkImage && theme.palette.mode === "dark") {
-      pathToImageLogo = project.darkImage;
-    }
+  //     if (project.darkImage && theme.palette.mode === "dark") {
+  //       pathToImageLogo = project.darkImage;
+  //     }
 
-    return (
-      <Box key={index} ref={projectsRefArray[index]} id={project.title}>
-        <ProjectInfo
-          nameOfProject={project.title}
-          pathToImageLogo={pathToImageLogo}
-        />
-      </Box>
-    );
-  });
+  //     return (
+  //       <Box key={index} ref={projectsRefArray[index]} id={project.title}>
+  //         <ProjectInfo
+  //           nameOfProject={project.title}
+  //           pathToImageLogo={pathToImageLogo}
+  //         />
+  //       </Box>
+  //     );
+  //   });
 
-  const projectsList = projectsData.map((project, index) => (
-    <ProjectItem
-      key={index}
-      activeProject={activeProject}
-      scrollToRef={scrollToRef}
-      projectRef={projectsRefArray[index]}
-      lightImage={project.lightImage}
-      darkImage={project.darkImage}
-      title={project.title}
-    />
-  ));
+  //   const projectsList = projectsData.map((project, index) => (
+  //     <ProjectItem
+  //       key={index}
+  //       activeProject={activeProject}
+  //       scrollToRef={scrollToRef}
+  //       projectRef={projectsRefArray[index]}
+  //       lightImage={project.lightImage}
+  //       darkImage={project.darkImage}
+  //       title={project.title}
+  //     />
+  //   ));
 
   useEffect(() => {
     observer.current = new IntersectionObserver(handleIntersection, {
@@ -115,8 +99,8 @@ const PortfolioPage = () => {
         <Typography>My projects</Typography>
       </Box>
       <Box sx={pageContent}>
-        <Box sx={projectInfoWrapper}>{projectsInfo}</Box>
-        <Box sx={projectListWrapper}>{projectsList}</Box>
+        {/* <Box sx={projectInfoWrapper}>{projectsInfo}</Box> */}
+        {/* <Box sx={projectListWrapper}>{projectsList}</Box> */}
       </Box>
     </Box>
   );
