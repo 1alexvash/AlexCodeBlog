@@ -1,13 +1,13 @@
 import "../styles/root.scss";
 
+import { css, CssBaseline, GlobalStyles } from "@mui/material";
 import type { AppProps } from "next/app";
+import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import store from "redux/store";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PageProvider from "@/components/MUI/PageProvider";
-import { ThemeProvider } from "next-themes";
-import { CssBaseline, GlobalStyles, css } from "@mui/material";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider>
