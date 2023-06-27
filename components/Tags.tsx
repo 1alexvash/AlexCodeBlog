@@ -6,23 +6,23 @@ import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { useEditState } from "tinacms/dist/react";
 
 export interface Tag {
-  readonly name: string;
-  readonly postsCount: number;
+  name: string;
+  postsCount: number;
 }
 
 interface Props {
-  readonly tags: readonly Tag[];
+  tags: Tag[];
 }
 
 interface TagItemProps {
-  readonly isActive: boolean;
-  readonly onClick: () => void;
-  readonly tagName: string;
-  readonly tagCount?: number;
+  isActive: boolean;
+  onClick: () => void;
+  tagName: string;
+  tagCount?: number;
 }
 
 interface TagsListProps {
-  readonly tags: readonly TagItemProps[];
+  tags: TagItemProps[];
 }
 
 const MINIMUM_VISIBLE_COUNT = 2;
@@ -68,7 +68,7 @@ const Tags = ({ tags }: Props) => {
     }
   };
 
-  const otherTagItems: readonly TagItemProps[] = tags
+  const otherTagItems: TagItemProps[] = tags
     .map(({ name, postsCount }) => {
       const isDefaultVisibleTag = postsCount >= MINIMUM_VISIBLE_COUNT;
       const isTemporaryVisibleTag =

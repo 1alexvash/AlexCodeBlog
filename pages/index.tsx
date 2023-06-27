@@ -28,11 +28,9 @@ interface Props {
   variables: MainConfigQueryVariables;
 }
 
-const initialTagCount: Readonly<Record<string, number>> = {};
+const initialTagCount: Record<string, number> = {};
 
-const calculateSortedTags = (
-  posts: PostDocumentWithoutBody[]
-): readonly Tag[] => {
+const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
   const tags = posts.map((post) => post.tags).flat();
 
   const tagsFrequency = tags.reduce((acc, tag) => {
@@ -44,8 +42,11 @@ const calculateSortedTags = (
   }, initialTagCount);
 
   return Object.entries(tagsFrequency)
-    .sort((a, b) => b[1] - a[1])
-    .map(([name, postsCount]) => ({ name, postsCount }));
+    .map(([name, postsCount]) => ({
+      name,
+      postsCount,
+    }))
+    .sort((a, b) => b.postsCount - a.postsCount);
 };
 
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
