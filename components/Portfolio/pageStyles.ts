@@ -12,8 +12,8 @@ const styles = (theme: Theme) => ({
       ["@media (max-width: 480px)"]: {
         fontSize: "28px",
       },
-      mt: 2.5,
-      mb: 9.5,
+      mt: "10px",
+      mb: "38px",
     },
   },
   pageContent: {
@@ -34,7 +34,7 @@ const styles = (theme: Theme) => ({
     },
     "& > div": {
       "&:not(:first-child)": {
-        mt: 9,
+        mt: "36px",
       },
     },
   },
@@ -51,12 +51,12 @@ const styles = (theme: Theme) => ({
     backgroundColor: theme.palette.mode === "light" ? "white" : "#33393F",
     display: "flex",
     alignItems: "center",
-    pl: 6.25,
+    pl: "25px",
     borderBottom: "1px solid",
     borderColor: theme.palette.mode === "light" ? "#ececec" : "#4B4B4B",
     cursor: "pointer",
     "& .MuiTypography-root": {
-      ml: 2.5,
+      ml: "10px",
       fontWeight: "700",
       fontSize: "18px",
       lineHeight: "129.4%",
@@ -67,12 +67,12 @@ const styles = (theme: Theme) => ({
   },
   projectInfo: {
     position: "relative",
-    pl: 6,
+    pl: "24px",
     display: "flex",
     alignItems: "center",
-    mb: 3.75,
+    mb: "15px",
     ["@media (max-width: 767px)"]: {
-      pl: 4,
+      pl: "16px",
     },
   },
   leftSideLine: {
@@ -90,7 +90,7 @@ const styles = (theme: Theme) => ({
   projectNameStyle: {
     display: "flex",
     alignItems: "center",
-    mb: 4,
+    mb: "16px",
     "& .MuiTypography-root": {
       ml: 1,
       fontWeight: "700",
@@ -100,8 +100,8 @@ const styles = (theme: Theme) => ({
     },
   },
   projectDescriptionStyle: {
-    px: 8,
-    py: 7,
+    px: "32px",
+    py: "28px",
     backgroundColor: theme.palette.mode === "light" ? "#f7f9fb" : "#33393f",
     display: "flex",
     justifyContent: "space-between",
@@ -110,7 +110,7 @@ const styles = (theme: Theme) => ({
       width: "33.33%",
     },
     "& .MuiTypography-root": {
-      mb: 2.5,
+      mb: "10px",
       fontWeight: 700,
       fontSize: "20px",
       lineHeight: "31px",
@@ -122,11 +122,11 @@ const styles = (theme: Theme) => ({
       color: theme.palette.mode === "light" ? "#1e1e1e" : "white",
     },
     ["@media (max-width: 767px)"]: {
-      px: 4,
+      px: "16px",
       "& > *": {
         width: "100%",
         "&:not(:last-child)": {
-          mb: 4,
+          mb: "16px",
         },
       },
       display: "block",
