@@ -28,11 +28,18 @@ const ProjectItem = ({
     color: "white",
   };
 
-  const src = darkImage
-    ? theme.palette.mode === "dark" || activeProject === projectRef.current.id
-      ? darkImage
-      : lightImage
-    : lightImage;
+  let src = lightImage;
+
+  if (darkImage) {
+    if (
+      theme.palette.mode === "dark" ||
+      activeProject === projectRef.current.id
+    ) {
+      src = darkImage;
+    } else {
+      src = lightImage;
+    }
+  }
 
   return (
     <Box

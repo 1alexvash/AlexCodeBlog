@@ -61,20 +61,26 @@ const PortfolioPage = () => {
     setActiveProject(ref.current.id);
   };
 
-  const projectsInfo = projectsData.map((project, index) => (
-    <Box key={index} ref={projectsRefArray[index]} id={project.title}>
-      <ProjectInfo
-        nameOfProject={project.title}
-        pathToImageLogo={
-          project.darkImage
-            ? theme.palette.mode === "light"
-              ? project.lightImage
-              : project.darkImage
-            : project.lightImage
-        }
-      />
-    </Box>
-  ));
+  const projectsInfo = projectsData.map((project, index) => {
+    let pathToImageLogo = project.lightImage;
+
+    if (project.darkImage && theme.palette.mode === "light") {
+      pathToImageLogo = project.lightImage;
+    }
+
+    if (project.darkImage && theme.palette.mode === "dark") {
+      pathToImageLogo = project.darkImage;
+    }
+
+    return (
+      <Box key={index} ref={projectsRefArray[index]} id={project.title}>
+        <ProjectInfo
+          nameOfProject={project.title}
+          pathToImageLogo={pathToImageLogo}
+        />
+      </Box>
+    );
+  });
 
   const projectsList = projectsData.map((project, index) => (
     <ProjectItem
