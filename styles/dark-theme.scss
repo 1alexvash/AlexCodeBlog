@@ -1,6 +1,8 @@
-.dark-theme {
-  background: #18191d;
-  color: #f2f5f7;
+[data-theme="dark"] {
+  body {
+    background: #18191d;
+    color: #f2f5f7;
+  }
 
   ::-webkit-scrollbar {
     background: #33393f;

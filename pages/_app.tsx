@@ -1,6 +1,5 @@
 import "../styles/root.scss";
 
-import { css, CssBaseline, GlobalStyles } from "@mui/material";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
@@ -10,28 +9,10 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PageProvider from "@/components/MUI/PageProvider";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <ThemeProvider>
+  <ThemeProvider storageKey="theme" defaultTheme="dark" enableSystem>
     <Provider store={store}>
       <GoogleAnalytics />
-
       <PageProvider>
-        <CssBaseline />
-        {/* <GlobalStyles
-          styles={css`
-            :root {
-              body {
-                color: #616161;
-                background: #fff;
-              }
-            }
-            [data-theme="dark"] {
-              body {
-                background: #18191d;
-                color: #f2f5f7;
-              }
-            }
-          `}
-        /> */}
         <Component {...pageProps} />
       </PageProvider>
     </Provider>
