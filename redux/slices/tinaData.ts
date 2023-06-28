@@ -7,7 +7,7 @@ const initialState: MainConfigQuery = {
     siteTitle: "",
     id: "",
     siteDescription: "",
-    siteKeywords: [],
+    ogSiteTitle: "",
     authorName: "",
     authorPosition: "",
     socialLinks: [],
