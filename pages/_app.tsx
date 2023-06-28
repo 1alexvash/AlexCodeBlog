@@ -16,7 +16,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
 
       <PageProvider>
         <CssBaseline />
-        <GlobalStyles
+        {/* <GlobalStyles
           styles={css`
             :root {
               body {
@@ -31,7 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
               }
             }
           `}
-        />
+        /> */}
         <Component {...pageProps} />
       </PageProvider>
     </Provider>

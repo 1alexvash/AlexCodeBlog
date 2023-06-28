@@ -1,3 +1,17 @@
+:root {
+  body {
+    color: #616161;
+    background: #fff;
+  }
+}
+
+[data-theme="dark"] {
+  body {
+    background: #18191d;
+    color: #f2f5f7;
+  }
+}
+
 *,
 *:before,
 *:after {
