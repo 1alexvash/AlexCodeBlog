@@ -12,7 +12,7 @@ import Intro from "@/components/Intro";
 import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
-import Tags from "@/components/Tags";
+import Tags, { Tag } from "@/components/Tags";
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
@@ -28,6 +28,27 @@ interface Props {
   variables: MainConfigQueryVariables;
 }
 
+const initialTagCount: Record<string, number> = {};
+
+const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
+  const tags = posts.map((post) => post.tags).flat();
+
+  const tagsFrequency = tags.reduce((acc, tag) => {
+    if (acc[tag]) {
+      return { ...acc, [tag]: acc[tag] + 1 };
+    }
+
+    return { ...acc, [tag]: 1 };
+  }, initialTagCount);
+
+  return Object.entries(tagsFrequency)
+    .map(([name, postsCount]) => ({
+      name,
+      postsCount,
+    }))
+    .sort((a, b) => b.postsCount - a.postsCount);
+};
+
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
 
@@ -37,22 +58,12 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
     data: tinaData,
   });
 
-  const tags = posts.map((post) => post.tags).flat();
-
-  const tagsFrequency = tags.reduce((acc, tag) => {
-    if (acc[tag]) {
-      acc[tag] += 1;
-    } else {
-      acc[tag] = 1;
-    }
-    return acc;
-  }, {} as Record<string, number>);
-
-  const sortedTags = Object.entries(tagsFrequency).sort((a, b) => b[1] - a[1]);
-
-  const uniqueSortedTags = sortedTags.map((tag) => tag[0]);
-
   const selectedTags = useAppSelector((state) => state.selectedTags);
+  const currentPage = useAppSelector((state) => state.pagination.currentPage);
+  const nextPage = currentPage + 1;
+
+  const tags = calculateSortedTags(posts);
+
   const filteredPosts = posts.filter((post) => {
     if (selectedTags.length === 0) {
       return true;
@@ -64,8 +75,6 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const pagesCount = Math.ceil(
     filteredPosts.length / data.mainConfig.postsPerPage
   );
-  const currentPage = useAppSelector((state) => state.pagination.currentPage);
-  const nextPage = currentPage + 1;
 
   const postsToRender = filteredPosts.slice(
     currentPage * data.mainConfig.postsPerPage,
@@ -104,8 +113,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          {/* TODO: Implement tags count for the admin user */}
-          <Tags uniqueTags={uniqueSortedTags} />
+          <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
         </div>
