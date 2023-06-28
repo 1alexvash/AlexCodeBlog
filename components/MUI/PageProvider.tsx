@@ -1,9 +1,9 @@
 import { ThemeProvider as MUIThemeProvider } from "@mui/material";
 import { useTheme } from "next-themes";
+import { useState } from "react";
 
 import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
 import getMUITheme from "./getMUITheme";
-import { useState } from "react";
 
 interface Props {
   children: JSX.Element;
