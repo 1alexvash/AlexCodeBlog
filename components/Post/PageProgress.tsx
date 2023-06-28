@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 import useWindowDimensions from "helpers/useWindowDimensions";
 import { useCallback, useEffect, useRef } from "react";
 
-const chromeZoomPixelGapBugFix = -0.25;
-const progressBarHeight = 10;
+import PageProgressWrapper, { progressBarHeight } from "./PageProgressWrapper";
+
 const minDocumentHeight = 1030;
 const minScrollHeightValue = 1;
 
@@ -64,15 +64,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
   }, [calculateScrollProgress]);
 
   return (
-    <Box
-      sx={(theme) => ({
-        position: "sticky",
-        top: chromeZoomPixelGapBugFix,
-        zIndex: 29,
-        height: progressBarHeight,
-        backgroundColor: theme.palette.mode === "light" ? "#f2f5f7" : "#33393f",
-      })}
-    >
+    <PageProgressWrapper>
       <Box
         ref={progressBarRef}
         sx={(theme) => ({
@@ -85,7 +77,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
             theme.palette.mode === "light" ? "#3a3a3a" : "#fe6c0a",
         })}
       />
-    </Box>
+    </PageProgressWrapper>
   );
 };
 

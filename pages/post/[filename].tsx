@@ -11,6 +11,7 @@ import Header from "@/components/Header";
 import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
+import PageProgressWrapper from "@/components/Post/PageProgressWrapper";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
@@ -28,6 +29,7 @@ const latestPostsPerPage = 10;
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
+  loading: () => <PageProgressWrapper />,
 });
 
 const Post = ({ latestPosts, ...props }: Props) => {
