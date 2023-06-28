@@ -13,6 +13,7 @@ import {
   PortfolioConnectionQuery,
   PortfolioConnectionQueryVariables,
 } from ".tina/__generated__/types";
+import { nodeProjectsArrayToProjects } from "helpers/tinaHelpers";
 
 interface Props {
   tinaData: PortfolioConnectionQuery;
@@ -50,7 +51,7 @@ const Home: NextPage<Props> = ({ tinaData, query, variables }) => {
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
       <Box ref={blogPostSectionRef} sx={{ padding: "36px 0" }}>
         <Box sx={containterStyles}>
-          <PortfolioPage projectsData={data} />
+          <PortfolioPage projectsData={nodeProjectsArrayToProjects(data)} />
         </Box>
       </Box>
       <Footer />

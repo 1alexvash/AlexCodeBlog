@@ -206,8 +206,8 @@ export default defineConfig({
                 type: "image",
               },
               {
-                name: "projectName",
-                label: "Project Name",
+                name: "title",
+                label: "Title",
                 type: "string",
                 required: true,
               },
