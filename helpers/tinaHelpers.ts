@@ -1,4 +1,13 @@
 import { PostDocument, PostFromQuery } from "interfaces";
+import { PostQuery } from ".tina/__generated__/types";
+
+export const isDefined = <T>(value: T | undefined): value is T => {
+  return typeof value !== "undefined";
+};
+
+export const isNotNull = <T>(value: T | null): value is T => {
+  return value !== null;
+};
 
 export const postToDocument = (post: PostFromQuery): PostDocument => {
   const { date, draft, title, body, heroImage, tags, _sys, id, audioVersion } =
@@ -11,7 +20,7 @@ export const postToDocument = (post: PostFromQuery): PostDocument => {
     title,
     body,
     heroImage: heroImage ?? undefined,
-    tags: tags ? (tags.filter((tag) => tag !== null) as string[]) : [],
+    tags: tags ? tags.filter(isNotNull) : [],
     _sys,
     id,
   };
