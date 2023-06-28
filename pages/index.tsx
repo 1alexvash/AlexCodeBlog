@@ -86,7 +86,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
     <>
       <Head>
         <title>{data.mainConfig.siteTitle}</title>
-        <meta property="og:title" content={data.mainConfig.ogTitle} />
+        <meta property="og:title" content={data.mainConfig.ogSiteTitle} />
         <meta property="og:description" content={siteDescription} />
         <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="website" />

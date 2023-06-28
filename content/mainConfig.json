@@ -1,7 +1,7 @@
 {
   "siteTitle": "AlexCode",
   "siteDescription": "Technologies suck, they won't be if you read my blog 💪\nOn my blog I'm sharing tips to increase your productivity and developer happiness\n",
-  "ogTitle": "Blog about programming",
+  "ogSiteTitle": "Blog about programming",
   "authorName": "Alex",
   "authorPosition": "Full Stack JavaScript Developer",
   "socialLinks": [

@@ -5,7 +5,7 @@ export const postToDocument = (post: PostFromQuery): PostDocument => {
     post;
 
   return {
-    audioVersion: audioVersion ?? "",
+    audioVersion: audioVersion ?? null,
     date,
     draft,
     title,

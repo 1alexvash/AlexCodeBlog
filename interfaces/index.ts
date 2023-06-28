@@ -13,7 +13,7 @@ type SystemInfo = Readonly<{
 export type PostDocument = Readonly<{
   id: string;
   title: string;
-  audioVersion?: string;
+  audioVersion?: string | null;
   date: Date | string;
   heroImage?: string | undefined;
   draft: boolean;

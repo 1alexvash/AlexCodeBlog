@@ -85,8 +85,8 @@ export default defineConfig({
             required: true,
           },
           {
-            name: "ogTitle",
-            label: "OG Title",
+            name: "ogSiteTitle",
+            label: "OG Site Title",
             type: "string",
             required: true,
           },
@@ -137,7 +137,7 @@ export default defineConfig({
           {
             type: "string",
             name: "audioVersion",
-            label: "Audio version(Vocaro)",
+            label: "Audio version (Vocaroo)",
           },
           {
             type: "rich-text",
