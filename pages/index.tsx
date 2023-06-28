@@ -59,14 +59,11 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
     data: tinaData,
   });
 
-
   const siteDescription = getFirstParagraph(data.mainConfig.siteDescription);
-
 
   const selectedTags = useAppSelector((state) => state.selectedTags);
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
   const nextPage = currentPage + 1;
-
 
   const tags = calculateSortedTags(posts);
 

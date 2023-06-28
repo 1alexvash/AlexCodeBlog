@@ -1,5 +1,4 @@
 import { PostDocument, PostFromQuery } from "interfaces";
-import { PostQuery } from ".tina/__generated__/types";
 
 export const isDefined = <T>(value: T | undefined): value is T => {
   return typeof value !== "undefined";
