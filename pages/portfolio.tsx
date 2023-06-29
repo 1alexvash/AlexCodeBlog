@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRef } from "react";
 
@@ -9,6 +9,7 @@ import { PortfolioPage } from "@/components/Portfolio";
 import { ProjectData } from "@/components/Portfolio/projectDataTypes";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import StandWithUkraine from "@/components/StandWithUkraine";
+import client from ".tina/__generated__/client";
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
@@ -70,6 +71,18 @@ const Home: NextPage = () => {
       <Footer />
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const portfolio = await client.queries.portfolioConnection();
+
+  return {
+    props: {
+      tinaData: portfolio.data,
+      query: portfolio.query,
+      variables: portfolio.variables,
+    },
+  };
 };
 
 export default Home;
