@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import useWindowDimensions from "helpers/useWindowDimensions";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 const progressBarHeight = 10;
@@ -12,9 +12,9 @@ interface Props {
 }
 
 const PageProgress = ({ blogPostSectionRef }: Props) => {
-  const progressBarRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-
   const { width, height } = useWindowDimensions();
+
+  const [position, setPosition] = useState("0");
 
   const calculateScrollProgress = useCallback(() => {
     const blogPostSection = blogPostSectionRef.current;
@@ -48,7 +48,7 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
       width = "0%";
     }
 
-    progressBarRef.current?.style.setProperty("width", width);
+    setPosition(width);
   }, [blogPostSectionRef]);
 
   useEffect(() => {
@@ -74,12 +74,11 @@ const PageProgress = ({ blogPostSectionRef }: Props) => {
       })}
     >
       <Box
-        ref={progressBarRef}
         sx={(theme) => ({
           display: "block",
           borderRadius: "1px",
           height: "100%",
-          width: 0,
+          width: position,
           transition: "width 200ms",
           backgroundColor:
             theme.palette.mode === "light" ? "#3a3a3a" : "#fe6c0a",
