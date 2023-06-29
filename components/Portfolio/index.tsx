@@ -1,113 +1,67 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import styles from "./pageStyles";
-import ProjectInfo from "./ProjectInfo";
-import ProjectItem from "./ProjectItem";
+import { ProjectData } from "./projectDataTypes";
+import { ProjectList } from "./ProjectList";
+import { ProjectsInfo } from "./ProjectsInfo";
 
-const projectsData = [
-  {
-    title: "AiScout",
-    lightImage: "/images/aiscout-dark-logo.svg",
-    darkImage: "/images/aiscout-logo.svg",
-  },
-  {
-    title: "Gaffer",
-    lightImage: "/images/gaffer-logo.svg",
-  },
-  {
-    title: "Woodland (NDA)",
-    lightImage: "/images/woodland-dark-logo.svg",
-    darkImage: "/images/woodland-logo.svg",
-  },
-  {
-    title: "GoVirtual (NDA)",
-    lightImage: "/images/goVirtual-logo.svg",
-  },
-];
+export interface PortfolioPageProps {
+  readonly projects: readonly ProjectData[];
+}
 
-const PortfolioPage = () => {
-  const [activeProject, setActiveProject] = useState("AiScout");
-
+export const PortfolioPage = ({
+  projects,
+}: PortfolioPageProps): JSX.Element => {
   const theme = useTheme();
+
+  const [activeProjectId, setActiveProjectId] = useState<string | undefined>(
+    projects[0].id
+  );
+
+  const [enableScrollObservation, setEnableScrollObservation] =
+    useState<boolean>(false);
 
   const { pageTitle, pageContent, projectInfoWrapper, projectListWrapper } =
     styles(theme);
 
-  const AiScoutRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const GafferRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const WoodlandRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const GoVirtualRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-
-  const projectsRefArray = [AiScoutRef, GafferRef, WoodlandRef, GoVirtualRef];
-
-  const observer = useRef<IntersectionObserver | null>(null);
-
-  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setActiveProject(entry.target.id);
-      }
-    });
-  };
-
-  const scrollToRef = (ref: React.MutableRefObject<HTMLDivElement>) => {
-    ref.current.scrollIntoView({
-      behavior: "auto",
-      block: "center",
-      inline: "center",
-    });
-
-    setActiveProject(ref.current.id);
-  };
-
-  const projectsInfo = projectsData.map((project, index) => {
-    let pathToImageLogo = project.lightImage;
-
-    if (project.darkImage && theme.palette.mode === "light") {
-      pathToImageLogo = project.lightImage;
-    }
-
-    if (project.darkImage && theme.palette.mode === "dark") {
-      pathToImageLogo = project.darkImage;
-    }
-
-    return (
-      <Box key={index} ref={projectsRefArray[index]} id={project.title}>
-        <ProjectInfo
-          nameOfProject={project.title}
-          pathToImageLogo={pathToImageLogo}
-        />
-      </Box>
-    );
-  });
-
-  const projectsList = projectsData.map((project, index) => (
-    <ProjectItem
-      key={index}
-      activeProject={activeProject}
-      scrollToRef={scrollToRef}
-      projectRef={projectsRefArray[index]}
-      lightImage={project.lightImage}
-      darkImage={project.darkImage}
-      title={project.title}
-    />
-  ));
+  const enableObservation = useCallback(() => {
+    setEnableScrollObservation(true);
+  }, [setEnableScrollObservation]);
 
   useEffect(() => {
-    observer.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0.9,
-    });
+    if (enableScrollObservation) {
+      return;
+    }
 
-    observer.current.observe(AiScoutRef.current);
-    observer.current.observe(GafferRef.current);
-    observer.current.observe(WoodlandRef.current);
-    observer.current.observe(GoVirtualRef.current);
+    document.addEventListener("scroll", enableObservation);
 
     return () => {
-      observer.current?.disconnect();
+      document.removeEventListener("scroll", enableObservation);
     };
-  }, [activeProject]);
+  }, [enableScrollObservation, enableObservation]);
+
+  const handleProjectActivatedByScroll = useCallback(
+    (id: string) => {
+      if (id === activeProjectId) {
+        return;
+      }
+      setEnableScrollObservation(false);
+      setActiveProjectId(id);
+    },
+    [setEnableScrollObservation, setActiveProjectId, activeProjectId]
+  );
+
+  const handleProjectSelectClick = useCallback(
+    (id: string) => {
+      if (id === activeProjectId) {
+        return;
+      }
+      setEnableScrollObservation(false);
+      setActiveProjectId(id);
+    },
+    [setEnableScrollObservation, setActiveProjectId, activeProjectId]
+  );
 
   return (
     <Box>
@@ -115,11 +69,22 @@ const PortfolioPage = () => {
         <Typography>My projects</Typography>
       </Box>
       <Box sx={pageContent}>
-        <Box sx={projectInfoWrapper}>{projectsInfo}</Box>
-        <Box sx={projectListWrapper}>{projectsList}</Box>
+        <Box sx={projectInfoWrapper}>
+          <ProjectsInfo
+            projects={projects}
+            enableScrollObservation={enableScrollObservation}
+            activeProjectId={activeProjectId}
+            onProjectActivated={handleProjectActivatedByScroll}
+          />
+        </Box>
+        <Box sx={projectListWrapper}>
+          <ProjectList
+            projects={projects}
+            activeProjectId={activeProjectId}
+            onProjectClick={handleProjectSelectClick}
+          />
+        </Box>
       </Box>
     </Box>
   );
 };
-
-export default PortfolioPage;

@@ -7009,6 +7009,11 @@ lodash.startcase@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.startcase/-/lodash.startcase-4.4.0.tgz#9436e34ed26093ed7ffae1936144350915d9add8"
   integrity sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==
 
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+  integrity sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==
+
 lodash.zip@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
@@ -9221,6 +9226,13 @@ react-transition-group@^4.4.5:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-use-is-scrolling@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-use-is-scrolling/-/react-use-is-scrolling-0.0.2.tgz#723dcb65d77486cc052d1045b639fa2f6232834c"
+  integrity sha512-tnrSZRTMUcNAbUG2Q8jTWUrp3Q8ka5X9cLeqXZa2Xh95NvMGxxfHnUHXd1JFmYUPm4O4Ig4cWbdlme+bhcjLWA==
+  dependencies:
+    lodash.throttle "^4.1.1"
 
 react@17.0.2:
   version "17.0.2"

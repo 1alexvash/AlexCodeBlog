@@ -5,13 +5,39 @@ import { useRef } from "react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import PortfolioPage from "@/components/Portfolio";
+import { PortfolioPage } from "@/components/Portfolio";
+import { ProjectData } from "@/components/Portfolio/projectDataTypes";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
 });
+
+const projectsDataStub: readonly ProjectData[] = [
+  {
+    id: "1",
+    title: "AiScout",
+    lightImage: "/images/aiscout-dark-logo.svg",
+    darkImage: "/images/aiscout-logo.svg",
+  },
+  {
+    id: "2",
+    title: "Gaffer",
+    lightImage: "/images/gaffer-logo.svg",
+  },
+  {
+    id: "3",
+    title: "Woodland (NDA)",
+    lightImage: "/images/woodland-dark-logo.svg",
+    darkImage: "/images/woodland-logo.svg",
+  },
+  {
+    id: "4",
+    title: "GoVirtual (NDA)",
+    lightImage: "/images/goVirtual-logo.svg",
+  },
+];
 
 const containterStyles = {
   mx: "auto",
@@ -38,7 +64,7 @@ const Home: NextPage = () => {
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
       <Box ref={blogPostSectionRef} sx={{ padding: "36px 0" }}>
         <Box sx={containterStyles}>
-          <PortfolioPage />
+          <PortfolioPage projects={projectsDataStub} />
         </Box>
       </Box>
       <Footer />

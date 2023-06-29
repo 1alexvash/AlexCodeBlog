@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-syntax-highlighter": "^15.5.0",
+    "react-use-is-scrolling": "^0.0.2",
     "sass": "^1.56.2",
     "tinacms": "^1.5.8"
   },

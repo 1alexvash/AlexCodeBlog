@@ -2,23 +2,21 @@ import { Box, Typography, useTheme } from "@mui/material";
 
 import styles from "./pageStyles";
 
-interface Props {
-  activeProject: string;
-  scrollToRef: (ref: React.MutableRefObject<HTMLDivElement>) => void;
-  projectRef: React.MutableRefObject<HTMLDivElement>;
-  lightImage: string;
-  darkImage?: string;
-  title: string;
+export interface Props {
+  readonly onClick: () => void;
+  readonly isActive: boolean;
+  readonly lightImage: string;
+  readonly darkImage?: string;
+  readonly title: string;
 }
 
-const ProjectItem = ({
-  activeProject,
-  scrollToRef,
-  projectRef,
+export const ProjectItem = ({
+  isActive,
   lightImage,
   darkImage,
   title,
-}: Props) => {
+  onClick,
+}: Props): JSX.Element => {
   const theme = useTheme();
 
   const { projectItem } = styles(theme);
@@ -31,10 +29,7 @@ const ProjectItem = ({
   let src = lightImage;
 
   if (darkImage) {
-    if (
-      theme.palette.mode === "dark" ||
-      activeProject === projectRef.current.id
-    ) {
+    if (theme.palette.mode === "dark" || isActive) {
       src = darkImage;
     } else {
       src = lightImage;
@@ -43,11 +38,11 @@ const ProjectItem = ({
 
   return (
     <Box
-      onClick={() => scrollToRef(projectRef)}
+      onClick={onClick}
       sx={{
         ...projectItem,
         backgroundColor: theme.palette.mode === "light" ? "white" : "#33393F",
-        ...(activeProject === title && activeProjectStyles),
+        ...(isActive && activeProjectStyles),
       }}
     >
       <img src={src} alt="Woodland" height={33} width={36} />
@@ -55,5 +50,3 @@ const ProjectItem = ({
     </Box>
   );
 };
-
-export default ProjectItem;

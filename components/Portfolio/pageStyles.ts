@@ -36,6 +36,9 @@ const styles = (theme: Theme) => ({
       "&:not(:first-child)": {
         mt: "36px",
       },
+      "&:last-child": {
+        mb: "50%",
+      },
     },
   },
   projectListWrapper: {
@@ -88,6 +91,7 @@ const styles = (theme: Theme) => ({
     flexDirection: "column",
   },
   projectNameStyle: {
+    scrollMarginTop: "340px",
     display: "flex",
     alignItems: "center",
     mb: "16px",

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import useWindowDimensions from "helpers/useWindowDimensions";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const chromeZoomPixelGapBugFix = -0.25;
 const progressBarHeight = 10;
