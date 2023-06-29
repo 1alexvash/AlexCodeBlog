@@ -28,3 +28,59 @@ export const queriesToArrayOfDocuments = (
 ): PostDocument[] => {
   return posts.map((post) => postToDocument(post));
 };
+
+export const nodeProjectsArrayToProjects = (
+  data: PortfolioConnectionQuery
+): Project[] => {
+  const mappedData = data.portfolioConnection.edges
+    ?.map((edge) => edge?.node?.project)
+    .reverse();
+
+  if (!mappedData) {
+    return [
+      {
+        lightIcon: "",
+        darkIcon: "",
+        title: "",
+        client: "",
+        project: "",
+        result: "",
+        description: "",
+      },
+    ];
+  }
+
+  return mappedData
+    .flatMap((projects) => projects)
+    .map((item) => {
+      if (!item) {
+        return {
+          lightIcon: "",
+          title: "",
+          client: "",
+          project: "",
+          result: "",
+          description: "",
+        };
+      }
+      const {
+        client,
+        description,
+        lightIcon,
+        project,
+        title,
+        result,
+        darkIcon,
+      } = item;
+
+      return {
+        client,
+        description,
+        lightIcon,
+        darkIcon,
+        project,
+        title,
+        result,
+      };
+    });
+};
