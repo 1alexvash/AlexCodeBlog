@@ -34,3 +34,13 @@ export type PostFromQuery = Readonly<{
   tags?: Array<string | null> | null;
   _sys: SystemInfo;
 }>;
+
+export interface Project {
+  lightIcon: string;
+  darkIcon?: string | null;
+  title: string;
+  client: any;
+  project: any;
+  result: any;
+  description: any;
+}
