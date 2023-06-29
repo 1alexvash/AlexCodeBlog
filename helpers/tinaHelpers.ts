@@ -1,9 +1,4 @@
-import {
-  NodeProjectsArray,
-  PostDocument,
-  PostFromQuery,
-  Project,
-} from "interfaces";
+import { PostDocument, PostFromQuery } from "interfaces";
 
 import { PostQuery } from ".tina/__generated__/types";
 
@@ -33,9 +28,3 @@ export const queriesToArrayOfDocuments = (
 ): PostDocument[] => {
   return posts.map((post) => postToDocument(post));
 };
-
-// export const NodeProjectsArrayToProjects = (
-//   data: NodeProjectsArray
-// ): Project[] => {
-//   return {};
-// };

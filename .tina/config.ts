@@ -24,7 +24,7 @@ export default defineConfig({
       {
         name: "mainConfig",
         label: "Main config",
-        path: "content/config",
+        path: "content",
         format: "json",
         fields: [
           {
@@ -94,6 +94,7 @@ export default defineConfig({
               min: 1,
             },
           },
+
           {
             name: "postsPerPage",
             label: "Posts per page",
@@ -180,64 +181,6 @@ export default defineConfig({
           },
           router: ({ document }) => `/post/${document._sys.filename}`,
         },
-      },
-      {
-        name: "portfolio",
-        label: "Portfolio",
-        path: "content/portfolio",
-        format: "json",
-        fields: [
-          {
-            label: "Project",
-            name: "project",
-            type: "object",
-            list: true,
-            required: true,
-            fields: [
-              {
-                name: "lightIcon",
-                label: "Light Icon",
-                type: "image",
-                required: true,
-              },
-              {
-                name: "darkIcon",
-                label: "Dark Icon",
-                type: "image",
-              },
-              {
-                name: "projectName",
-                label: "Project Name",
-                type: "string",
-                required: true,
-              },
-              {
-                name: "client",
-                label: "Client",
-                type: "rich-text",
-                required: true,
-              },
-              {
-                name: "project",
-                label: "Project",
-                type: "rich-text",
-                required: true,
-              },
-              {
-                name: "result",
-                label: "Result",
-                type: "rich-text",
-                required: true,
-              },
-              {
-                name: "description",
-                label: "Description",
-                type: "rich-text",
-                required: true,
-              },
-            ],
-          },
-        ],
       },
     ],
   },
