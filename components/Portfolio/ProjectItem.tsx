@@ -6,8 +6,8 @@ interface Props {
   activeProject: string;
   scrollToRef: (ref: React.MutableRefObject<HTMLDivElement>) => void;
   projectRef: React.MutableRefObject<HTMLDivElement>;
-  lightIcon: string;
-  darkIcon?: string;
+  lightImage: string;
+  darkImage?: string;
   title: string;
 }
 
@@ -15,8 +15,8 @@ const ProjectItem = ({
   activeProject,
   scrollToRef,
   projectRef,
-  lightIcon,
-  darkIcon,
+  lightImage,
+  darkImage,
   title,
 }: Props) => {
   const theme = useTheme();
@@ -28,16 +28,16 @@ const ProjectItem = ({
     color: "white",
   };
 
-  let src = lightIcon;
+  let src = lightImage;
 
-  if (darkIcon) {
+  if (darkImage) {
     if (
       theme.palette.mode === "dark" ||
       activeProject === projectRef.current.id
     ) {
-      src = darkIcon;
+      src = darkImage;
     } else {
-      src = lightIcon;
+      src = lightImage;
     }
   }
 

@@ -35,10 +35,31 @@ export type PostFromQuery = Readonly<{
   _sys: SystemInfo;
 }>;
 
+export type NodeProjectsArray =
+  | (
+      | {
+          __typename?: "Portfolio" | undefined;
+          id: string;
+          _sys: SystemInfo;
+          project: Array<{
+            __typename: "PortfolioProject";
+            projectIcon: string;
+            projectName: string;
+            client: any;
+            project: any;
+            result: any;
+            description: any;
+          }>;
+        }
+      | null
+      | undefined[]
+    )
+  | undefined;
+
 export interface Project {
-  lightIcon: string;
-  darkIcon?: string | null;
-  title: string;
+  __typename: "PortfolioProject";
+  projectIcon: string;
+  projectName: string;
   client: any;
   project: any;
   result: any;
