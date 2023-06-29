@@ -47,7 +47,7 @@ const ProjectInfo = ({
     }
 
     ref.current.scrollIntoView({
-      behavior: "instant",
+      behavior: "auto",
       block: "start",
       inline: "center",
     });
