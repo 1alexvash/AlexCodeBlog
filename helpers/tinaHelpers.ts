@@ -1,6 +1,6 @@
-import { PostDocument, PostFromQuery } from "interfaces";
+import { PostDocument, PostFromQuery, Project } from "interfaces";
 
-import { PostQuery } from ".tina/__generated__/types";
+import { PortfolioConnectionQuery, PostQuery } from ".tina/__generated__/types";
 
 const postToDocument = (post: PostFromQuery): PostDocument => {
   const { date, draft, title, body, heroImage, tags, _sys, id } = post;
@@ -29,6 +29,17 @@ export const queriesToArrayOfDocuments = (
   return posts.map((post) => postToDocument(post));
 };
 
+const emptyProjectData: Project = {
+  id: "",
+  lightImage: "",
+  darkImage: "",
+  title: "",
+  clientDescription: "",
+  projectDescription: "",
+  resultDescription: "",
+  mainDescription: "",
+};
+
 export const nodeProjectsArrayToProjects = (
   data: PortfolioConnectionQuery
 ): Project[] => {
@@ -37,32 +48,16 @@ export const nodeProjectsArrayToProjects = (
     .reverse();
 
   if (!mappedData) {
-    return [
-      {
-        lightIcon: "",
-        darkIcon: "",
-        title: "",
-        client: "",
-        project: "",
-        result: "",
-        description: "",
-      },
-    ];
+    return [emptyProjectData];
   }
 
   return mappedData
     .flatMap((projects) => projects)
     .map((item) => {
       if (!item) {
-        return {
-          lightIcon: "",
-          title: "",
-          client: "",
-          project: "",
-          result: "",
-          description: "",
-        };
+        return emptyProjectData;
       }
+
       const {
         client,
         description,
@@ -71,16 +66,18 @@ export const nodeProjectsArrayToProjects = (
         title,
         result,
         darkIcon,
+        id,
       } = item;
 
       return {
-        client,
-        description,
-        lightIcon,
-        darkIcon,
-        project,
+        clientDescription: client,
+        mainDescription: description,
+        lightImage: lightIcon,
+        darkImage: darkIcon ?? undefined,
+        projectDescription: project,
         title,
-        result,
+        resultDescription: result,
+        id,
       };
     });
 };

@@ -37,7 +37,7 @@ const styles = (theme: Theme) => ({
         mt: "36px",
       },
       "&:last-child": {
-        mb: "50%",
+        mb: "70%",
       },
     },
   },

@@ -24,7 +24,7 @@ export default defineConfig({
       {
         name: "mainConfig",
         label: "Main config",
-        path: "content",
+        path: "content/config",
         format: "json",
         fields: [
           {
@@ -195,6 +195,12 @@ export default defineConfig({
             list: true,
             required: true,
             fields: [
+              {
+                name: "id",
+                label: "Id",
+                type: "string",
+                required: true,
+              },
               {
                 name: "lightIcon",
                 label: "Light Icon",

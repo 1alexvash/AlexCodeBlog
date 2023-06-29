@@ -1,44 +1,25 @@
 import { Box } from "@mui/material";
+import { nodeProjectsArrayToProjects } from "helpers/tinaHelpers";
 import type { GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRef } from "react";
+import { useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { PortfolioPage } from "@/components/Portfolio";
-import { ProjectData } from "@/components/Portfolio/projectDataTypes";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import StandWithUkraine from "@/components/StandWithUkraine";
+
 import client from ".tina/__generated__/client";
+import {
+  PortfolioConnectionQuery,
+  PortfolioConnectionQueryVariables,
+} from ".tina/__generated__/types";
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
 });
-
-const projectsDataStub: readonly ProjectData[] = [
-  {
-    id: "1",
-    title: "AiScout",
-    lightImage: "/images/aiscout-dark-logo.svg",
-    darkImage: "/images/aiscout-logo.svg",
-  },
-  {
-    id: "2",
-    title: "Gaffer",
-    lightImage: "/images/gaffer-logo.svg",
-  },
-  {
-    id: "3",
-    title: "Woodland (NDA)",
-    lightImage: "/images/woodland-dark-logo.svg",
-    darkImage: "/images/woodland-logo.svg",
-  },
-  {
-    id: "4",
-    title: "GoVirtual (NDA)",
-    lightImage: "/images/goVirtual-logo.svg",
-  },
-];
 
 const containterStyles = {
   mx: "auto",
@@ -54,7 +35,14 @@ const containterStyles = {
   },
 };
 
-const Home: NextPage = () => {
+interface Props {
+  tinaData: PortfolioConnectionQuery;
+  variables: PortfolioConnectionQueryVariables;
+  query: string;
+}
+
+const Home: NextPage<Props> = ({ query, tinaData, variables }) => {
+  const { data } = useTina({ query, data: tinaData, variables });
   const blogPostSectionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   return (
@@ -65,7 +53,7 @@ const Home: NextPage = () => {
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
       <Box ref={blogPostSectionRef} sx={{ padding: "36px 0" }}>
         <Box sx={containterStyles}>
-          <PortfolioPage projects={projectsDataStub} />
+          <PortfolioPage projects={nodeProjectsArrayToProjects(data)} />
         </Box>
       </Box>
       <Footer />

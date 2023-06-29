@@ -36,10 +36,14 @@ export const ProjectInfoItem = ({
   return (
     <Box>
       <ProjectInfo
+        clientDescription={projectData.clientDescription}
+        projectDescription={projectData.projectDescription}
+        resultDescription={projectData.resultDescription}
+        mainDescription={projectData.mainDescription}
+        nameOfProject={projectData.title}
         onActivated={onActivated}
         enableScrollObservation={enableScrollObservation}
         isActive={isActive}
-        nameOfProject={projectData.title}
         pathToImageLogo={calculatePathToImageLogo(
           projectData,
           theme.palette.mode
