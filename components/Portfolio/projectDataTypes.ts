@@ -1,10 +1,10 @@
 export interface ProjectData {
-  readonly id: number;
-  readonly title: string;
-  readonly lightImage: string;
-  readonly darkImage?: string;
-  readonly clientDescription: any;
-  readonly projectDescription: any;
-  readonly resultDescription: any;
-  readonly mainDescription: any;
+  id: number;
+  title: string;
+  lightImage: string;
+  darkImage?: string;
+  clientDescription: any;
+  projectDescription: any;
+  resultDescription: any;
+  mainDescription: any;
 }

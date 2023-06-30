@@ -6,16 +6,16 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import styles from "./pageStyles";
 
 interface Props {
-  readonly id: number;
-  readonly nameOfProject: string;
-  readonly pathToImageLogo: string;
-  readonly isActive: boolean;
-  readonly enableScrollObservation: boolean;
-  readonly onActivated: (projectId: number) => void;
-  readonly clientDescription: any;
-  readonly projectDescription: any;
-  readonly resultDescription: any;
-  readonly mainDescription: any;
+  id: number;
+  nameOfProject: string;
+  pathToImageLogo: string;
+  isActive: boolean;
+  enableScrollObservation: boolean;
+  onActivated: (projectId: number) => void;
+  clientDescription: any;
+  projectDescription: any;
+  resultDescription: any;
+  mainDescription: any;
 }
 
 const ProjectInfo = ({

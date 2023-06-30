@@ -3,11 +3,11 @@ import { Box, Typography, useTheme } from "@mui/material";
 import styles from "./pageStyles";
 
 export interface Props {
-  readonly onClick: () => void;
-  readonly isActive: boolean;
-  readonly lightImage: string;
-  readonly darkImage?: string;
-  readonly title: string;
+  onClick: () => void;
+  isActive: boolean;
+  lightImage: string;
+  darkImage?: string;
+  title: string;
 }
 
 export const ProjectItem = ({

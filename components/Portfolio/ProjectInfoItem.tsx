@@ -5,10 +5,10 @@ import { ProjectData } from "./projectDataTypes";
 import ProjectInfo from "./ProjectInfo";
 
 export interface ProjectInfoItemProps {
-  readonly projectData: ProjectData;
-  readonly isActive: boolean;
-  readonly enableScrollObservation: boolean;
-  readonly onActivated: (projectId: number) => void;
+  projectData: ProjectData;
+  isActive: boolean;
+  enableScrollObservation: boolean;
+  onActivated: (projectId: number) => void;
 }
 
 const calculatePathToImageLogo = (

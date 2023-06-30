@@ -1,6 +1,6 @@
 import { Maybe, Scalars } from "./../.tina/__generated__/types";
 
-type SystemInfo = Readonly<{
+type SystemInfo = {
   __typename?: "SystemInfo";
   filename: string;
   basename: string;
@@ -8,9 +8,9 @@ type SystemInfo = Readonly<{
   path: string;
   relativePath: string;
   extension: string;
-}>;
+};
 
-export type PostDocument = Readonly<{
+export type PostDocument = {
   id: string;
   title: string;
   date: Date | string;
@@ -19,11 +19,11 @@ export type PostDocument = Readonly<{
   tags: string[];
   _sys: SystemInfo;
   body?: Maybe<Scalars["JSON"]>;
-}>;
+};
 
 export type PostDocumentWithoutBody = Omit<PostDocument, "body">;
 
-export type PostFromQuery = Readonly<{
+export type PostFromQuery = {
   __typename?: "Post";
   id: string;
   title: string;
@@ -33,15 +33,15 @@ export type PostFromQuery = Readonly<{
   body?: any | null;
   tags?: Array<string | null> | null;
   _sys: SystemInfo;
-}>;
+};
 
 export interface Project {
-  readonly id: string;
-  readonly title: string;
-  readonly lightImage: string;
-  readonly darkImage?: string;
-  readonly clientDescription: any;
-  readonly projectDescription: any;
-  readonly resultDescription: any;
-  readonly mainDescription: any;
+  id: string;
+  title: string;
+  lightImage: string;
+  darkImage?: string;
+  clientDescription: any;
+  projectDescription: any;
+  resultDescription: any;
+  mainDescription: any;
 }

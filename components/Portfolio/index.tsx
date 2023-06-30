@@ -7,7 +7,7 @@ import { ProjectList } from "./ProjectList";
 import { ProjectsInfo } from "./ProjectsInfo";
 
 export interface PortfolioPageProps {
-  readonly projects: readonly ProjectData[];
+  projects: ProjectData[];
 }
 
 export const PortfolioPage = ({

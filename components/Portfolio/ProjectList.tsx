@@ -2,9 +2,9 @@ import { ProjectData } from "./projectDataTypes";
 import { ProjectItem } from "./ProjectItem";
 
 export interface ProjectListProps {
-  readonly projects: readonly ProjectData[];
-  readonly activeProjectId: number | undefined;
-  readonly onProjectClick: (projectId: number) => void;
+  projects: ProjectData[];
+  activeProjectId: number | undefined;
+  onProjectClick: (projectId: number) => void;
 }
 
 export const ProjectList = ({
