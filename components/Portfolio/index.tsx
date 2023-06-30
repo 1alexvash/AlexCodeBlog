@@ -15,7 +15,7 @@ export const PortfolioPage = ({
 }: PortfolioPageProps): JSX.Element => {
   const theme = useTheme();
 
-  const [activeProjectId, setActiveProjectId] = useState<string | undefined>(
+  const [activeProjectId, setActiveProjectId] = useState<number | undefined>(
     projects[0].id
   );
 
@@ -42,7 +42,7 @@ export const PortfolioPage = ({
   }, [enableScrollObservation, enableObservation]);
 
   const handleProjectActivatedByScroll = useCallback(
-    (id: string) => {
+    (id: number) => {
       if (id === activeProjectId) {
         return;
       }
@@ -53,7 +53,7 @@ export const PortfolioPage = ({
   );
 
   const handleProjectSelectClick = useCallback(
-    (id: string) => {
+    (id: number) => {
       if (id === activeProjectId) {
         return;
       }

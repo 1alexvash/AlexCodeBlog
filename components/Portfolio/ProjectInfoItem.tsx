@@ -8,7 +8,7 @@ export interface ProjectInfoItemProps {
   readonly projectData: ProjectData;
   readonly isActive: boolean;
   readonly enableScrollObservation: boolean;
-  readonly onActivated: (projectId: string) => void;
+  readonly onActivated: (projectId: number) => void;
 }
 
 const calculatePathToImageLogo = (

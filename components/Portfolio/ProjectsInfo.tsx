@@ -4,8 +4,8 @@ import { ProjectInfoItem } from "./ProjectInfoItem";
 export interface ProjectsInfoProps {
   readonly projects: readonly ProjectData[];
   readonly enableScrollObservation: boolean;
-  readonly activeProjectId: string | undefined;
-  readonly onProjectActivated: (projectId: string) => void;
+  readonly activeProjectId: number | undefined;
+  readonly onProjectActivated: (projectId: number) => void;
 }
 
 export const ProjectsInfo = ({

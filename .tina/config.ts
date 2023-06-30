@@ -197,8 +197,8 @@ export default defineConfig({
             fields: [
               {
                 name: "id",
-                label: "Id",
-                type: "string",
+                label: "ID",
+                type: "number",
                 required: true,
               },
               {

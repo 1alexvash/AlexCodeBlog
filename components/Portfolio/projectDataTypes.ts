@@ -1,5 +1,5 @@
 export interface ProjectData {
-  readonly id: string;
+  readonly id: number;
   readonly title: string;
   readonly lightImage: string;
   readonly darkImage?: string;

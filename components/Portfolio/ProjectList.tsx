@@ -3,8 +3,8 @@ import { ProjectItem } from "./ProjectItem";
 
 export interface ProjectListProps {
   readonly projects: readonly ProjectData[];
-  readonly activeProjectId: string | undefined;
-  readonly onProjectClick: (projectId: string) => void;
+  readonly activeProjectId: number | undefined;
+  readonly onProjectClick: (projectId: number) => void;
 }
 
 export const ProjectList = ({
