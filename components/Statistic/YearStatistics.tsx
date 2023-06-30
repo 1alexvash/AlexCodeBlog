@@ -6,7 +6,7 @@ import { calculateMarginBottom } from "./pageHelpers";
 import styles from "./pageStyles";
 
 const minColumnHeight = 1;
-const heightByPostQuantity = 30;
+const pixelsHeightPetMonth = 30;
 
 const months = [
   { month: "January", season: "winter" },
@@ -50,7 +50,7 @@ const YearStatistics = ({ postsByMonth }: Props) => {
               sx={{
                 height: `${
                   postsByMonth[column.month] > 0
-                    ? postsByMonth[column.month] * heightByPostQuantity
+                    ? postsByMonth[column.month] * pixelsHeightPetMonth
                     : minColumnHeight
                 }px`,
               }}
