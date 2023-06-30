@@ -6,7 +6,9 @@ import { getPostsByYearAndMonth, getYearsArray } from "./pageHelpers";
 import styles from "./pageStyles";
 import YearStatistics from "./YearStatistics";
 
-export type PostsByMonthType = { [month: string]: number };
+export type PostsByMonthType = {
+  [month: string]: number;
+};
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -39,19 +41,10 @@ const StatisticPage = ({ posts }: Props) => {
     if (isActiveYear) {
       backgroundColor = colorsPalette.orange;
       color = colorsPalette.white;
-
-      return {
-        backgroundColor,
-        color,
-      };
-    }
-
-    if (theme.palette.mode === "light") {
+    } else if (theme.palette.mode === "light") {
       backgroundColor = colorsPalette.lightGrey;
       color = colorsPalette.black;
-    }
-
-    if (theme.palette.mode === "dark") {
+    } else if (theme.palette.mode === "dark") {
       backgroundColor = colorsPalette.grey;
       color = colorsPalette.white;
     }
