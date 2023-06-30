@@ -13,6 +13,7 @@ export type SystemInfo = Readonly<{
 export type PostDocument = Readonly<{
   id: string;
   title: string;
+  audioVersion?: string | null;
   date: Date | string;
   heroImage?: string | null;
   draft: boolean;
@@ -27,6 +28,7 @@ export type PostFromQuery = {
   __typename?: "Post";
   id: string;
   title: string;
+  audioVersion?: string | null;
   date: string;
   heroImage?: string | null;
   draft: boolean;

@@ -1,8 +1,5 @@
 import { convertTypesAndGetEdges } from "helpers/getEdgeNodesHelpers";
-import {
-  queriesToArrayOfDocuments,
-  queryToDocument,
-} from "helpers/tinaHelpers";
+import { postToDocument, queriesToArrayOfDocuments } from "helpers/tinaHelpers";
 import { PostFromQuery } from "interfaces";
 import { GetStaticPaths, GetStaticProps } from "next";
 import dynamic from "next/dynamic";
@@ -16,6 +13,7 @@ import Header from "@/components/Header";
 import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
 import BreadCrumbs from "@/components/Post/BreadCrumbs";
 import LatestPosts from "@/components/Post/LatestPosts";
+import PageProgressWrapper from "@/components/Post/PageProgressWrapper";
 import PostContent from "@/components/Post/PostContent";
 import StandWithUkraine from "@/components/StandWithUkraine";
 
@@ -33,6 +31,7 @@ const latestPostsPerPage = 10;
 
 const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
   ssr: false,
+  loading: () => <PageProgressWrapper />,
 });
 
 const Post = ({ latestPosts, ...props }: Props) => {
@@ -64,7 +63,7 @@ const Post = ({ latestPosts, ...props }: Props) => {
       <BreadCrumbs title={data.post.title} />
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
       <BlogPostSectionWrapper ref={blogPostSectionRef}>
-        <PostContent post={queryToDocument(data)} />
+        <PostContent post={postToDocument(data.post)} />
         <LatestPosts latestPosts={queriesToArrayOfDocuments(latestPosts)} />
       </BlogPostSectionWrapper>
       <Footer />

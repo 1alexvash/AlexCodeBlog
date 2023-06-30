@@ -1,0 +1,48 @@
+---
+title: JavaScript map data structure
+date: 2023-06-26T00:00:00.000Z
+heroImage: /post-images/JavaScript map.png
+draft: false
+tags:
+  - JavaScript
+  - TypeScript
+---
+
+A picture worth a thousand words, so let's start off with a code example.
+
+```typescript
+// An example of JS Map Data Structure
+const currencyCountryMap: Map<string, string> = new Map([
+  ['USD', 'United States'],
+  ['EUR', 'European Union'],
+  ['JPY', 'Japan'],
+  ['GBP', 'United Kingdom'],
+  ['AUD', 'Australia'],
+]);
+```
+
+This might look like some mix of `object` / `array` type, but it is actually is something unique, as this type provides some rigidity, as can be seen by this TypeScript notation `Map<string, string>`.
+
+So, you know for every currency like an `USD` there's a corresponding country => `United States`
+
+This is beneficial because this data structure provides a very clear and reliable key to pair structure, and also because it comes with slightly different methods to work with it.
+
+```typescript
+// Remove a key-value pair from the map
+currencyCountryMap.delete('USD');
+
+// Add a key-value pair to the map
+currencyCountryMap.set('CAD', 'Canada');
+
+// Check if a key exists in the map
+currencyCountryMap.has('JPY'); // true
+
+// Get the value for a key
+currencyCountryMap.get('JPY'); // 'Japan'
+
+// Get the size of the map
+currencyCountryMap.size; // 5
+
+// Clear the map
+currencyCountryMap.clear();
+```

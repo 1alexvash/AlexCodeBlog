@@ -85,14 +85,10 @@ export default defineConfig({
             required: true,
           },
           {
-            name: "siteKeywords",
-            label: "Site keywords",
-            list: true,
+            name: "ogSiteTitle",
+            label: "OG Site Title",
             type: "string",
             required: true,
-            ui: {
-              min: 1,
-            },
           },
 
           {
@@ -116,7 +112,6 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
-          // TODO: audio file
           {
             type: "datetime",
             name: "date",
@@ -138,6 +133,11 @@ export default defineConfig({
             type: "boolean",
             required: true,
             description: "If this is checked the post will not be published",
+          },
+          {
+            type: "string",
+            name: "audioVersion",
+            label: "Audio version (Vocaroo)",
           },
           {
             type: "rich-text",
