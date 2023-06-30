@@ -30,7 +30,7 @@ export const queriesToArrayOfDocuments = (
 };
 
 const emptyProjectData: Project = {
-  id: "",
+  id: -1,
   lightImage: "",
   darkImage: "",
   title: "",

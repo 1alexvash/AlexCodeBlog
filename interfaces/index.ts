@@ -36,7 +36,7 @@ export type PostFromQuery = {
 };
 
 export interface Project {
-  id: string;
+  id: number;
   title: string;
   lightImage: string;
   darkImage?: string;
