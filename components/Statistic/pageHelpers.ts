@@ -2,7 +2,11 @@ import { PostDocumentWithoutBody } from "interfaces";
 
 import { PostsByMonthType } from ".";
 
-export const marginBottomCounter = (postsCount: number | undefined) => {
+const emptyPostsByMonth: { [month: string]: number } = {};
+
+export const calculateMarginBottom = (
+  postsCount: number | undefined
+): { mb?: string } => {
   if (!postsCount) {
     return { mb: "55px" };
   }
@@ -14,10 +18,25 @@ export const marginBottomCounter = (postsCount: number | undefined) => {
   return {};
 };
 
+export const getYearsArray = (posts: PostDocumentWithoutBody[]): number[] => {
+  const uniqueYears: Set<number> = new Set();
+
+  posts.forEach((post) => {
+    const postYear = new Date(post.date).getUTCFullYear();
+    uniqueYears.add(postYear);
+  });
+
+  uniqueYears.add(new Date().getUTCFullYear());
+
+  return Array.from(uniqueYears).sort();
+};
+
 export const getPostsByYearAndMonth = (
   year: number,
   posts: PostDocumentWithoutBody[]
-) => {
+): {
+  [month: string]: number;
+} => {
   const postsByMonth: PostsByMonthType = {};
   const filteredPosts = posts.filter(
     (post) => new Date(post.date).getUTCFullYear() === year
@@ -40,10 +59,9 @@ export const getPostsByYearAndMonth = (
     return monthA - monthB;
   });
 
-  const sortedPostsByMonth: { [month: string]: number } = {};
-  sortedMonths.map((month) => {
-    sortedPostsByMonth[month] = postsByMonth[month];
-  });
+  const sortedPostsByMonth = sortedMonths.reduce((acc, month) => {
+    return { ...acc, [month]: postsByMonth[month] };
+  }, emptyPostsByMonth);
 
   return sortedPostsByMonth;
 };

@@ -18,13 +18,13 @@ interface Props {
 const containterStyles = {
   mx: "auto",
   px: "15px",
-  ["@media(min-width: 768px)"]: {
+  ["@media (min-width: 768px)"]: {
     width: "750px",
   },
-  ["@media(min-width: 1020px)"]: {
+  ["@media (min-width: 1020px)"]: {
     width: "1000px",
   },
-  ["@media(min-width: 1260px)"]: {
+  ["@media (min-width: 1260px)"]: {
     width: "1230px",
   },
 };

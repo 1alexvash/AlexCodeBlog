@@ -2,13 +2,13 @@ import { Box, Paper, Typography, useTheme } from "@mui/material";
 import React from "react";
 
 import { PostsByMonthType } from ".";
-import { marginBottomCounter } from "./pageHelpers";
+import { calculateMarginBottom } from "./pageHelpers";
 import styles from "./pageStyles";
 
 const minColumnHeight = 1;
-const heightByCount = 30;
+const heightByPostQuantity = 30;
 
-const monthlySeasons = [
+const months = [
   { month: "January", season: "winter" },
   { month: "February", season: "winter" },
   { month: "March", season: "spring" },
@@ -27,25 +27,30 @@ interface Props {
   postsByMonth: PostsByMonthType;
 }
 
-const MonthlyDiagramStatistic = ({ postsByMonth }: Props) => {
+const YearStatistics = ({ postsByMonth }: Props) => {
   const theme = useTheme();
 
-  const { monthlyDiagramWrapper, monthlyDiagramColumn, monthTitlesStyle } =
-    styles(theme);
+  const {
+    monthlyDiagramWrapper,
+    monthlyDiagramColumn,
+    monthName,
+    monthNameColumn,
+    yearStatistics,
+  } = styles(theme);
 
   return (
-    <Box>
+    <Box sx={yearStatistics}>
       <Box sx={monthlyDiagramWrapper}>
-        {monthlySeasons.map((column) => (
+        {months.map((column) => (
           <Box sx={monthlyDiagramColumn} key={column.month}>
-            <Typography sx={marginBottomCounter(postsByMonth[column.month])}>
+            <Typography sx={calculateMarginBottom(postsByMonth[column.month])}>
               {postsByMonth[column.month] ?? 0}
             </Typography>
             <Paper
               sx={{
                 height: `${
                   postsByMonth[column.month] > 0
-                    ? postsByMonth[column.month] * heightByCount
+                    ? postsByMonth[column.month] * heightByPostQuantity
                     : minColumnHeight
                 }px`,
               }}
@@ -61,13 +66,15 @@ const MonthlyDiagramStatistic = ({ postsByMonth }: Props) => {
           </Box>
         ))}
       </Box>
-      <Box sx={monthTitlesStyle}>
-        {monthlySeasons.map((currentMonth) => (
-          <Box key={currentMonth.month}>{currentMonth.month}</Box>
+      <Box sx={monthName}>
+        {months.map((month) => (
+          <Box sx={{ width: "100%" }} key={month.month}>
+            <Box sx={monthNameColumn}> {month.month}</Box>
+          </Box>
         ))}
       </Box>
     </Box>
   );
 };
 
-export default MonthlyDiagramStatistic;
+export default YearStatistics;
