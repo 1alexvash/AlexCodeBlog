@@ -22,6 +22,84 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "mainConfig",
+        label: "Main config",
+        path: "content",
+        format: "json",
+        fields: [
+          {
+            name: "siteDescription",
+            label: "Site description",
+            type: "rich-text",
+            isBody: true,
+          },
+          {
+            name: "defaultImage",
+            label: "Default image",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "authorName",
+            label: "Author name",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "authorPosition",
+            label: "Author position",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "socialLinks",
+            label: "Social links",
+            type: "object",
+            list: true,
+            required: true,
+            fields: [
+              {
+                name: "link",
+                label: "Link",
+                type: "string",
+                required: true,
+              },
+              {
+                name: "image",
+                label: "Image",
+                type: "string",
+                required: true,
+              },
+              {
+                name: "class",
+                label: "Class",
+                type: "string",
+              },
+            ],
+          },
+          {
+            name: "siteTitle",
+            label: "Site title",
+            type: "string",
+            isTitle: true,
+            required: true,
+          },
+          {
+            name: "ogSiteTitle",
+            label: "OG Site Title",
+            type: "string",
+            required: true,
+          },
+
+          {
+            name: "postsPerPage",
+            label: "Posts per page",
+            type: "number",
+            required: true,
+          },
+        ],
+      },
+      {
         name: "post",
         label: "Posts",
         path: "content/posts",
@@ -34,12 +112,14 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
-          // TODO: audio file
           {
             type: "datetime",
             name: "date",
             label: "Date",
             required: true,
+            ui: {
+              parse: (value) => value && value.format("YYYY-MM-DD"),
+            },
           },
           {
             type: "image",
@@ -53,6 +133,11 @@ export default defineConfig({
             type: "boolean",
             required: true,
             description: "If this is checked the post will not be published",
+          },
+          {
+            type: "string",
+            name: "audioVersion",
+            label: "Audio version (Vocaroo)",
           },
           {
             type: "rich-text",

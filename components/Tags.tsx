@@ -1,53 +1,97 @@
+import { isDefined } from "helpers/tinaHelpers";
 import { useEffect } from "react";
 import { resetPaginationPage } from "redux/slices/pagination";
 import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
+import { useEditState } from "tinacms/dist/react";
 
-interface Props {
-  uniqueTags: string[];
+export interface Tag {
+  name: string;
+  postsCount: number;
 }
 
-const Tags = ({ uniqueTags }: Props) => {
+interface Props {
+  tags: Tag[];
+}
+
+interface TagItemProps {
+  isActive: boolean;
+  onClick: () => void;
+  tagName: string;
+  tagCount?: number;
+}
+
+interface TagsListProps {
+  tags: TagItemProps[];
+}
+
+const MINIMUM_VISIBLE_COUNT = 2;
+const SINGLE_POST_COUNT = 1;
+
+const TagItem = ({
+  isActive,
+  onClick,
+  tagName,
+  tagCount,
+}: TagItemProps): JSX.Element => (
+  <li className={isActive ? "active" : ""} onClick={onClick}>
+    {tagCount ? `${tagName} [${tagCount}]` : tagName}
+  </li>
+);
+
+const TagsList = ({ tags }: TagsListProps): JSX.Element => (
+  <ul className="filter-tags-list">
+    {tags.map((tag) => (
+      <TagItem key={tag.tagName} {...tag} />
+    ))}
+  </ul>
+);
+
+const Tags = ({ tags }: Props) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
 
-  const dispatch = useAppDispatch();
+  const { edit } = useEditState();
 
-  const noneTagSelected = selectedTags.length === 0;
-  const allTagsSelected = uniqueTags.length === selectedTags.length;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(resetPaginationPage());
   }, [dispatch, selectedTags]);
 
-  return (
-    <ul className="filter-tags-list">
-      <li
-        className={noneTagSelected || allTagsSelected ? "active" : ""}
-        onClick={() => dispatch(resetTags())}
-      >
-        ALL
-      </li>
-      {uniqueTags.map((uniqueTag) => (
-        <li
-          key={uniqueTag}
-          className={selectedTags.includes(uniqueTag) ? "active" : ""}
-          onClick={() => {
-            if (selectedTags.includes(uniqueTag)) {
-              const updatedTags = selectedTags.filter(
-                (tag) => tag !== uniqueTag
-              );
+  const tagSelect = (uniqueTag: string): void => {
+    if (selectedTags.includes(uniqueTag)) {
+      const updatedTags = selectedTags.filter((tag) => tag !== uniqueTag);
 
-              dispatch(setTags(updatedTags));
-            } else {
-              dispatch(setTags([...selectedTags, uniqueTag]));
-            }
-          }}
-        >
-          {uniqueTag}
-        </li>
-      ))}
-    </ul>
-  );
+      dispatch(setTags(updatedTags));
+    } else {
+      dispatch(setTags([...selectedTags, uniqueTag]));
+    }
+  };
+
+  const otherTagItems: TagItemProps[] = tags
+    .map(({ name, postsCount }) => {
+      const isDefaultVisibleTag = postsCount >= MINIMUM_VISIBLE_COUNT;
+      const isTemporaryVisibleTag =
+        postsCount === SINGLE_POST_COUNT && selectedTags.includes(name);
+
+      return edit || isTemporaryVisibleTag || isDefaultVisibleTag
+        ? {
+            isActive: selectedTags.includes(name) || isTemporaryVisibleTag,
+            tagName: name,
+            tagCount: edit ? postsCount : undefined,
+            onClick: () => tagSelect(name),
+          }
+        : undefined;
+    })
+    .filter(isDefined);
+
+  const allTagItem: TagItemProps = {
+    tagName: "ALL",
+    onClick: () => dispatch(resetTags()),
+    isActive: selectedTags.length === 0 || tags.length === selectedTags.length,
+  };
+
+  return <TagsList tags={[allTagItem, ...otherTagItems]} />;
 };
 
 export default Tags;

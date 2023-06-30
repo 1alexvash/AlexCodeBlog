@@ -1,5 +1,4 @@
-import { Box } from "@mui/material";
-import config from "config";
+import { Box, Typography } from "@mui/material";
 import {
   isPostADraft,
   isPostInTheFuture,
@@ -9,10 +8,14 @@ import isUpcomingPost from "helpers/isUpcomingPost";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { useAppDispatch } from "redux/typesHooks";
+import { useAppSelector } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import renderCopyButtons from "../../helpers/renderCopyButtons";
+import { setTags } from "../../redux/slices/selectedTags";
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
@@ -20,21 +23,35 @@ interface Props {
   post: PostDocument;
 }
 
-interface CodeTinaComponentProps {
+interface CodeBlockTinaProps {
   lang: string;
   value: string;
 }
 
-interface listItemTinaProps {
+interface ListItemTinaProps {
+  children: JSX.Element;
+}
+
+interface ImgTinaProps {
+  url: string;
+  caption?: string;
+  alt?: string;
+}
+
+interface CodeTinaProps {
   children: JSX.Element;
 }
 
 const codeBlockASTNodeName = "code_block";
 const listItemASTNodeName = "li";
+const imgASTNodeName = "img";
+const codeASTNodeName = "code";
 
 const components: Components<{
-  [codeBlockASTNodeName]: CodeTinaComponentProps;
-  [listItemASTNodeName]: listItemTinaProps;
+  [codeBlockASTNodeName]: CodeBlockTinaProps;
+  [listItemASTNodeName]: ListItemTinaProps;
+  [imgASTNodeName]: ImgTinaProps;
+  [codeASTNodeName]: CodeTinaProps;
 }> = {
   [codeBlockASTNodeName]: (props) => {
     if (!props) {
@@ -50,10 +67,64 @@ const components: Components<{
 
     return <li className="tina-list-item">{props.children}</li>;
   },
+  [imgASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return (
+      <Box>
+        <img src={props.url} alt={props.alt} />
+        <Typography
+          variant="caption"
+          component="p"
+          sx={(theme) => ({
+            color:
+              theme.palette.mode === "dark"
+                ? theme.palette.main.lightGrey
+                : theme.palette.main.darkGrey,
+            fontSize: "14px",
+            textAlign: "center",
+            mt: "5px",
+          })}
+        >
+          {props.caption}
+        </Typography>
+      </Box>
+    );
+  },
+  [codeASTNodeName]: (props) => {
+    if (!props) {
+      return <></>;
+    }
+
+    return (
+      <Box
+        component="code"
+        sx={(theme) => ({
+          fontFamily: "monospace",
+          backgroundColor:
+            theme.palette.mode === "light"
+              ? "rgba(9, 30, 66, 0.08)"
+              : "rgba(161, 189, 217, 0.08)",
+          borderRadius: "3px",
+          padding: "4px",
+          overflowWrap: "break-word",
+          whiteSpace: "pre-wrap",
+        })}
+      >
+        {props.children}
+      </Box>
+    );
+  },
 };
 
 const PostContent = ({ post }: Props) => {
+  const dispatch = useAppDispatch();
   const description = getFirstParagraph(post.body);
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
+  const hostURLLink = useAppSelector((state) => state.hostUrl);
+
   const document = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,12 +135,12 @@ const PostContent = ({ post }: Props) => {
     <article className="blogpost-content">
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={config.site_description} />
+        <meta name="description" content={config.siteDescription} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={config.host_url} />
+        <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content={config.site_title} />
+        <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:image" content={post.heroImage} />
       </Head>
 
@@ -95,13 +166,17 @@ const PostContent = ({ post }: Props) => {
 
       <div className="tags">
         {post.tags.map((tag) => (
-          <a href="" key={tag}>
+          <Link href="/" key={tag} onClick={() => dispatch(setTags([tag]))}>
             #{tag}
-          </a>
+          </Link>
         ))}
       </div>
-      {/* <Reactions /> This future might be added later */}
       <Box component="div" ref={document}>
+        {post.audioVersion && (
+          <Box component="p">
+            <Link href={post.audioVersion}>Audio Version:</Link>
+          </Box>
+        )}
         <TinaMarkdown content={post.body} components={components} />
       </Box>
     </article>
