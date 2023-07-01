@@ -1,6 +1,6 @@
-import { PaletteMode, ThemeProvider as MUIThemeProvider } from "@mui/material";
-import { defaultTheme, setTheme, Theme } from "redux/slices/theme";
-import { useAppDispatch, useAppSelector } from "redux/typesHooks";
+import { ThemeProvider as MUIThemeProvider } from "@mui/material";
+import { useTheme } from "next-themes";
+import { useState } from "react";
 
 import useIsomorphicLayoutEffect from "../useIsomorphicLayoutEffect";
 import getMUITheme from "./getMUITheme";
@@ -8,6 +8,9 @@ import getMUITheme from "./getMUITheme";
 interface Props {
   children: JSX.Element;
 }
+type Theme = "light" | "dark";
+
+const defaultTheme = "dark";
 
 const getStorageTheme = (): Theme | undefined => {
   return localStorage.theme;
@@ -28,18 +31,28 @@ const getBrowserTheme = (): Theme | undefined => {
 const getInitialTheme = (): Theme =>
   getStorageTheme() || getBrowserTheme() || defaultTheme;
 
-const ThemeProvider = ({ children }: Props) => {
-  const dispatch = useAppDispatch();
-  const theme = useAppSelector((state) => state.theme);
-  const MUITheme = getMUITheme(theme as PaletteMode);
+const PageProvider = ({ children }: Props) => {
+  const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useIsomorphicLayoutEffect(() => {
+    setMounted(true);
     const initialTheme = getInitialTheme();
 
-    dispatch(setTheme(initialTheme));
-  }, [dispatch]);
+    setTheme(initialTheme);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  if (theme !== "dark" && theme !== "light") {
+    return null;
+  }
+
+  const MUITheme = getMUITheme(theme);
 
   return <MUIThemeProvider theme={MUITheme}>{children}</MUIThemeProvider>;
 };
 
-export default ThemeProvider;
+export default PageProvider;

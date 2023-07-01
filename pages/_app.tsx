@@ -1,20 +1,22 @@
 import "../styles/root.scss";
 
 import type { AppProps } from "next/app";
+import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import store from "redux/store";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import ThemeProvider from "@/components/MUI/ThemeProvider";
+import PageProvider from "@/components/MUI/PageProvider";
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <Provider store={store}>
-    <GoogleAnalytics />
-
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
-  </Provider>
+  <ThemeProvider storageKey="theme" defaultTheme="dark" enableSystem>
+    <Provider store={store}>
+      <GoogleAnalytics />
+      <PageProvider>
+        <Component {...pageProps} />
+      </PageProvider>
+    </Provider>
+  </ThemeProvider>
 );
 
 export default MyApp;
