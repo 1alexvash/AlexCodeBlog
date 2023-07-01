@@ -6,7 +6,7 @@ import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
-import { useAppDispatch } from "redux/typesHooks";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
 import { setTags } from "../redux/slices/selectedTags";
 
@@ -49,6 +49,7 @@ const shimmer = (width: number, height: number) => `
 const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
 const PostCard = ({ post }: Props) => {
+  const selectedTags = useAppSelector((state) => state.selectedTags);
   const dispatch = useAppDispatch();
 
   return (
@@ -87,7 +88,7 @@ const PostCard = ({ post }: Props) => {
                 key={tag}
                 onClick={(event) => {
                   event.preventDefault();
-                  dispatch(setTags([tag]));
+                  dispatch(setTags([...selectedTags, tag]));
                 }}
               >
                 #{tag}
