@@ -5,7 +5,7 @@ import Head from "next/head";
 import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
-import { useTina } from "tinacms/dist/react";
+import { useEditState, useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -21,6 +21,8 @@ import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
+import { useEffect, useState } from "react";
+import UpcomingPosts from "@/components/UpcomingPosts";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -52,12 +54,45 @@ const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
 
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
+  const [upcomingPosts, setUpcomingPosts] = useState<
+    PostDocumentWithoutBody[] | []
+  >([]);
+
+  const { edit } = useEditState();
 
   const { data } = useTina({
     query,
     variables,
     data: tinaData,
   });
+
+  useEffect(() => {
+    if (edit) {
+      const fetchData = async () => {
+        const draftPostsResponse = await fetch("/api/getAllDraftPosts");
+        const futurePostsResponse = await fetch("api/getAllFuturePosts");
+
+        if (!draftPostsResponse.ok || !futurePostsResponse.ok) {
+          throw new Error(`HTTP error! status: ${draftPostsResponse.status}`);
+        }
+
+        const draftPosts = await draftPostsResponse.json();
+
+        const futurePosts = await futurePostsResponse.json();
+        console.log({ futurePosts, draftPosts });
+        const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype.concat(
+          futurePosts,
+          draftPosts
+        );
+
+        setUpcomingPosts(upcomingPosts);
+      };
+
+      fetchData().catch((e) => {
+        console.error("An error occurred while fetching the data: ", e);
+      });
+    }
+  }, [edit]);
 
   const siteDescription = getFirstParagraph(data.mainConfig.siteDescription);
 
@@ -113,6 +148,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
+          {edit && <UpcomingPosts posts={upcomingPosts} />}
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
@@ -124,7 +160,12 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+  const posts = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: false },
+      date: { before: new Date(Date.now()).toString() },
+    },
+  });
 
   const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",

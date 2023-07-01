@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   const postsQuery = await client.queries.postsWithoutBody({
     filter: {
-      draft: { eq: false },
+      draft: { eq: true },
     },
   });
   const posts = convertTypesAndGetEdges(postsQuery);
