@@ -52,11 +52,21 @@ const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
     .sort((a, b) => b.postsCount - a.postsCount);
 };
 
+const fetchUpcomingPosts = async (): Promise<PostDocumentWithoutBody[]> => {
+  const upcomingPostsResponse = await fetch("/api/getUpcomingPosts");
+
+  if (!upcomingPostsResponse.ok) {
+    throw new Error(`HTTP error! status: ${upcomingPostsResponse.status}`);
+  }
+
+  return await upcomingPostsResponse.json();
+};
+
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
-  const [upcomingPosts, setUpcomingPosts] = useState<
-    PostDocumentWithoutBody[] | []
-  >([]);
+  const [upcomingPosts, setUpcomingPosts] = useState<PostDocumentWithoutBody[]>(
+    []
+  );
 
   const { edit } = useEditState();
 
@@ -67,31 +77,18 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   });
 
   useEffect(() => {
-    if (edit) {
-      const fetchData = async () => {
-        const draftPostsResponse = await fetch("/api/getAllDraftPosts");
-        const futurePostsResponse = await fetch("api/getAllFuturePosts");
-
-        if (!draftPostsResponse.ok || !futurePostsResponse.ok) {
-          throw new Error(`HTTP error! status: ${draftPostsResponse.status}`);
-        }
-
-        const draftPosts = await draftPostsResponse.json();
-
-        const futurePosts = await futurePostsResponse.json();
-        console.log({ futurePosts, draftPosts });
-        const upcomingPosts: PostDocumentWithoutBody[] = Array.prototype.concat(
-          futurePosts,
-          draftPosts
-        );
-
-        setUpcomingPosts(upcomingPosts);
-      };
-
-      fetchData().catch((error) => {
-        console.error("An error occurred while fetching the data: ", error);
-      });
+    if (!edit) {
+      return;
     }
+
+    fetchUpcomingPosts()
+      .then(setUpcomingPosts)
+      .catch((error) => {
+        console.error(
+          "An error occurred while fetching the upcoming posts: ",
+          error
+        );
+      });
   }, [edit]);
 
   const siteDescription = getFirstParagraph(data.mainConfig.siteDescription);

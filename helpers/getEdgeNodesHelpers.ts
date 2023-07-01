@@ -15,20 +15,16 @@ type postWithoutBodyData = {
   query: string;
 };
 
-export const getEdgeNodes = (
-  tinaData: postWithoutBodyData | never[]
+const getEdgeNodes = (
+  tinaData: postWithoutBodyData
 ): PostsFromQueryWithoutBody => {
-  if (Array.isArray(tinaData)) {
-    return [];
-  }
-
   return tinaData.data.postConnection.edges
     ?.map((edge) => edge?.node)
     .reverse();
 };
 
 export const convertTypesAndGetEdges = (
-  tinaData: postWithoutBodyData | never[]
+  tinaData: postWithoutBodyData
 ): PostDocumentWithoutBody[] => {
   return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData));
 };
