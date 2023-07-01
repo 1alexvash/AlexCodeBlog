@@ -1,11 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { useEditState } from "tinacms/dist/react";
 
 const Logo = () => {
-  const { edit } = useEditState();
-
   const logo = (
     <span className="main-logo">
       <img
@@ -29,11 +26,7 @@ const Logo = () => {
 
   const onTheMainPage = router.pathname === "/";
 
-  return onTheMainPage ? (
-    logo
-  ) : (
-    <Link href={edit ? "/adminPortal/" : "/"}>{logo}</Link>
-  );
+  return onTheMainPage ? logo : <Link href="/">{logo}</Link>;
 };
 
 export default Logo;
