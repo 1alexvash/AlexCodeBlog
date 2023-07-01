@@ -2,6 +2,7 @@ import getFirstParagraph from "helpers/getFirstParagraph";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
@@ -14,6 +15,7 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags, { Tag } from "@/components/Tags";
+import UpcomingPosts from "@/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
@@ -21,8 +23,6 @@ import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
-import { useEffect, useState } from "react";
-import UpcomingPosts from "@/components/UpcomingPosts";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -88,8 +88,8 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
         setUpcomingPosts(upcomingPosts);
       };
 
-      fetchData().catch((e) => {
-        console.error("An error occurred while fetching the data: ", e);
+      fetchData().catch((error) => {
+        console.error("An error occurred while fetching the data: ", error);
       });
     }
   }, [edit]);
