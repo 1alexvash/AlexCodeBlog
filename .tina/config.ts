@@ -184,14 +184,4 @@ export default defineConfig({
       },
     ],
   },
-  admin: {
-    auth: {
-      onLogin: async () => {
-        location.href = "/admin/index.html#/~/adminPortal/";
-      },
-      onLogout: async () => {
-        location.href = "/";
-      },
-    },
-  },
 });

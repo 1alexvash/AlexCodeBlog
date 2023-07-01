@@ -13,11 +13,11 @@ A picture worth a thousand words, so let's start off with a code example.
 ```typescript
 // An example of JS Map Data Structure
 const currencyCountryMap: Map<string, string> = new Map([
-  ["USD", "United States"],
-  ["EUR", "European Union"],
-  ["JPY", "Japan"],
-  ["GBP", "United Kingdom"],
-  ["AUD", "Australia"],
+  ['USD', 'United States'],
+  ['EUR', 'European Union'],
+  ['JPY', 'Japan'],
+  ['GBP', 'United Kingdom'],
+  ['AUD', 'Australia'],
 ]);
 ```
 
@@ -29,16 +29,16 @@ This is beneficial because this data structure provides a very clear and reliabl
 
 ```typescript
 // Remove a key-value pair from the map
-currencyCountryMap.delete("USD");
+currencyCountryMap.delete('USD');
 
 // Add a key-value pair to the map
-currencyCountryMap.set("CAD", "Canada");
+currencyCountryMap.set('CAD', 'Canada');
 
 // Check if a key exists in the map
-currencyCountryMap.has("JPY"); // true
+currencyCountryMap.has('JPY'); // true
 
 // Get the value for a key
-currencyCountryMap.get("JPY"); // 'Japan'
+currencyCountryMap.get('JPY'); // 'Japan'
 
 // Get the size of the map
 currencyCountryMap.size; // 5
