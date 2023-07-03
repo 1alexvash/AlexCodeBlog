@@ -31,6 +31,8 @@ interface Props {
   variables: MainConfigQueryVariables;
 }
 
+export type UpcomingPostsType = PostDocumentWithoutBody[] | [] | undefined;
+
 const initialTagCount: Record<string, number> = {};
 
 const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
@@ -52,7 +54,7 @@ const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
     .sort((a, b) => b.postsCount - a.postsCount);
 };
 
-const fetchUpcomingPosts = async (): Promise<PostDocumentWithoutBody[]> => {
+const fetchUpcomingPosts = async (): Promise<UpcomingPostsType> => {
   const upcomingPostsResponse = await fetch("/api/getUpcomingPosts");
 
   if (!upcomingPostsResponse.ok) {
@@ -64,9 +66,7 @@ const fetchUpcomingPosts = async (): Promise<PostDocumentWithoutBody[]> => {
 
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
-  const [upcomingPosts, setUpcomingPosts] = useState<PostDocumentWithoutBody[]>(
-    []
-  );
+  const [upcomingPosts, setUpcomingPosts] = useState<UpcomingPostsType>();
 
   const { edit } = useEditState();
 
@@ -145,7 +145,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          {edit && <UpcomingPosts posts={upcomingPosts} />}
+          {edit && <UpcomingPosts posts={[]} />}
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
