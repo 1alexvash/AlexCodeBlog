@@ -1,7 +1,7 @@
 import { Box, Divider, List, Skeleton, Typography } from "@mui/material";
+import { UpcomingPostsType } from "pages";
 
 import PostCard from "./PostCard";
-import { UpcomingPostsType } from "pages";
 
 interface Props {
   posts: UpcomingPostsType;
@@ -31,7 +31,7 @@ const SkeletonsList = ({ listsToRender }: SkeletonsListProps) => {
 
 const PostsList = ({ posts }: Props): JSX.Element => {
   if (!posts) {
-    return <SkeletonsList listsToRender={3}></SkeletonsList>;
+    return <SkeletonsList listsToRender={3} />;
   }
 
   if (posts.length === 0) {

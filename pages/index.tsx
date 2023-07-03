@@ -145,7 +145,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          {edit && <UpcomingPosts posts={[]} />}
+          {edit && <UpcomingPosts posts={upcomingPosts} />}
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
