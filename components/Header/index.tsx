@@ -44,7 +44,9 @@ const Header = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const posts = await fetch("/api/getAllPosts").then((data) => data.json());
+      const posts = await fetch("/api/getAllPostsWithoutBody").then((data) =>
+        data.json()
+      );
 
       setSearch((search) => ({
         ...search,

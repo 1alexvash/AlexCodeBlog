@@ -1,17 +1,31 @@
-import { PostDocumentWithoutBody } from "interfaces";
+import { List } from "@mui/material";
+import { UpcomingPostsType } from "pages";
 
 import PostCard from "./PostCard";
+import EmptyPostsMessage from "./UpcomingPosts/EmptyPostsMessage";
+import SkeletonsList from "./UpcomingPosts/Skeletons";
 
 interface Props {
-  posts: PostDocumentWithoutBody[];
+  posts: UpcomingPostsType;
+  skeletonsToRender?: number;
 }
 
-const Posts = ({ posts }: Props) => (
-  <ul className="posts-list">
-    {posts.map((post) => (
-      <PostCard key={post.title} post={post} />
-    ))}
-  </ul>
-);
+const Posts = ({ posts, skeletonsToRender = 0 }: Props) => {
+  if (!posts) {
+    return <SkeletonsList skeletonsToRender={skeletonsToRender} />;
+  }
+
+  if (posts.length === 0) {
+    return <EmptyPostsMessage />;
+  }
+
+  return (
+    <List className="posts-list">
+      {posts.map((post, index) => (
+        <PostCard key={index} post={post} />
+      ))}
+    </List>
+  );
+};
 
 export default Posts;

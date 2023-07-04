@@ -19,7 +19,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
         <div className="related-posts-block" key={post.title}>
           <Link href={post._sys.filename} className="image">
             <Image
-              src={post.heroImage ?? "/post-images/draft.webp"}
+              src={post.heroImage ?? ""}
               alt="blog post image"
               width="102"
               height="102"

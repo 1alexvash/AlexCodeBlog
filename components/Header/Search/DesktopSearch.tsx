@@ -35,10 +35,7 @@ const DesktopSearch = ({
       {filteredPosts.map((post, index) => (
         <div className="related-posts-block" key={index}>
           <a href={`/post/${post._sys.filename}`} className="image">
-            <img
-              src={post.heroImage ?? "/post-images/draft.webp"}
-              alt="blog post image"
-            />
+            <img src={post.heroImage ?? ""} alt="blog post image" />
           </a>
           <div className="inner">
             <a href={`/post/${post._sys.filename}`} className="name">

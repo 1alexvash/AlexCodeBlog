@@ -2,10 +2,11 @@ import getFirstParagraph from "helpers/getFirstParagraph";
 import { PostDocumentWithoutBody } from "interfaces";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
-import { useTina } from "tinacms/dist/react";
+import { useEditState, useTina } from "tinacms/dist/react";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -14,6 +15,7 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags, { Tag } from "@/components/Tags";
+import UpcomingPosts from "@/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
@@ -28,6 +30,8 @@ interface Props {
   query: string;
   variables: MainConfigQueryVariables;
 }
+
+export type UpcomingPostsType = PostDocumentWithoutBody[] | undefined;
 
 const initialTagCount: Record<string, number> = {};
 
@@ -50,14 +54,42 @@ const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
     .sort((a, b) => b.postsCount - a.postsCount);
 };
 
+const fetchUpcomingPosts = async (): Promise<UpcomingPostsType> => {
+  const upcomingPostsResponse = await fetch("/api/getUpcomingPosts");
+
+  if (!upcomingPostsResponse.ok) {
+    throw new Error(`HTTP error! status: ${upcomingPostsResponse.status}`);
+  }
+
+  return await upcomingPostsResponse.json();
+};
+
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   const dispatch = useAppDispatch();
+  const [upcomingPosts, setUpcomingPosts] = useState<UpcomingPostsType>();
+
+  const { edit } = useEditState();
 
   const { data } = useTina({
     query,
     variables,
     data: tinaData,
   });
+
+  useEffect(() => {
+    if (!edit) {
+      return;
+    }
+
+    fetchUpcomingPosts()
+      .then(setUpcomingPosts)
+      .catch((error) => {
+        console.error(
+          "An error occurred while fetching the upcoming posts: ",
+          error
+        );
+      });
+  }, [edit]);
 
   const siteDescription = getFirstParagraph(data.mainConfig.siteDescription);
 
@@ -113,6 +145,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
+          {edit && <UpcomingPosts posts={upcomingPosts} />}
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
@@ -124,7 +157,12 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+  const posts = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: false },
+      date: { before: new Date(Date.now()).toString() },
+    },
+  });
 
   const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
