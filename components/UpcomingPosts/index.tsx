@@ -1,8 +1,6 @@
-import { Box, Divider, List, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { UpcomingPostsType } from "pages";
 
-import PostCard from "../PostCard";
-import SkeletonsList from "./Skeletons";
 import Posts from "../Posts";
 
 interface Props {

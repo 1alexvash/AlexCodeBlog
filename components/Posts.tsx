@@ -1,9 +1,9 @@
-import { PostDocumentWithoutBody } from "interfaces";
-import SkeletonsList from "./UpcomingPosts/Skeletons";
-import { List, Typography } from "@mui/material";
+import { List } from "@mui/material";
+import { UpcomingPostsType } from "pages";
+
 import PostCard from "./PostCard";
 import EmptyPostsMessage from "./UpcomingPosts/EmptyPosts";
-import { UpcomingPostsType } from "pages";
+import SkeletonsList from "./UpcomingPosts/Skeletons";
 
 interface Props {
   posts: UpcomingPostsType;
