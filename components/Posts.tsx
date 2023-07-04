@@ -2,7 +2,7 @@ import { List } from "@mui/material";
 import { UpcomingPostsType } from "pages";
 
 import PostCard from "./PostCard";
-import EmptyPostsMessage from "./UpcomingPosts/EmptyPosts";
+import EmptyPostsMessage from "./UpcomingPosts/EmptyPostsMessage";
 import SkeletonsList from "./UpcomingPosts/Skeletons";
 
 interface Props {
