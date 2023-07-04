@@ -15,7 +15,7 @@ import Pagination from "@/components/Pagination";
 import Posts from "@/components/Posts";
 import StandWithUkraine from "@/components/StandWithUkraine";
 import Tags, { Tag } from "@/components/Tags";
-import UpcomingPosts from "@/components/UpcomingPosts";
+
 import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
@@ -23,6 +23,7 @@ import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
+import UpcomingPosts from "@/components/UpcomingPosts";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -145,7 +146,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          {edit && <UpcomingPosts posts={upcomingPosts} />}
+          <UpcomingPosts posts={undefined} />
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
