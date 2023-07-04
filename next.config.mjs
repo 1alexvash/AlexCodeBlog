@@ -18,15 +18,15 @@ const nextConfig = {
   },
   reactStrictMode: true,
   swcMinify: true,
-  images: {
-    domains: ["assets.tina.io"],
-  },
   rewrites: () => [
     {
       source: "/admin",
       destination: "/admin/index.html",
     },
   ],
+  images: {
+    domains: ["assets.tina.io"],
+  },
 };
 
 if (isDev) {

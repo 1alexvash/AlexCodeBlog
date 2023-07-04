@@ -3,37 +3,13 @@ import { UpcomingPostsType } from "pages";
 
 import PostCard from "../PostCard";
 import SkeletonsList from "./Skeletons";
+import Posts from "../Posts";
 
 interface Props {
   posts: UpcomingPostsType;
 }
 
 const skeletonsCount = 3;
-
-const PostsList = ({ posts }: Props): JSX.Element => {
-  if (!posts) {
-    return <SkeletonsList skeletonsToRender={skeletonsCount} />;
-  }
-
-  if (posts.length === 0) {
-    return (
-      <Typography
-        variant="h6"
-        sx={{ display: "block", margin: "0 auto", mb: "30px" }}
-      >
-        There are no Upcoming posts yet...
-      </Typography>
-    );
-  }
-
-  return (
-    <>
-      {posts.map((post, index) => (
-        <PostCard key={index} post={post} />
-      ))}
-    </>
-  );
-};
 
 const UpcomingPosts = ({ posts }: Props) => (
   <Box sx={{ mb: "50px" }}>
@@ -51,9 +27,7 @@ const UpcomingPosts = ({ posts }: Props) => (
     >
       Upcoming Posts
     </Typography>
-    <List className="posts-list">
-      <PostsList posts={posts} />
-    </List>
+    <Posts posts={posts} skeletonsToRender={skeletonsCount} />
     <Divider sx={{ position: "absolute", width: "100%", left: 0 }} />
   </Box>
 );

@@ -1,11 +1,11 @@
-import { Skeleton } from "@mui/material";
+import { List, Skeleton } from "@mui/material";
 
 interface SkeletonsListProps {
   skeletonsToRender: number;
 }
 
 const SkeletonsList = ({ skeletonsToRender }: SkeletonsListProps) => (
-  <>
+  <List className="posts-list">
     {Array.from({ length: skeletonsToRender }).map((_, index) => (
       <Skeleton
         variant="rectangular"
@@ -16,7 +16,7 @@ const SkeletonsList = ({ skeletonsToRender }: SkeletonsListProps) => (
         key={index}
       />
     ))}
-  </>
+  </List>
 );
 
 export default SkeletonsList;

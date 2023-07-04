@@ -32,7 +32,7 @@ interface Props {
   variables: MainConfigQueryVariables;
 }
 
-export type UpcomingPostsType = PostDocumentWithoutBody[] | [] | undefined;
+export type UpcomingPostsType = PostDocumentWithoutBody[] | undefined;
 
 const initialTagCount: Record<string, number> = {};
 
@@ -146,7 +146,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          <UpcomingPosts posts={undefined} />
+          {edit && <UpcomingPosts posts={upcomingPosts} />}
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
