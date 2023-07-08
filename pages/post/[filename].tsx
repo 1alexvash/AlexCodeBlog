@@ -57,6 +57,10 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <meta property="og:site_name" content={config.siteTitle} />
         <meta property="og:image" content={config.defaultImage} />
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="google-site-verification"
+          content="Rq4JzMPM1eiFgTeha665hHKyVJv6gMop8SkqvvY0sN0"
+        />
       </Head>
       <StandWithUkraine />
       <Header />
