@@ -1,13 +1,12 @@
 import { Box } from "@mui/material";
 import { PostDocumentWithoutBody } from "interfaces";
 import Head from "next/head";
+import Footer from "src/components/Footer";
+import Header from "src/components/Header";
+import Intro from "src/components/Intro";
+import StandWithUkraine from "src/components/StandWithUkraine";
+import StatisticPage from "src/components/Statistic";
 import { useTina } from "tinacms/dist/react";
-
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Intro from "@/components/Intro";
-import StandWithUkraine from "@/components/StandWithUkraine";
-import StatisticPage from "@/components/Statistic";
 
 import client from ".tina/__generated__/client";
 import {
