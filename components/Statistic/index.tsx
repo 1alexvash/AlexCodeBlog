@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import { PostDocumentWithoutBody } from "interfaces";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -18,6 +18,9 @@ const currentYear = new Date().getUTCFullYear();
 
 const YearStatistics = dynamic(() => import("./YearStatistics"), {
   ssr: false,
+  loading: () => (
+    <Skeleton variant="rectangular" sx={{ width: "100%", height: "385px" }} />
+  ),
 });
 
 const StatisticPage = ({ posts }: Props) => {
