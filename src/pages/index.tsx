@@ -6,17 +6,16 @@ import { useEffect, useState } from "react";
 import { setHostUrl } from "redux/slices/hostUrl";
 import { setTinaData } from "redux/slices/tinaData";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
+import Footer from "src/components/Footer";
+import Header from "src/components/Header";
+import Intro from "src/components/Intro";
+import Pagination from "src/components/Pagination";
+import Posts from "src/components/Posts";
+import StandWithUkraine from "src/components/StandWithUkraine";
+import Tags, { Tag } from "src/components/Tags";
+import UpcomingPosts from "src/components/UpcomingPosts";
+import useIsomorphicLayoutEffect from "src/components/useIsomorphicLayoutEffect";
 import { useEditState, useTina } from "tinacms/dist/react";
-
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Intro from "@/components/Intro";
-import Pagination from "@/components/Pagination";
-import Posts from "@/components/Posts";
-import StandWithUkraine from "@/components/StandWithUkraine";
-import Tags, { Tag } from "@/components/Tags";
-import UpcomingPosts from "@/components/UpcomingPosts";
-import useIsomorphicLayoutEffect from "@/components/useIsomorphicLayoutEffect";
 
 import client from ".tina/__generated__/client";
 import {

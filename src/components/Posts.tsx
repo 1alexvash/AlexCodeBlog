@@ -1,5 +1,5 @@
 import { List } from "@mui/material";
-import { UpcomingPostsType } from "pages";
+import { UpcomingPostsType } from "src/pages";
 
 import PostCard from "./PostCard";
 import EmptyPostsMessage from "./UpcomingPosts/EmptyPostsMessage";
