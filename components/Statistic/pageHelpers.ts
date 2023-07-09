@@ -5,13 +5,20 @@ import { PostsByMonthType } from ".";
 const emptyPostsByMonth: { [month: string]: number } = {};
 
 export const calculateMarginBottom = (
-  postsCount: number | undefined
+  postsNumber: number | undefined,
+  width: number
 ): { mb?: string } => {
-  if (!postsCount) {
+  const tabletWidthThreshold = 1020;
+
+  if (!postsNumber && width < tabletWidthThreshold) {
+    return { mb: "30px" };
+  }
+
+  if (!postsNumber) {
     return { mb: "55px" };
   }
 
-  if (postsCount === 1) {
+  if (postsNumber === 1) {
     return { mb: "26px" };
   }
 

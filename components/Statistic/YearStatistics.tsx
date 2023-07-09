@@ -1,4 +1,5 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
+import useWindowDimensions from "helpers/useWindowDimensions";
 import React from "react";
 
 import { PostsByMonthType } from ".";
@@ -7,6 +8,7 @@ import styles from "./pageStyles";
 
 const minColumnHeight = 1;
 const pixelsHeightPetMonth = 30;
+const noPostsPerMonth = 0;
 
 const months = [
   { month: "January", season: "winter" },
@@ -23,6 +25,24 @@ const months = [
   { month: "December", season: "winter" },
 ];
 
+const hasMonthPosts = (postsNumber: number): boolean =>
+  postsNumber > noPostsPerMonth;
+
+const monthNameLength = (width: number, monthName: string): string => {
+  const mobilePhoneWidthThreshold = 441;
+  const smallDesktopWidthThreshold = 1260;
+
+  if (width < mobilePhoneWidthThreshold) {
+    return monthName.slice(0, 1);
+  }
+
+  if (width < smallDesktopWidthThreshold) {
+    return monthName.slice(0, 3);
+  }
+
+  return monthName;
+};
+
 interface Props {
   postsByMonth: PostsByMonthType;
 }
@@ -30,26 +50,25 @@ interface Props {
 const YearStatistics = ({ postsByMonth }: Props) => {
   const theme = useTheme();
 
-  const {
-    monthlyDiagramWrapper,
-    monthlyDiagramColumn,
-    monthName,
-    monthNameColumn,
-    yearStatistics,
-  } = styles(theme);
+  const { monthlyDiagramWrapper, monthlyDiagramColumn, monthName } =
+    styles(theme);
+
+  const { width } = useWindowDimensions();
 
   return (
-    <Box sx={yearStatistics}>
+    <>
       <Box sx={monthlyDiagramWrapper}>
         {months.map((column) => (
           <Box sx={monthlyDiagramColumn} key={column.month}>
-            <Typography sx={calculateMarginBottom(postsByMonth[column.month])}>
-              {postsByMonth[column.month] ?? 0}
+            <Typography
+              sx={calculateMarginBottom(postsByMonth[column.month], width)}
+            >
+              {postsByMonth[column.month] ?? noPostsPerMonth}
             </Typography>
             <Paper
               sx={{
                 height: `${
-                  postsByMonth[column.month] > 0
+                  hasMonthPosts(postsByMonth[column.month])
                     ? postsByMonth[column.month] * pixelsHeightPetMonth
                     : minColumnHeight
                 }px`,
@@ -68,12 +87,10 @@ const YearStatistics = ({ postsByMonth }: Props) => {
       </Box>
       <Box sx={monthName}>
         {months.map((month) => (
-          <Box sx={{ width: "100%" }} key={month.month}>
-            <Box sx={monthNameColumn}> {month.month}</Box>
-          </Box>
+          <Box key={month.month}>{monthNameLength(width, month.month)}</Box>
         ))}
       </Box>
-    </Box>
+    </>
   );
 };
 

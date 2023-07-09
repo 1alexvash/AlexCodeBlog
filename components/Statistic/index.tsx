@@ -1,10 +1,10 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { PostDocumentWithoutBody } from "interfaces";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import { getPostsByYearAndMonth, getYearsArray } from "./pageHelpers";
 import styles from "./pageStyles";
-import YearStatistics from "./YearStatistics";
 
 export type PostsByMonthType = {
   [month: string]: number;
@@ -16,10 +16,14 @@ interface Props {
 
 const currentYear = new Date().getUTCFullYear();
 
+const YearStatistics = dynamic(() => import("./YearStatistics"), {
+  ssr: false,
+});
+
 const StatisticPage = ({ posts }: Props) => {
   const theme = useTheme();
 
-  const yearsArray = getYearsArray(posts);
+  const years = getYearsArray(posts);
 
   const [postsByMonth, setPostsByMonth] = useState<PostsByMonthType>(
     getPostsByYearAndMonth(currentYear, posts)
@@ -64,7 +68,7 @@ const StatisticPage = ({ posts }: Props) => {
         },
       ]}
     >
-      {yearsArray.map((year) => (
+      {years.map((year) => (
         <Box
           sx={yearActiveStyles(selectedYear === year)}
           onClick={() => handleYearClick(year)}

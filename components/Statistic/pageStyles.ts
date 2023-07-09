@@ -36,6 +36,10 @@ const styles = (theme: Theme) => ({
     width: "100%",
     height: "385px",
     px: "10px",
+    backgroundColor:
+      theme.palette.mode === "light"
+        ? theme.palette.main.lightGrey
+        : theme.palette.main.grey,
   },
   monthlyDiagramColumn: {
     width: "100%",
@@ -51,38 +55,36 @@ const styles = (theme: Theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "end",
-      width: "89px",
+      width: "100%",
       background: theme.palette.main.orange,
       "& img": {
         mb: "3px",
+        "@media (max-width: 1019px)": {
+          width: "100%",
+          height: "100%",
+          maxHeight: "30px",
+          minHeight: "30px",
+        },
       },
     },
   },
   monthName: {
     display: "flex",
     width: "100%",
+    justifyContent: "space-between",
     px: "10px",
     gap: "10px",
-    pt: "10px",
-  },
-  monthNameColumn: {
-    width: "89px",
-    color:
-      theme.palette.mode === "light"
-        ? theme.palette.main.black
-        : theme.palette.main.white,
-    fontSize: "14px",
-    textAlign: "center",
-  },
-  yearStatistics: {
-    overflowX: "auto",
-    "&::-webkit-scrollbar": {
-      display: "none",
+    mt: "10px",
+    "& .MuiBox-root": {
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.main.black
+          : theme.palette.main.white,
+      fontSize: "14px",
+      width: "100%",
+      maxWidth: "90px",
+      textAlign: "center",
     },
-    backgroundColor:
-      theme.palette.mode === "light"
-        ? theme.palette.main.lightGrey
-        : theme.palette.main.grey,
   },
 });
 
