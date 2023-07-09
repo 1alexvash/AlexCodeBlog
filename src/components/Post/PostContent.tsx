@@ -5,17 +5,17 @@ import {
 } from "helpers/checkOfDraftOrFuturePost";
 import getFirstParagraph from "helpers/getFirstParagraph";
 import isUpcomingPost from "helpers/isUpcomingPost";
+import renderCopyButtons from "helpers/renderCopyButtons";
 import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocument } from "interfaces";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
 import { useAppSelector } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
-import renderCopyButtons from "../../helpers/renderCopyButtons";
-import { setTags } from "../../redux/slices/selectedTags";
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
 
@@ -141,7 +141,7 @@ const PostContent = ({ post }: Props) => {
         <meta property="og:url" content={hostURLLink} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={config.siteTitle} />
-        <meta property="og:image" content={post.heroImage} />
+        <meta property="og:image" content={post.heroImage ?? ""} />
       </Head>
 
       <div className="blogpost-image">

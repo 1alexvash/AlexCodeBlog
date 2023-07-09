@@ -2,9 +2,8 @@ import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
+import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
-
-import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
   latestPosts: PostDocumentWithoutBody[];
 }
@@ -19,7 +18,7 @@ const LatestPosts = ({ latestPosts }: Props) => {
         <div className="related-posts-block" key={post.title}>
           <Link href={post._sys.filename} className="image">
             <Image
-              src={post.heroImage ?? "/post-images/draft.webp"}
+              src={post.heroImage ?? ""}
               alt="blog post image"
               width="102"
               height="102"

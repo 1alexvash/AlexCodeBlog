@@ -1,10 +1,12 @@
-/* eslint-disable @next/next/no-sync-scripts */
 import { Head, Html, Main, NextScript } from "next/document";
 
 const Document = () => (
   <Html lang="en">
     <Head>
-      <script src="/scripts/theme.js" />
+      <meta
+        name="google-site-verification"
+        content="Rq4JzMPM1eiFgTeha665hHKyVJv6gMop8SkqvvY0sN0"
+      />
     </Head>
     <body>
       <Main />

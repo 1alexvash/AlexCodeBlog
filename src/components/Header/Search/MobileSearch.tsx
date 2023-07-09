@@ -31,10 +31,7 @@ const MobileSearch = ({
         <div className="mobile-posts-block" key={index}>
           <div className="inner-flex">
             <a href={`/post/${post._sys.filename}`} className="image">
-              <img
-                src={post.heroImage ?? "/post-images/draft.webp"}
-                alt="blog post image"
-              />
+              <img src={post.heroImage ?? ""} alt="blog post image" />
             </a>
             <a href={`/post/${post._sys.filename}`} className="name">
               {post.title}

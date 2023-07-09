@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import React from "react";
-import { useAppSelector } from "redux/typesHooks";
 
 const NotFoundPage = () => {
-  const theme = useAppSelector((state) => state.theme);
+  const { theme } = useTheme();
 
   return (
     <section className="content-404">
