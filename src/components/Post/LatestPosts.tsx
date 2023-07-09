@@ -2,9 +2,8 @@ import isUpcomingPost from "helpers/isUpcomingPost";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
+import { resetTags, setTags } from "redux/slices/selectedTags";
 import { useAppDispatch } from "redux/typesHooks";
-
-import { resetTags, setTags } from "../../redux/slices/selectedTags";
 interface Props {
   latestPosts: PostDocumentWithoutBody[];
 }

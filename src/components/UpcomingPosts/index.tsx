@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { UpcomingPostsType } from "pages";
+import { UpcomingPostsType } from "src/pages";
 
 import Posts from "../Posts";
 

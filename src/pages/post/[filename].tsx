@@ -6,18 +6,17 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRef } from "react";
 import { useAppSelector } from "redux/typesHooks";
+import Footer from "src/components/Footer";
+import Header from "src/components/Header";
+import BlogPostSectionWrapper from "src/components/Post/BlogPostSectionWrapper";
+import BreadCrumbs from "src/components/Post/BreadCrumbs";
+import LatestPosts from "src/components/Post/LatestPosts";
+import PageProgressWrapper from "src/components/Post/PageProgressWrapper";
+import PostContent from "src/components/Post/PostContent";
+import StandWithUkraine from "src/components/StandWithUkraine";
 import { useTina } from "tinacms/dist/react";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import BlogPostSectionWrapper from "@/components/Post/BlogPostSectionWrapper";
-import BreadCrumbs from "@/components/Post/BreadCrumbs";
-import LatestPosts from "@/components/Post/LatestPosts";
-import PageProgressWrapper from "@/components/Post/PageProgressWrapper";
-import PostContent from "@/components/Post/PostContent";
-import StandWithUkraine from "@/components/StandWithUkraine";
-
-import { client } from "../../.tina/__generated__/client";
+import { client } from ".tina/__generated__/client";
 import { PostQuery, PostQueryVariables } from ".tina/__generated__/types";
 
 interface Props {
@@ -29,7 +28,7 @@ interface Props {
 
 const latestPostsPerPage = 10;
 
-const PageProgress = dynamic(() => import("@/components/Post/PageProgress"), {
+const PageProgress = dynamic(() => import("src/components/Post/PageProgress"), {
   ssr: false,
   loading: () => <PageProgressWrapper />,
 });
