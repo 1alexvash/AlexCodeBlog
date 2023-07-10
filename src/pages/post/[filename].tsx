@@ -105,7 +105,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const postListResponse = await client.queries.postConnection();
+  const postListResponse = await client.queries.postsWithoutBody();
 
   const paths =
     postListResponse.data.postConnection.edges?.map((page) => ({
