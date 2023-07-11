@@ -1,0 +1,52 @@
+---
+title: JavaScript set data structure
+date: 2023-07-14T00:00:00.000Z
+heroImage: /post-images/JavaScript set.png
+draft: false
+tags:
+  - JavaScript
+---
+
+Let's say you have a basket with ten fruits
+
+```javascript
+const fruits = [
+  "apple",
+  "banana",
+  "orange",
+  "apple",
+  "pineapple",
+  "apple",
+  "orange",
+  "grape",
+  "banana",
+  "apple",
+];
+```
+
+This array of elements is nice, but it has some duplicated fruits.
+
+So if you want to store only a unique set of elements in your variable, then you can use the set data structure.
+
+```javascript
+const fruits = [
+  "apple",
+  "banana",
+  "orange",
+  "apple",
+  "pineapple",
+  "apple",
+  "orange",
+  "grape",
+  "banana",
+  "apple",
+];
+
+const setOfFruits = new Set(fruits);
+
+console.log("setOfFruits:", setOfFruits);
+// setOfFruits: Set { 'apple', 'banana', 'orange', 'pineapple', 'grape' } 
+console.log("setOfFruits.size:", setOfFruits.size);
+// setOfFruits.size: 5
+
+```
