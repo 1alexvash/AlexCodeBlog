@@ -71,9 +71,9 @@ const Header = () => {
       desktopInputRef.current?.focus();
     }
 
-    if (showMenu) {
-      mobileInputRef.current?.focus();
-    }
+    // if (showMenu) {
+    //   mobileInputRef.current?.focus();
+    // }
   }, [
     search.showSearch,
     search.posts.length,
