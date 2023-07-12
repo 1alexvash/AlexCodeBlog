@@ -3,7 +3,11 @@ import { PostDocumentWithoutBody } from "interfaces";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-import { getPostsByYearAndMonth, getYearsArray } from "./pageHelpers";
+import {
+  getAudioPostsStatistic,
+  getPostsByYearAndMonth,
+  getYearsArray,
+} from "./pageHelpers";
 import styles from "./pageStyles";
 
 export type PostsByMonthType = {
@@ -39,6 +43,8 @@ const StatisticPage = ({ posts }: Props) => {
     setPostsByMonth(getPostsByYearAndMonth(year, posts));
     setSelectedYear(year);
   };
+
+  const postsAudioStatistic = getAudioPostsStatistic(posts, selectedYear);
 
   const yearActiveStyles = (isActiveYear: boolean) => {
     const colorsPalette = theme.palette.main;
@@ -88,7 +94,10 @@ const StatisticPage = ({ posts }: Props) => {
       <Typography sx={pageTitle}>Statistics</Typography>
       {pageControls}
 
-      <YearStatistics postsByMonth={postsByMonth} />
+      <YearStatistics
+        postsByMonth={postsByMonth}
+        postsAudioStatistic={postsAudioStatistic}
+      />
     </>
   );
 };

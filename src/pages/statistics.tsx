@@ -5,7 +5,7 @@ import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Intro from "src/components/Intro";
 import StandWithUkraine from "src/components/StandWithUkraine";
-import StatisticPage from "src/components/Statistic";
+import StatisticPage from "src/components/Statistics";
 import { useTina } from "tinacms/dist/react";
 
 import client from ".tina/__generated__/client";

@@ -86,6 +86,17 @@ const styles = (theme: Theme) => ({
       textAlign: "center",
     },
   },
+  audioStatistic: {
+    marginBottom: "25px",
+    fontSize: "16px",
+    color:
+      theme.palette.mode === "light"
+        ? theme.palette.main.darkGrey
+        : theme.palette.main.white,
+    "& .MuiBox-root": {
+      marginBottom: "5px",
+    },
+  },
 });
 
 export default styles;

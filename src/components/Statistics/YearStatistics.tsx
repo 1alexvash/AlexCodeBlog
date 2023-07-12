@@ -45,18 +45,32 @@ const monthNameLength = (width: number, monthName: string): string => {
 
 interface Props {
   postsByMonth: PostsByMonthType;
+  postsAudioStatistic: {
+    postsWithAudio: number;
+    postsWithoutAudio: number;
+  };
 }
 
-const YearStatistics = ({ postsByMonth }: Props) => {
+const YearStatistics = ({ postsByMonth, postsAudioStatistic }: Props) => {
   const theme = useTheme();
 
-  const { monthlyDiagramWrapper, monthlyDiagramColumn, monthName } =
-    styles(theme);
+  const { postsWithAudio, postsWithoutAudio } = postsAudioStatistic;
+
+  const {
+    monthlyDiagramWrapper,
+    monthlyDiagramColumn,
+    monthName,
+    audioStatistic,
+  } = styles(theme);
 
   const { width } = useWindowDimensions();
 
   return (
     <>
+      <Box sx={audioStatistic}>
+        <Box>Posts with audio: {postsWithAudio}</Box>
+        <Box>Posts without audio: {postsWithoutAudio}</Box>
+      </Box>
       <Box sx={monthlyDiagramWrapper}>
         {months.map((column) => (
           <Box sx={monthlyDiagramColumn} key={column.month}>

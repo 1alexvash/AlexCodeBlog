@@ -38,6 +38,24 @@ export const getYearsArray = (posts: PostDocumentWithoutBody[]): number[] => {
   return Array.from(uniqueYears).sort();
 };
 
+export const getAudioPostsStatistic = (
+  posts: PostDocumentWithoutBody[],
+  year: number
+): { postsWithAudio: number; postsWithoutAudio: number } => {
+  const filteredPosts = posts.filter(
+    (post) => new Date(post.date).getUTCFullYear() === year
+  );
+
+  const postsWithAudioNumber = filteredPosts.filter(
+    (post) => post.audioVersion
+  ).length;
+
+  return {
+    postsWithAudio: postsWithAudioNumber,
+    postsWithoutAudio: filteredPosts.length - postsWithAudioNumber,
+  };
+};
+
 export const getPostsByYearAndMonth = (
   year: number,
   posts: PostDocumentWithoutBody[]
