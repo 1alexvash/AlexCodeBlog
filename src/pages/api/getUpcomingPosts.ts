@@ -18,8 +18,8 @@ export default async function handler(
     },
   });
 
-  const posts = convertTypesAndGetEdges(draftPosts).concat(
-    convertTypesAndGetEdges(futurePosts)
+  const posts = convertTypesAndGetEdges(futurePosts).concat(
+    convertTypesAndGetEdges(draftPosts)
   );
 
   return res.status(200).json(posts);
