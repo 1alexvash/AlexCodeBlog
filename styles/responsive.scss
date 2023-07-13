@@ -276,7 +276,7 @@
     justify-content: flex-start;
     position: fixed;
     z-index: 50;
-    height: 100lvh;
+    height: -webkit-fill-available;
     overflow-y: auto;
     width: 100%;
     background: #fff;
