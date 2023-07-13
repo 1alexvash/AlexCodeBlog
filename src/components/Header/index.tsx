@@ -32,21 +32,21 @@ const Header = () => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
   });
 
-  const mobileRef = useRef<HTMLDivElement>(null);
+  const mobileContentRef = useRef<HTMLDivElement>(null);
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (!mobileRef.current) {
+    if (!mobileContentRef.current) {
       return;
     }
-    console.log(mobileRef);
+
     if (search.showSearch || showMenu) {
       document.body.classList.add("overflow-hidden");
-      disableBodyScroll(mobileRef.current);
+      disableBodyScroll(mobileContentRef.current);
     } else {
       document.body.classList.remove("overflow-hidden");
-      enableBodyScroll(mobileRef.current);
+      enableBodyScroll(mobileContentRef.current);
     }
   }, [search.showSearch, showMenu]);
 
@@ -106,7 +106,7 @@ const Header = () => {
 
   const HeaderContentDesktop = (
     <div
-      ref={mobileRef}
+      ref={mobileContentRef}
       className="header-content"
       style={{
         display: showMenu ? "flex" : "none",
