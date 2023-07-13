@@ -1,3 +1,4 @@
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -31,14 +32,21 @@ const Header = () => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
   });
 
+  const mobileRef = useRef<HTMLDivElement>(null);
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (!mobileRef.current) {
+      return;
+    }
+    console.log(mobileRef);
     if (search.showSearch || showMenu) {
       document.body.classList.add("overflow-hidden");
+      disableBodyScroll(mobileRef.current);
     } else {
       document.body.classList.remove("overflow-hidden");
+      enableBodyScroll(mobileRef.current);
     }
   }, [search.showSearch, showMenu]);
 
@@ -71,9 +79,9 @@ const Header = () => {
       desktopInputRef.current?.focus();
     }
 
-    // if (showMenu) {
-    //   mobileInputRef.current?.focus();
-    // }
+    if (showMenu) {
+      mobileInputRef.current?.focus();
+    }
   }, [
     search.showSearch,
     search.posts.length,
@@ -98,6 +106,7 @@ const Header = () => {
 
   const HeaderContentDesktop = (
     <div
+      ref={mobileRef}
       className="header-content"
       style={{
         display: showMenu ? "flex" : "none",
