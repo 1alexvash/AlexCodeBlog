@@ -12,7 +12,7 @@ import Intro from "src/components/Intro";
 import Pagination from "src/components/Pagination";
 import Posts from "src/components/Posts";
 import StandWithUkraine from "src/components/StandWithUkraine";
-import StatisticsLink from "src/components/StatisticsLink";
+import StatisticsReferenceButton from "src/components/StatisticsReferenceButton";
 import Tags, { Tag } from "src/components/Tags";
 import UpcomingPosts from "src/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "src/components/useIsomorphicLayoutEffect";
@@ -145,8 +145,8 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       />
       <section className="simple-section">
         <div className="container">
-          {edit && <StatisticsLink />}
           {edit && <UpcomingPosts posts={upcomingPosts} />}
+          {edit && <StatisticsReferenceButton />}
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />

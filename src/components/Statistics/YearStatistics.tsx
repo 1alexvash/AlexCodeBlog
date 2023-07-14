@@ -68,8 +68,8 @@ const YearStatistics = ({ postsByMonth, postsAudioStatistic }: Props) => {
   return (
     <>
       <Box sx={audioStatistic}>
-        <Box>Posts with audio: {postsWithAudio}</Box>
-        <Box>Posts without audio: {postsWithoutAudio}</Box>
+        <Box>🔊 Posts with audio: {postsWithAudio}</Box>
+        <Box>🔈 Posts without audio: {postsWithoutAudio}</Box>
       </Box>
       <Box sx={monthlyDiagramWrapper}>
         {months.map((column) => (

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Link from "next/link";
 
-const StatisticsLink = () => (
+const StatisticsReferenceButton = () => (
   <Box
     sx={(theme) => ({
       width: 200,
@@ -35,4 +35,4 @@ const StatisticsLink = () => (
   </Box>
 );
 
-export default StatisticsLink;
+export default StatisticsReferenceButton;
