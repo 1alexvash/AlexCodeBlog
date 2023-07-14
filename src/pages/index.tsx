@@ -12,6 +12,7 @@ import Intro from "src/components/Intro";
 import Pagination from "src/components/Pagination";
 import Posts from "src/components/Posts";
 import StandWithUkraine from "src/components/StandWithUkraine";
+import StatisticsReferenceButton from "src/components/StatisticsReferenceButton";
 import Tags, { Tag } from "src/components/Tags";
 import UpcomingPosts from "src/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "src/components/useIsomorphicLayoutEffect";
@@ -22,6 +23,7 @@ import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
+import { Box } from "@mui/material";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -145,6 +147,9 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       <section className="simple-section">
         <div className="container">
           {edit && <UpcomingPosts posts={upcomingPosts} />}
+          <Box sx={{ display: "flex", justifyContent: "end" }}>
+            {edit && <StatisticsReferenceButton />}
+          </Box>
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />
