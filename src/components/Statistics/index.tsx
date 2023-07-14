@@ -4,9 +4,9 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 
 import {
-  getAudioPostsStatistic,
+  getAudioPostStatistics,
   getPostsByYearAndMonth,
-  getYearsArray,
+  getYears,
 } from "./pageHelpers";
 import styles from "./pageStyles";
 
@@ -36,7 +36,7 @@ const YearStatistics = dynamic(() => import("./YearStatistics"), {
 const StatisticPage = ({ posts }: Props) => {
   const theme = useTheme();
 
-  const years = getYearsArray(posts);
+  const years = getYears(posts);
 
   const [postsByMonth, setPostsByMonth] = useState<PostsByMonthType>(
     getPostsByYearAndMonth(currentYear, posts)
@@ -50,7 +50,7 @@ const StatisticPage = ({ posts }: Props) => {
     setSelectedYear(year);
   };
 
-  const postsAudioStatistic = getAudioPostsStatistic(posts, selectedYear);
+  const postsAudioStatistic = getAudioPostStatistics(posts, selectedYear);
 
   const yearActiveStyles = (isActiveYear: boolean) => {
     const colorsPalette = theme.palette.main;

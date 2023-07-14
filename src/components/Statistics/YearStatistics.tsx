@@ -7,7 +7,7 @@ import { calculateMarginBottom } from "./pageHelpers";
 import styles from "./pageStyles";
 
 const minColumnHeight = 1;
-const pixelsHeightPetMonth = 30;
+const pixelsHeightPerMonth = 30;
 const noPostsPerMonth = 0;
 
 const months = [
@@ -25,8 +25,9 @@ const months = [
   { month: "December", season: "winter" },
 ];
 
-const hasMonthPosts = (postsNumber: number): boolean =>
-  postsNumber > noPostsPerMonth;
+const hasMonthPosts = (postsNumber: number): boolean => {
+  return postsNumber > noPostsPerMonth;
+}
 
 const monthNameLength = (width: number, monthName: string): string => {
   const mobilePhoneWidthThreshold = 441;
@@ -81,11 +82,10 @@ const YearStatistics = ({ postsByMonth, postsAudioStatistic }: Props) => {
             </Typography>
             <Paper
               sx={{
-                height: `${
-                  hasMonthPosts(postsByMonth[column.month])
-                    ? postsByMonth[column.month] * pixelsHeightPetMonth
+                height: `${hasMonthPosts(postsByMonth[column.month])
+                    ? postsByMonth[column.month] * pixelsHeightPerMonth
                     : minColumnHeight
-                }px`,
+                  }px`,
               }}
               square
             >

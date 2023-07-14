@@ -23,6 +23,7 @@ import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
+import { Box } from "@mui/material";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -146,7 +147,9 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
       <section className="simple-section">
         <div className="container">
           {edit && <UpcomingPosts posts={upcomingPosts} />}
-          {edit && <StatisticsReferenceButton />}
+          <Box sx={{ display: "flex", justifyContent: "end" }}>
+            {edit && <StatisticsReferenceButton />}
+          </Box>
           <Tags tags={tags} />
           <Posts posts={postsToRender} />
           <Pagination pagesCount={pagesCount} />

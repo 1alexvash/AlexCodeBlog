@@ -4,7 +4,7 @@ import Link from "next/link";
 const StatisticsReferenceButton = () => (
   <Box
     sx={(theme) => ({
-      width: 200,
+      width: "30%",
       "& a": {
         cursor: "pointer",
         mb: "20px",

@@ -25,34 +25,28 @@ export const calculateMarginBottom = (
   return {};
 };
 
-export const getYearsArray = (posts: PostDocumentWithoutBody[]): number[] => {
-  const uniqueYears: Set<number> = new Set();
-
-  posts.forEach((post) => {
-    const postYear = new Date(post.date).getUTCFullYear();
-    uniqueYears.add(postYear);
-  });
-
+export const getYears = (posts: PostDocumentWithoutBody[]): number[] => {
+  const uniqueYears = new Set(posts.map(post => new Date(post.date).getUTCFullYear()));
   uniqueYears.add(new Date().getUTCFullYear());
 
   return Array.from(uniqueYears).sort();
 };
 
-export const getAudioPostsStatistic = (
+export const getAudioPostStatistics = (
   posts: PostDocumentWithoutBody[],
   year: number
 ): { postsWithAudio: number; postsWithoutAudio: number } => {
-  const filteredPosts = posts.filter(
+  const filteredPostsByYear = posts.filter(
     (post) => new Date(post.date).getUTCFullYear() === year
   );
 
-  const postsWithAudioNumber = filteredPosts.filter(
+  const postsWithAudioNumber = filteredPostsByYear.filter(
     (post) => post.audioVersion
   ).length;
 
   return {
     postsWithAudio: postsWithAudioNumber,
-    postsWithoutAudio: filteredPosts.length - postsWithAudioNumber,
+    postsWithoutAudio: filteredPostsByYear.length - postsWithAudioNumber,
   };
 };
 
