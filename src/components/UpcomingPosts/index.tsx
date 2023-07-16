@@ -2,6 +2,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import { UpcomingPostsType } from "src/pages";
 
 import Posts from "../Posts";
+import StatisticsReferenceButton from "../StatisticsReferenceButton";
 
 interface Props {
   posts: UpcomingPostsType;
@@ -26,6 +27,9 @@ const UpcomingPosts = ({ posts }: Props) => (
       Upcoming Posts
     </Typography>
     <Posts posts={posts} skeletonsToRender={skeletonsCount} />
+    <Box sx={{ display: "flex", justifyContent: "end" }}>
+      <StatisticsReferenceButton />
+    </Box>
     <Divider sx={{ position: "absolute", width: "100%", left: 0 }} />
   </Box>
 );
