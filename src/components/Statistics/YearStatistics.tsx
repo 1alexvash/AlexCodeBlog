@@ -27,7 +27,7 @@ const months = [
 
 const hasMonthPosts = (postsNumber: number): boolean => {
   return postsNumber > noPostsPerMonth;
-}
+};
 
 const monthNameLength = (width: number, monthName: string): string => {
   const mobilePhoneWidthThreshold = 441;
@@ -82,10 +82,11 @@ const YearStatistics = ({ postsByMonth, postsAudioStatistic }: Props) => {
             </Typography>
             <Paper
               sx={{
-                height: `${hasMonthPosts(postsByMonth[column.month])
+                height: `${
+                  hasMonthPosts(postsByMonth[column.month])
                     ? postsByMonth[column.month] * pixelsHeightPerMonth
                     : minColumnHeight
-                  }px`,
+                }px`,
               }}
               square
             >

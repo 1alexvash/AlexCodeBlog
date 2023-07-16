@@ -26,7 +26,9 @@ export const calculateMarginBottom = (
 };
 
 export const getYears = (posts: PostDocumentWithoutBody[]): number[] => {
-  const uniqueYears = new Set(posts.map(post => new Date(post.date).getUTCFullYear()));
+  const uniqueYears = new Set(
+    posts.map((post) => new Date(post.date).getUTCFullYear())
+  );
   uniqueYears.add(new Date().getUTCFullYear());
 
   return Array.from(uniqueYears).sort();
