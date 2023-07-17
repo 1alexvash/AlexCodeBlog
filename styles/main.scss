@@ -16,7 +16,6 @@ html {
   font-size: 16px;
   font-weight: 400;
   height: 100%;
-  height: -webkit-fill-available;
 }
 
 html,
@@ -635,9 +634,9 @@ header {
   border-radius: 3px;
   pointer-events: none;
   background: linear-gradient(
-                  180deg,
-                  rgba(0, 0, 0, 0) 0%,
-                  rgba(0, 0, 0, 0.9) 100%
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.9) 100%
   );
 }
 
@@ -1364,4 +1363,5 @@ blockquote p:last-child {
 
 .position-fixed {
   position: fixed;
+  width: 100%;
 }
