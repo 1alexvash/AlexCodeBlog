@@ -1,4 +1,3 @@
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -43,10 +42,10 @@ const Header = () => {
 
     if (search.showSearch || showMenu) {
       document.body.classList.add("overflow-hidden");
-      disableBodyScroll(mobileContentRef.current);
+      document.documentElement.classList.add("position-fixed");
     } else {
       document.body.classList.remove("overflow-hidden");
-      enableBodyScroll(mobileContentRef.current);
+      document.documentElement.classList.remove("position-fixed");
     }
   }, [search.showSearch, showMenu]);
 

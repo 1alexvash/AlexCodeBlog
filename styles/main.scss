@@ -635,9 +635,9 @@ header {
   border-radius: 3px;
   pointer-events: none;
   background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.9) 100%
+                  180deg,
+                  rgba(0, 0, 0, 0) 0%,
+                  rgba(0, 0, 0, 0.9) 100%
   );
 }
 
@@ -1360,4 +1360,8 @@ blockquote p:last-child {
 .tina-list-item {
   display: flex;
   gap: 4px;
+}
+
+.position-fixed {
+  position: fixed;
 }
