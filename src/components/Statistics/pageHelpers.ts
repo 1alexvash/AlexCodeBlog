@@ -38,9 +38,9 @@ export const getAudioPostStatistics = (
   posts: PostDocumentWithoutBody[],
   year: number
 ): { postsWithAudio: number; postsWithoutAudio: number } => {
-  const filteredPostsByYear = posts.filter(
-    (post) => new Date(post.date).getUTCFullYear() === year
-  );
+  const filteredPostsByYear = posts
+    .filter((post) => new Date(post.date).getUTCFullYear() === year)
+    .filter((post) => !post.draft);
 
   const postsWithAudioNumber = filteredPostsByYear.filter(
     (post) => post.audioVersion
@@ -59,9 +59,9 @@ export const getPostsByYearAndMonth = (
   [month: string]: number;
 } => {
   const postsByMonth: PostsByMonthType = {};
-  const filteredPosts = posts.filter(
-    (post) => new Date(post.date).getUTCFullYear() === year
-  );
+  const filteredPosts = posts
+    .filter((post) => new Date(post.date).getUTCFullYear() === year)
+    .filter((post) => !post.draft);
 
   filteredPosts.forEach((post) => {
     const date = new Date(post.date);
