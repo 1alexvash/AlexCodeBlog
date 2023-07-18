@@ -27,7 +27,7 @@ const YearStatistics = dynamic(() => import("./YearStatistics"), {
     <>
       <Skeleton
         variant="rectangular"
-        sx={{ width: "200px", height: "37px", mb: "30px" }}
+        sx={{ width: "200px", height: "58px", mb: "30px" }}
       />
       <Skeleton variant="rectangular" sx={{ width: "100%", height: "385px" }} />
     </>
