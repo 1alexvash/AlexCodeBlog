@@ -71,7 +71,7 @@ const YearStatistics = ({
 
   const { width } = useWindowDimensions();
 
-  const AudioStatistics = (
+  const additionalStatistics = (
     <Box sx={audioStatistics}>
       <Box>🔈 Posts without audio: {postsWithoutAudio}</Box>
       <Box>🔊 Posts with audio: {postsWithAudio}</Box>
@@ -81,7 +81,7 @@ const YearStatistics = ({
 
   return (
     <>
-      {AudioStatistics}
+      {additionalStatistics}
       <Box sx={monthlyDiagramWrapper}>
         {months.map((column) => (
           <Box sx={monthlyDiagramColumn} key={column.month}>
