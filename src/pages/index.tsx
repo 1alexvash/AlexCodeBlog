@@ -34,6 +34,7 @@ export type UpcomingPostsType = PostDocumentWithoutBody[] | undefined;
 
 const initialTagCount: Record<string, number> = {};
 const postsPerRequestThreshold = 999;
+
 const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
   const tags = posts.map((post) => post.tags).flat();
 
@@ -158,6 +159,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
 export const getStaticProps = async () => {
   const posts = await client.queries.postsWithoutBody({
     filter: {
+      draft: { eq: false },
       date: { before: new Date(Date.now()).toString() },
     },
     first: postsPerRequestThreshold,
