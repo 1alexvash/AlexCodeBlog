@@ -33,7 +33,7 @@ interface Props {
 export type UpcomingPostsType = PostDocumentWithoutBody[] | undefined;
 
 const initialTagCount: Record<string, number> = {};
-
+const postsPerRequestThreshold = 999;
 const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
   const tags = posts.map((post) => post.tags).flat();
 
@@ -160,7 +160,7 @@ export const getStaticProps = async () => {
     filter: {
       date: { before: new Date(Date.now()).toString() },
     },
-    first: 200,
+    first: postsPerRequestThreshold,
   });
 
   const mainConfig = await client.queries.mainConfig({
