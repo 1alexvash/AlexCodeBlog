@@ -64,7 +64,6 @@ const fetchUpcomingPosts = async (): Promise<UpcomingPostsType> => {
 };
 
 const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
-  console.log(posts);
   const dispatch = useAppDispatch();
   const [upcomingPosts, setUpcomingPosts] = useState<UpcomingPostsType>();
 
