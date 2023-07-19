@@ -22,11 +22,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<PostDocumentWithoutBody[]>
 ) {
-  // const draftPosts = await client.queries.postsWithoutBody({
-  //   filter: {
-  //     draft: { eq: true },
-  //   },
-  // });
+  const draftPosts = await client.queries.postsWithoutBody({
+    filter: {
+      draft: { eq: true },
+    },
+  });
 
   const futurePosts = await client.queries.postsWithoutBody({
     filter: {
@@ -34,10 +34,9 @@ export default async function handler(
     },
   });
 
-  // const posts = sortFuturePosts(convertTypesAndGetEdges(futurePosts)).concat(
-  //   convertTypesAndGetEdges(draftPosts)
-  // );
-  const posts = sortFuturePosts(convertTypesAndGetEdges(futurePosts));
+  const posts = sortFuturePosts(convertTypesAndGetEdges(futurePosts)).concat(
+    convertTypesAndGetEdges(draftPosts)
+  );
 
   return res.status(200).json(posts);
 }
