@@ -1,6 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/typesHooks";
 
 import Logo from "./Logo";
@@ -15,6 +15,16 @@ export type Search = {
   posts: PostDocumentWithoutBody[];
 };
 
+const toggleSearchVisibility = (show: boolean): void => {
+  if (show) {
+    document.body.classList.add("overflow-hidden");
+    document.documentElement.classList.add("position-fixed");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+    document.documentElement.classList.remove("position-fixed");
+  }
+};
+
 const Header = () => {
   const [search, setSearch] = useState<Search>({
     value: "",
@@ -27,6 +37,12 @@ const Header = () => {
 
   const [showMenu, setShowMenu] = useState(false);
 
+  const handleScreenChange = useCallback((): void => {
+    toggleSearchVisibility(false);
+    setShowMenu(false);
+    setSearch({ ...search, showSearch: false });
+  }, [search]);
+
   const filteredPosts = search.posts.filter((post) => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
   });
@@ -36,18 +52,23 @@ const Header = () => {
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    const windowMatchMedia = window.matchMedia("(orientation: portrait)");
+
     if (!mobileContentRef.current) {
       return;
     }
 
     if (search.showSearch || showMenu) {
-      document.body.classList.add("overflow-hidden");
-      document.documentElement.classList.add("position-fixed");
+      toggleSearchVisibility(true);
     } else {
-      document.body.classList.remove("overflow-hidden");
-      document.documentElement.classList.remove("position-fixed");
+      toggleSearchVisibility(false);
     }
-  }, [search.showSearch, showMenu]);
+
+    windowMatchMedia.addEventListener("change", handleScreenChange);
+
+    return () =>
+      windowMatchMedia.removeEventListener("change", handleScreenChange);
+  }, [search.showSearch, showMenu, handleScreenChange]);
 
   useEffect(() => {
     const fetchData = async () => {
