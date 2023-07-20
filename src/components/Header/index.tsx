@@ -47,16 +47,11 @@ const Header = () => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
   });
 
-  const mobileContentRef = useRef<HTMLDivElement>(null);
   const mobileInputRef = useRef<HTMLInputElement>(null);
   const desktopInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const windowMatchMedia = window.matchMedia("(orientation: portrait)");
-
-    if (!mobileContentRef.current) {
-      return;
-    }
 
     if (search.showSearch || showMenu) {
       toggleSearchVisibility(true);
@@ -126,7 +121,6 @@ const Header = () => {
 
   const HeaderContentDesktop = (
     <div
-      ref={mobileContentRef}
       className="header-content"
       style={{
         display: showMenu ? "flex" : "none",
