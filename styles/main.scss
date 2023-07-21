@@ -15,6 +15,7 @@
 html {
   font-size: 16px;
   font-weight: 400;
+  height: 100%;
 }
 
 html,
@@ -32,7 +33,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   border: none;
-  border-radius: 0px;
+  border-radius: 0;
   background: #fe6c0a;
 }
 
@@ -1238,6 +1239,7 @@ blockquote p:last-child {
   padding: 12px 20px;
   transition: all 0.3s ease-out;
   cursor: pointer;
+
   &:hover {
     background: #6c6c6c;
   }
@@ -1280,6 +1282,7 @@ blockquote p:last-child {
   border-left: 62px solid #3a3a3a;
   z-index: 3;
 }
+
 .triangle-draft::before {
   content: "";
   position: absolute;
@@ -1289,6 +1292,7 @@ blockquote p:last-child {
   right: 59px;
   top: 55px;
 }
+
 .triangle-draft::after {
   content: "";
   position: absolute;
@@ -1317,6 +1321,7 @@ blockquote p:last-child {
   font-size: 14px;
   top: -34px;
 }
+
 .triangle-future::before {
   content: "";
   position: absolute;
@@ -1326,6 +1331,7 @@ blockquote p:last-child {
   right: 59px;
   top: 55px;
 }
+
 .triangle-future::after {
   content: "";
   position: absolute;
@@ -1353,4 +1359,9 @@ blockquote p:last-child {
 .tina-list-item {
   display: flex;
   gap: 4px;
+}
+
+.position-fixed {
+  position: fixed;
+  width: 100%;
 }
