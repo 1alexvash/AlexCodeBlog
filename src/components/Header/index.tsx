@@ -148,20 +148,32 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-        <div className="header-search-desktop">
-          <img
-            src="/images/search.svg"
-            alt="search"
-            onClick={() => {
-              setSearch((search) => ({
-                ...search,
-                showSearch: true,
-              }));
-            }}
-            width={19}
-            height={19}
-          />
-        </div>
+        <ul className="header-menu-icons">
+          <li>
+            <Link href="/post/paid-services">
+              <img
+                src="/images/pay-icon.svg"
+                alt="pay-icon"
+                width={24}
+                height={24}
+              />
+            </Link>
+          </li>
+          <li>
+            <img
+              src="/images/search.svg"
+              alt="search"
+              onClick={() => {
+                setSearch((search) => ({
+                  ...search,
+                  showSearch: true,
+                }));
+              }}
+              width={19}
+              height={19}
+            />
+          </li>
+        </ul>
       </div>
       <ul className="header-socials">
         {config.socialLinks.map((link) => (
