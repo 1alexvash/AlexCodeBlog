@@ -26,5 +26,7 @@ const getEdgeNodes = (
 export const convertTypesAndGetEdges = (
   tinaData: postWithoutBodyData
 ): PostDocumentWithoutBody[] => {
-  return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData));
+  return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData)).filter(
+    (post) => post.title !== "Paid Services"
+  );
 };
