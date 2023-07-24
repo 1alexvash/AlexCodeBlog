@@ -26,7 +26,7 @@ interface Props {
   latestPosts: PostFromQuery[];
 }
 
-const latestPostsPerPage = 10;
+const latestPostsPerPage = 55;
 
 const PageProgress = dynamic(() => import("src/components/Post/PageProgress"), {
   ssr: false,

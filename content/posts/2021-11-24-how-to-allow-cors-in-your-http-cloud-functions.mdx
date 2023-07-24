@@ -1,7 +1,7 @@
 ---
 title: How to allow CORS in your HTTP cloud functions
-date: '2021-11-24T22:00:00.000Z'
-heroImage: /post-images/how-to-allow-cors-in-your-http-cloud-functions.png
+date: 2021-11-24T22:00:00.000Z
+heroImage: /post-images/how-to-allow-cors-in-your-http-cloud-functions.jpg
 draft: false
 tags:
   - Cloud Functions
@@ -14,13 +14,13 @@ You probably have noticed something interesting.
 
 We can call our function via CURL, but not via fetch on the client.
 
-![](/post-images/2021-11-image-5.webp)
+![](/post-images/image-5.jpg)
 
 It is due to CORS policy.
 
 Let's rewrite our code in the **functions/index.js** using official way from the firebase documentation.
 
-![](/post-images/2021-11-image-6.webp)
+![](/post-images/image-6.jpg)
 
 To this:
 
@@ -63,7 +63,7 @@ fetch("https://us-central1-fir-project-3359f.cloudfunctions.net/helloWorld")
 
 And it works!
 
-![](/post-images/2021-11-image-7.webp)
+![](/post-images/image-7.jpg)
 
 But don't you find it is a little bit redundant to write so much code?
 
