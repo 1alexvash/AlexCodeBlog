@@ -34,13 +34,16 @@ export const getYears = (posts: PostDocumentWithoutBody[]): number[] => {
   return Array.from(uniqueYears).sort();
 };
 
+export const getPostsByCurrentYear = (
+  posts: PostDocumentWithoutBody[],
+  year: number
+) => posts.filter((post) => new Date(post.date).getUTCFullYear() === year);
+
 export const getAudioPostStatistics = (
   posts: PostDocumentWithoutBody[],
   year: number
 ): { postsWithAudio: number; postsWithoutAudio: number } => {
-  const filteredPostsByYear = posts
-    .filter((post) => new Date(post.date).getUTCFullYear() === year)
-    .filter((post) => !post.draft);
+  const filteredPostsByYear = getPostsByCurrentYear(posts, year);
 
   const postsWithAudioNumber = filteredPostsByYear.filter(
     (post) => post.audioVersion
@@ -59,11 +62,9 @@ export const getPostsByYearAndMonth = (
   [month: string]: number;
 } => {
   const postsByMonth: PostsByMonthType = {};
-  const filteredPosts = posts
-    .filter((post) => new Date(post.date).getUTCFullYear() === year)
-    .filter((post) => !post.draft);
+  const filteredPostsByYear = getPostsByCurrentYear(posts, year);
 
-  filteredPosts.forEach((post) => {
+  filteredPostsByYear.forEach((post) => {
     const date = new Date(post.date);
     const month = date.toLocaleString("en-US", {
       month: "long",
