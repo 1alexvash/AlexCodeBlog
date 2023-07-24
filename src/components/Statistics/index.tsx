@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import {
   getAudioPostStatistics,
+  getPostsByCurrentYear,
   getPostsByYearAndMonth,
   getYears,
 } from "./pageHelpers";
@@ -26,7 +27,7 @@ const YearStatistics = dynamic(() => import("./YearStatistics"), {
     <>
       <Skeleton
         variant="rectangular"
-        sx={{ width: "200px", height: "37px", mb: "30px" }}
+        sx={{ width: "200px", height: "58px", mb: "30px" }}
       />
       <Skeleton variant="rectangular" sx={{ width: "100%", height: "385px" }} />
     </>
@@ -103,6 +104,7 @@ const StatisticPage = ({ posts }: Props) => {
       <YearStatistics
         postsByMonth={postsByMonth}
         postsAudioStatistic={postsAudioStatistic}
+        postsNumber={getPostsByCurrentYear(posts, selectedYear).length}
       />
     </>
   );

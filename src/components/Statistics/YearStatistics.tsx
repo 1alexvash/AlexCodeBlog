@@ -50,9 +50,14 @@ interface Props {
     postsWithAudio: number;
     postsWithoutAudio: number;
   };
+  postsNumber: number;
 }
 
-const YearStatistics = ({ postsByMonth, postsAudioStatistic }: Props) => {
+const YearStatistics = ({
+  postsByMonth,
+  postsAudioStatistic,
+  postsNumber,
+}: Props) => {
   const theme = useTheme();
 
   const { postsWithAudio, postsWithoutAudio } = postsAudioStatistic;
@@ -61,17 +66,22 @@ const YearStatistics = ({ postsByMonth, postsAudioStatistic }: Props) => {
     monthlyDiagramWrapper,
     monthlyDiagramColumn,
     monthName,
-    audioStatistic,
+    audioStatistics,
   } = styles(theme);
 
   const { width } = useWindowDimensions();
 
+  const additionalStatistics = (
+    <Box sx={audioStatistics}>
+      <Box>🔈 Posts without audio: {postsWithoutAudio}</Box>
+      <Box>🔊 Posts with audio: {postsWithAudio}</Box>
+      <Box>📝 Total posts: {postsNumber}</Box>
+    </Box>
+  );
+
   return (
     <>
-      <Box sx={audioStatistic}>
-        <Box>🔊 Posts with audio: {postsWithAudio}</Box>
-        <Box>🔈 Posts without audio: {postsWithoutAudio}</Box>
-      </Box>
+      {additionalStatistics}
       <Box sx={monthlyDiagramWrapper}>
         {months.map((column) => (
           <Box sx={monthlyDiagramColumn} key={column.month}>

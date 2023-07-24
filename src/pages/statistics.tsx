@@ -66,7 +66,11 @@ const Statistics = ({ posts, query, tinaData, variables }: Props) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({});
+  const posts = await client.queries.postConnection({
+    filter: {
+      draft: { eq: false },
+    },
+  });
 
   const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",

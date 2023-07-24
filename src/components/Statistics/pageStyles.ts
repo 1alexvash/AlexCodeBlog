@@ -86,7 +86,7 @@ const styles = (theme: Theme) => ({
       textAlign: "center",
     },
   },
-  audioStatistic: {
+  audioStatistics: {
     marginBottom: "25px",
     fontSize: "16px",
     color:
