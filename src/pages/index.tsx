@@ -30,7 +30,6 @@ interface Props {
   variables: MainConfigQueryVariables;
 }
 
-// hello!
 export type UpcomingPostsType = PostDocumentWithoutBody[] | undefined;
 
 const initialTagCount: Record<string, number> = {};
