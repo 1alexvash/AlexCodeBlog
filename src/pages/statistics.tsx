@@ -8,6 +8,7 @@ import StandWithUkraine from "src/components/StandWithUkraine";
 import StatisticPage from "src/components/Statistics";
 import { useTina } from "tinacms/dist/react";
 
+import { postsPerRequestThreshold } from "./index";
 import client from ".tina/__generated__/client";
 import {
   MainConfigQuery,
@@ -70,6 +71,7 @@ export const getStaticProps = async () => {
     filter: {
       draft: { eq: false },
     },
+    first: postsPerRequestThreshold,
   });
 
   const mainConfig = await client.queries.mainConfig({
