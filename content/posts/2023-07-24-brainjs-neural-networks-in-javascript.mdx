@@ -1,0 +1,110 @@
+---
+title: 'Brain.js: neural networks in JavaScript'
+date: 2023-07-24T14:31:10.268Z
+draft: true
+tags:
+  - JavaScript
+  - AI
+---
+
+Another post about AI and machine learning. Recently, I found an interesting library for machine learning.
+
+Let's take a look at the example below and try to understand what's happening in this code 🧐
+
+```javascript
+const a = character(
+  '.#####.' +
+  '#.....#' +
+  '#.....#' +
+  '#######' +
+  '#.....#' +
+  '#.....#' +
+  '#.....#'
+);
+const b = character(
+  '######.' +
+  '#.....#' +
+  '#.....#' +
+  '######.' +
+  '#.....#' +
+  '#.....#' +
+  '######.'
+);
+const c = character(
+  '#######' +
+  '#......' +
+  '#......' +
+  '#......' +
+  '#......' +
+  '#......' +
+  '#######'
+);
+```
+
+Here, we're teaching our machine how to distinguish these chars.
+
+Using c, we convert our characters to the required format to train our machine and help it identify them.
+
+```javascript
+function character(string) {
+  return string
+    .trim()
+    .split('')
+    .map(integer);
+}
+
+function integer(character) {
+  if ('#' === character) return 1;
+  
+  return 0;
+}
+```
+
+Okay, after this, let's train our AI to learn the letters A through C.
+
+```javascript
+const net = new brain.NeuralNetwork();
+net.train([{
+  input: a,
+  output: {
+    a: 1
+  }
+},
+{
+  input: b,
+  output: {
+    b: 1
+  }
+},
+{
+  input: c,
+  output: {
+    c: 1
+  }
+}
+], {
+  log: detail => console.log(detail)
+});
+```
+
+So, we'll try to identify letters using this machine, and it will give us an approximate result of our training.
+
+```javascript
+const result = brain.likely(character(
+  '.#####.' +
+  '#.....#' +
+  '#.....#' +
+  '###.###' +
+  '#.....#' +
+  '#.....#' +
+  '#.....#'
+), net);
+```
+
+As a result, it predicts the letter A, even with a slight pixel variation.
+
+***
+
+## Bottom line
+
+The library provided here offers a promising approach to training models for accurate predictions. I can't wait for new amazing AI libraries 💪
