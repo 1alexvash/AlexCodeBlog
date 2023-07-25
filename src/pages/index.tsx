@@ -176,7 +176,7 @@ export const getStaticProps: GetStaticProps = async () => {
         .reverse(),
       tinaData: mainConfig.data,
       query: mainConfig.query,
-      variables: mainConfig.variabes,
+      variables: mainConfig.variables,
     },
     revalidate: 10,
   };
