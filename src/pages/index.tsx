@@ -1,6 +1,6 @@
 import getFirstParagraph from "helpers/getFirstParagraph";
 import { PostDocumentWithoutBody } from "interfaces";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { setHostUrl } from "redux/slices/hostUrl";
@@ -156,7 +156,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = await client.queries.postsWithoutBody({
     filter: {
       draft: { eq: false },
@@ -176,8 +176,9 @@ export const getStaticProps = async () => {
         .reverse(),
       tinaData: mainConfig.data,
       query: mainConfig.query,
-      variables: mainConfig.variables,
+      variables: mainConfig.variabes,
     },
+    revalidate: 10,
   };
 };
 
