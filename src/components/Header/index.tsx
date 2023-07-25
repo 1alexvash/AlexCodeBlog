@@ -1,5 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/typesHooks";
 
@@ -33,8 +34,6 @@ const Header = () => {
     posts: [] as PostDocumentWithoutBody[],
   });
 
-  const config = useAppSelector((state) => state.tinaData.mainConfig);
-
   const [showMenu, setShowMenu] = useState(false);
 
   const handleScreenChange = useCallback((): void => {
@@ -42,6 +41,10 @@ const Header = () => {
     setShowMenu(false);
     setSearch({ ...search, showSearch: false });
   }, [search]);
+
+  const { asPath } = useRouter();
+
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
 
   const filteredPosts = search.posts.filter((post) => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
@@ -143,8 +146,17 @@ const Header = () => {
       <div className="header-menu-outer">
         <ul className="header-menu">
           <li>
-            <Link href="/" className="active">
+            <Link href="/" className={asPath === "/" ? "active" : ""}>
               Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/post/paid-services"
+              className={asPath === "/post/paid-services" ? "active" : ""}
+              onClick={() => setShowMenu(false)}
+            >
+              Paid Services
             </Link>
           </li>
         </ul>
