@@ -33,7 +33,7 @@ interface Props {
 export type UpcomingPostsType = PostDocumentWithoutBody[] | undefined;
 
 const initialTagCount: Record<string, number> = {};
-const postsPerRequestThreshold = 999;
+export const postsPerRequestThreshold = 999;
 
 const calculateSortedTags = (posts: PostDocumentWithoutBody[]): Tag[] => {
   const tags = posts.map((post) => post.tags).flat();
