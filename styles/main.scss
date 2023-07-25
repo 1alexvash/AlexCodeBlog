@@ -218,24 +218,19 @@ header {
   width: 100%;
 }
 
-.header-menu-icons {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.header-menu-icons li {
+.header-search-desktop {
   cursor: pointer;
   -ms-flex-item-align: center;
   -ms-grid-row-align: center;
   align-self: center;
+  margin-left: 24px;
 }
 
-.header-menu-icons li:hover img {
+.header-search-desktop:hover img {
   filter: none !important;
 }
 
-.header-menu-icons li img {
+.header-search-desktop img {
   display: block;
   filter: brightness(0);
   transition: all 0.3s ease-out;
