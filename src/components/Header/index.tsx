@@ -16,6 +16,47 @@ export type Search = {
   posts: PostDocumentWithoutBody[];
 };
 
+interface Page {
+  name: string;
+  link: string;
+}
+
+interface LinksProps {
+  pages: Page[];
+  setShowMenu: (value: boolean) => void;
+}
+
+const pages: Page[] = [
+  {
+    name: "home",
+    link: "/",
+  },
+  {
+    name: "paid services",
+    link: "/post/paid-services",
+  },
+];
+
+const Links = ({ pages, setShowMenu }: LinksProps): JSX.Element => {
+  const { asPath } = useRouter();
+
+  return (
+    <>
+      {pages.map(({ link, name }, index) => (
+        <li key={index}>
+          <Link
+            href={link}
+            className={asPath === link ? "active" : ""}
+            onClick={() => setShowMenu(false)}
+          >
+            {name}
+          </Link>
+        </li>
+      ))}
+    </>
+  );
+};
+
 const toggleSearchVisibility = (show: boolean): void => {
   if (show) {
     document.body.classList.add("overflow-hidden");
@@ -41,8 +82,6 @@ const Header = () => {
     setShowMenu(false);
     setSearch({ ...search, showSearch: false });
   }, [search]);
-
-  const { asPath } = useRouter();
 
   const config = useAppSelector((state) => state.tinaData.mainConfig);
 
@@ -145,20 +184,7 @@ const Header = () => {
       />
       <div className="header-menu-outer">
         <ul className="header-menu">
-          <li>
-            <Link href="/" className={asPath === "/" ? "active" : ""}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/post/paid-services"
-              className={asPath === "/post/paid-services" ? "active" : ""}
-              onClick={() => setShowMenu(false)}
-            >
-              Paid Services
-            </Link>
-          </li>
+          <Links pages={pages} setShowMenu={setShowMenu} />
         </ul>
         <div className="header-search-desktop">
           <img
