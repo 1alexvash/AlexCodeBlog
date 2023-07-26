@@ -8,6 +8,7 @@ import StandWithUkraine from "src/components/StandWithUkraine";
 import StatisticPage from "src/components/Statistics";
 import { useTina } from "tinacms/dist/react";
 
+import { convertTypesAndGetEdges } from "../../helpers/getEdgeNodesHelpers";
 import { postsPerRequestThreshold } from "./index";
 import client from ".tina/__generated__/client";
 import {
@@ -67,12 +68,14 @@ const Statistics = ({ posts, query, tinaData, variables }: Props) => {
 };
 
 export const getStaticProps = async () => {
-  const posts = await client.queries.postConnection({
+  const posts = await client.queries.postsWithoutBody({
     filter: {
       draft: { eq: false },
     },
     first: postsPerRequestThreshold,
   });
+
+  console.log(convertTypesAndGetEdges(posts));
 
   const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
@@ -80,9 +83,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts: posts.data.postConnection.edges
-        ?.map((edge) => edge?.node)
-        .reverse(),
+      posts: convertTypesAndGetEdges(posts),
       tinaData: mainConfig.data,
       query: mainConfig.query,
       variables: mainConfig.variables,
