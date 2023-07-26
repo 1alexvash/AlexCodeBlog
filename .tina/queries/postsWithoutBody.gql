@@ -1,3 +1,13 @@
+fragment PostPartsWithoutBody on Post {
+  title
+  date
+  heroImage
+  draft
+  audioVersion
+  tags
+}
+
+
 query postsWithoutBody(
   $before: String
   $after: String
@@ -16,20 +26,18 @@ query postsWithoutBody(
   ) {
     edges {
       node {
-        id
-        title
-        date
-        heroImage
-        draft
-        tags
-        _sys {
-          filename
-          basename
-          breadcrumbs
-          path
-          relativePath
-          extension
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
         }
+        ...PostPartsWithoutBody
       }
     }
   }
