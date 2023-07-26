@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { PostDocumentWithoutBody } from "interfaces";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
@@ -67,7 +68,7 @@ const Statistics = ({ posts, query, tinaData, variables }: Props) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = await client.queries.postsWithoutBody({
     filter: {
       draft: { eq: false },
@@ -84,8 +85,9 @@ export const getStaticProps = async () => {
       posts: convertTypesAndGetEdges(posts),
       tinaData: mainConfig.data,
       query: mainConfig.query,
-      variables: mainConfig.variables,
+      variables: mainConfig.variabes,
     },
+    revalidate: 10,
   };
 };
 
