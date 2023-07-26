@@ -75,8 +75,6 @@ export const getStaticProps = async () => {
     first: postsPerRequestThreshold,
   });
 
-  console.log(convertTypesAndGetEdges(posts));
-
   const mainConfig = await client.queries.mainConfig({
     relativePath: "mainConfig.json",
   });
