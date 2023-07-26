@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps = async () => {
       posts: convertTypesAndGetEdges(posts),
       tinaData: mainConfig.data,
       query: mainConfig.query,
-      variables: mainConfig.variabes,
+      variables: mainConfig.variables,
     },
     revalidate: 10,
   };
