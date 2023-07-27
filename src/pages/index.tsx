@@ -17,6 +17,7 @@ import UpcomingPosts from "src/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "src/components/useIsomorphicLayoutEffect";
 import { useEditState, useTina } from "tinacms/dist/react";
 
+import { convertTypesAndGetEdges } from "../../helpers/getEdgeNodesHelpers";
 import client from ".tina/__generated__/client";
 import {
   MainConfigQuery,
@@ -171,9 +172,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      posts: posts.data.postConnection.edges
-        ?.map((edge) => edge?.node)
-        .reverse(),
+      posts: convertTypesAndGetEdges(posts),
       tinaData: mainConfig.data,
       query: mainConfig.query,
       variables: mainConfig.variables,
