@@ -44,6 +44,7 @@ type PostFromQueryWithoutBody = {
   heroImage?: string | null;
   draft: boolean;
   tags?: Array<string | null> | null;
+  audioVersion?: string | null;
   _sys: SystemInfo;
 };
 
@@ -72,5 +73,6 @@ export const postsQueryToPostsWithoutBody = (
       ? postQuery.tags.filter((tag): tag is string => tag !== null)
       : [],
     _sys: postQuery._sys,
+    audioVersion: postQuery.audioVersion,
   }));
 };
