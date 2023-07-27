@@ -17,12 +17,12 @@ import UpcomingPosts from "src/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "src/components/useIsomorphicLayoutEffect";
 import { useEditState, useTina } from "tinacms/dist/react";
 
+import { convertTypesAndGetEdges } from "../../helpers/getEdgeNodesHelpers";
 import client from ".tina/__generated__/client";
 import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
-import { convertTypesAndGetEdges } from "../../helpers/getEdgeNodesHelpers";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
