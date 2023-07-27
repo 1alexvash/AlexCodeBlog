@@ -1,5 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 
+import { pagesName } from "../src/components/Header";
 import {
   PostsFromQueryWithoutBody,
   postsQueryToPostsWithoutBody,
@@ -27,6 +28,6 @@ export const convertTypesAndGetEdges = (
   tinaData: postWithoutBodyData
 ): PostDocumentWithoutBody[] => {
   return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData)).filter(
-    (post) => post.title !== "Paid Services"
+    (post) => !pagesName.includes(post.title)
   );
 };

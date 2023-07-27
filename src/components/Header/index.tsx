@@ -28,14 +28,16 @@ interface LinksProps {
 
 const pages: Page[] = [
   {
-    name: "home",
+    name: "Home",
     link: "/",
   },
   {
-    name: "paid services",
+    name: "Paid Services",
     link: "/post/paid-services",
   },
 ];
+
+export const pagesName = pages.map((page) => page.name);
 
 const Links = ({ pages, setShowMenu }: LinksProps): JSX.Element => {
   const { asPath } = useRouter();

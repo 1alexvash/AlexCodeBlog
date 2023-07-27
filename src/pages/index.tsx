@@ -22,6 +22,7 @@ import {
   MainConfigQuery,
   MainConfigQueryVariables,
 } from ".tina/__generated__/types";
+import { convertTypesAndGetEdges } from "../../helpers/getEdgeNodesHelpers";
 
 interface Props {
   posts: PostDocumentWithoutBody[];
@@ -171,9 +172,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts: posts.data.postConnection.edges
-        ?.map((edge) => edge?.node)
-        .reverse(),
+      posts: convertTypesAndGetEdges(posts),
       tinaData: mainConfig.data,
       query: mainConfig.query,
       variables: mainConfig.variables,
