@@ -157,6 +157,7 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
   );
 };
 
+// Test commit
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await client.queries.postsWithoutBody({
     filter: {
