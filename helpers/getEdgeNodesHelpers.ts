@@ -1,6 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 
-import { pagesName } from "../src/components/Header";
+import { pageNamesList } from "../src/components/Header";
 import {
   PostsFromQueryWithoutBody,
   postsQueryToPostsWithoutBody,
@@ -28,6 +28,6 @@ export const convertTypesAndGetEdges = (
   tinaData: postWithoutBodyData
 ): PostDocumentWithoutBody[] => {
   return postsQueryToPostsWithoutBody(getEdgeNodes(tinaData)).filter(
-    (post) => !pagesName.includes(post.title)
+    (post) => !pageNamesList.includes(post.title)
   );
 };

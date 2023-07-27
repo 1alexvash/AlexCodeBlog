@@ -37,7 +37,7 @@ const pages: Page[] = [
   },
 ];
 
-export const pagesName = pages.map((page) => page.name);
+export const pageNamesList = pages.map((page) => page.name);
 
 const Links = ({ pages, setShowMenu }: LinksProps): JSX.Element => {
   const { asPath } = useRouter();
