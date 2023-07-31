@@ -10,11 +10,6 @@
       "image": "/images/telegram.svg"
     },
     {
-      "link": "https://github.com/1alexvash",
-      "image": "/images/github.svg",
-      "class": "git"
-    },
-    {
       "link": "mailto:1alexvash@gmail.com",
       "image": "/images/mail.svg"
     }
