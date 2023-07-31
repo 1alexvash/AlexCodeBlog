@@ -12,8 +12,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { setTags } from "redux/slices/selectedTags";
-import { useAppDispatch } from "redux/typesHooks";
-import { useAppSelector } from "redux/typesHooks";
+import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
 
 import Codeblock from "../Codeblock";
@@ -149,7 +148,7 @@ const PostContent = ({ post }: Props) => {
         {isPostInTheFuture(post) && <FuturePostMark />}
 
         <img
-          src={post.heroImage ?? "/post-images/draft.webp"}
+          src={post.heroImage ?? "/post-images/draft.jpg"}
           alt="blog post image"
           width={790}
           height={394}
