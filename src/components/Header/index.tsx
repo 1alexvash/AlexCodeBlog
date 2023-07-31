@@ -1,5 +1,6 @@
 import { PostDocumentWithoutBody } from "interfaces";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "redux/typesHooks";
 
@@ -13,6 +14,49 @@ export type Search = {
   showSearch: boolean;
   isLoaded: boolean;
   posts: PostDocumentWithoutBody[];
+};
+
+interface Page {
+  name: string;
+  link: string;
+}
+
+interface LinksProps {
+  pages: Page[];
+  setShowMenu: (value: boolean) => void;
+}
+
+const pages: Page[] = [
+  {
+    name: "Home",
+    link: "/",
+  },
+  {
+    name: "Paid Services",
+    link: "/post/paid-services",
+  },
+];
+
+export const pageNamesList = pages.map((page) => page.name);
+
+const Links = ({ pages, setShowMenu }: LinksProps): JSX.Element => {
+  const { asPath } = useRouter();
+
+  return (
+    <>
+      {pages.map(({ link, name }, index) => (
+        <li key={index}>
+          <Link
+            href={link}
+            className={asPath === link ? "active" : ""}
+            onClick={() => setShowMenu(false)}
+          >
+            {name}
+          </Link>
+        </li>
+      ))}
+    </>
+  );
 };
 
 const toggleSearchVisibility = (show: boolean): void => {
@@ -33,8 +77,6 @@ const Header = () => {
     posts: [] as PostDocumentWithoutBody[],
   });
 
-  const config = useAppSelector((state) => state.tinaData.mainConfig);
-
   const [showMenu, setShowMenu] = useState(false);
 
   const handleScreenChange = useCallback((): void => {
@@ -42,6 +84,8 @@ const Header = () => {
     setShowMenu(false);
     setSearch({ ...search, showSearch: false });
   }, [search]);
+
+  const config = useAppSelector((state) => state.tinaData.mainConfig);
 
   const filteredPosts = search.posts.filter((post) => {
     return post.title.toLowerCase().includes(search.value.toLowerCase());
@@ -142,11 +186,7 @@ const Header = () => {
       />
       <div className="header-menu-outer">
         <ul className="header-menu">
-          <li>
-            <Link href="/" className="active">
-              Home
-            </Link>
-          </li>
+          <Links pages={pages} setShowMenu={setShowMenu} />
         </ul>
         <div className="header-search-desktop">
           <img
