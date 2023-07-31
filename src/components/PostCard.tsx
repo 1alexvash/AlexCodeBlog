@@ -72,7 +72,7 @@ const PostCard = ({ post }: Props) => {
               )}`}
               width="378"
               height="378"
-              sizes="100vw"
+              quality={100}
               style={{
                 filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
 
