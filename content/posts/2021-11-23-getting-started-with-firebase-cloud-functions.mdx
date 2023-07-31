@@ -1,7 +1,7 @@
 ---
 title: Getting started with Firebase Cloud Functions
 date: '2021-11-23T22:00:00.000Z'
-heroImage: /post-images/2021-11-24-getting-started-with-firebase-cloud-functions.webp
+heroImage: /post-images/getting-started-with-firebase-cloud-functions.jpg
 draft: false
 tags:
   - Cloud Functions
@@ -37,23 +37,23 @@ firebase init
 
 Press enter to proceed
 
-![](/post-images/2021-11-cloud-1.webp)
+![](/post-images/cloud-1.jpg)
 
 Then choose the right service you need
 
-![](/post-images/2021-11-cloud-2.webp)
+![](/post-images/cloud-2.jpg)
 
 Select your project
 
-![](/post-images/2021-11-cloud-3.webp)
+![](/post-images/cloud-3.jpg)
 
 Pick your flavor of JavaScript
 
-![](/post-images/2021-11-cloud-4.webp)
+![](/post-images/cloud-4.jpg)
 
 Answer if you need ESLint, it is opted out by default
 
-![](/post-images/2021-11-cloud-5.webp)
+![](/post-images/cloud-5.jpg)
 
 Then just press yes to install dependencies.
 
@@ -61,15 +61,15 @@ It is going to create firebase config + functions folder.
 
 So, you're going to see a structure like that.
 
-![](/post-images/2021-11-cloud-6.webp)
+![](/post-images/cloud-6.jpg)
 
 Let's go to **functions/index.js**
 
-![](/post-images/2021-11-cloud-7.webp)
+![](/post-images/cloud-7.jpg)
 
 And uncomment the first function, so we can actually test it out.
 
-![](/post-images/2021-11-cloud-8.webp)
+![](/post-images/cloud-8.jpg)
 
 Now we need to deploy this function to firebase using this command.
 
@@ -79,11 +79,11 @@ firebase deploy --only functions
 
 After deploying. You're going to receive the URL by which you'll be able to call the function.
 
-![](/post-images/2021-11-cloud-9.webp)
+![](/post-images/cloud-9.jpg)
 
 To test it out. Let's open some shell and run this CURL script
 
-![](/post-images/2021-11-cloud-10.webp)
+![](/post-images/cloud-10.jpg)
 
 Wow. We've got something working.
 
@@ -91,7 +91,7 @@ In the firebase → functions → logs.
 
 You can see that we did indeed log something by calling this function. We've got 200 success status and execution time. Well, that can have a little bit of use.
 
-![](/post-images/2021-11-cloud-11.webp)
+![](/post-images/cloud-11.jpg)
 
 That's it for this article, in the next article. We're going to create something a bit more exciting.
 

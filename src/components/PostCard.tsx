@@ -64,7 +64,7 @@ const PostCard = ({ post }: Props) => {
         <div className="content">
           <Link href={`/post/${post._sys.filename}`} className="post-img">
             <Image
-              src={post.heroImage ?? "/post-images/draft.webp"}
+              src={post.heroImage ?? "/post-images/draft.jpg"}
               alt="blog post image"
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
@@ -73,6 +73,7 @@ const PostCard = ({ post }: Props) => {
               width="378"
               height="378"
               sizes="100vw"
+              quality={100}
               style={{
                 filter: isUpcomingPost(post) ? "grayscale(50%)" : "none",
 
