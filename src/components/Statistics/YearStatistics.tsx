@@ -1,8 +1,9 @@
-import { Box, Paper, Typography, useTheme } from "@mui/material";
+import { Box, Divider, Paper, Typography, useTheme } from "@mui/material";
 import useWindowDimensions from "helpers/useWindowDimensions";
 import React from "react";
 
 import { PostsByMonthType } from ".";
+import MortalityReminder from "./MortalityReminder";
 import { calculateMarginBottom } from "./pageHelpers";
 import styles from "./pageStyles";
 
@@ -115,6 +116,8 @@ const YearStatistics = ({
           <Box key={month.month}>{monthNameLength(width, month.month)}</Box>
         ))}
       </Box>
+      <Divider sx={{ my: "30px" }} />
+      <MortalityReminder />
     </>
   );
 };
