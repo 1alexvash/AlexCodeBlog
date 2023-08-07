@@ -69,7 +69,12 @@ const MortalityReminder = () => (
   <Box
     sx={(theme) => ({
       maxWidth: "270px",
-      background: theme.palette.main.lightGrey,
+      background:
+        theme.palette.mode === "dark"
+          ? theme.palette.main.grey
+          : theme.palette.main.lightGrey,
+      color:
+        theme.palette.mode === "dark" ? "white" : theme.palette.main.darkGrey,
       padding: "10px",
       borderRadius: "4px",
       border: `1px solid ${theme.palette.main.grey}`,
