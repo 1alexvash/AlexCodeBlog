@@ -11,11 +11,14 @@ function calculateAge(birthDate: Date) {
 
   const ageDecimalPart = ageInYears - Math.floor(ageInYears);
 
+  const numberAfterDecimalPoint = 2;
+
   const ageFormatted = `${Math.floor(ageInYears)}.${(
-    Number(ageDecimalPart.toFixed(2)) * 100
+    Number(ageDecimalPart.toFixed(numberAfterDecimalPoint)) *
+    10 ** numberAfterDecimalPoint
   )
     .toFixed(0)
-    .padStart(2, "0")}`;
+    .padStart(numberAfterDecimalPoint, "0")}`;
 
   return ageFormatted;
 }
