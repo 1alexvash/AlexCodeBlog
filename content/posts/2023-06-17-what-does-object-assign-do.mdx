@@ -40,3 +40,20 @@ console.log('centaur:', centaur)
 As you can see, the new `centaur` object got the properties from `person` and `horse` objects.
 
 However, something interesting to watch out for is that `person`'s properties "name" and "age" were overwritten by the exact `horse`'s properties as they had higher precedence in this method call.
+
+***
+
+### Quick update
+
+Prefer object spread syntax over Object.assign
+
+```javascript
+// This syntax ✅
+const centaur = { ...person, ...horse };
+
+// Over this syntax ❌
+const centaur = Object.assign(person, horse);
+
+```
+
+As it seems easier for most of the people.
