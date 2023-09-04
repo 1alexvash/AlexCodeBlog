@@ -1,7 +1,4 @@
-import { Box, Divider } from "@mui/material";
-import React from "react";
-
-function calculateAge(birthDate: Date) {
+export function calculateAge(birthDate: Date) {
   const birthTime = birthDate.getTime();
   const now = Date.now();
   const ageInMillis = now - birthTime;
@@ -23,7 +20,7 @@ function calculateAge(birthDate: Date) {
   return ageFormatted;
 }
 
-function calculateTimeToNextBirthday(birthDate: Date) {
+export function calculateMonthsAndDaysToTheDate(birthDate: Date) {
   const today = new Date();
   const nextBirthday = new Date(
     today.getFullYear(),
@@ -40,15 +37,13 @@ function calculateTimeToNextBirthday(birthDate: Date) {
   const monthsToNextBirthday = Math.floor(daysToNextBirthday / 30);
 
   if (monthsToNextBirthday > 0) {
-    return `It is ${monthsToNextBirthday} months and ${
-      daysToNextBirthday % 30
-    } days to your next 🍰 birthday.`;
+    return `${monthsToNextBirthday} months and ${daysToNextBirthday % 30} days`;
   } else {
     return `It is ${daysToNextBirthday} days to your next birthday.`;
   }
 }
 
-const calculateDaysToNextBirthday = (birthDate: Date) => {
+export const calculateDaysToTheDate = (birthDate: Date) => {
   const today = new Date();
   const nextBirthday = new Date(
     today.getFullYear(),
@@ -65,41 +60,3 @@ const calculateDaysToNextBirthday = (birthDate: Date) => {
 
   return daysToNextBirthday;
 };
-
-const AlexBirthDate = new Date("1998-07-22");
-
-const MortalityReminder = () => (
-  <Box
-    sx={(theme) => ({
-      maxWidth: "270px",
-      background:
-        theme.palette.mode === "dark"
-          ? theme.palette.main.grey
-          : theme.palette.main.lightGrey,
-      color:
-        theme.palette.mode === "dark" ? "white" : theme.palette.main.darkGrey,
-      padding: "10px",
-      borderRadius: "4px",
-      border: `1px solid ${theme.palette.main.grey}`,
-      textAlign: "center",
-    })}
-  >
-    <Box sx={{ fontWeight: "bold" }}>Mortality reminder</Box>
-    <Box sx={{ fontSize: "100px" }}>☠</Box>
-    <Box>
-      Today I am{" "}
-      <Box component="span" sx={{ fontWeight: "bold", fontSize: "32px" }}>
-        {calculateAge(AlexBirthDate)}
-      </Box>{" "}
-      years old
-    </Box>
-    <Divider sx={{ my: "10px" }} />
-    {calculateTimeToNextBirthday(AlexBirthDate)}
-    <Box sx={{ my: "10px" }}>
-      Or just {calculateDaysToNextBirthday(AlexBirthDate)} days.
-    </Box>
-    <Box>Remember to use this time wisely.</Box>
-  </Box>
-);
-
-export default MortalityReminder;
