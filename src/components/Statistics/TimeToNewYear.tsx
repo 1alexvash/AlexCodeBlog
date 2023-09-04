@@ -1,27 +1,5 @@
-import { Box, Divider } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-
-function calculateAge(birthDate: Date) {
-  const birthTime = birthDate.getTime();
-  const now = Date.now();
-  const ageInMillis = now - birthTime;
-
-  const ageInSeconds = ageInMillis / 1000;
-  const ageInYears = ageInSeconds / (60 * 60 * 24 * 365.25);
-
-  const ageDecimalPart = ageInYears - Math.floor(ageInYears);
-
-  const numberAfterDecimalPoint = 2;
-
-  const ageFormatted = `${Math.floor(ageInYears)}.${(
-    Number(ageDecimalPart.toFixed(numberAfterDecimalPoint)) *
-    10 ** numberAfterDecimalPoint
-  )
-    .toFixed(0)
-    .padStart(numberAfterDecimalPoint, "0")}`;
-
-  return ageFormatted;
-}
 
 function calculateTimeToNextBirthday(birthDate: Date) {
   const today = new Date();
@@ -66,7 +44,7 @@ const calculateDaysToNextBirthday = (birthDate: Date) => {
   return daysToNextBirthday;
 };
 
-const AlexBirthDate = new Date("1998-07-22");
+const NewYearDate = new Date(new Date().getFullYear() + 1, 0, 1);
 
 const TimeToNewYear = () => (
   <Box
@@ -84,21 +62,13 @@ const TimeToNewYear = () => (
       textAlign: "center",
     })}
   >
-    <Box sx={{ fontWeight: "bold" }}>Mortality reminder</Box>
-    <Box sx={{ fontSize: "100px" }}>☠</Box>
-    <Box>
-      Today I am{" "}
-      <Box component="span" sx={{ fontWeight: "bold", fontSize: "32px" }}>
-        {calculateAge(AlexBirthDate)}
-      </Box>{" "}
-      years old
-    </Box>
-    <Divider sx={{ my: "10px" }} />
-    {calculateTimeToNextBirthday(AlexBirthDate)}
+    <Box sx={{ fontWeight: "bold" }}>Time To New Year</Box>
+    <Box sx={{ fontSize: "100px" }}>❄</Box>
+
+    {calculateTimeToNextBirthday(NewYearDate)}
     <Box sx={{ my: "10px" }}>
-      Or just {calculateDaysToNextBirthday(AlexBirthDate)} days.
+      Or just {calculateDaysToNextBirthday(NewYearDate)} days.
     </Box>
-    <Box>Remember to use this time wisely.</Box>
   </Box>
 );
 
