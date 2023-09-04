@@ -5,7 +5,7 @@ import MortalityReminder from "./MortalityReminder";
 import TimeToNewYear from "./TimeToNewYear";
 
 const Timers = () => (
-  <Box sx={{ display: "flex", gap: "20px" }}>
+  <Box sx={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
     <MortalityReminder />
     <TimeToNewYear />
   </Box>
