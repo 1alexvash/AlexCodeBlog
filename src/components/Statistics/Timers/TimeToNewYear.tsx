@@ -1,48 +1,10 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-function calculateTimeToNextBirthday(birthDate: Date) {
-  const today = new Date();
-  const nextBirthday = new Date(
-    today.getFullYear(),
-    birthDate.getMonth(),
-    birthDate.getDate()
-  );
-
-  if (nextBirthday < today) {
-    nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
-  }
-
-  const timeDifference = Number(nextBirthday) - Number(today);
-  const daysToNextBirthday = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  const monthsToNextBirthday = Math.floor(daysToNextBirthday / 30);
-
-  if (monthsToNextBirthday > 0) {
-    return `It is ${monthsToNextBirthday} months and ${
-      daysToNextBirthday % 30
-    } days to your next 🍰 birthday.`;
-  } else {
-    return `It is ${daysToNextBirthday} days to your next birthday.`;
-  }
-}
-
-const calculateDaysToNextBirthday = (birthDate: Date) => {
-  const today = new Date();
-  const nextBirthday = new Date(
-    today.getFullYear(),
-    birthDate.getMonth(),
-    birthDate.getDate()
-  );
-
-  if (nextBirthday < today) {
-    nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
-  }
-
-  const timeDifference = Number(nextBirthday) - Number(today);
-  const daysToNextBirthday = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-  return daysToNextBirthday;
-};
+import {
+  calculateDaysToTheDate,
+  calculateMonthsAndDaysToTheDate,
+} from "./helpers";
 
 const NewYearDate = new Date(new Date().getFullYear() + 1, 0, 1);
 
@@ -64,10 +26,9 @@ const TimeToNewYear = () => (
   >
     <Box sx={{ fontWeight: "bold" }}>Time To New Year</Box>
     <Box sx={{ fontSize: "100px" }}>❄</Box>
-
-    {calculateTimeToNextBirthday(NewYearDate)}
+    It is {calculateMonthsAndDaysToTheDate(NewYearDate)} to the next year ☃
     <Box sx={{ my: "10px" }}>
-      Or just {calculateDaysToNextBirthday(NewYearDate)} days.
+      Or just {calculateDaysToTheDate(NewYearDate)} days.
     </Box>
   </Box>
 );
