@@ -10,6 +10,7 @@ import {
   getYears,
 } from "./pageHelpers";
 import styles from "./pageStyles";
+import Timers from "./Timers";
 
 export type PostsByMonthType = {
   [month: string]: number;
@@ -106,6 +107,8 @@ const StatisticPage = ({ posts }: Props) => {
         postsAudioStatistic={postsAudioStatistic}
         postsNumber={getPostsByCurrentYear(posts, selectedYear).length}
       />
+
+      <Timers />
     </>
   );
 };

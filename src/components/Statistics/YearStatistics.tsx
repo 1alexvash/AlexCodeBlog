@@ -3,7 +3,6 @@ import useWindowDimensions from "helpers/useWindowDimensions";
 import React from "react";
 
 import { PostsByMonthType } from ".";
-import MortalityReminder from "./MortalityReminder";
 import { calculateMarginBottom } from "./pageHelpers";
 import styles from "./pageStyles";
 
@@ -117,7 +116,6 @@ const YearStatistics = ({
         ))}
       </Box>
       <Divider sx={{ my: "30px" }} />
-      <MortalityReminder />
     </>
   );
 };
