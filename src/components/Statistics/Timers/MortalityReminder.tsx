@@ -35,8 +35,10 @@ const MortalityReminder = () => (
       years old
     </Box>
     <Divider sx={{ my: "10px" }} />
-    It is {calculateMonthsAndDaysToTheDate(AlexBirthDate)} to your next 🍰
-    birthday.
+    <Box>
+      It is {calculateMonthsAndDaysToTheDate(AlexBirthDate)} to your next 🍰
+      birthday.
+    </Box>
     <Box sx={{ my: "10px" }}>
       Or just {calculateDaysToTheDate(AlexBirthDate)} days.
     </Box>

@@ -25,8 +25,10 @@ const TimeToNewYear = () => (
     })}
   >
     <Box sx={{ fontWeight: "bold" }}>Time To New Year</Box>
-    <Box sx={{ fontSize: "100px" }}>❄</Box>
-    It is {calculateMonthsAndDaysToTheDate(NewYearDate)} to the next year ☃
+    <Box sx={{ fontSize: "100px", py: "10px" }}>❄</Box>
+    <Box>
+      It is {calculateMonthsAndDaysToTheDate(NewYearDate)} to the next year ☃
+    </Box>
     <Box sx={{ my: "10px" }}>
       Or just {calculateDaysToTheDate(NewYearDate)} days.
     </Box>
