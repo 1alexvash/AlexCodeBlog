@@ -1,0 +1,30 @@
+---
+title: What is a pure function?
+date: 2023-09-10T00:00:00.000Z
+heroImage: /post-images/What is a pure function in JavaScript.jpg
+draft: true
+tags:
+  - JavaScript
+---
+
+Let's start from the definition: A pure function is a function that always returns the same output for the same input and has no side effects.
+
+For example:
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+add(1, 2); // 3
+add(2, 3); // 5
+add(3, 4); // 7
+```
+
+@code example
+
+@what does this actually mean
+
+(from gpt: Pure functions are important in functional programming because they are predictable, testable, and easier to reason about. They help reduce bugs and make code more maintainable.)
+
+@implications
