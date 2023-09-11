@@ -1,0 +1,46 @@
+---
+title: What is a pure function?
+date: '2023-09-12T00:00:00.000Z'
+heroImage: /post-images/What is a pure function in JavaScript.jpg
+draft: false
+tags:
+  - JavaScript
+---
+
+
+Let's start from the definition: A pure function is a function that always returns the same output for the same input and has no side effects.
+
+Pure function example ✅
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+add(1, 2); // 3
+add(2, 3); // 5
+add(3, 4); // 7
+```
+
+Same input, leads to the same output. Anytime and everytime.
+
+Impure function example ❌
+
+```javascript
+const user = {
+  name: "John",
+  balance: 1000,
+}
+
+function withdraw(amount) {
+  const updatedValue = user.balance -= amount;
+  return updatedValue;
+}
+```
+
+The problem with this one is that it depends on the value outside of its scope, that's why it has side effects and cannot be properly tested.
+
+### The bottom line
+
+In summary, a pure function always produces the same output for the same input and avoids side effects, while an impure function relies on external values, leading to unpredictability and testing challenges.
+
