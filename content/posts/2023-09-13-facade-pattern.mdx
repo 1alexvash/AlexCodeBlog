@@ -10,8 +10,82 @@ tags:
 
 So you came here to level up!
 
-@let's start from the meme
+@meme
 
-@jquery
+Facade pattern hides the complexity away.
 
-@example
+Let's say you are working on some web page, and a certain function gets very bigger over hundreed of lines. Then it makes sense to refactor it into a separate file.
+
+This achieves a couple of things:
+
+1. Makes the main file shorter and so easier to read
+2. If something goes wrong with the main function, it will also make to find the problem
+3. Code becomes more modular, and so easier to read
+
+### Example 1
+
+Let's say Elon Musk wants to send a satellite to Mars, so we present him with the following function.
+
+```javascript
+import sendSateliteToMars from "./sendSateliteToMars";
+// 10 million lines of code
+
+marsButton.onclick = () => sendSateliteToMars();
+
+```
+
+At the end of the day, we and business don't really care how much code is under the hood. All we care about is whether it does the thing we were asked for as programmers.
+
+### Example 2
+
+If you are old enough to encounter or work with [jQuery](https://jquery.com/) than you are already familiar with this pattern.
+
+```javascript
+$("button").click(() => $("div").animate({ left: "250px" }));
+```
+
+I really don't care how many lines of code are behind this implementation, whether it is 100 or 1000.
+
+All I really care about is that my client is happy, and that he does not abuse me with assaults about ruining his business 😉
+
+### Example 3
+
+Let's say we have a really long and complex shopping form with dozens of fields.
+
+```javascript
+import { proccessOrder } from './proccessOrder';
+
+processOrder({
+  user: {
+    name: 'John',
+    age: 30,
+    email: 'john@gmail.com'
+  },
+  product: {
+    name: 'Smartphone',
+    price: 500,
+  },
+  quantity: 1,
+  discount: 0.1,
+  delivery: {
+    address: 'Baker Street 221B',
+    time: '18:00',
+  },
+  payment: {
+    method: "PayPal",
+    currency: "USD",
+    price: 450,
+  },
+});
+
+```
+
+As you might see, this function is a monster. It receives a bunch of parameters. Only discount logic can be one hundred lines long, and there's a  lot more to this function, so it is definitely worth separating this concrete method into a separate helper file.
+
+For the end user it is only a single button, but what they don't see is 200 lines of error handling for all the wrong possible cases in the world.
+
+### The bottom line
+
+Facade pattern can make big systems easier to developer, test and maintain.
+
+And if you want to be a good developer and I guess you are as you are already on this page, this is something to know!
