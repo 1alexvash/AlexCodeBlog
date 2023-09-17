@@ -1,0 +1,37 @@
+---
+title: JavaScript trick to make big numbers more readable
+date: 2023-09-19T00:00:00.000Z
+draft: false
+tags:
+  - JavaScript
+---
+
+Have you ever seen numbers like this?
+
+```javascript
+const fiveMillion = 5_000_000;
+```
+
+What about this?
+
+```javascript
+const oneBillion = 1_000_000_000;
+```
+
+This is totally valid JavaScript syntax, those numbers are treated as regular numbers, there's a proof:
+
+```javascript
+const fiveMillion = 5_000_000;
+
+const oneBillion = 1_000_000_000;
+
+const sum = fiveMillion + oneBillion;
+console.log('sum:', sum); // sum: 1005000000
+```
+
+### What's the trick?
+
+It is just a nice new feature called "numeric separator",  introduced in ECMAScript 2021 (ES12).
+
+These underscores are ignored by the JavaScript engine and are purely for readability purposes.
+
