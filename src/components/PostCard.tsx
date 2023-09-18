@@ -12,6 +12,9 @@ import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 interface Props {
   post: PostDocumentWithoutBody;
 }
+interface FuturePostProps {
+  date: Date | string;
+}
 
 export const DraftPostMark = () => (
   <div className="draft-post">
@@ -21,11 +24,12 @@ export const DraftPostMark = () => (
   </div>
 );
 
-export const FuturePostMark = () => (
+export const FuturePostMark = ({ date }: FuturePostProps) => (
   <div className="future-post">
     <div className="triangle triangle-future  triangle-item">
-      <span className="triangle-text-future triangle-text">future</span>
-      <span className="triangle-text-future-post triangle-text"> post</span>
+      <span className="triangle-text-future triangle-text">
+        {new Date(date).toLocaleDateString()}
+      </span>
     </div>
   </div>
 );
@@ -54,7 +58,7 @@ const PostCard = ({ post }: Props) => {
   return (
     <li>
       {isPostADraft(post) && <DraftPostMark />}
-      {isPostInTheFuture(post) && <FuturePostMark />}
+      {isPostInTheFuture(post) && <FuturePostMark date={post.date} />}
 
       <div
         className={`posts-list-block ${
