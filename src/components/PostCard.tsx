@@ -3,6 +3,7 @@ import {
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
 import isUpcomingPost from "helpers/isUpcomingPost";
+import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,15 +25,23 @@ export const DraftPostMark = () => (
   </div>
 );
 
-export const FuturePostMark = ({ date }: FuturePostProps) => (
-  <div className="future-post">
-    <div className="triangle triangle-future  triangle-item">
-      <span className="triangle-text-future triangle-text">
-        {new Date(date).toLocaleDateString()}
-      </span>
+export const FuturePostMark = ({ date }: FuturePostProps) => {
+  const dateString = toHumanReadableDate(date)
+    .toString()
+    .replace(",", "")
+    .split(" ");
+
+  console.log(dateString);
+  return (
+    <div className="future-post">
+      <div className="triangle triangle-future  triangle-item">
+        <span className="triangle-text-future triangle-text">
+          {toHumanReadableDate(date).toString()}
+        </span>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const shimmer = (width: number, height: number) => `
   <svg width="${width}" height="${height}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
