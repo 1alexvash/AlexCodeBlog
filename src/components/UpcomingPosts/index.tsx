@@ -5,11 +5,15 @@ import Posts from "../Posts";
 import StatisticsReferenceButton from "../StatisticsReferenceButton";
 import { isPostInTheFuture } from "helpers/checkOfDraftOrFuturePost";
 import SkeletonsList from "./Skeletons";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 interface UpcomingPostsTemplateProps {
   posts: UpcomingPostsType;
   sectionName: "Drafts" | "Scheduled";
-  statisticsButtonState?: boolean;
+  showStatisticsButton?: boolean;
+  lightIconPath: "/images/future-light.png" | "/images/draft-light.png";
+  darkIconPath: "/images/future-dark.png" | "/images/draft-dark.png";
 }
 
 interface Props {
@@ -21,44 +25,64 @@ const skeletonsCount = 3;
 const UpcomingPostsTemplate = ({
   posts,
   sectionName,
-  statisticsButtonState = true,
-}: UpcomingPostsTemplateProps) => (
-  <Box sx={{ mb: "50px" }}>
-    <Typography
-      sx={(theme) => ({
-        color: theme.palette.mode === "light" ? "#3a3a3a" : "white",
-        lineHeight: 1.28,
-        fontWeight: 700,
-        fontSize: "43px",
-        mb: 9,
-        ["@media (max-width: 480px)"]: {
-          fontSize: "28px",
-        },
-      })}
-    >
-      {sectionName}
-    </Typography>
-    <Posts posts={posts} skeletonsToRender={skeletonsCount} />
-    <Box
-      sx={{
-        display: statisticsButtonState ? "flex" : "none",
-        justifyContent: "end",
-      }}
-    >
-      <StatisticsReferenceButton />
+  showStatisticsButton: statisticsButtonState = true,
+  darkIconPath,
+  lightIconPath,
+}: UpcomingPostsTemplateProps) => {
+  const { resolvedTheme } = useTheme();
+
+  if (!resolvedTheme) {
+    return null;
+  }
+
+  return (
+    <Box sx={{ mb: "50px" }}>
+      <Typography
+        sx={(theme) => ({
+          color: theme.palette.mode === "light" ? "#3a3a3a" : "white",
+          lineHeight: 1.28,
+          fontWeight: 700,
+          fontSize: "43px",
+          display: "flex",
+          gap: "5px",
+          mb: 9,
+          ["@media (max-width: 480px)"]: {
+            fontSize: "28px",
+          },
+        })}
+      >
+        {sectionName}
+        <Image
+          src={resolvedTheme === "light" ? darkIconPath : lightIconPath}
+          alt="icon"
+          width={48}
+          height={48}
+        />
+      </Typography>
+      <Posts posts={posts} skeletonsToRender={skeletonsCount} />
+      <Box
+        sx={{
+          display: statisticsButtonState ? "flex" : "none",
+          justifyContent: "end",
+        }}
+      >
+        <StatisticsReferenceButton />
+      </Box>
+      <Divider sx={{ position: "absolute", width: "100%", left: 0 }} />
     </Box>
-    <Divider sx={{ position: "absolute", width: "100%", left: 0 }} />
-  </Box>
-);
+  );
+};
 
 const UpcomingPosts = ({ posts }: Props) => {
   if (!posts) {
-    return <SkeletonsList skeletonsToRender={skeletonsCount} />;
+    return (
+      <Box sx={{ mt: "120px" }}>
+        <SkeletonsList skeletonsToRender={skeletonsCount} />
+      </Box>
+    );
   }
 
-  const draftPosts = posts.filter(
-    (post) => post.draft && !isPostInTheFuture(post)
-  );
+  const draftPosts = posts.filter((post) => post.draft);
 
   const scheduledPosts = posts.filter(
     (post) => isPostInTheFuture(post) && !post.draft
@@ -67,11 +91,18 @@ const UpcomingPosts = ({ posts }: Props) => {
   return (
     <>
       <UpcomingPostsTemplate
+        darkIconPath="/images/draft-dark.png"
+        lightIconPath="/images/draft-light.png"
         posts={draftPosts}
         sectionName="Drafts"
-        statisticsButtonState={false}
+        showStatisticsButton={false}
       />
-      <UpcomingPostsTemplate posts={scheduledPosts} sectionName="Scheduled" />
+      <UpcomingPostsTemplate
+        posts={scheduledPosts}
+        sectionName="Scheduled"
+        darkIconPath="/images/future-dark.png"
+        lightIconPath="/images/future-light.png"
+      />
     </>
   );
 };
