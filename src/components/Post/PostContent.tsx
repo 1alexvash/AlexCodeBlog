@@ -145,7 +145,7 @@ const PostContent = ({ post }: Props) => {
 
       <div className="blogpost-image">
         {isPostADraft(post) && <DraftPostMark />}
-        {isPostInTheFuture(post) && <FuturePostMark />}
+        {isPostInTheFuture(post) && <FuturePostMark date={post.date} />}
 
         <img
           src={post.heroImage ?? "/post-images/draft.jpg"}
