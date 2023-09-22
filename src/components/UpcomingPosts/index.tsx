@@ -51,13 +51,13 @@ const UpcomingPostsTemplate = ({
           },
         })}
       >
-        {sectionName}
         <Image
           src={resolvedTheme === "light" ? darkIconPath : lightIconPath}
           alt="icon"
           width={48}
           height={48}
         />
+        {sectionName}
       </Typography>
       <Posts posts={posts} skeletonsToRender={skeletonsCount} />
       <Box

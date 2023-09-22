@@ -26,17 +26,17 @@ export const DraftPostMark = () => (
 );
 
 export const FuturePostMark = ({ date }: FuturePostProps) => {
-  const dateString = toHumanReadableDate(date)
-    .toString()
-    .replace(",", "")
-    .split(" ");
+  const postDate = new Date(date);
 
-  console.log(dateString);
+  const postDay = postDate.getDate();
+
+  const postDateString = postDate.toLocaleDateString("en-GB");
+
   return (
     <div className="future-post">
       <div className="triangle triangle-future  triangle-item">
         <span className="triangle-text-future triangle-text">
-          {toHumanReadableDate(date).toString()}
+          {postDateString}
         </span>
       </div>
     </div>
