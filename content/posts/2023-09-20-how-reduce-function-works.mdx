@@ -1,13 +1,13 @@
 ---
 title: How Reduce function works
-date: 2023-09-20T18:16:21.415Z
+date: 2023-09-29T00:00:00.000Z
 heroImage: /post-images/JavaScript reduce method.jpg
 draft: true
 tags:
   - JavaScript
 ---
 
-The reduce function reduces the entire array to a single value, so you can perform powerful operations like summing the total value or finding the average.
+The reduce function **reduces the entire array to a single value**, so you can perform powerful operations like summing the total value or finding the average.
 
 ### Syntax
 
@@ -28,7 +28,7 @@ array.reduce((accumulator, currentValue, currentIndex, array) => {
 
 Let's say we have different baskets with fruits, and we want to count the total number of fruits.
 
-Then .reduce function comes to the rescue.
+Then `.reduce` function comes to the rescue.
 
 ```javascript
 const basketsWithFruits = [5, 10, 15, 20];
@@ -91,10 +91,11 @@ const payments = [
   { amount: 600, description: "Product 3" },
 ]
 
+// This one is essential since it won't be selected correctly during object iteration
 const initialValue = 0;
 
-const bill = payments.reduce((acc, payment) => {
-  return acc + payment.amount;
+const bill = payments.reduce((accumulator, payment) => {
+  return accumulator + payment.amount;
 }, initialValue);
 
 // subtract bill from bankAccount balance
@@ -103,3 +104,7 @@ bankAccount.balance -= bill;
 // print the new balance
 console.log(bankAccount.balance); // 1800
 ```
+
+### The bottom line
+
+Reduce is a powerful JavaScript function using it solves many complex problems in a concise way.
