@@ -1,31 +1,38 @@
 import { Box, Divider, Typography } from "@mui/material";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { UpcomingPostsType } from "src/pages";
+
 import Posts from "../Posts";
 import StatisticsReferenceButton from "../StatisticsReferenceButton";
-import Image from "next/image";
 import { skeletonsCount } from ".";
 
 interface UpcomingPostsTemplateProps {
   posts: UpcomingPostsType;
   sectionName: "Drafts" | "Scheduled";
   showStatisticsButton?: boolean;
-  lightIconPath: "/images/future-light.png" | "/images/draft-light.png";
-  darkIconPath: "/images/future-dark.png" | "/images/draft-dark.png";
 }
 
 const UpcomingPostsTemplate = ({
   posts,
   sectionName,
   showStatisticsButton: statisticsButtonState = true,
-  darkIconPath,
-  lightIconPath,
 }: UpcomingPostsTemplateProps) => {
   const { resolvedTheme } = useTheme();
 
   if (!resolvedTheme) {
     return null;
   }
+
+  const lightIconPath =
+    sectionName === "Scheduled"
+      ? "/images/future-light.png"
+      : "/images/draft-light.png";
+
+  const darkIconPath =
+    sectionName === "Scheduled"
+      ? "/images/future-dark.png"
+      : "/images/draft-dark.png";
 
   return (
     <Box sx={{ mb: "50px" }}>
@@ -37,7 +44,7 @@ const UpcomingPostsTemplate = ({
           fontSize: "43px",
           display: "flex",
           gap: "5px",
-          mb: 9,
+          mb: sectionName === "Scheduled" ? 0 : 4.5,
           ["@media (max-width: 480px)"]: {
             fontSize: "28px",
           },

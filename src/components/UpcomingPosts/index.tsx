@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
+import { isPostInTheFuture } from "helpers/checkOfDraftOrFuturePost";
 import { UpcomingPostsType } from "src/pages";
 
-import { isPostInTheFuture } from "helpers/checkOfDraftOrFuturePost";
 import SkeletonsList from "./Skeletons";
 import UpcomingPostsTemplate from "./UpcomingPostsTemplate";
 
@@ -29,18 +29,11 @@ const UpcomingPosts = ({ posts }: Props) => {
   return (
     <>
       <UpcomingPostsTemplate
-        darkIconPath="/images/draft-dark.png"
-        lightIconPath="/images/draft-light.png"
         posts={draftPosts}
         sectionName="Drafts"
         showStatisticsButton={false}
       />
-      <UpcomingPostsTemplate
-        posts={scheduledPosts}
-        sectionName="Scheduled"
-        darkIconPath="/images/future-dark.png"
-        lightIconPath="/images/future-light.png"
-      />
+      <UpcomingPostsTemplate posts={scheduledPosts} sectionName="Scheduled" />
     </>
   );
 };
