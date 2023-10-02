@@ -25,7 +25,7 @@ const UpcomingPosts = ({ posts }: Props) => {
   const scheduledPosts = posts.filter(
     (post) => isPostInTheFuture(post) && !post.draft
   );
-
+  //
   return (
     <>
       <UpcomingPostsTemplate
