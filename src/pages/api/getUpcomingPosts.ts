@@ -31,6 +31,7 @@ export default async function handler(
   const futurePosts = await client.queries.postsWithoutBody({
     filter: {
       date: { after: new Date(Date.now()).toString() },
+      draft: { eq: false },
     },
   });
 

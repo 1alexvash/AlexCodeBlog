@@ -9,8 +9,11 @@ import Link from "next/link";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
-interface Props {
+interface PostCardProps {
   post: PostDocumentWithoutBody;
+}
+interface FuturePostProps {
+  date: Date | string;
 }
 
 export const DraftPostMark = () => (
@@ -21,11 +24,12 @@ export const DraftPostMark = () => (
   </div>
 );
 
-export const FuturePostMark = () => (
+export const FuturePostMark = ({ date }: FuturePostProps) => (
   <div className="future-post">
     <div className="triangle triangle-future  triangle-item">
-      <span className="triangle-text-future triangle-text">future</span>
-      <span className="triangle-text-future-post triangle-text"> post</span>
+      <span className="triangle-text-future triangle-text">
+        {new Date(date).toLocaleDateString("en-GB")}
+      </span>
     </div>
   </div>
 );
@@ -47,14 +51,14 @@ const shimmer = (width: number, height: number) => `
 
 const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
-const PostCard = ({ post }: Props) => {
+const PostCard = ({ post }: PostCardProps) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
   const dispatch = useAppDispatch();
 
   return (
     <li>
       {isPostADraft(post) && <DraftPostMark />}
-      {isPostInTheFuture(post) && <FuturePostMark />}
+      {isPostInTheFuture(post) && <FuturePostMark date={post.date} />}
 
       <div
         className={`posts-list-block ${
