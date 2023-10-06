@@ -3,14 +3,13 @@ import {
   isPostInTheFuture,
 } from "helpers/checkOfDraftOrFuturePost";
 import isUpcomingPost from "helpers/isUpcomingPost";
-import toHumanReadableDate from "helpers/toHumanReadableDate";
 import { PostDocumentWithoutBody } from "interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
 
-interface Props {
+interface PostCardProps {
   post: PostDocumentWithoutBody;
 }
 interface FuturePostProps {
@@ -52,7 +51,7 @@ const shimmer = (width: number, height: number) => `
 
 const toBase64 = (str: string) => Buffer.from(str).toString("base64");
 
-const PostCard = ({ post }: Props) => {
+const PostCard = ({ post }: PostCardProps) => {
   const selectedTags = useAppSelector((state) => state.selectedTags);
   const dispatch = useAppDispatch();
 
