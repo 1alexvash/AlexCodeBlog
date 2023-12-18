@@ -1,0 +1,41 @@
+---
+title: What's the difference between null and undefined?
+date: 2023-12-18T07:08:40.657Z
+heroImage: /post-images/null vs undefined difference.jpg
+draft: false
+tags:
+  - JavaScript
+---
+
+`null` and `undefiend` are two JavaScript types which serve a similar purpose of informing about the absence of value, but with one key distinction.
+
+Null means explicit absence of value, while undefined implicit.
+
+Basically, `null` is used when we are sure that something does not have value at the moment, and it is not by accident.
+
+### Practical example
+
+Let's say we have the following code for the game, and you see this.
+
+```javascript
+const hero = {
+  name: 'Dragon Slayer',
+  level: 1,
+  health: 100,
+  weapon: {
+    type: 'sword',
+    damage: 15
+  },
+  rucksack: null
+}
+```
+
+If you haven't written this code yourselves, and you are reading the code written by someone else.
+
+This at least tells that at the current stage in the game, the hero does not possess or acquired a rucksack, but he might in the future.
+
+Much better and easier to read this code then if this property was simply missed.
+
+### Bottom line
+
+Properly distinguishing those two types will make your code much more versatile and easier to read, so you'll be able to write more complex apps with fewer side effects and errors.
