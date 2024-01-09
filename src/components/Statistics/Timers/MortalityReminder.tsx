@@ -9,6 +9,8 @@ import {
 
 const AlexBirthDate = new Date("1998-07-22");
 
+const averageMonthLength = 30;
+
 const MortalityReminder = () => (
   <Box
     sx={(theme) => ({
@@ -39,10 +41,12 @@ const MortalityReminder = () => (
       It is {calculateMonthsAndDaysToTheDate(AlexBirthDate)} to your next 🍰
       birthday.
     </Box>
-    <Box sx={{ my: "10px" }}>
-      Or just {calculateDaysToTheDate(AlexBirthDate)} days.
-    </Box>
-    <Box>Remember to use this time wisely.</Box>
+    {calculateDaysToTheDate(AlexBirthDate) > averageMonthLength && (
+      <Box sx={{ my: "10px" }}>
+        Or just {calculateDaysToTheDate(AlexBirthDate)} days.
+      </Box>
+    )}
+    <Box sx={{ mt: "10px" }}>Remember to use this time wisely.</Box>
   </Box>
 );
 
