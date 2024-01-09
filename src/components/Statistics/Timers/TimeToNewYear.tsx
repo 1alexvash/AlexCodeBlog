@@ -6,7 +6,15 @@ import {
   calculateMonthsAndDaysToTheDate,
 } from "./helpers";
 
-const NewYearDate = new Date(new Date().getFullYear() + 1, 0, 1);
+const newYearDate = new Date(new Date().getFullYear() + 1, 0, 1);
+
+const moreThanOneMonthToDate = (startDate: Date, endDate: Date) => {
+  return (
+    startDate.getMonth() > endDate.getMonth() ||
+    (startDate.getMonth() === endDate.getMonth() &&
+      startDate.getDate() > endDate.getDate())
+  );
+};
 
 const TimeToNewYear = () => (
   <Box
@@ -26,12 +34,16 @@ const TimeToNewYear = () => (
   >
     <Box sx={{ fontWeight: "bold" }}>Time To New Year</Box>
     <Box sx={{ fontSize: "100px", py: "10px" }}>❄</Box>
+
     <Box>
-      It is {calculateMonthsAndDaysToTheDate(NewYearDate)} to the next year ☃
+      It is {calculateMonthsAndDaysToTheDate(newYearDate)} to the next year ☃
     </Box>
-    <Box sx={{ my: "10px" }}>
-      Or just {calculateDaysToTheDate(NewYearDate)} days.
-    </Box>
+
+    {moreThanOneMonthToDate(new Date(), newYearDate) && (
+      <Box sx={{ my: "10px" }}>
+        Or just {calculateDaysToTheDate(newYearDate)} days.
+      </Box>
+    )}
   </Box>
 );
 

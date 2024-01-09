@@ -33,13 +33,13 @@ export function calculateMonthsAndDaysToTheDate(birthDate: Date) {
   }
 
   const timeDifference = Number(nextBirthday) - Number(today);
-  const daysToNextBirthday = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  const monthsToNextBirthday = Math.floor(daysToNextBirthday / 30);
+  const daysToDate = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const monthsToDate = Math.floor(daysToDate / 30);
 
-  if (monthsToNextBirthday > 0) {
-    return `${monthsToNextBirthday} months and ${daysToNextBirthday % 30} days`;
+  if (monthsToDate > 0) {
+    return `${monthsToDate} months and ${daysToDate % 30} days`;
   } else {
-    return `It is ${daysToNextBirthday} days to your next birthday.`;
+    return `${daysToDate} days`;
   }
 }
 
