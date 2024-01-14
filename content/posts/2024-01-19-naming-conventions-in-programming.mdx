@@ -1,0 +1,68 @@
+---
+title: Naming conventions in programming
+date: 2024-01-19T00:00:00.000Z
+heroImage: /post-images/Naming conventions in programing.png
+draft: false
+tags:
+  - ProgrammingFundamentals
+---
+
+There are four main programming conventions, and they go by even more funnier names.
+
+![](</post-images/Naming conventions in programing ILLUSTRATION.png>)
+
+You don't necessarily to know them by name, but at least you need to be aware of them.
+
+Otherwise, your code is just going to create a massive confusion for your readers, and you definitely don't want that look on their faces!
+
+### For instance
+
+In Python, there's a well established snake\_case convention (hence the name Python, lol).
+
+So you typically write your variables like this: perform\_work, execute\_operation, and clean\_and\_reboot.
+
+While in JavaScript, the established convention is **camelCase**.
+
+So the big point: don't mix those two, and make our JavaScript code look like Python (Do you remember about massive confusion?)
+
+❎
+
+```javascript
+const math_add = (a, b) => {
+  return a + b;
+};
+
+const math_subtract = (a, b) => {
+  return a - b;
+};
+
+const math_multiply = (a, b) => {
+  return a * b;
+};
+
+const math_divide = (a, b) => {
+  return a / b;
+};
+```
+
+Instead, use a proper convention for your language.
+
+✅
+
+```javascript
+const mathAdd = (a, b) => {
+  return a + b;
+};
+
+const mathSubtract = (a, b) => {
+  return a - b;
+};
+
+const mathMultiply = (a, b) => {
+  return a * b;
+};
+
+const mathDivide = (a, b) => {
+  return a / b;
+};
+```
