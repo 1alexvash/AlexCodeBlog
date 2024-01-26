@@ -9,9 +9,11 @@ tags:
 
 Hashmap is a famous data structure.
 
-Joma Tech, for example, loves using it in his videos for jokes, this [video](https://www.youtube.com/watch?v=5bId3N7QZec) is my favorite one.
+Joma Tech, for example, loves using it in his videos for comedy, this [video](https://www.youtube.com/watch?v=5bId3N7QZec) is my favorite one.
 
-There might have been some confusion, as in developing circles you might have heard this term quite often while not knowing exactly what it is. That's true, as Hashmap is actually a data structure from Python. The closest we've got in JavaScript is an object. But, if you want to learn more. It'll be good for you to understand this term to navigate more smoothly around all data structures topic.
+There might have been some confusion, as in developing circles you might have heard this term quite often while not understanding exactly what it is. That's true, as Hashmap is actually a data structure from Python.
+
+The closest we've got in JavaScript is an object. But, if you want to learn more. It'll be good for you to understand this term to navigate more smoothly around all data structures topic.
 
 ### So what is Hashmap?
 
@@ -19,17 +21,22 @@ There might have been some confusion, as in developing circles you might have he
 
 Imagine we have a street with houses on it.
 
-Each house is locked, and to open them you need a key, every house has a unique key to open it.
+Each house is locked, and to open it you need a key, every house has a unique key to open it.
 
-That's what essentially a Hashmap is, a pair of values: key and value.
+That's what essentially a Hashmap is, a pair of values: **key and value**.
 
 ### How to implement it?
 
-As already mentioned, Hashmap is not really a JavaScript structure, but you still might need the knowledge about it, especially when it comes to interviews, knowing data structures or doing LeetCode tasks.
+As already mentioned, Hashmap is not really a JavaScript structure, which makes things a bit more confusing than they should be.
 
-And the very nasty fact about JavaScript is that it has a mix of programming paradigms under its core. Which means two very opposite things: First good one, it's very easy to get started with it, and the second is a bad one, it's extremely hard to master it, every framework does not look like JavaScript but like another new language in itself, as there's a myriad of ways to do the same thing.
+As this is a very nasty fact about JavaScript to watch out for as it has a mix of programming paradigms under its core. 
 
-So let's go over a couple of ways we can implement this data structure
+Which means two quite very opposite things: 
+
+* First good one, it's very easy to get started with it, as there are many ways to mix things up to make the program work.
+* And the second is not so nice one thing about JS, as the side effect of the first thing. It is extremely hard to master this language. The flexibility of paradigms makes every framework look like an entirely new language, as there's a myriad of ways to do the same thing, so React vs Angular looks more different than let's say Python vs Ruby.
+
+Let's get back to the main point of the article, and check out a couple of ways we can implement this data structure:
 
 ### 1) Basic JavaScript object:
 
@@ -43,7 +50,7 @@ const houses = {
 };
 ```
 
-### 2) JavaSciript map structure introduced in ES6
+### 2) JavaScript map structure introduced in ES6
 
 ```javascript
 const houses = new Map([
@@ -58,7 +65,7 @@ const houses = new Map([
 houses.get("key1"); // First House
 ```
 
-This one has some advantage of additional methods like get, set, and delete so it gives yo a better mental model of the actual Hashmap.
+This one has some advantage of additional methods like `get`, `set`, and `delete` so it gives yo a better mental model of the actual Hashmap.
 
 ### 3) And lastly the TypeScript implementation
 
@@ -74,20 +81,24 @@ const houses: Record<HouseKeys, string> = {
 };
 ```
 
-This task is achieved via Record type, providing as with a good typing support.
+This task is achieved via Record type, providing as with a nice typing support.
 
-### Summary
+### Practical applications
 
-This article got a bit complicated till its end. Haha, I warned you! JavaScript is actually very complicated and messy under its core, but actually, you don't need to know all of that.
+Hashmap is actually one of the most popular data structures, and is used quite often, not only for Leetcode / [Codewars](https://alex-code.com/admin#/~/post/2023-01-21-i-tried-codewars-for-30-days) tasks.
 
-Just remember the core idea of 🔑 key and value pair, and you'll be golden.
+It's like with 🔑 key. Give it to a child who never used it, and this kid won't have a clue what to do with it, but once you try using this data structure it'll be your second nature.
 
 ### Fun story
 
-I actually remember a story when I first encountered this pattern for the very first time.
+Once at work, I was handed over a piece of functionality to finish, and I have seen this piece of code in React which looked unfamiliar to me.
 
-It was a web application where I was handed over to finish a piece of functionality by a much more experienced developer than me. Where we basically had an app layout with 5 states. For every state, we loaded a unique component, so the code looked like this in React `{components[state]}`.
+{components\[state]}
 
-At this moment it was too advanced code for me, so for a couple of days I was refactoring things here and there trying to understand what's going on and come up with a simpler solution. At the end of the week, I have removed the senior developer's code, and basically reimplemented the exact same thing by the end of the week, as there wasn't anything better for this particular task.
+For business context of this code. We had an app with 5 possible states, and depending on the selected tab we had to show the selected UI component.
 
-Damn, if only I knew this data structure I would have saved some time, but I only by reinventing a wheel I was able to learn the concept by hand.
+Back then, I knew that this developer was way more experienced and senior than me, but my ego told me I can make this code less complicated, so I went refactoring!
+
+I was formatting, giving variables a better name, splitting things up, making components smaller for 2 weeks, until I came with the same pattern as my Senior dev.
+
+As I could not come up with anything better, while I was trying to reinvent the wheel I invented the wheel itself, and realised how Hashmap works! 😅
