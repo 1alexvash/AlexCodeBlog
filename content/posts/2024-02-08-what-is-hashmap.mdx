@@ -73,3 +73,21 @@ const houses: Record<HouseKeys, string> = {
   key5: 'Fifth House',
 };
 ```
+
+This task is achieved via Record type, providing as with a good typing support.
+
+### Summary
+
+This article got a bit complicated till its end. Haha, I warned you! JavaScript is actually very complicated and messy under its core, but actually, you don't need to know all of that.
+
+Just remember the core idea of 🔑 key and value pair, and you'll be golden.
+
+### Fun story
+
+I actually remember a story when I first encountered this pattern for the very first time.
+
+It was a web application where I was handed over to finish a piece of functionality by a much more experienced developer than me. Where we basically had an app layout with 5 states. For every state, we loaded a unique component, so the code looked like this in React {components\[state]}.
+
+At this moment it was too advanced code for me, so for a couple of days I was refactoring things here and there trying to understand what's going on and come up with a simpler solution. At the end of the week, I have removed the senior developer's code, and basically reimplemented the exact same thing by the end of the week, as there wasn't anything better for this particular task.
+
+Damn, if only I knew this data structure I would have saved some time, but I only by reinventing a wheel I was able to learn the concept by hand.
