@@ -173,7 +173,7 @@ const PostContent = ({ post }: Props) => {
       <Box component="div" ref={document}>
         {post.audioVersion && (
           <Box component="p">
-            <Link href={post.audioVersion}>Audio Version:</Link>
+            <Link href={post.audioVersion}>Audio Version</Link>
           </Box>
         )}
         <TinaMarkdown content={post.body} components={components} />
