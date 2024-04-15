@@ -75,24 +75,13 @@ import useCustomCounter from "./hooks/useCustomCounter";
 
 const App = () => {
   const customCounter = useCustomCounter();
-  const secondCustomCounter = useCustomCounter();
 
   return (
     <div>
-    <div>
-    <h1>First counter < /h1>
-      < p > { customCounter.count } < /p>
-      < button onClick = { customCounter.increment } > Increment < /button>
-        < button onClick = { customCounter.decrement } > Decrement < /button>
-          < /div>
-
-          < div >
-          <h1>Second counter < /h1>
-            < p > { secondCustomCounter.count } < /p>
-            < button onClick = { secondCustomCounter.increment } > Increment < /button>
-              < button onClick = { secondCustomCounter.decrement } > Decrement < /button>
-                < /div>
-                < /div>
+      <p>{customCounter.count}</p>
+      <button onClick={customCounter.increment}>Increment</button>
+      <button onClick={customCounter.decrement}>Decrement</button>
+    </div>
   );
 };
 
@@ -100,8 +89,12 @@ export default App;
 
 ```
 
+Magic, right? But, this isn't where it ends, as you can just easily reuse this custom hook for the second time.
+
 @applications
 
 @code sample
 
 @image example
+
+@enscapsulate the logic
