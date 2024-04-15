@@ -97,10 +97,22 @@ const App = () => {
 
   return (
     <div>
-    <p>{ customCounter.count } < /p>
-    < button onClick = { customCounter.increment } > Increment < /button>
-      < button onClick = { customCounter.decrement } > Decrement < /button>
-        < /div>
+
+      <div>
+        <h1>First counter</h1>
+        <p>{customCounter.count} < /p>
+        <button onClick={customCounter.increment }>Increment</button>
+        <button onClick={customCounter.decrement }>Decrement</button>
+      </div>
+
+      <div>
+        <h1>First counter</h1>
+        <p>{customCounter.count} </p>
+        <button onClick = {customCounter.increment}>Increment</button>
+        <button onClick={customCounter.decrement}>Decrement</button>
+      </div>
+      
+    </div>   
   );
 };
 
