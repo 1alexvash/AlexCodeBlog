@@ -7,8 +7,6 @@ tags:
   - React
 ---
 
-@any premise?
-
 React custom hooks are much, much easier from what you think they are. In a nutshell, they are just simple functions, and it's a very good mental model to keep in mind while working with them.
 
 Let's get into an example
@@ -91,10 +89,24 @@ export default App;
 
 Magic, right? But, this isn't where it ends, as you can just easily reuse this custom hook for the second time.
 
-@applications
+```typescript
 
-@code sample
+const App = () => {
+  const customCounter = useCustomCounter();
+  const secondCustomCounter = useCustomCounter();
 
-@image example
+  return (
+    <div>
+    <p>{ customCounter.count } < /p>
+    < button onClick = { customCounter.increment } > Increment < /button>
+      < button onClick = { customCounter.decrement } > Decrement < /button>
+        < /div>
+  );
+};
 
-@enscapsulate the logic
+export default App;
+```
+
+So it potentially opens up doors to many [encapsulation patterns](https://alex-code.com/post/2023-09-17-facade-pattern), so you can create complex logic, hide its complexity away, and reuse it.
+
+@live demo
