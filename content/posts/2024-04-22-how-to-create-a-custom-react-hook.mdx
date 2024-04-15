@@ -15,8 +15,93 @@ Let's get into an example
 
 ### Example
 
-@counter example, or something different?
+We are going to build a simple counter app. It will serve three functions:
+
+1. Display the current state
+2. Has an increment button
+3. Has a decrement button
+
+First, of all, let's define the custom function and export it:
+
+```typescript
+const useCustomCounter = () => {
+  
+};
+
+export default useCustomCounter;
+
+```
+
+Now let's define a state
+
+```typescript
+import { useState } from "react";
+
+const useCustomCounter = () => {
+  const [count] = useState(0);
+
+  return { count };
+};
+
+export default useCustomCounter;
+
+```
+
+And, now let's add `increment` and `decrement` functions, so we can actually play with it.
+
+The complete code for the hook:
+
+```javascript
+// hooks/useCustomCounter
+import { useState } from "react";
+
+const useCustomCounter = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => setCount((count) => count + 1);
+  const decrement = () => setCount((count) => count - 1);
+
+  return { count, increment, decrement };
+};
+
+export default useCustomCounter;
+
+```
+
+Now, to make it work, we'll have to => hook this into our app.
+
+```typescript
+import useCustomCounter from "./hooks/useCustomCounter";
+
+const App = () => {
+  const customCounter = useCustomCounter();
+  const secondCustomCounter = useCustomCounter();
+
+  return (
+    <div>
+    <div>
+    <h1>First counter < /h1>
+      < p > { customCounter.count } < /p>
+      < button onClick = { customCounter.increment } > Increment < /button>
+        < button onClick = { customCounter.decrement } > Decrement < /button>
+          < /div>
+
+          < div >
+          <h1>Second counter < /h1>
+            < p > { secondCustomCounter.count } < /p>
+            < button onClick = { secondCustomCounter.increment } > Increment < /button>
+              < button onClick = { secondCustomCounter.decrement } > Decrement < /button>
+                < /div>
+                < /div>
+  );
+};
+
+export default App;
+
+```
 
 @applications
 
 @code sample
+
+@image example
