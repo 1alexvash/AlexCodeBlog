@@ -19,6 +19,15 @@ I mean, Tina CMS is still not perfect, as it has a couple of flaws I am going to
 
 ### What sucks
 
+Despite, it's core feature which really carries the overall impression of TinaCMS it still has a few nuances here, and there are a few nuances that make it not so perfect.
+
+And here they are:
+
+1. Despite being based on the React platform, it still not as easy in terms of integration as the forementioned NetlifyCMS
+2. TypeScript is not a first class citizen inside TinaCMS, so if your project is based on React + TypeScript stack you are going to have a fun time extracting those types which will make the existing integration even harder.
+3. It has a few weird bugs, one of them is when you write an article and accidentally close the tab. It closes the page without any warning about lost progress. I did report this bug a long time ago inside the community, but they don't seem to fix it any time soon.
+4. There are a couple of issues with renaming I did report as well, for example, when you rename a file, and it has invalid characters or there's a file with a similar name. The website just crashes, instead of just giving a beautiful validation error in advance.
+
 @record .gif demo to illustrate why it is better than all the rest
 
 It is mostly, a short demo
