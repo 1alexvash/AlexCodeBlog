@@ -2,30 +2,81 @@
 title: What it recursion?
 date: 2024-05-27T00:00:00.000Z
 heroImage: /post-images/How the recursion works.jpg
-draft: true
+draft: false
 tags:
   - ' JavaScript'
   - Patterns
 ---
 
-Imagine Sophia. Sophia wants to buy a house, and she needs $200 000 for the down payment, and she's trying to estimate how long it will take her to save up the money.
+Imagine Sophia. Sophia wants to buy a house, and she needs $200 000 for the down payment, and she's trying to estimate how long it will take her to save up the needed sum of money.
 
-Additionally, Sophia has $50 000 already saved up, and she can save $10 000 / year, also all her money is invested, and she's consistently getting a 10% yearly yield.
+For context, Sophia already has $50 000 already saved up, and she can save $10 000 / year, also all her money is invested, and she's consistently getting a 10% yearly yield.
 
-The problem like this is really hard to solve if you don't know the recursion pattern because it is not your traditional `for loop` as you don't really know where it is going to end.
+So initially, she has the $50K. The next year she has $5K of interest + $10K from savings with a total of $65K for this year, and the next year she's going to have $6.5K of interest, and from there the calculation gets more and more complex.
 
-Recursion in a nutshell is basically a function calling itself until a certain condition is met. For the sake of simplicity, just basically imagine a 🐍 snake trying to bite itself, this is how it looks, and this is what we are trying to achieve
+The problem like this might be hard to solve if you don't know the recursion pattern because it is not your traditional `for loop` as you don't really know where it is going to end.
+
+Recursion in a nutshell is basically a function calling itself until a certain condition is met. For the sake of simplicity, just basically imagine a 🐍 snake trying to bite itself, this is how it looks, and this is what we are trying to achieve.
+
+Enough of talking, let's check the code example.
 
 ### Example
 
-@find codewars example and provide the code
+```javascript
+function yearsToAffordTheDownPayment({
+  currentSumOfMoney,
+  interestRate,
+  moneySavedUp,
+  downPaymentEndGoal,
+  years = 0,
+}) {
+  const savingGoalIsMet = currentSumOfMoney >= downPaymentEndGoal;
 
-@write some placeholder code, of what is happening year by year
+  if (savingGoalIsMet) {
+    return { years };
+  }
 
-@illustration example, do I need an illustration?
+  const updatedSumOfMoney = Math.floor(
+    currentSumOfMoney + currentSumOfMoney * (interestRate / 100) + moneySavedUp
+  );
 
-This kata is semi-relevant, but otherwise try to come up with my own code:\
-\
-[https://codewars.com/kata/5544c7a5cb454edb3c000047/solutions/typescript](https://codewars.com/kata/5544c7a5cb454edb3c000047/solutions/typescript)
+  const nextYear = years + 1;
 
-Or maybe this is what I was looking for: [https://www.codewars.com/kata/563b662a59afc2b5120000c6](https://www.codewars.com/kata/563b662a59afc2b5120000c6)
+  console.log(
+    `Year ${nextYear}: current sum of money $${updatedSumOfMoney} money left to save $${downPaymentEndGoal - updatedSumOfMoney
+    }`
+  );
+  
+  // 'Year 1: current sum of money $65000 money left to save $135000'
+  // 'Year 2: current sum of money $81500 money left to save $118500'
+  // 'Year 3: current sum of money $99650 money left to save $100350'
+  // 'Year 4: current sum of money $119615 money left to save $80385'
+  // 'Year 5: current sum of money $141576 money left to save $58424'
+  // 'Year 6: current sum of money $165733 money left to save $34267'
+  // 'Year 7: current sum of money $192306 money left to save $7694'
+  // 'Year 8: current sum of money $221536 money left to save $-21536' // ✅ Saving goal is met
+
+  return yearsToAffordTheDownPayment({
+    currentSumOfMoney: updatedSumOfMoney,
+    interestRate,
+    moneySavedUp,
+    downPaymentEndGoal,
+    years: nextYear,
+  });
+}
+
+const sophiaInitialConditions = {
+  currentSumOfMoney: 50000,
+  interestRate: 10,
+  moneySavedUp: 10000,
+  downPaymentEndGoal: 200000,
+};
+
+const result = yearsToAffordTheDownPayment(sophiaInitialConditions);
+console.log("result:", result);
+// 'result:', { years: 8 }
+```
+
+The example is quite lengthy, but I tried to make it as human-readable as humanly possible.
+
+I strongly recommend playing with it yourself to better understand what's going on inside of it; otherwise, that's all on the recursion.  Piece out 🙋‍♂️.
