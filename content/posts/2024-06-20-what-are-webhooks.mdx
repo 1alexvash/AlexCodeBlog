@@ -6,6 +6,7 @@ draft: true
 tags:
   - Backend
   - Stripe
+  - SaaS
 ---
 
 Let's say we have a kid, Jeffrey. Jeffrey plays computer games, and he can't kill the final Dragon in the game.
@@ -16,9 +17,11 @@ How would we as developers implement the following logic?
 
 Since this operation involves payment transaction, and storing the information in a database, it is more complex than just simply calling a function `buyItem(sword)`.
 
+@illustration
+
 Usually, the way it works, you ask the payment provider, for example Stripe, to issue a user a 📃 payment invoice. Then the user is being redirected to the stripe payment form. Where it asks the user to provide the payment information for the requested item.
 
-When everything goes well on the Stripe side, and the payment is confirmed, it issues an event, saying `'payment_intent.succeeded'` ✅ and forward this event via 🪝 webhook technology, basically forwarding this event from the stripe webhook URL `https://stripe.com/webhooks` to your web server URL `https://yourserver.com/api/buyItem` where you can securely reward the user with the item he has purchased. In case the payment did not go well, you're going to receive `'payment_intent.payment_failed'` ❌ and can send an according message to the user.
+When everything goes well on the Stripe side, and the payment is confirmed, it issues an event, saying `'payment_intent.succeeded'` ✅ and forward this event via 🪝 webhook technology, basically forwarding this event from the Stripe webhook URL `https://stripe.com/webhooks` to your web server URL `https://yourserver.com/api/buyItem` where you can securely reward the user with the item he has purchased. In case the payment did not go well, you're going to receive `'payment_intent.payment_failed'` ❌ event and can send an according message to the user.
 
 The main benefit of this webhook approach is 🛡 security, as the payment itself is not handled by the client, but instead redirected to the stripe payment form, which makes this transaction very secure, so to see your item a couple of things will have to take place:
 
@@ -26,12 +29,10 @@ The main benefit of this webhook approach is 🛡 security, as the payment itsel
 2. Stripe acknowledges a payment, and sends a webhook response to your server
 3. Your server receives executes backend logic, and rewards a user with an item
 4. The item is stored in database
-5. And only after all those steps, the client is updated, and the user can his item
+5. And only after all those steps, the client is updated, and the user can his purchased item
 
-@illustration
+Quite a few steps in between, huh? Yes, but that's exactly what makes this process secure.
 
-@what to show on the illustration?
+This flow is especially useful when you are dealing with payment subscriptions or Software as a Service types of apps. Since when, for example, a reoccurring event happens once a month like "subscription prolonged" or "subscription payment failed", your app still needs to act accordingly, especially when there's no client connection.
 
-@should we try to make a gif? yes, we should, it's going to be our first time experiment! it would be cool practice on getting those ones done, it'd be a good presentational experience, so in the future down the line, i might start doing videos or what not
-
-@especially useful with subscription when the event is not send from the client
+And the webhooks way is the only way to accomplish this goal.
