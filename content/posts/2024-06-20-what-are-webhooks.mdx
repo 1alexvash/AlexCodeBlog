@@ -18,7 +18,7 @@ Since this operation involves payment transaction, and storing the information i
 
 Usually, the way it works, you ask the payment provider, for example Stripe, to issue a user a 📃 payment invoice. Then the user is being redirected to the stripe payment form. Where it asks the user to provide the payment information for the requested item.
 
-When everything goes well on the Stripe side, and the payment is confirmed, it issues an event, saying 'payment\_intent.succeeded' ✅ and forward this event via 🪝 webhook technology, basically forwarding this event from the stripe webhook URL \`https\://stripe.com/webhooks\` to your web server URL \`https\://yourserver.com/api/buyItem\` where you can securely reward the user with the item he has purchased. In case the payment did not go well, you're going to receive 'payment\_intent.payment\_failed' ❌ and can send an according message to the user.
+When everything goes well on the Stripe side, and the payment is confirmed, it issues an event, saying `'payment_intent.succeeded'` ✅ and forward this event via 🪝 webhook technology, basically forwarding this event from the stripe webhook URL `https://stripe.com/webhooks` to your web server URL `https://yourserver.com/api/buyItem` where you can securely reward the user with the item he has purchased. In case the payment did not go well, you're going to receive `'payment_intent.payment_failed'` ❌ and can send an according message to the user.
 
 The main benefit of this webhook approach is 🛡 security, as the payment itself is not handled by the client, but instead redirected to the stripe payment form, which makes this transaction very secure, so to see your item a couple of things will have to take place:
 
@@ -27,7 +27,6 @@ The main benefit of this webhook approach is 🛡 security, as the payment itsel
 3. Your server receives executes backend logic, and rewards a user with an item
 4. The item is stored in database
 5. And only after all those steps, the client is updated, and the user can his item
-
 
 @illustration
 
