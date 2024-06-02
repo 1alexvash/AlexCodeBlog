@@ -32,7 +32,7 @@ const pages: Page[] = [
     link: "/",
   },
   {
-    name: "Paid Services",
+    name: "Services",
     link: "/post/paid-services",
   },
 ];
