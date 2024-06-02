@@ -1,6 +1,9 @@
 import { useAppSelector } from "redux/typesHooks";
 
-const currentYear = new Date().getFullYear();
+const years = {
+  initial: 2021,
+  current: new Date().getFullYear()
+}
 
 const Footer = () => {
   const config = useAppSelector((state) => state.tinaData.mainConfig);
@@ -32,8 +35,7 @@ const Footer = () => {
             ))}
           </ul>
           <div className="copyright">
-            ©{currentYear} - Alex-code <span className="divider">|</span> All
-            right reserved
+            ©{years.initial} - {years.current}
           </div>
         </div>
       </div>
