@@ -69,6 +69,13 @@ const paymentRequest = API.sendPaymentRequest(); // Take 5 seconds to execute
 API.receiveMoney(paymentRequest); // Take 3 seconds to execute, so it actualy sends ❌ nothing
 ```
 
+To fix this bug, you convert this code into an `async` function, by adding the `await` keyword making sure that everything is executed in the sequential order:
+
+```typescript
+const paymentRequest = await API.sendPaymentRequest();
+await API.receiveMoney(paymentRequest); // ✅ Now, works properly
+```
+
 @code example
 
 @second illustration?
