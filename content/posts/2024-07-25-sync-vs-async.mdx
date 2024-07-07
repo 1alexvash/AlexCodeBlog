@@ -47,7 +47,27 @@ secondFunction();
 thirdFunction();
 ```
 
-This code is easy, as `1`, `2`, `3`, as this is basically the order this code will be executed.
+This code is easy, as `1`, `2`, `3`, as this is basically the order this sequential code will be executed.
+
+***
+
+Let's take a look at an asynchronous code, as this is where, a typical rookie would likely make a mistake.
+
+Let's imagine a business logic where a Peter wants to say a payment request to a company and receive money from it, where we have the following code:
+
+```typescript
+const paymentRequest = API.sendPaymentRequest();
+API.receiveMoney(paymentRequest);
+```
+
+On the surface, it looks like this code will work, but there's a big caveat many new beginners are missing!
+
+Let's take a detailed look:
+
+```typescript
+const paymentRequest = API.sendPaymentRequest(); // Take 5 seconds to execute
+API.receiveMoney(paymentRequest); // Take 3 seconds to execute, so it actualy sends ❌ nothing
+```
 
 @code example
 
