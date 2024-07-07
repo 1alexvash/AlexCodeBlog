@@ -66,7 +66,8 @@ Let's take a detailed look:
 
 ```typescript
 const paymentRequest = API.sendPaymentRequest(); // Take 5 seconds to execute
-API.receiveMoney(paymentRequest); // Take 3 seconds to execute, so it actualy sends ❌ nothing
+API.receiveMoney(paymentRequest); // Take 3 seconds to execute, 
+// ERROR ❌, second request did not receive the paymentRequest
 ```
 
 To fix this bug, you convert this code into an `async` function, by adding the `await` keyword making sure that everything is executed in the sequential order:
