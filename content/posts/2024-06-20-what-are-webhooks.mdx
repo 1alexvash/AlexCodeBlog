@@ -2,7 +2,7 @@
 title: What are webhooks?
 date: 2024-06-20T00:00:00.000Z
 heroImage: /post-images/what are webhooks.png
-draft: true
+draft: false
 tags:
   - Backend
   - Stripe
@@ -17,7 +17,7 @@ How would we as developers implement the following logic?
 
 Since this operation involves payment transaction, and storing the information in a database, it is more complex than just simply calling a function `buyItem(sword)`.
 
-@illustration
+![](/post-images/webhooks_oliver_buying_sword.gif)
 
 Usually, the way it works, you ask the payment provider, for example Stripe, to issue a user a 📃 payment invoice. Then the user is being redirected to the stripe payment form. Where it asks the user to provide the payment information for the requested item.
 
