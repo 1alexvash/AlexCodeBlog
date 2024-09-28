@@ -137,7 +137,6 @@ const Home: NextPage<Props> = ({ posts, query, tinaData, variables }) => {
         <meta name="description" content={siteDescription} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StandWithUkraine />
       <Header />
       <Intro
         authorName={data.mainConfig.authorName}
