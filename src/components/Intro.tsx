@@ -13,7 +13,7 @@ const Intro = ({ authorName, authorPosition, siteDescription }: Props) => (
         <div className="intro-avatar">
           <div className="image">
             <img
-              src="/images/author-avatar.jpg"
+              src="/images/author-avatar-2.jpg"
               alt="author-avatar"
               width={90}
               height={90}
