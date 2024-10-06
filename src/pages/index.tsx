@@ -11,7 +11,6 @@ import Header from "src/components/Header";
 import Intro from "src/components/Intro";
 import Pagination from "src/components/Pagination";
 import Posts from "src/components/Posts";
-import StandWithUkraine from "src/components/StandWithUkraine";
 import Tags, { Tag } from "src/components/Tags";
 import UpcomingPosts from "src/components/UpcomingPosts";
 import useIsomorphicLayoutEffect from "src/components/useIsomorphicLayoutEffect";

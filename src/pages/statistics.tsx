@@ -5,7 +5,6 @@ import Head from "next/head";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Intro from "src/components/Intro";
-import StandWithUkraine from "src/components/StandWithUkraine";
 import StatisticPage from "src/components/Statistics";
 import { useTina } from "tinacms/dist/react";
 
@@ -51,7 +50,6 @@ const Statistics = ({ posts, query, tinaData, variables }: Props) => {
         <title>{data.mainConfig.siteTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StandWithUkraine />
       <Header />
       <Intro
         authorName={data.mainConfig.authorName}

@@ -13,7 +13,6 @@ import BreadCrumbs from "src/components/Post/BreadCrumbs";
 import LatestPosts from "src/components/Post/LatestPosts";
 import PageProgressWrapper from "src/components/Post/PageProgressWrapper";
 import PostContent from "src/components/Post/PostContent";
-import StandWithUkraine from "src/components/StandWithUkraine";
 import { useTina } from "tinacms/dist/react";
 
 import { client } from ".tina/__generated__/client";
@@ -57,7 +56,6 @@ const Post = ({ latestPosts, ...props }: Props) => {
         <meta property="og:image" content={config.defaultImage} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StandWithUkraine />
       <Header />
       <BreadCrumbs title={data.post.title} />
       <PageProgress blogPostSectionRef={blogPostSectionRef} />
