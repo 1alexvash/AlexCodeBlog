@@ -16,6 +16,28 @@ The thing about closure is that it is used kind of everywhere in every framework
 
 In a nutshell, this is a really basic concept, it just a function returning another function, let's check out the example:
 
+```javascript
+const outer = (greeting) => {
+  const inner = (name) => {
+    return `${greeting}, ${name}!`;
+  };
+
+  return inner;
+};
+
+const greet = outer("Hello");
+console.log(greet("John")); // Hello, John!
+
+```
+
+It gets really clear what's the closure is all about when you inspect in greet function:
+
+```javascript
+const greet = outer("Hello"); // λ ​​​​​at ​​​​​​​​greet
+```
+
+This is basically a function returning another, and that's all to it! A promise of some future potential!
+
 @complex
 
 @premise
