@@ -36,16 +36,33 @@ It gets really clear what's the closure is all about when you inspect in greet f
 const greet = outer("Hello"); // λ ​​​​​at ​​​​​​​​greet
 ```
 
-This is basically a function returning another, and that's all to it! A promise of some future potential!
+This is basically a function returning another, and that's all to it! A promise of some future potential! So basically watch out for that, so you'll be prepared against surprises in the behavior when coding.
 
-@complex
+### A bit more complex example
 
-@premise
+Let's check for the recursive example of closure before we wrap, that's a bit more complex example, but you'll get the picture of more advanced patterns that are possible with the following pattern.
 
-@ choose date
+```javascript
+function chainingClosureFunction(...initialArgs) {
+  const accumulator = (...args) => {
+    if (args.length === 0) {
+      // If called with no arguments, return the final computed result
+      return initialArgs.join("");
+    }
+    // Otherwise, accumulate arguments and return a callable function
+    return chainingClosureFunction(...initialArgs, ...args);
+  };
 
-@ figure out to implement that function (to figure out the infinite example)
+  return accumulator;
+}
 
-@ prepare an example in a nutshell
+const result = chainingClosureFunction("A")("B")("C")();
+console.log(result); // ABC
 
-@ an ifinite example
+```
+
+***
+
+That's it for the article.
+
+Honestly, I am still getting a grip myself with this pattern, so hopefully in the next year, I'll be able to rewrite this article with better and more accurate examples, but if you have something to say, then just feel free to text me, and we will improve this article further ;)
