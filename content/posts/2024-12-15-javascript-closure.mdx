@@ -30,17 +30,17 @@ console.log(greet("John")); // Hello, John!
 
 ```
 
-It gets really clear what's the closure is all about when you inspect in greet function:
+It gets really clear what's the closure is all about when you inspect the greet function:
 
 ```javascript
 const greet = outer("Hello"); // λ ​​​​​at ​​​​​​​​greet
 ```
 
-This is basically a function returning another, and that's all to it! A promise of some future potential! So basically watch out for that, so you'll be prepared against surprises in the behavior when coding.
+As this is basically a function returning another function, and that's all to it! A promise of some future potential! So basically watch out for that, so you'll be prepared against surprises in the behavior when coding.
 
 ### A bit more complex example
 
-Let's check for the recursive example of closure before we wrap, that's a bit more complex example, but you'll get the picture of more advanced patterns that are possible with the following pattern.
+Let's check for the recursive example of closure before we wrap, that's a bit more complex example, but you'll get the picture of more advanced patterns that are possible with the following approach.
 
 ```javascript
 function chainingClosureFunction(...initialArgs) {
@@ -61,8 +61,10 @@ console.log(result); // ABC
 
 ```
 
+And just like this, we've got the closure that we can call infinitely.
+
 ***
 
 That's it for the article.
 
-Honestly, I am still getting a grip myself with this pattern, so hopefully in the next year, I'll be able to rewrite this article with better and more accurate examples, but if you have something to say, then just feel free to text me, and we will improve this article further ;)
+Honestly, I am still getting a grip myself with this pattern, so hopefully in the next year, I'll be able to rewrite this article with better and more accurate examples, but if you have something to say, then just feel free to text me, and we will improve this article even further ;)
