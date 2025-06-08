@@ -98,7 +98,7 @@ const UpcomingPostsTemplate = ({
           },
         })}
       >
-        <IconComponent />
+        <Box sx={{ width: 48, height: 48 }}>{<IconComponent />}</Box>
         {sectionName}
       </Typography>
       <Posts posts={posts} skeletonsToRender={skeletonsCount} />
