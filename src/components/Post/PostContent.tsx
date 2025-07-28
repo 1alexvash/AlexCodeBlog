@@ -13,7 +13,11 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { setTags } from "redux/slices/selectedTags";
 import { useAppDispatch, useAppSelector } from "redux/typesHooks";
-import { Components, TinaMarkdown } from "tinacms/dist/rich-text";
+import {
+  Components,
+  TinaMarkdown,
+  TinaMarkdownContent,
+} from "tinacms/dist/rich-text";
 
 import Codeblock from "../Codeblock";
 import { DraftPostMark, FuturePostMark } from "../PostCard";
@@ -176,7 +180,13 @@ const PostContent = ({ post }: Props) => {
             <Link href={post.audioVersion}>Audio Version</Link>
           </Box>
         )}
-        <TinaMarkdown content={post.body} components={components} />
+
+        <TinaMarkdown
+          content={
+            post.body as unknown as TinaMarkdownContent | TinaMarkdownContent[]
+          }
+          components={components}
+        />
       </Box>
     </article>
   );
