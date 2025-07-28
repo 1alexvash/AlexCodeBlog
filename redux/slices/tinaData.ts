@@ -4,6 +4,7 @@ import { MainConfigQuery } from "./../../.tina/__generated__/types";
 
 const initialState: MainConfigQuery = {
   mainConfig: {
+    __typename: "MainConfig", // <-- add this line
     siteTitle: "",
     id: "",
     siteDescription: "",
