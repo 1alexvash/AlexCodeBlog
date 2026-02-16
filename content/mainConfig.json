@@ -1,7 +1,6 @@
 {
-  "siteTitle": "AlexCode",
-  "siteDescription": "🎉 And a very warm welcome to my blog! 🚀\nHere, I will help you level up your skills to become a 10X engineer💡\nSo buckle up and get ready to turbocharge your skills 🛠️💪\n",
-  "ogSiteTitle": "Blog about programming",
+  "siteDescription": "🎉 And a very warm welcome to my blog! 🚀\nHere, I will help you level up your skills to become a 10X engineer💡\nSo buckle up and get ready to level up your skills 🛠️💪\n",
+  "defaultImage": "/images/social-logo.png",
   "authorName": "Alex",
   "authorPosition": "Web Developer",
   "socialLinks": [
@@ -14,6 +13,7 @@
       "image": "/images/mail.svg"
     }
   ],
-  "defaultImage": "/images/social-logo.png",
+  "siteTitle": "AlexCode",
+  "ogSiteTitle": "Blog about programming",
   "postsPerPage": 24
 }
