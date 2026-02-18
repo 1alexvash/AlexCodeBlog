@@ -37,16 +37,43 @@ const submarine = {
 
 ```
 
-So than in the OOP way you will be able to run operation like this
+So then in the OOP way you will be able to run and command with your submarine like this
 
 ```javascript
+submarine.move("UP");
+submarine.upgrade("Shiled_Level_2")
+submarine.upgrade("Speed_Level_3")
 ```
 
 ### Functional programming way
 
-note…
+In a purely functional way, without any inspiration from the object style your functionality would like something as follows:
 
+```javascript
+function move(direction) {
+  return direction;
+}
+
+function attack(target) {
+  // Attacking
+}
+
+function upgrade(system) {
+  // Upgrading
+}
+
+```
+
+Very simple, right?
 
 ## Conclusion
 
-conclusion roughly the same, but O(f) vs F(o)…, angular/nestjs | react is functional
+Those two programming concepts aren't as scary as they seem.
+
+Honestly, they almost mostly look like the same thing.
+
+In essence, in the OOP way, you send `O(f)` while in the functional way `f(O)`
+
+Functional is easier to understand and beginner friendly, but otherwise…
+
+angular/nestjs | react is functional…
