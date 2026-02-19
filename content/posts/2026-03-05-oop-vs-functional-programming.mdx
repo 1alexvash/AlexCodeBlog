@@ -1,5 +1,5 @@
 ---
-title: OOP vs functional programming
+title: OOP vs Functional Programming
 date: 2026-03-05T00:00:00.000Z
 heroImage: /post-images/OOP vs functional programming.png
 draft: false
@@ -10,15 +10,15 @@ tags:
 
 Programming concepts might sound very scary.
 
-Especially this one with OOP (Object-Oriented Programming) – it just a combination of three scary letters.
+Especially this one called OOP (Object-Oriented Programming) – it just a combination of three scary letters.
 
 But in fact all of this is a lot easier than it sounds.
 
-So let's try to take a simple 🛳️ submarine game as an example to see the difference between those two fundamental coding patterns and approaches.
+So to really see that, let's build a simple 🛳️ submarine game using both approaches.
 
 ### OOP way
 
-If you would create your game with the Object Oriented Programing way, your app and submarine would roughly look something like this.
+If you would create your game with the object-oriented programming way, your app and submarine would roughly look something like this.
 
 ```javascript
 const submarine = {
@@ -37,7 +37,7 @@ const submarine = {
 
 ```
 
-So then in the OOP way you will be able to run and command with your submarine like this
+And then in the OOP way you will be able to run and command with your submarine like this
 
 ```javascript
 submarine.move("UP");
@@ -51,7 +51,7 @@ In a purely functional way, without any inspiration from the object style your f
 
 ```javascript
 function move(direction) {
-  return direction;
+    // Moving
 }
 
 function attack(target) {
@@ -66,11 +66,11 @@ function upgrade(system) {
 
 Very simple, right?
 
-## Conclusion
+## Bottom line
 
-Those two programming concepts aren't as scary as they seem.
+As you can see the first approach is based around objects as the core unit of organizing the code while the second around functions, but in  essence, both of those approaches are doing the same thing, they run your code and help you organize your program, and in the real-world application, you are in fact probably using both of those approaches at the same time.
 
-Honestly, they almost mostly look like the same thing.
+It's just that modern frameworks like React they lean more heavily towards the functional programming way, while other frameworks like Angular or NestJS lean towards the OOP way.
 
 In essence, in the OOP way, you send `O(f)` while in the functional way `f(O)`
 
